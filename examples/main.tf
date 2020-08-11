@@ -14,6 +14,16 @@ provider "squidex" {
   client_secret = var.client_secret
 }
 
+resource "squidex_language" "en" {
+  iso_2_code = "en"
+  is_master = true
+}
+
+resource "squidex_language" "de" {
+  iso_2_code = "de"
+  is_master = false
+}
+
 module "acme" {
   source = "./languages"
 }

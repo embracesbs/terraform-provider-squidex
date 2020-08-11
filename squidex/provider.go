@@ -12,30 +12,28 @@ func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"url": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_USERNAME", nil),
+				Type:     schema.TypeString,
+				Required: true,
 			},
 			"app_name": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_USERNAME", nil),
+				Type:     schema.TypeString,
+				Required: true,
 			},
 			"client_id": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_USERNAME", nil),
+				Type:     schema.TypeString,
+				Required: true,
 			},
 			"client_secret": &schema.Schema{
-				Type:        schema.TypeString,
-				Optional:    true,
-				Sensitive:   true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_PASSWORD", nil),
+				Type:      schema.TypeString,
+				Required:  true,
+				Sensitive: true,
 			},
 		},
-		ResourcesMap: map[string]*schema.Resource{},
+		ResourcesMap: map[string]*schema.Resource{
+			"squidex_language": resourceLanguage(),
+		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"squidex_app_languages": dataSourceAppLanguages(),
+			"squidex_languages": dataSourceLanguages(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}

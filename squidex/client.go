@@ -69,7 +69,6 @@ func NewClient(host, appName, clientID, clientSecret *string) (*Client, error) {
 }
 
 func (client *Client) doRequest(req *http.Request) ([]byte, error) {
-
 	if !strings.HasSuffix(req.URL.Path, "/identity-server/connect/token") {
 		req.Header.Set("Authorization", fmt.Sprintf("%s %s", client.TokenType, client.AccessToken))
 	}
@@ -85,7 +84,7 @@ func (client *Client) doRequest(req *http.Request) ([]byte, error) {
 		return nil, err
 	}
 
-	if res.StatusCode != http.StatusOK {
+	if res.StatusCode != http.StatusOK && res.StatusCode != http.StatusCreated {
 		return nil, fmt.Errorf("status: %d, body: %s", res.StatusCode, body)
 	}
 

@@ -3,7 +3,6 @@ package squidex
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
 	"net/url"
 	"path"
@@ -30,9 +29,9 @@ type Language struct {
 	Links       interface{} `json:"_links"`
 }
 
-func dataSourceAppLanguages() *schema.Resource {
+func dataSourceLanguages() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: dataSourceAppLanguagesRead,
+		ReadContext: dataSourceLanguagesRead,
 		Schema: map[string]*schema.Schema{
 			"languages": &schema.Schema{
 				Type:     schema.TypeList,
@@ -58,7 +57,7 @@ func dataSourceAppLanguages() *schema.Resource {
 	}
 }
 
-func dataSourceAppLanguagesRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceLanguagesRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	client := meta.(*Client)
 
 	// Warning or errors can be collected in a slice type
@@ -84,11 +83,6 @@ func dataSourceAppLanguagesRead(ctx context.Context, data *schema.ResourceData, 
 	languages := Languages{}
 	err = json.Unmarshal(body, &languages)
 	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err != nil {
-		log.Println(err)
 		return diag.FromErr(err)
 	}
 
