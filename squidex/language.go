@@ -3,7 +3,6 @@ package squidex
 import (
 	"encoding/json"
 	"errors"
-	"log"
 	"net/http"
 	"net/url"
 	"path"
@@ -13,7 +12,6 @@ import (
 func getLanguage(iso2Code string, languages []Language) *Language {
 	for i := range languages {
 		if languages[i].Iso2Code == iso2Code {
-			log.Println("Kreirani ", languages[i])
 			return &languages[i]
 		}
 	}
@@ -55,7 +53,6 @@ func (client *Client) CreateLanguage(newLanguage *Language) (*Language, error) {
 
 	body, err := client.doRequest(req)
 	if err != nil {
-		log.Println("Greska 1", err)
 		return nil, err
 	}
 
@@ -63,7 +60,6 @@ func (client *Client) CreateLanguage(newLanguage *Language) (*Language, error) {
 	err = json.Unmarshal(body, &languages)
 
 	if err != nil {
-		log.Println("Greska 2", err)
 		return nil, err
 	}
 
