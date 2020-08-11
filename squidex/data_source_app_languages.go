@@ -14,11 +14,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+// Languages -
 type Languages struct {
 	Items []Language  `json:"items"`
 	Links interface{} `json:"_links"`
 }
 
+// Language -
 type Language struct {
 	Iso2Code    string      `json:"iso2Code"`
 	EnglishName string      `json:"englishName"`
@@ -101,21 +103,21 @@ func dataSourceAppLanguagesRead(ctx context.Context, data *schema.ResourceData, 
 }
 
 func flattenLanguagesData(languageItems *[]Language) []interface{} {
-	if languageItems != nil {
-		ois := make([]interface{}, len(*languageItems), len(*languageItems))
-
-		for i, language := range *languageItems {
-			oi := make(map[string]interface{})
-
-			oi["iso_2_code"] = language.Iso2Code
-			oi["is_master"] = language.IsMaster
-			oi["is_optional"] = language.IsOptional
-
-			ois[i] = oi
-		}
-
-		return ois
+	if languageItems == nil {
+		return make([]interface{}, 0)
 	}
 
-	return make([]interface{}, 0)
+	languages := make([]interface{}, len(*languageItems), len(*languageItems))
+
+	for i, languageItem := range *languageItems {
+		language := make(map[string]interface{})
+
+		language["iso_2_code"] = languageItem.Iso2Code
+		language["is_master"] = languageItem.IsMaster
+		language["is_optional"] = languageItem.IsOptional
+
+		languages[i] = language
+	}
+
+	return languages
 }
