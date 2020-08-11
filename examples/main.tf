@@ -16,12 +16,12 @@ provider "squidex" {
 
 resource "squidex_language" "en" {
   iso_2_code = "en"
-  is_master = true
+  is_master = false
 }
 
 resource "squidex_language" "de" {
   iso_2_code = "de"
-  is_master = false
+  is_master = true
 }
 
 module "acme" {

@@ -82,7 +82,29 @@ func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return resourceLanguageRead(ctx, data, meta)
+	client := meta.(*Client)
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
+	updateLanguage := &Language{
+		Iso2Code: data.Get("iso_2_code").(string),
+		IsMaster: data.Get("is_master").(bool),
+	}
+
+	language, err := client.UpdateLanguage(updateLanguage)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	if err := data.Set("iso_2_code", language.Iso2Code); err != nil {
+		return diag.FromErr(err)
+	}
+
+	if err := data.Set("is_master", language.IsMaster); err != nil {
+		return diag.FromErr(err)
+	}
+
+	return diags
 }
 
 func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {

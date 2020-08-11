@@ -66,6 +66,43 @@ func (client *Client) CreateLanguage(newLanguage *Language) (*Language, error) {
 	return getLanguage(newLanguage.Iso2Code, languages.Items), nil
 }
 
+// UpdateLanguage -
+func (client *Client) UpdateLanguage(updateLanguage *Language) (*Language, error) {
+	language := map[string]bool{"isMaster": updateLanguage.IsMaster, "isOptional": false}
+	rb, err := json.Marshal(language)
+	if err != nil {
+		return nil, err
+	}
+
+	u, err := url.Parse(client.HostURL)
+	if err != nil {
+		return nil, err
+	}
+	// boilerplate to create absolute URL
+	u.Path = path.Join(u.Path, "/api/apps", client.AppName, "languages", updateLanguage.Iso2Code)
+
+	req, err := http.NewRequest("PUT", u.String(), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	body, err := client.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	languages := Languages{}
+	err = json.Unmarshal(body, &languages)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return getLanguage(updateLanguage.Iso2Code, languages.Items), nil
+}
+
 // DeleteLanguage -
 func (client *Client) DeleteLanguage(iso2Code string) error {
 	u, err := url.Parse(client.HostURL)
