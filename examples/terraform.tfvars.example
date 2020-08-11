@@ -1,0 +1,4 @@
+url           = "https://cloud.squidex.io"
+app_name      = "acme"
+client_id     = "acme:default"
+client_secret = "some_hashy_secret"
