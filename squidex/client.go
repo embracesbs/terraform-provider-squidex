@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"path"
 	"strings"
 	"time"
 )
@@ -45,8 +46,15 @@ func NewClient(host, appName, clientID, clientSecret *string) (*Client, error) {
 		data.Set("client_secret", *clientSecret)
 		data.Set("scope", "squidex-api")
 
+		u, err := url.Parse(client.HostURL)
+		if err != nil {
+			return nil, err
+		}
+		// boilerplate to create absolute URL
+		u.Path = path.Join(u.Path, "/identity-server/connect/token")
+
 		// authenticate
-		req, err := http.NewRequest("POST", fmt.Sprintf("%s/identity-server/connect/token", client.HostURL), strings.NewReader(data.Encode()))
+		req, err := http.NewRequest("POST", u.String(), strings.NewReader(data.Encode()))
 		if err != nil {
 			return nil, err
 		}
