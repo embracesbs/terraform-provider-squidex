@@ -1,3 +1,7 @@
+# Azure DevOps
+
+Connected with Azure Pipelines, produces Artifact.
+
 # Terraform Provider Squidex
 
 Run the following command to build the provider
