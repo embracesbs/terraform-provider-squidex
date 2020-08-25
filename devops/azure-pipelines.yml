@@ -15,8 +15,10 @@ steps:
     inputs:
       targetType: "inline"
       script: |
+        chmod +x ./devops/scripts/check_deps.sh
+        chmod +x ./devops/scripts/build_release.sh
         ./devops/scripts/check_deps.sh
-        VERSION=0.2.0-beta ./devops/scripts/build-release.sh
+        VERSION=0.2.0-beta ./devops/scripts/build_release.sh
 
   - task: UniversalPackages@0
     displayName: Release
