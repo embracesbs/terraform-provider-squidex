@@ -29,5 +29,5 @@ rm ./${BINARY}_${VERSION}_darwin_amd64
 rm ./${BINARY}_${VERSION}_linux_amd64
 rm ./${BINARY}_${VERSION}_windows_amd64
 
-cd ../../
+sha256sum -b * > SHA256SUMS
 echo "Done."

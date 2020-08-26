@@ -28,5 +28,6 @@ steps:
       feedsToUsePublish: "internal"
       vstsFeedPublish: "7720f8d2-bf64-47d9-8b10-53f21220d54d/9ba7201b-e25d-4afc-b55b-6ad212a1516d"
       vstsFeedPackagePublish: "terraform-provider-squidex"
-      versionOption: "patch"
+      versionOption: "custom"
+      versionPublish: "0.2.0-beta"
       packagePublishDescription: "Embrace's terraform-provider-squidex, https://github.com/embracesbs/terraform-provider-squidex"
