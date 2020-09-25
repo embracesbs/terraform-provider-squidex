@@ -1,15 +1,17 @@
 TEST?=$$(go list ./... | grep -v 'vendor')
 BINARY=terraform-provider-squidex
-VERSION=0.2.0
+VERSION=0.2.1
 OS=linux
 ARCH=amd64
 
 default: install
 
 build:
+	mkdir -p ./bin
 	go build -o ${BINARY}_v${VERSION}-${OS}-${ARCH}
 
 release:
+	mkdir -p ./bin
 	GOOS=darwin GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_darwin_amd64
 	GOOS=freebsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_freebsd_386
 	GOOS=freebsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_freebsd_amd64
