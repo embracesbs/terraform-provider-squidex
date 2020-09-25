@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export BINARY=terraform-provider-squidex
-export VERSION=0.2.1
 
 cd `dirname "$0"`/../../
 

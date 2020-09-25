@@ -6,6 +6,10 @@
 trigger:
   - master
 
+variables:
+  - name: VERSION
+    value: 0.2.2
+
 pool:
   vmImage: "ubuntu-latest"
 
@@ -18,7 +22,7 @@ steps:
         chmod +x ./devops/scripts/check_deps.sh
         chmod +x ./devops/scripts/build_release.sh
         ./devops/scripts/check_deps.sh
-        VERSION=0.2.1 ./devops/scripts/build_release.sh
+        VERSION=$(VERSION) ./devops/scripts/build_release.sh
 
   - task: UniversalPackages@0
     displayName: Release
@@ -29,5 +33,5 @@ steps:
       vstsFeedPublish: "7720f8d2-bf64-47d9-8b10-53f21220d54d/9ba7201b-e25d-4afc-b55b-6ad212a1516d"
       vstsFeedPackagePublish: "terraform-provider-squidex"
       versionOption: "custom"
-      versionPublish: "0.2.1"
+      versionPublish: $(VERSION)
       packagePublishDescription: "Embrace's terraform-provider-squidex, https://github.com/embracesbs/terraform-provider-squidex"
