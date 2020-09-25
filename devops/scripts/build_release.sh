@@ -1,22 +1,25 @@
 #!/bin/bash
 
-export BINARY=terraform-provider-squidex
+set -euo pipefail
 
-cd `dirname "$0"`/../../
+echo "Step 1. Changing to project root directory $(dirname "$0")/../../"
+cd "$(dirname "$0")/../../"
+echo "Done."
 
-echo "Create artifacts dir."
+echo "Step 2. Creating artifacts dir."
 mkdir -p artifacts
 echo "Done."
-echo "Building provider for linux..."
-GOOS=linux GOARCH=amd64 go build -o ./artifacts/${BINARY}_${VERSION}_linux_amd64
+
+echo "Step 3. Building provider for linux..."
+GOOS=linux GOARCH=amd64 go build -o ./artifacts/terraform-provider-squidex_${VERSION}_linux_amd64
 echo "Done."
 
-echo "Zipping provider..."
+echo "Step 4. Changing current dir to $(pwd)/artifacts"
+cd ./artifacts
+echo "Done."
 
-cd artifacts
-
-zip ${BINARY}_${VERSION}_linux_amd64.zip ./${BINARY}_${VERSION}_linux_amd64
-rm ./${BINARY}_${VERSION}_linux_amd64
+echo "Step 5. Zipping provider..."
+zip terraform-provider-squidex_${VERSION}_linux_amd64.zip ./terraform-provider-squidex_${VERSION}_linux_amd64
+rm ./terraform-provider-squidex_${VERSION}_linux_amd64
 sha256sum -b * > SHA256SUMS
-
 echo "Done."

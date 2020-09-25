@@ -8,7 +8,7 @@ trigger:
 
 variables:
   - name: VERSION
-    value: 0.2.2
+    value: 0.2.3
 
 pool:
   vmImage: "ubuntu-latest"
@@ -19,9 +19,9 @@ steps:
     inputs:
       targetType: "inline"
       script: |
-        chmod +x ./devops/scripts/check_deps.sh
+        # chmod +x ./devops/scripts/check_deps.sh
         chmod +x ./devops/scripts/build_release.sh
-        ./devops/scripts/check_deps.sh
+        # ./devops/scripts/check_deps.sh
         VERSION=$(VERSION) ./devops/scripts/build_release.sh
 
   - task: UniversalPackages@0
