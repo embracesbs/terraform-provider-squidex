@@ -1,6 +1,6 @@
 TEST?=$$(go list ./... | grep -v 'vendor')
 BINARY=terraform-provider-squidex
-VERSION=0.2.3
+VERSION=0.2.4
 OS=linux
 ARCH=amd64
 
