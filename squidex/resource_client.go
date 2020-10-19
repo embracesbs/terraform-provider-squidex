@@ -59,12 +59,15 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 
 	newClient := &Client{
 		Name: data.Get("name").(string),
+		Role: data.Get("role").(string),
 	}
 
-	client, err := apiClient.CreateClient(newClient)
+	_, err := apiClient.CreateClient(newClient)
 	if err != nil {
 		return diag.FromErr(err)
 	}
+
+	client, err := apiClient.UpdateClient(newClient)
 
 	data.SetId(newClient.Name)
 
