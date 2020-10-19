@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    restapi = {
+      source  = "terraform.embracecloud.nl/mastercard/restapi"
+      version = "1.14.0"
+    }
+    squidex = {
+      source  = "terraform.embracecloud.nl/embracecloud/squidex"
+      version = "0.3.0"
+    }
+  }
+}
+
 variable "url" {
 }
 variable "app_name" {
@@ -14,20 +27,22 @@ provider "squidex" {
   client_secret = var.client_secret
 }
 
-resource "squidex_language" "en" {
-  iso_2_code = "en"
-  is_master = false
-}
-
-resource "squidex_language" "de" {
-  iso_2_code = "de"
-  is_master = true
-}
-
 module "acme" {
-  source = "./languages"
+  source = "./acme"
+  languages = {
+    "nl" = false
+    "de" = false
+  }
+  clients = {
+    "gateway"                        = "Owner"
+    "content-provider-introspection" = "Reader"
+  }
 }
 
 output "languages" {
   value = module.acme.all_languages
+}
+
+output "clients" {
+  value = module.acme.all_clients
 }
