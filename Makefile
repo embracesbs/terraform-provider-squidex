@@ -4,7 +4,7 @@ NAMESPACE=terraform.embracecloud.nl
 COMPANY=embracecloud
 PROVIDER=squidex
 BINARY=terraform-provider-squidex
-VERSION=0.3.0
+VERSION=0.3.1
 OS=linux
 ARCH=amd64
 
