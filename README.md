@@ -16,13 +16,15 @@ make build
 
 ## Test sample configuration
 
-First, build and install the provider.
+First, build and install locally the provider.
 
 ```shell
-make install
+make local-install
 ```
 
-Then, run the following command to initialize the workspace and apply the sample configuration.
+Then, create a file `terraform.tfvars` in `./example` directory.  
+Configure values for your test Squidex application.  
+Run the following command to initialize the workspace and apply the sample configuration.
 
 ```shell
 cd examples

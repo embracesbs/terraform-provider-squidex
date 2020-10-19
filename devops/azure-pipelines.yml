@@ -8,7 +8,7 @@ trigger:
 
 variables:
   - name: VERSION
-    value: 0.2.4
+    value: 0.3.0
 
 pool:
   vmImage: "ubuntu-latest"

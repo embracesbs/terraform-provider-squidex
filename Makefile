@@ -1,34 +1,26 @@
+# Demands Terraform 0.13.x
 TEST?=$$(go list ./... | grep -v 'vendor')
+NAMESPACE=terraform.embracecloud.nl
+COMPANY=embracecloud
+PROVIDER=squidex
 BINARY=terraform-provider-squidex
-VERSION=0.2.4
+VERSION=0.3.0
 OS=linux
 ARCH=amd64
 
-default: install
+default: local-install
 
 build:
 	mkdir -p ./bin
-	go build -o ${BINARY}_v${VERSION}-${OS}-${ARCH}
-
-release:
-	mkdir -p ./bin
-	GOOS=darwin GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_darwin_amd64
-	GOOS=freebsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_freebsd_386
-	GOOS=freebsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_freebsd_amd64
-	GOOS=freebsd GOARCH=arm go build -o ./bin/${BINARY}_${VERSION}_freebsd_arm
-	GOOS=linux GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_linux_386
-	GOOS=linux GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_linux_amd64
-	GOOS=linux GOARCH=arm go build -o ./bin/${BINARY}_${VERSION}_linux_arm
-	GOOS=openbsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_openbsd_386
-	GOOS=openbsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_openbsd_amd64
-	GOOS=solaris GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_solaris_amd64
-	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
-	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
-	chmod +x ./bin/*
+	go build -o ./bin/${BINARY}_v${VERSION}
 
 install: build
-	mkdir -p ~/.terraform.d/plugins/${OS}_${ARCH}
-	mv ${BINARY}_v${VERSION}-${OS}-${ARCH} ~/.terraform.d/plugins/${OS}_${ARCH}
+	mkdir -p ~/.terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
+	mv ./bin/${BINARY}_v${VERSION} ~/.terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
+
+local-install: build
+	mkdir -p ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
+	mv ./bin/${BINARY}_v${VERSION} ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
 
 test:
 	go test -i $(TEST) || exit 1
