@@ -22,16 +22,37 @@ func resourceLanguage() *schema.Resource {
 				Type:     schema.TypeBool,
 				Required: true,
 			},
-			"is_optional": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
 		},
 	}
 }
 
+func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	client := meta.(*APIClient)
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
+	languageIso2Code := data.Id()
+
+	language, err := client.GetLanguage(languageIso2Code)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	data.SetId(language.Iso2Code)
+
+	if err := data.Set("iso_2_code", language.Iso2Code); err != nil {
+		return diag.FromErr(err)
+	}
+
+	if err := data.Set("is_master", language.IsMaster); err != nil {
+		return diag.FromErr(err)
+	}
+
+	return diags
+}
+
 func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*Client)
+	client := meta.(*APIClient)
 
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
@@ -46,29 +67,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 		return diag.FromErr(err)
 	}
 
-	if err := data.Set("iso_2_code", language.Iso2Code); err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := data.Set("is_master", language.IsMaster); err != nil {
-		return diag.FromErr(err)
-	}
 	data.SetId(language.Iso2Code)
-
-	return diags
-}
-
-func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*Client)
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	languageIso2Code := data.Id()
-
-	language, err := client.GetLanguage(languageIso2Code)
-	if err != nil {
-		return diag.FromErr(err)
-	}
 
 	if err := data.Set("iso_2_code", language.Iso2Code); err != nil {
 		return diag.FromErr(err)
@@ -82,7 +81,7 @@ func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*Client)
+	client := meta.(*APIClient)
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
@@ -96,6 +95,8 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 		return diag.FromErr(err)
 	}
 
+	data.SetId(language.Iso2Code)
+
 	if err := data.Set("iso_2_code", language.Iso2Code); err != nil {
 		return diag.FromErr(err)
 	}
@@ -108,7 +109,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 }
 
 func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*Client)
+	client := meta.(*APIClient)
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 

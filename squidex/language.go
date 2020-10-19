@@ -9,6 +9,22 @@ import (
 	"strings"
 )
 
+// Languages -
+type Languages struct {
+	Items []Language  `json:"items"`
+	Links interface{} `json:"_links"`
+}
+
+// Language -
+type Language struct {
+	Iso2Code    string      `json:"iso2Code"`
+	EnglishName string      `json:"englishName"`
+	Fallback    []string    `json:"fallback"`
+	IsMaster    bool        `json:"isMaster"`
+	IsOptional  bool        `json:"isOptional"`
+	Links       interface{} `json:"_links"`
+}
+
 func getLanguage(iso2Code string, languages []Language) *Language {
 	for i := range languages {
 		if languages[i].Iso2Code == iso2Code {
@@ -20,7 +36,7 @@ func getLanguage(iso2Code string, languages []Language) *Language {
 }
 
 // GetLanguage -
-func (client *Client) GetLanguage(iso2Code string) (*Language, error) {
+func (client *APIClient) GetLanguage(iso2Code string) (*Language, error) {
 	languages, err := client.GetLanguages()
 	if err != nil {
 		return nil, err
@@ -30,7 +46,7 @@ func (client *Client) GetLanguage(iso2Code string) (*Language, error) {
 }
 
 // CreateLanguage -
-func (client *Client) CreateLanguage(newLanguage *Language) (*Language, error) {
+func (client *APIClient) CreateLanguage(newLanguage *Language) (*Language, error) {
 	language := map[string]string{"language": newLanguage.Iso2Code}
 	rb, err := json.Marshal(language)
 	if err != nil {
@@ -67,7 +83,7 @@ func (client *Client) CreateLanguage(newLanguage *Language) (*Language, error) {
 }
 
 // UpdateLanguage -
-func (client *Client) UpdateLanguage(updateLanguage *Language) (*Language, error) {
+func (client *APIClient) UpdateLanguage(updateLanguage *Language) (*Language, error) {
 	language := map[string]bool{"isMaster": updateLanguage.IsMaster, "isOptional": false}
 	rb, err := json.Marshal(language)
 	if err != nil {
@@ -104,7 +120,7 @@ func (client *Client) UpdateLanguage(updateLanguage *Language) (*Language, error
 }
 
 // DeleteLanguage -
-func (client *Client) DeleteLanguage(iso2Code string) error {
+func (client *APIClient) DeleteLanguage(iso2Code string) error {
 	u, err := url.Parse(client.HostURL)
 	if err != nil {
 		return err
@@ -132,7 +148,7 @@ func (client *Client) DeleteLanguage(iso2Code string) error {
 }
 
 // GetLanguages -
-func (client *Client) GetLanguages() ([]Language, error) {
+func (client *APIClient) GetLanguages() ([]Language, error) {
 	u, err := url.Parse(client.HostURL)
 	if err != nil {
 		return nil, err

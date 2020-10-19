@@ -13,21 +13,25 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func dataSourceLanguages() *schema.Resource {
+func dataSourceClients() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: dataSourceLanguagesRead,
+		ReadContext: dataSourceClientsRead,
 		Schema: map[string]*schema.Schema{
-			"languages": &schema.Schema{
+			"clients": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"iso_2_code": &schema.Schema{
+						"name": &schema.Schema{
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"is_master": &schema.Schema{
-							Type:     schema.TypeBool,
+						"secret": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"role": &schema.Schema{
+							Type:     schema.TypeString,
 							Computed: true,
 						},
 					},
@@ -37,7 +41,7 @@ func dataSourceLanguages() *schema.Resource {
 	}
 }
 
-func dataSourceLanguagesRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceClientsRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	client := meta.(*APIClient)
 
 	// Warning or errors can be collected in a slice type
@@ -48,7 +52,7 @@ func dataSourceLanguagesRead(ctx context.Context, data *schema.ResourceData, met
 		return diag.FromErr(err)
 	}
 	// boilerplate to create absolute URL
-	u.Path = path.Join(u.Path, "/api/apps", client.AppName, "languages")
+	u.Path = path.Join(u.Path, "/api/apps", client.AppName, "clients")
 
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -60,13 +64,13 @@ func dataSourceLanguagesRead(ctx context.Context, data *schema.ResourceData, met
 		return diag.FromErr(err)
 	}
 
-	languages := Languages{}
-	err = json.Unmarshal(body, &languages)
+	clients := Clients{}
+	err = json.Unmarshal(body, &clients)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	if err := data.Set("languages", flattenLanguagesData(&languages.Items)); err != nil {
+	if err := data.Set("clients", flattenClientsData(&clients.Items)); err != nil {
 		return diag.FromErr(err)
 	}
 
@@ -76,21 +80,22 @@ func dataSourceLanguagesRead(ctx context.Context, data *schema.ResourceData, met
 	return diags
 }
 
-func flattenLanguagesData(languageItems *[]Language) []interface{} {
-	if languageItems == nil {
+func flattenClientsData(clientItems *[]Client) []interface{} {
+	if clientItems == nil {
 		return make([]interface{}, 0)
 	}
 
-	languages := make([]interface{}, len(*languageItems), len(*languageItems))
+	clients := make([]interface{}, len(*clientItems), len(*clientItems))
 
-	for i, languageItem := range *languageItems {
-		language := make(map[string]interface{})
+	for i, clientItem := range *clientItems {
+		client := make(map[string]interface{})
 
-		language["iso_2_code"] = languageItem.Iso2Code
-		language["is_master"] = languageItem.IsMaster
+		client["name"] = clientItem.Name
+		client["secret"] = clientItem.Secret
+		client["role"] = clientItem.Role
 
-		languages[i] = language
+		clients[i] = client
 	}
 
-	return languages
+	return clients
 }

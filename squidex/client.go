@@ -2,99 +2,174 @@ package squidex
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
+	"errors"
 	"net/http"
 	"net/url"
 	"path"
 	"strings"
-	"time"
 )
+
+// Clients -
+type Clients struct {
+	Items []Client    `json:"items"`
+	Links interface{} `json:"_links"`
+}
 
 // Client -
 type Client struct {
-	HTTPClient  *http.Client
-	HostURL     string
-	AppName     string
-	TokenType   string
-	AccessToken string
+	ID     string      `json:"id"`
+	Name   string      `json:"name"`
+	Role   string      `json:"role"`
+	Secret string      `json:"secret"`
+	Links  interface{} `json:"_links"`
 }
 
-// AuthResponse -
-type AuthResponse struct {
-	TokenType   string `json:"token_type"`
-	AccessToken string `json:"access_token"`
+func getClient(name string, clients []Client) *Client {
+	for i := range clients {
+		if clients[i].Name == name {
+			return &clients[i]
+		}
+	}
+
+	return nil
 }
 
-// NewClient -
-func NewClient(host, appName, clientID, clientSecret *string) (*Client, error) {
-	client := Client{
-		HTTPClient: &http.Client{Timeout: 10 * time.Second},
-		HostURL:    *host,
-		AppName:    *appName,
-	}
-
-	if host != nil {
-		client.HostURL = *host
-	}
-
-	if (clientID != nil) && (clientSecret != nil) {
-		// form request body
-		data := url.Values{}
-		data.Set("grant_type", "client_credentials")
-		data.Set("client_id", *clientID)
-		data.Set("client_secret", *clientSecret)
-		data.Set("scope", "squidex-api")
-
-		u, err := url.Parse(client.HostURL)
-		if err != nil {
-			return nil, err
-		}
-		// boilerplate to create absolute URL
-		u.Path = path.Join(u.Path, "/identity-server/connect/token")
-
-		// authenticate
-		req, err := http.NewRequest("POST", u.String(), strings.NewReader(data.Encode()))
-		if err != nil {
-			return nil, err
-		}
-
-		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-		body, err := client.doRequest(req)
-
-		// parse response body
-		ar := AuthResponse{}
-		err = json.Unmarshal(body, &ar)
-		if err != nil {
-			return nil, err
-		}
-
-		client.TokenType = ar.TokenType
-		client.AccessToken = ar.AccessToken
-	}
-
-	return &client, nil
-}
-
-func (client *Client) doRequest(req *http.Request) ([]byte, error) {
-	if !strings.HasSuffix(req.URL.Path, "/identity-server/connect/token") {
-		req.Header.Set("Authorization", fmt.Sprintf("%s %s", client.TokenType, client.AccessToken))
-	}
-
-	res, err := client.HTTPClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer res.Body.Close()
-
-	body, err := ioutil.ReadAll(res.Body)
+// GetClientByName -
+func (apiClient *APIClient) GetClientByName(name string) (*Client, error) {
+	clients, err := apiClient.GetClients()
 	if err != nil {
 		return nil, err
 	}
 
-	if res.StatusCode != http.StatusOK && res.StatusCode != http.StatusCreated {
-		return nil, fmt.Errorf("status: %d, body: %s", res.StatusCode, body)
+	return getClient(name, clients), nil
+}
+
+// CreateClient -
+func (apiClient *APIClient) CreateClient(newClient *Client) (*Client, error) {
+	client := map[string]string{"id": newClient.Name}
+	rb, err := json.Marshal(client)
+	if err != nil {
+		return nil, err
 	}
 
-	return body, err
+	u, err := url.Parse(apiClient.HostURL)
+	if err != nil {
+		return nil, err
+	}
+	// boilerplate to create absolute URL
+	u.Path = path.Join(u.Path, "/api/apps", apiClient.AppName, "clients")
+
+	req, err := http.NewRequest("POST", u.String(), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	body, err := apiClient.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	clients := Clients{}
+	err = json.Unmarshal(body, &clients)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return getClient(newClient.Name, clients.Items), nil
+}
+
+// UpdateClient -
+func (apiClient *APIClient) UpdateClient(updateClient *Client) (*Client, error) {
+	client := map[string]string{"name": updateClient.Name, "role": updateClient.Role}
+	rb, err := json.Marshal(client)
+	if err != nil {
+		return nil, err
+	}
+
+	u, err := url.Parse(apiClient.HostURL)
+	if err != nil {
+		return nil, err
+	}
+	// boilerplate to create absolute URL
+	u.Path = path.Join(u.Path, "/api/apps", apiClient.AppName, "clients", updateClient.Name)
+
+	req, err := http.NewRequest("PUT", u.String(), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	body, err := apiClient.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	clients := Clients{}
+	err = json.Unmarshal(body, &clients)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return getClient(updateClient.Name, clients.Items), nil
+}
+
+// DeleteClient -
+func (apiClient *APIClient) DeleteClient(id string) error {
+	u, err := url.Parse(apiClient.HostURL)
+	if err != nil {
+		return err
+	}
+	// boilerplate to create absolute URL
+	u.Path = path.Join(u.Path, "/api/apps", apiClient.AppName, "clients", id)
+
+	req, err := http.NewRequest("DELETE", u.String(), nil)
+	if err != nil {
+		return err
+	}
+
+	body, err := apiClient.doRequest(req)
+	if err != nil {
+		return err
+	}
+
+	clients := Clients{}
+	err = json.Unmarshal(body, &clients)
+	if getClient(id, clients.Items) != nil {
+		return errors.New(string(body))
+	}
+
+	return nil
+}
+
+// GetClients -
+func (apiClient *APIClient) GetClients() ([]Client, error) {
+	u, err := url.Parse(apiClient.HostURL)
+	if err != nil {
+		return nil, err
+	}
+	// boilerplate to create absolute URL
+	u.Path = path.Join(u.Path, "/api/apps", apiClient.AppName, "clients")
+
+	req, err := http.NewRequest("GET", u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := apiClient.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	clients := Clients{}
+	err = json.Unmarshal(body, &clients)
+	if err != nil {
+		return nil, err
+	}
+
+	return clients.Items, nil
 }

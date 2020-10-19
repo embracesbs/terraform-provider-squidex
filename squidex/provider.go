@@ -31,9 +31,11 @@ func Provider() *schema.Provider {
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"squidex_language": resourceLanguage(),
+			"squidex_client":   resourceClient(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"squidex_languages": dataSourceLanguages(),
+			"squidex_clients":   dataSourceClients(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
