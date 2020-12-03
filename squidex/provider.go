@@ -3,7 +3,10 @@ package squidex
 import (
 	"context"
 
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -30,7 +33,9 @@ func Provider() *schema.Provider {
 				Sensitive: true,
 			},
 		},
-		ResourcesMap:         map[string]*schema.Resource{},
+		ResourcesMap: map[string]*schema.Resource{
+			"squidex_App": resourceApp(),
+		},
 		DataSourcesMap:       map[string]*schema.Resource{},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -43,12 +48,11 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	clientID := d.Get("client_id").(string)
 	clientSecret := d.Get("client_secret").(string)
 
-	cfg := common.SquidexConfig{
-		ClientId:      clientID,
-		ClientSecret:  clientSecret,
-		SquidexUrl:    url,
-		TokenEndpoint: tokenEndpoint,
+	config := &squidexclient.Configuration{
+		BasePath:   url,
+		HTTPClient: common.NewClient(clientID, clientSecret, tokenEndpoint, "squidex-api"),
 	}
 
-	return cfg, nil
+	return squidexclient.NewAPIClient(config), nil
+
 }
