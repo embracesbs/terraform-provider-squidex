@@ -34,7 +34,9 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"squidex_App": resourceApp(),
+			"squidex_app":     resourceApp(),
+			"squidex_client":  resourceClient(),
+			"suidex_language": resourceLanguage(),
 		},
 		DataSourcesMap:       map[string]*schema.Resource{},
 		ConfigureContextFunc: providerConfigure,
@@ -48,11 +50,13 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	clientID := d.Get("client_id").(string)
 	clientSecret := d.Get("client_secret").(string)
 
+	var diags diag.Diagnostics
+
 	config := &squidexclient.Configuration{
 		BasePath:   url,
 		HTTPClient: common.NewClient(clientID, clientSecret, tokenEndpoint, "squidex-api"),
 	}
 
-	return squidexclient.NewAPIClient(config), nil
+	return squidexclient.NewAPIClient(config), diags
 
 }
