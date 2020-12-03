@@ -51,6 +51,8 @@ func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta inte
 
 	data.SetId(result.Id)
 
+	resourceAppUpdate(ctx, data, meta)
+
 	return diags
 }
 
