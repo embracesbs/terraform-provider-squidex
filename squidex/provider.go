@@ -3,6 +3,7 @@ package squidex
 import (
 	"context"
 
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -15,7 +16,7 @@ func Provider() *schema.Provider {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"app_name": &schema.Schema{
+			"token_endpoint": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
@@ -29,40 +30,25 @@ func Provider() *schema.Provider {
 				Sensitive: true,
 			},
 		},
-		ResourcesMap: map[string]*schema.Resource{
-			"squidex_language": resourceLanguage(),
-			"squidex_client":   resourceClient(),
-		},
-		DataSourcesMap: map[string]*schema.Resource{
-			"squidex_languages": dataSourceLanguages(),
-			"squidex_clients":   dataSourceClients(),
-		},
+		ResourcesMap:         map[string]*schema.Resource{},
+		DataSourcesMap:       map[string]*schema.Resource{},
 		ConfigureContextFunc: providerConfigure,
 	}
 }
 
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+
 	url := d.Get("url").(string)
-	appName := d.Get("app_name").(string)
+	tokenEndpoint := d.Get("token_endpoint").(string)
 	clientID := d.Get("client_id").(string)
 	clientSecret := d.Get("client_secret").(string)
 
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	if (clientID != "") && (clientSecret != "") {
-		client, err := NewClient(&url, &appName, &clientID, &clientSecret)
-		if err != nil {
-			return nil, diag.FromErr(err)
-		}
-
-		return client, diags
+	cfg := common.SquidexConfig{
+		ClientId:      clientID,
+		ClientSecret:  clientSecret,
+		SquidexUrl:    url,
+		TokenEndpoint: tokenEndpoint,
 	}
 
-	client, err := NewClient(nil, nil, nil, nil)
-	if err != nil {
-		return nil, diag.FromErr(err)
-	}
-
-	return client, diags
+	return cfg, nil
 }

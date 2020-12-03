@@ -1,7 +1,7 @@
 package main
 
 import (
-	"terraform-provider-squidex/squidex"
+	"github.com/embracesbs/terraform-provider-squidex/squidex"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
