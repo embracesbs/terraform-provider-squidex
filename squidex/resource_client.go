@@ -60,7 +60,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 
 	data.SetId(id)
 
-	resourceClientUpdate(ctx, data, meta)
+	//resourceClientUpdate(ctx, data, meta)
 
 	return diags
 }

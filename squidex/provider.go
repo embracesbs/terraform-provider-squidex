@@ -34,9 +34,9 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"squidex_app":     resourceApp(),
-			"squidex_client":  resourceClient(),
-			"suidex_language": resourceLanguage(),
+			"squidex_app":       resourceApp(),
+			"squidex_client":    resourceClient(),
+			"squidex_languages": resourceLanguage(),
 		},
 		DataSourcesMap:       map[string]*schema.Resource{},
 		ConfigureContextFunc: providerConfigure,

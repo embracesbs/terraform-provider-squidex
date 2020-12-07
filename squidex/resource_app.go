@@ -62,10 +62,10 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	var diags diag.Diagnostics
 
 	name := data.Get("name").(string)
-	description := data.Get("description").(*string)
+	description := data.Get("description").(string)
 
 	_, _, err := client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
-		Description: description,
+		Description: &description,
 	})
 
 	if err != nil {
