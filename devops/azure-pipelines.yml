@@ -4,11 +4,13 @@
 # https://aka.ms/yaml
 
 trigger:
-  - master
+  - refs/tags/v*
 
 variables:
-  - name: VERSION
+  - name: Version
     value: 0.4.0
+  - name: version2
+    value: ${{ replace(variables['Build.SourceBranchName'],'v','') }}
 
 pool:
   vmImage: "ubuntu-latest"
@@ -19,8 +21,9 @@ steps:
     inputs:
       targetType: "inline"
       script: |
+        echo $(version2)
         chmod +x ./devops/scripts/build_release.sh
-        VERSION=$(VERSION) ./devops/scripts/build_release.sh
+        VERSION=$(Version) ./devops/scripts/build_release.sh
 
   - task: UniversalPackages@0
     displayName: Release
@@ -31,5 +34,5 @@ steps:
       vstsFeedPublish: "7720f8d2-bf64-47d9-8b10-53f21220d54d/9ba7201b-e25d-4afc-b55b-6ad212a1516d"
       vstsFeedPackagePublish: "terraform-provider-squidex"
       versionOption: "custom"
-      versionPublish: $(VERSION)
+      versionPublish: $(Version)
       packagePublishDescription: "Embrace's terraform-provider-squidex, https://github.com/embracesbs/terraform-provider-squidex"
