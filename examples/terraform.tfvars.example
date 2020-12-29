@@ -1,4 +1,3 @@
-url           = "https://cloud.squidex.io"
-app_name      = "acme"
-client_id     = "acme:default"
+host          = "https://squidex.dev.embracecloud.io"
+client_id     = "root"
 client_secret = "some_hashy_secret"

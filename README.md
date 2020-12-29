@@ -24,7 +24,11 @@ First, build and install locally the provider.
 make local-install
 ```
 
-Then, create a file `terraform.tfvars` in `./example` directory.  
+This will create the provider binary.
+Copy that binary into the location that Terraform will try to find it.
+Depending on the OS, version and Terraform version this could differ. On Windows 64 with Terraformn 0.13: /terraform.d/plugins/terraform.embracecloud.nl/embracecloud/squidex/0.4.0/windows_amd64"
+
+Then, create a file `terraform.tfvars` in `./examples` directory.  
 Configure values for your test Squidex application.  
 Run the following command to initialize the workspace and apply the sample configuration.
 

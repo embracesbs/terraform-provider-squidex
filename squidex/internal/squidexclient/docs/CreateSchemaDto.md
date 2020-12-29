@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Properties** | Pointer to [**OneOfSchemaPropertiesDto**](oneOf&lt;SchemaPropertiesDto&gt;.md) | The optional properties. | [optional] 
 **Scripts** | Pointer to [**OneOfSchemaScriptsDto**](oneOf&lt;SchemaScriptsDto&gt;.md) | The optional scripts. | [optional] 
-**FieldsInReferences** | Pointer to [**OneOfarray**](oneOf&lt;array&gt;.md) | The names of the fields that should be used in references. | [optional] 
-**FieldsInLists** | Pointer to [**OneOfarray**](oneOf&lt;array&gt;.md) | The names of the fields that should be shown in lists, including meta fields. | [optional] 
+**FieldsInReferences** | Pointer to **[]string** | The names of the fields that should be used in references. | [optional] 
+**FieldsInLists** | Pointer to **[]string** | The names of the fields that should be shown in lists, including meta fields. | [optional] 
 **Fields** | Pointer to [**[]UpsertSchemaFieldDto**](UpsertSchemaFieldDto.md) | Optional fields. | [optional] 
 **PreviewUrls** | Pointer to **map[string]string** | The optional preview urls. | [optional] 
 **Category** | Pointer to **string** | The category. | [optional] 

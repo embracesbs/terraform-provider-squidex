@@ -1,6 +1,6 @@
 # \AppsApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,31 +8,35 @@ Method | HTTP request | Description
 [**AppClientsGetClients**](AppsApi.md#AppClientsGetClients) | **Get** /apps/{app}/clients | Get app clients.
 [**AppClientsPostClient**](AppsApi.md#AppClientsPostClient) | **Post** /apps/{app}/clients | Create a new app client.
 [**AppClientsPutClient**](AppsApi.md#AppClientsPutClient) | **Put** /apps/{app}/clients/{id} | Updates an app client.
-[**AppContributorsDeleteContributor**](AppsApi.md#AppContributorsDeleteContributor) | **Delete** /apps/{app}/contributors/{id} | Remove contributor from app.
+[**AppContributorsDeleteContributor**](AppsApi.md#AppContributorsDeleteContributor) | **Delete** /apps/{app}/contributors/{id} | Remove contributor.
+[**AppContributorsDeleteMyself**](AppsApi.md#AppContributorsDeleteMyself) | **Delete** /apps/{app}/contributors/me | Remove yourself.
 [**AppContributorsGetContributors**](AppsApi.md#AppContributorsGetContributors) | **Get** /apps/{app}/contributors | Get app contributors.
 [**AppContributorsPostContributor**](AppsApi.md#AppContributorsPostContributor) | **Post** /apps/{app}/contributors | Assign contributor to app.
 [**AppLanguagesDeleteLanguage**](AppsApi.md#AppLanguagesDeleteLanguage) | **Delete** /apps/{app}/languages/{language} | Deletes an app language.
 [**AppLanguagesGetLanguages**](AppsApi.md#AppLanguagesGetLanguages) | **Get** /apps/{app}/languages | Get app languages.
 [**AppLanguagesPostLanguage**](AppsApi.md#AppLanguagesPostLanguage) | **Post** /apps/{app}/languages | Attaches an app language.
 [**AppLanguagesPutLanguage**](AppsApi.md#AppLanguagesPutLanguage) | **Put** /apps/{app}/languages/{language} | Updates an app language.
-[**AppPatternsDeletePattern**](AppsApi.md#AppPatternsDeletePattern) | **Delete** /apps/{app}/patterns/{id} | Delete an existing app pattern.
+[**AppPatternsDeletePattern**](AppsApi.md#AppPatternsDeletePattern) | **Delete** /apps/{app}/patterns/{id} | Delete an app pattern.
 [**AppPatternsGetPatterns**](AppsApi.md#AppPatternsGetPatterns) | **Get** /apps/{app}/patterns | Get app patterns.
 [**AppPatternsPostPattern**](AppsApi.md#AppPatternsPostPattern) | **Post** /apps/{app}/patterns | Create a new app pattern.
-[**AppPatternsPutPattern**](AppsApi.md#AppPatternsPutPattern) | **Put** /apps/{app}/patterns/{id} | Update an existing app pattern.
-[**AppRolesDeleteRole**](AppsApi.md#AppRolesDeleteRole) | **Delete** /apps/{app}/roles/{name} | Remove role from app.
+[**AppPatternsPutPattern**](AppsApi.md#AppPatternsPutPattern) | **Put** /apps/{app}/patterns/{id} | Update an app pattern.
+[**AppRolesDeleteRole**](AppsApi.md#AppRolesDeleteRole) | **Delete** /apps/{app}/roles/{roleName} | Remove role from app.
 [**AppRolesGetPermissions**](AppsApi.md#AppRolesGetPermissions) | **Get** /apps/{app}/roles/permissions | Get app permissions.
 [**AppRolesGetRoles**](AppsApi.md#AppRolesGetRoles) | **Get** /apps/{app}/roles | Get app roles.
 [**AppRolesPostRole**](AppsApi.md#AppRolesPostRole) | **Post** /apps/{app}/roles | Add role to app.
-[**AppRolesPutRole**](AppsApi.md#AppRolesPutRole) | **Put** /apps/{app}/roles/{name} | Update an existing app role.
+[**AppRolesPutRole**](AppsApi.md#AppRolesPutRole) | **Put** /apps/{app}/roles/{roleName} | Update an app role.
 [**AppWorkflowsDeleteWorkflow**](AppsApi.md#AppWorkflowsDeleteWorkflow) | **Delete** /apps/{app}/workflows/{id} | Delete a workflow.
 [**AppWorkflowsGetWorkflows**](AppsApi.md#AppWorkflowsGetWorkflows) | **Get** /apps/{app}/workflows | Get app workflow.
 [**AppWorkflowsPostWorkflow**](AppsApi.md#AppWorkflowsPostWorkflow) | **Post** /apps/{app}/workflows | Create a workflow.
 [**AppWorkflowsPutWorkflow**](AppsApi.md#AppWorkflowsPutWorkflow) | **Put** /apps/{app}/workflows/{id} | Update a workflow.
 [**AppsDeleteApp**](AppsApi.md#AppsDeleteApp) | **Delete** /apps/{app} | Archive the app.
+[**AppsDeleteImage**](AppsApi.md#AppsDeleteImage) | **Delete** /apps/{app}/image | Remove the app image.
 [**AppsGetApp**](AppsApi.md#AppsGetApp) | **Get** /apps/{app} | Get an app by name.
 [**AppsGetApps**](AppsApi.md#AppsGetApps) | **Get** /apps | Get your apps.
+[**AppsGetImage**](AppsApi.md#AppsGetImage) | **Get** /apps/{app}/image | Get the app image.
 [**AppsPostApp**](AppsApi.md#AppsPostApp) | **Post** /apps | Create a new app.
 [**AppsUpdateApp**](AppsApi.md#AppsUpdateApp) | **Put** /apps/{app} | Update the app.
+[**AppsUploadImage**](AppsApi.md#AppsUploadImage) | **Post** /apps/{app}/image | Upload the app image.
 
 
 
@@ -180,7 +184,7 @@ Name | Type | Description  | Notes
 
 > ContributorsDto AppContributorsDeleteContributor(ctx, app, id)
 
-Remove contributor from app.
+Remove contributor.
 
 ### Required Parameters
 
@@ -190,6 +194,38 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
 **id** | **string**| The id of the contributor. | 
+
+### Return type
+
+[**ContributorsDto**](ContributorsDto.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AppContributorsDeleteMyself
+
+> ContributorsDto AppContributorsDeleteMyself(ctx, app)
+
+Remove yourself.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -410,7 +446,7 @@ Name | Type | Description  | Notes
 
 > PatternsDto AppPatternsDeletePattern(ctx, app, id)
 
-Delete an existing app pattern.
+Delete an app pattern.
 
 Schemas using this pattern will still function using the same Regular Expression.
 
@@ -512,7 +548,7 @@ Name | Type | Description  | Notes
 
 > PatternsDto AppPatternsPutPattern(ctx, app, id, updatePatternDto)
 
-Update an existing app pattern.
+Update an app pattern.
 
 ### Required Parameters
 
@@ -544,7 +580,7 @@ Name | Type | Description  | Notes
 
 ## AppRolesDeleteRole
 
-> RolesDto AppRolesDeleteRole(ctx, app, name)
+> RolesDto AppRolesDeleteRole(ctx, app, roleName)
 
 Remove role from app.
 
@@ -555,7 +591,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the role. | 
+**roleName** | **string**| The name of the role. | 
 
 ### Return type
 
@@ -674,9 +710,9 @@ Name | Type | Description  | Notes
 
 ## AppRolesPutRole
 
-> RolesDto AppRolesPutRole(ctx, app, name, updateRoleDto)
+> RolesDto AppRolesPutRole(ctx, app, roleName, updateRoleDto)
 
-Update an existing app role.
+Update an app role.
 
 ### Required Parameters
 
@@ -685,7 +721,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the role to be updated. | 
+**roleName** | **string**| The name of the role to be updated. | 
 **updateRoleDto** | [**UpdateRoleDto**](UpdateRoleDto.md)| Role to be updated for the app. | 
 
 ### Return type
@@ -870,6 +906,38 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AppsDeleteImage
+
+> AppDto AppsDeleteImage(ctx, app)
+
+Remove the app image.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app to update. | 
+
+### Return type
+
+[**AppDto**](AppDto.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## AppsGetApp
 
 > AppDto AppsGetApp(ctx, app)
@@ -926,6 +994,38 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AppsGetImage
+
+> *os.File AppsGetImage(ctx, app)
+
+Get the app image.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app. | 
+
+### Return type
+
+[***os.File**](*os.File.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -992,6 +1092,49 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AppsUploadImage
+
+> AppDto AppsUploadImage(ctx, app, optional)
+
+Upload the app image.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app to update. | 
+ **optional** | ***AppsUploadImageOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a AppsUploadImageOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **file** | **optional.Interface of *os.File****optional.*os.File**|  | 
+
+### Return type
+
+[**AppDto**](AppDto.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

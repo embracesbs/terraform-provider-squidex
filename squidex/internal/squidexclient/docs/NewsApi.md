@@ -1,16 +1,16 @@
 # \NewsApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**NewsGetLanguages**](NewsApi.md#NewsGetLanguages) | **Get** /news/features | Get features since version.
+[**NewsGetNews**](NewsApi.md#NewsGetNews) | **Get** /news/features | Get features since version.
 
 
 
-## NewsGetLanguages
+## NewsGetNews
 
-> FeaturesDto NewsGetLanguages(ctx, optional)
+> FeaturesDto NewsGetNews(ctx, optional)
 
 Get features since version.
 
@@ -20,11 +20,11 @@ Get features since version.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***NewsGetLanguagesOpts** | optional parameters | nil if no parameters
+ **optional** | ***NewsGetNewsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a NewsGetLanguagesOpts struct
+Optional parameters are passed through a pointer to a NewsGetNewsOpts struct
 
 
 Name | Type | Description  | Notes

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **CanAccessContent** | **bool** | Indicates if the user can access at least one content. | [optional] 
 **PlanName** | Pointer to **string** | Gets the current plan name. | [optional] 
 **PlanUpgrade** | Pointer to **string** | Gets the next plan name. | [optional] 
+**RoleProperties** | **map[string]interface{}** | The properties from the role. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

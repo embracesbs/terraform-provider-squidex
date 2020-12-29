@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsStopped** | **bool** |  | [optional] 
 **IsResetting** | **bool** |  | [optional] 
+**Count** | **int32** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Error** | Pointer to **string** |  | [optional] 
 **Position** | Pointer to **string** |  | [optional] 

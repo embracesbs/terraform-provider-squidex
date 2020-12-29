@@ -1,11 +1,10 @@
-# GraphQlQuery
+# GraphQlPostDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OperationName** | **string** |  | [optional] 
-**NamedQuery** | **string** |  | [optional] 
 **Query** | **string** |  | [optional] 
 **Variables** | [**interface{}**](.md) |  | [optional] 
 

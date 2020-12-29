@@ -1,6 +1,6 @@
 # \NotificationsApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

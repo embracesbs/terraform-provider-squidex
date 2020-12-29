@@ -1,4 +1,4 @@
-# ImportResultDto
+# BulkResultDto
 
 ## Properties
 
