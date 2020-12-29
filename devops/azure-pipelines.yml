@@ -7,9 +7,7 @@ trigger:
   - refs/tags/v*
 
 variables:
-  - name: Version
-    value: 0.4.0
-  - name: version2
+  - name: version
     value: ${{ replace(variables['Build.SourceBranchName'],'v','') }}
 
 pool:
@@ -33,6 +31,7 @@ steps:
       feedsToUsePublish: "internal"
       vstsFeedPublish: "7720f8d2-bf64-47d9-8b10-53f21220d54d/9ba7201b-e25d-4afc-b55b-6ad212a1516d"
       vstsFeedPackagePublish: "terraform-provider-squidex"
+      
       versionOption: "custom"
       versionPublish: $(Version)
       packagePublishDescription: "Embrace's terraform-provider-squidex, https://github.com/embracesbs/terraform-provider-squidex"
