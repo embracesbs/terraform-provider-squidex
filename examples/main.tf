@@ -13,6 +13,7 @@ provider "squidex" {
   url            = "${var.host}/api"
 }
 
+# TODO: discuss strategy, do we allow for destroy and create on app resources?
 resource "squidex_app" "test" {
   name = "squidex-provider-test"
   description = "description1"
@@ -30,4 +31,12 @@ resource "squidex_languages" "test" {
     language = "en-NL"
     is_master = true
   }
+}
+
+# TODO: discuss strategy, do we allow for destroy and create on app resources?
+resource "squidex_schema" "test" {
+  app_name  = squidex_app.test.name
+  name      = "squidex-provider-test-updated"
+  published = true
+  singleton = false
 }
