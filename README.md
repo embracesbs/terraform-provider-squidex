@@ -2,14 +2,16 @@
 
 Connected with Azure Pipelines, produces Artifact - an Universal Package.
 
-# Terraform Provider Squidex
+## Terraform Provider Squidex
 
 Run the following command to build the provider
+
 ```shell
 go build -o terraform-provider-squidex
 ```
 
 Alternatively, you can run:
+
 ```shell
 make build
 ```
@@ -30,3 +32,10 @@ Run the following command to initialize the workspace and apply the sample confi
 cd examples
 terraform init && terraform apply
 ```
+
+## Release
+
+Use a git tag with semver (e.g. v0.4.2). This will trigger a pipeline to release the provider as a package.
+
+- Trigger & pipeline: Azure Pipelines
+- Package: Azure Artifacts (Universal)
