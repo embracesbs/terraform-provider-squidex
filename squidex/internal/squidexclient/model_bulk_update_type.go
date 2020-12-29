@@ -13,7 +13,7 @@ type BulkUpdateType string
 
 // List of BulkUpdateType
 const (
-	UPSERT BulkUpdateType = "Upsert"
-	CHANGE_STATUS BulkUpdateType = "ChangeStatus"
-	DELETE BulkUpdateType = "Delete"
+	BulkUpdateTypeUPSERT BulkUpdateType = "Upsert"
+	BulkUpdateTypeCHANGE_STATUS BulkUpdateType = "ChangeStatus"
+	BulkUpdateTypeDELETE BulkUpdateType = "Delete"
 )

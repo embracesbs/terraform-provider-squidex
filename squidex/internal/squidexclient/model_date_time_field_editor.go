@@ -13,6 +13,6 @@ type DateTimeFieldEditor string
 
 // List of DateTimeFieldEditor
 const (
-	DATE DateTimeFieldEditor = "Date"
-	DATE_TIME DateTimeFieldEditor = "DateTime"
+	DateTimeFieldEditorDATE DateTimeFieldEditor = "Date"
+	DateTimeFieldEditorDATE_TIME DateTimeFieldEditor = "DateTime"
 )

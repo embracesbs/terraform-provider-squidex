@@ -11,7 +11,7 @@ package squidexclient
 // SchemaDetailsDtoAllOf struct for SchemaDetailsDtoAllOf
 type SchemaDetailsDtoAllOf struct {
 	// The scripts.
-	Scripts OneOfSchemaScriptsDto `json:"scripts"`
+	Scripts SchemaScriptsDto `json:"scripts"`
 	// The preview Urls.
 	PreviewUrls map[string]string `json:"previewUrls"`
 	// The name of fields that are used in content lists.

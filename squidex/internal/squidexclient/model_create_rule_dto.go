@@ -11,7 +11,7 @@ package squidexclient
 // CreateRuleDto struct for CreateRuleDto
 type CreateRuleDto struct {
 	// The trigger properties.
-	Trigger OneOfRuleTriggerDto `json:"trigger"`
+	Trigger RuleTriggerDto `json:"trigger"`
 	// The action properties.
-	Action OneOfRuleAction `json:"action"`
+	Action RuleAction `json:"action"`
 }

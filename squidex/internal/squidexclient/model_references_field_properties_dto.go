@@ -34,7 +34,7 @@ type ReferencesFieldPropertiesDto struct {
 	// True to resolve references in the content list.
 	ResolveReference bool `json:"resolveReference,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfReferencesFieldEditor `json:"editor,omitempty"`
+	Editor ReferencesFieldEditor `json:"editor,omitempty"`
 	// The id of the referenced schemas.
 	SchemaIds *[]string `json:"schemaIds,omitempty"`
 }

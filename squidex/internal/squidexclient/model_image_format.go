@@ -13,9 +13,9 @@ type ImageFormat string
 
 // List of ImageFormat
 const (
-	AUTO ImageFormat = "Auto"
-	PNG ImageFormat = "PNG"
-	JPEG ImageFormat = "JPEG"
-	TGA ImageFormat = "TGA"
-	GIF ImageFormat = "GIF"
+	ImageFormatAUTO ImageFormat = "Auto"
+	ImageFormatPNG ImageFormat = "PNG"
+	ImageFormatJPEG ImageFormat = "JPEG"
+	ImageFormatTGA ImageFormat = "TGA"
+	ImageFormatGIF ImageFormat = "GIF"
 )

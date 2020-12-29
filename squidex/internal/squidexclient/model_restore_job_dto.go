@@ -22,5 +22,5 @@ type RestoreJobDto struct {
 	// The time when the job has been stopped.
 	Stopped *time.Time `json:"stopped,omitempty"`
 	// The status of the operation.
-	Status OneOfJobStatus `json:"status,omitempty"`
+	Status JobStatus `json:"status,omitempty"`
 }

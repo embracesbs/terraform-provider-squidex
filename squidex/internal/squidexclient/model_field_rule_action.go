@@ -13,7 +13,7 @@ type FieldRuleAction string
 
 // List of FieldRuleAction
 const (
-	DISABLE FieldRuleAction = "Disable"
-	HIDE FieldRuleAction = "Hide"
-	REQUIRE FieldRuleAction = "Require"
+	FieldRuleActionDISABLE FieldRuleAction = "Disable"
+	FieldRuleActionHIDE FieldRuleAction = "Hide"
+	FieldRuleActionREQUIRE FieldRuleAction = "Require"
 )

@@ -11,7 +11,7 @@ package squidexclient
 // RuleElementPropertyDto struct for RuleElementPropertyDto
 type RuleElementPropertyDto struct {
 	// The html editor.
-	Editor OneOfRuleActionPropertyEditor `json:"editor"`
+	Editor RuleActionPropertyEditor `json:"editor"`
 	// The name of the editor.
 	Name string `json:"name"`
 	// The label to use.

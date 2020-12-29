@@ -11,5 +11,5 @@ package squidexclient
 // UpdateSettingDto struct for UpdateSettingDto
 type UpdateSettingDto struct {
 	// The value for the setting.
-	Value OneOfIJsonValue `json:"value,omitempty"`
+	Value IJsonValue `json:"value,omitempty"`
 }

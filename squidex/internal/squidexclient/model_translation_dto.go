@@ -11,7 +11,7 @@ package squidexclient
 // TranslationDto struct for TranslationDto
 type TranslationDto struct {
 	// The result of the translation.
-	Result OneOfTranslationResult `json:"result,omitempty"`
+	Result TranslationResult `json:"result,omitempty"`
 	// The translated text.
 	Text *string `json:"text,omitempty"`
 }

@@ -13,7 +13,7 @@ type WebhookMethod string
 
 // List of WebhookMethod
 const (
-	POST WebhookMethod = "POST"
-	PUT WebhookMethod = "PUT"
-	GET WebhookMethod = "GET"
+	WebhookMethodPOST WebhookMethod = "POST"
+	WebhookMethodPUT WebhookMethod = "PUT"
+	WebhookMethodGET WebhookMethod = "GET"
 )

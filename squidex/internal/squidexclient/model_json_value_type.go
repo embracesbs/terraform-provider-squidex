@@ -13,10 +13,10 @@ type JsonValueType string
 
 // List of JsonValueType
 const (
-	ARRAY JsonValueType = "Array"
-	BOOLEAN JsonValueType = "Boolean"
-	NULL JsonValueType = "Null"
-	NUMBER JsonValueType = "Number"
-	OBJECT JsonValueType = "Object"
-	STRING JsonValueType = "String"
+	JsonValueTypeARRAY JsonValueType = "Array"
+	JsonValueTypeBOOLEAN JsonValueType = "Boolean"
+	JsonValueTypeNULL JsonValueType = "Null"
+	JsonValueTypeNUMBER JsonValueType = "Number"
+	JsonValueTypeOBJECT JsonValueType = "Object"
+	JsonValueTypeSTRING JsonValueType = "String"
 )

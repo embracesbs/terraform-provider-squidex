@@ -11,9 +11,9 @@ package squidexclient
 // CreateSchemaDto struct for CreateSchemaDto
 type CreateSchemaDto struct {
 	// The optional properties.
-	Properties *OneOfSchemaPropertiesDto `json:"properties,omitempty"`
+	Properties *SchemaPropertiesDto `json:"properties,omitempty"`
 	// The optional scripts.
-	Scripts *OneOfSchemaScriptsDto `json:"scripts,omitempty"`
+	Scripts *SchemaScriptsDto `json:"scripts,omitempty"`
 	// The names of the fields that should be used in references.
 	FieldsInReferences *[]string `json:"fieldsInReferences,omitempty"`
 	// The names of the fields that should be shown in lists, including meta fields.

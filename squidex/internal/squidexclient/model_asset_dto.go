@@ -42,7 +42,7 @@ type AssetDto struct {
 	// The version of the file.
 	FileVersion int64 `json:"fileVersion,omitempty"`
 	// The type of the asset.
-	Type OneOfAssetType `json:"type,omitempty"`
+	Type AssetType `json:"type,omitempty"`
 	// The user that has created the schema.
 	CreatedBy string `json:"createdBy"`
 	// The user that has updated the asset.
@@ -54,7 +54,7 @@ type AssetDto struct {
 	// The version of the asset.
 	Version int64 `json:"version,omitempty"`
 	// The metadata.
-	Meta OneOfAssetMeta `json:"_meta,omitempty"`
+	Meta AssetMeta `json:"_meta,omitempty"`
 	// Determines of the created file is an image.
 	IsImage bool `json:"isImage,omitempty"`
 	// The width of the image in pixels if the asset is an image.

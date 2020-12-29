@@ -14,7 +14,7 @@ type WebhookRuleActionDto struct {
 	// The url to the webhook.
 	Url string `json:"url"`
 	// The type of the request.
-	Method OneOfWebhookMethod `json:"method"`
+	Method WebhookMethod `json:"method"`
 	// Leave it empty to use the full event as body.
 	Payload *string `json:"payload,omitempty"`
 	// The mime type of the payload.

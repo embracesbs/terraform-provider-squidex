@@ -13,12 +13,12 @@ type RuleActionPropertyEditor string
 
 // List of RuleActionPropertyEditor
 const (
-	CHECKBOX RuleActionPropertyEditor = "Checkbox"
-	DROPDOWN RuleActionPropertyEditor = "Dropdown"
-	EMAIL RuleActionPropertyEditor = "Email"
-	NUMBER RuleActionPropertyEditor = "Number"
-	PASSWORD RuleActionPropertyEditor = "Password"
-	TEXT RuleActionPropertyEditor = "Text"
-	TEXT_AREA RuleActionPropertyEditor = "TextArea"
-	URL RuleActionPropertyEditor = "Url"
+	RuleActionPropertyEditorCHECKBOX RuleActionPropertyEditor = "Checkbox"
+	RuleActionPropertyEditorDROPDOWN RuleActionPropertyEditor = "Dropdown"
+	RuleActionPropertyEditorEMAIL RuleActionPropertyEditor = "Email"
+	RuleActionPropertyEditorNUMBER RuleActionPropertyEditor = "Number"
+	RuleActionPropertyEditorPASSWORD RuleActionPropertyEditor = "Password"
+	RuleActionPropertyEditorTEXT RuleActionPropertyEditor = "Text"
+	RuleActionPropertyEditorTEXT_AREA RuleActionPropertyEditor = "TextArea"
+	RuleActionPropertyEditorURL RuleActionPropertyEditor = "Url"
 )

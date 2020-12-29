@@ -13,8 +13,8 @@ type JobStatus string
 
 // List of JobStatus
 const (
-	CREATED JobStatus = "Created"
-	STARTED JobStatus = "Started"
-	COMPLETED JobStatus = "Completed"
-	FAILED JobStatus = "Failed"
+	JobStatusCREATED JobStatus = "Created"
+	JobStatusSTARTED JobStatus = "Started"
+	JobStatusCOMPLETED JobStatus = "Completed"
+	JobStatusFAILED JobStatus = "Failed"
 )

@@ -13,9 +13,9 @@ type TranslationResult string
 
 // List of TranslationResult
 const (
-	TRANSLATED TranslationResult = "Translated"
-	LANGUAGE_NOT_SUPPORTED TranslationResult = "LanguageNotSupported"
-	NOT_TRANSLATED TranslationResult = "NotTranslated"
-	NOT_IMPLEMENTED TranslationResult = "NotImplemented"
-	FAILED TranslationResult = "Failed"
+	TranslationResultTRANSLATED TranslationResult = "Translated"
+	TranslationResultLANGUAGE_NOT_SUPPORTED TranslationResult = "LanguageNotSupported"
+	TranslationResultNOT_TRANSLATED TranslationResult = "NotTranslated"
+	TranslationResultNOT_IMPLEMENTED TranslationResult = "NotImplemented"
+	TranslationResultFAILED TranslationResult = "Failed"
 )

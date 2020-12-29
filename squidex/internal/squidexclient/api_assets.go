@@ -55,7 +55,7 @@ AssetContentGetAssetContent Get the asset content.
  * @param "Width" (optional.Int32) -  The target width of the asset, if it is an image.
  * @param "Height" (optional.Int32) -  The target height of the asset, if it is an image.
  * @param "Quality" (optional.Int32) -  Optional image quality, it is is an jpeg image.
- * @param "Mode" (optional.Interface of OneOfResizeMode) -  The resize mode when the width and height is defined.
+ * @param "Mode" (optional.Interface of ResizeMode) -  The resize mode when the width and height is defined.
  * @param "FocusX" (optional.Float32) -  Override the y focus point.
  * @param "FocusY" (optional.Float32) -  Override the x focus point.
  * @param "Nofocus" (optional.Bool) -  True to ignore the asset focus point if any.
@@ -213,7 +213,7 @@ AssetContentGetAssetContentBySlug Get the asset content.
  * @param "Width" (optional.Int32) -  The target width of the asset, if it is an image.
  * @param "Height" (optional.Int32) -  The target height of the asset, if it is an image.
  * @param "Quality" (optional.Int32) -  Optional image quality, it is is an jpeg image.
- * @param "Mode" (optional.Interface of OneOfResizeMode) -  The resize mode when the width and height is defined.
+ * @param "Mode" (optional.Interface of ResizeMode) -  The resize mode when the width and height is defined.
  * @param "FocusX" (optional.Float32) -  Override the y focus point.
  * @param "FocusY" (optional.Float32) -  Override the x focus point.
  * @param "Nofocus" (optional.Bool) -  True to ignore the asset focus point if any.

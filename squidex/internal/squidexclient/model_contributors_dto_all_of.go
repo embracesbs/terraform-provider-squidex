@@ -15,5 +15,5 @@ type ContributorsDtoAllOf struct {
 	// The maximum number of allowed contributors.
 	MaxContributors int32 `json:"maxContributors,omitempty"`
 	// The metadata to provide information about this request.
-	Meta OneOfContributorsMetadata `json:"_meta,omitempty"`
+	Meta ContributorsMetadata `json:"_meta,omitempty"`
 }

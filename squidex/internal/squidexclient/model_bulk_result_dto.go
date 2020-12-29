@@ -11,7 +11,7 @@ package squidexclient
 // BulkResultDto struct for BulkResultDto
 type BulkResultDto struct {
 	// The error when the import failed.
-	Error *OneOfErrorDto `json:"error,omitempty"`
+	Error *ErrorDto `json:"error,omitempty"`
 	// The id of the content when the import succeeds.
 	ContentId *string `json:"contentId,omitempty"`
 }

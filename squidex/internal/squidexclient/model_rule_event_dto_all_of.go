@@ -28,7 +28,7 @@ type RuleEventDtoAllOf struct {
 	// The next attempt.
 	NextAttempt *time.Time `json:"nextAttempt,omitempty"`
 	// The result of the event.
-	Result OneOfRuleResult `json:"result,omitempty"`
+	Result RuleResult `json:"result,omitempty"`
 	// The result of the job.
-	JobResult OneOfRuleJobResult `json:"jobResult,omitempty"`
+	JobResult RuleJobResult `json:"jobResult,omitempty"`
 }

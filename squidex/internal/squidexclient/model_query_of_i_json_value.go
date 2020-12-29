@@ -10,7 +10,7 @@
 package squidexclient
 // QueryOfIJsonValue struct for QueryOfIJsonValue
 type QueryOfIJsonValue struct {
-	Filter *OneOfobject `json:"filter,omitempty"`
+	Filter *FilterNodeOfIJsonValue `json:"filter,omitempty"`
 	FullText *string `json:"fullText,omitempty"`
 	Skip int64 `json:"skip,omitempty"`
 	Take int64 `json:"take,omitempty"`

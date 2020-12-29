@@ -21,7 +21,7 @@ type UpsertSchemaFieldDto struct {
 	// Determines the optional partitioning of the field.
 	Partitioning *string `json:"partitioning,omitempty"`
 	// The field properties.
-	Properties OneOfFieldPropertiesDto `json:"properties"`
+	Properties FieldPropertiesDto `json:"properties"`
 	// The nested fields.
 	Nested *[]UpsertSchemaNestedFieldDto `json:"nested,omitempty"`
 }

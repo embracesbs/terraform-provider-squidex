@@ -13,10 +13,10 @@ type SearchResultType string
 
 // List of SearchResultType
 const (
-	ASSET SearchResultType = "Asset"
-	CONTENT SearchResultType = "Content"
-	DASHBOARD SearchResultType = "Dashboard"
-	SETTING SearchResultType = "Setting"
-	RULE SearchResultType = "Rule"
-	SCHEMA SearchResultType = "Schema"
+	SearchResultTypeASSET SearchResultType = "Asset"
+	SearchResultTypeCONTENT SearchResultType = "Content"
+	SearchResultTypeDASHBOARD SearchResultType = "Dashboard"
+	SearchResultTypeSETTING SearchResultType = "Setting"
+	SearchResultTypeRULE SearchResultType = "Rule"
+	SearchResultTypeSCHEMA SearchResultType = "Schema"
 )

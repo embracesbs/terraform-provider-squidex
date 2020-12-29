@@ -32,5 +32,5 @@ type TagsFieldPropertiesDto struct {
 	// The allowed values for the field value.
 	AllowedValues *[]string `json:"allowedValues,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfTagsFieldEditor `json:"editor,omitempty"`
+	Editor TagsFieldEditor `json:"editor,omitempty"`
 }

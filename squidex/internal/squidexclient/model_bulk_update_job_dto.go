@@ -11,13 +11,13 @@ package squidexclient
 // BulkUpdateJobDto struct for BulkUpdateJobDto
 type BulkUpdateJobDto struct {
 	// An optional query to identify the content to update.
-	Query *OneOfQueryOfIJsonValue `json:"query,omitempty"`
+	Query *QueryOfIJsonValue `json:"query,omitempty"`
 	// An optional id of the content to update.
 	Id *string `json:"id,omitempty"`
 	// The data of the content when type is set to 'Upsert'.
-	Data *OneOfNamedContentData `json:"data,omitempty"`
+	Data *NamedContentData `json:"data,omitempty"`
 	// The new status when the type is set to 'ChangeStatus'.
 	Status *string `json:"status,omitempty"`
 	// The update type.
-	Type OneOfBulkUpdateType `json:"type,omitempty"`
+	Type BulkUpdateType `json:"type,omitempty"`
 }

@@ -38,5 +38,5 @@ type NumberFieldPropertiesDto struct {
 	// Indicates that the inline editor is enabled for this field.
 	InlineEditable bool `json:"inlineEditable,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfNumberFieldEditor `json:"editor,omitempty"`
+	Editor NumberFieldEditor `json:"editor,omitempty"`
 }

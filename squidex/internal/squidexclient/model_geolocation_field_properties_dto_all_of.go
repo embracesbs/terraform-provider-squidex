@@ -13,5 +13,5 @@ type GeolocationFieldPropertiesDtoAllOf struct {
 	// The default value for the field value.
 	DefaultValue *bool `json:"defaultValue,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfGeolocationFieldEditor `json:"editor,omitempty"`
+	Editor GeolocationFieldEditor `json:"editor,omitempty"`
 }

@@ -13,11 +13,11 @@ type ResizeMode string
 
 // List of ResizeMode
 const (
-	CROP ResizeMode = "Crop"
-	CROP_UPSIZE ResizeMode = "CropUpsize"
-	PAD ResizeMode = "Pad"
-	BOX_PAD ResizeMode = "BoxPad"
-	MAX ResizeMode = "Max"
-	MIN ResizeMode = "Min"
-	STRETCH ResizeMode = "Stretch"
+	ResizeModeCROP ResizeMode = "Crop"
+	ResizeModeCROP_UPSIZE ResizeMode = "CropUpsize"
+	ResizeModePAD ResizeMode = "Pad"
+	ResizeModeBOX_PAD ResizeMode = "BoxPad"
+	ResizeModeMAX ResizeMode = "Max"
+	ResizeModeMIN ResizeMode = "Min"
+	ResizeModeSTRETCH ResizeMode = "Stretch"
 )

@@ -11,7 +11,7 @@ package squidexclient
 // FieldRuleDto struct for FieldRuleDto
 type FieldRuleDto struct {
 	// The action to perform when the condition is met.
-	Action OneOfFieldRuleAction `json:"action"`
+	Action FieldRuleAction `json:"action"`
 	// The field to update.
 	Field string `json:"field"`
 	// The condition.

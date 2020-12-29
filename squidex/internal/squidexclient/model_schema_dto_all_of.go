@@ -20,7 +20,7 @@ type SchemaDtoAllOf struct {
 	// The name of the category.
 	Category *string `json:"category,omitempty"`
 	// The schema properties.
-	Properties OneOfSchemaPropertiesDto `json:"properties"`
+	Properties SchemaPropertiesDto `json:"properties"`
 	// Indicates if the schema is a singleton.
 	IsSingleton bool `json:"isSingleton,omitempty"`
 	// Indicates if the schema is published.

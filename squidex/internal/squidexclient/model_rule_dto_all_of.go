@@ -30,9 +30,9 @@ type RuleDtoAllOf struct {
 	// Optional rule name.
 	Name *string `json:"name,omitempty"`
 	// The trigger properties.
-	Trigger OneOfRuleTriggerDto `json:"trigger"`
+	Trigger RuleTriggerDto `json:"trigger"`
 	// The action properties.
-	Action OneOfRuleAction `json:"action"`
+	Action RuleAction `json:"action"`
 	// The number of completed executions.
 	NumSucceeded int32 `json:"numSucceeded,omitempty"`
 	// The number of failed executions.

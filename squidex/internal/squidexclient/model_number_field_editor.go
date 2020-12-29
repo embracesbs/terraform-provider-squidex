@@ -13,8 +13,8 @@ type NumberFieldEditor string
 
 // List of NumberFieldEditor
 const (
-	INPUT NumberFieldEditor = "Input"
-	RADIO NumberFieldEditor = "Radio"
-	DROPDOWN NumberFieldEditor = "Dropdown"
-	STARS NumberFieldEditor = "Stars"
+	NumberFieldEditorINPUT NumberFieldEditor = "Input"
+	NumberFieldEditorRADIO NumberFieldEditor = "Radio"
+	NumberFieldEditorDROPDOWN NumberFieldEditor = "Dropdown"
+	NumberFieldEditorSTARS NumberFieldEditor = "Stars"
 )

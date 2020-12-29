@@ -23,5 +23,5 @@ type NestedFieldDto struct {
 	// Defines if the field is disabled.
 	IsDisabled bool `json:"isDisabled,omitempty"`
 	// The field properties.
-	Properties OneOfFieldPropertiesDto `json:"properties"`
+	Properties FieldPropertiesDto `json:"properties"`
 }

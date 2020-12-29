@@ -15,5 +15,5 @@ type AddFieldDto struct {
 	// Determines the optional partitioning of the field.
 	Partitioning *string `json:"partitioning,omitempty"`
 	// The field properties.
-	Properties OneOfFieldPropertiesDto `json:"properties"`
+	Properties FieldPropertiesDto `json:"properties"`
 }

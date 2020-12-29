@@ -13,7 +13,7 @@ type UpdateRuleDto struct {
 	// Optional rule name.
 	Name *string `json:"name,omitempty"`
 	// The trigger properties.
-	Trigger OneOfRuleTriggerDto `json:"trigger,omitempty"`
+	Trigger RuleTriggerDto `json:"trigger,omitempty"`
 	// The action properties.
-	Action OneOfRuleAction `json:"action,omitempty"`
+	Action RuleAction `json:"action,omitempty"`
 }

@@ -13,8 +13,8 @@ type ReferencesFieldEditor string
 
 // List of ReferencesFieldEditor
 const (
-	LIST ReferencesFieldEditor = "List"
-	DROPDOWN ReferencesFieldEditor = "Dropdown"
-	TAGS ReferencesFieldEditor = "Tags"
-	CHECKBOXES ReferencesFieldEditor = "Checkboxes"
+	ReferencesFieldEditorLIST ReferencesFieldEditor = "List"
+	ReferencesFieldEditorDROPDOWN ReferencesFieldEditor = "Dropdown"
+	ReferencesFieldEditorTAGS ReferencesFieldEditor = "Tags"
+	ReferencesFieldEditorCHECKBOXES ReferencesFieldEditor = "Checkboxes"
 )

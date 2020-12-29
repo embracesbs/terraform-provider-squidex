@@ -11,5 +11,5 @@ package squidexclient
 // UiFieldPropertiesDtoAllOf struct for UiFieldPropertiesDtoAllOf
 type UiFieldPropertiesDtoAllOf struct {
 	// The editor that is used to manage this field.
-	Editor OneOfUiFieldEditor `json:"editor,omitempty"`
+	Editor UiFieldEditor `json:"editor,omitempty"`
 }

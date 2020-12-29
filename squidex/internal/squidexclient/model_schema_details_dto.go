@@ -22,7 +22,7 @@ type SchemaDetailsDto struct {
 	// The name of the category.
 	Category *string `json:"category,omitempty"`
 	// The schema properties.
-	Properties OneOfSchemaPropertiesDto `json:"properties"`
+	Properties SchemaPropertiesDto `json:"properties"`
 	// Indicates if the schema is a singleton.
 	IsSingleton bool `json:"isSingleton,omitempty"`
 	// Indicates if the schema is published.
@@ -38,7 +38,7 @@ type SchemaDetailsDto struct {
 	// The version of the schema.
 	Version int64 `json:"version,omitempty"`
 	// The scripts.
-	Scripts OneOfSchemaScriptsDto `json:"scripts"`
+	Scripts SchemaScriptsDto `json:"scripts"`
 	// The preview Urls.
 	PreviewUrls map[string]string `json:"previewUrls"`
 	// The name of fields that are used in content lists.

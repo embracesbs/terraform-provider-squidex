@@ -26,7 +26,7 @@ type AssetsFieldPropertiesDto struct {
 	Tags *[]string `json:"tags,omitempty"`
 	FieldType string `json:"fieldType"`
 	// The preview mode for the asset.
-	PreviewMode OneOfAssetPreviewMode `json:"previewMode,omitempty"`
+	PreviewMode AssetPreviewMode `json:"previewMode,omitempty"`
 	// The minimum allowed items for the field value.
 	MinItems *int32 `json:"minItems,omitempty"`
 	// The maximum allowed items for the field value.

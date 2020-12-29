@@ -50,7 +50,7 @@ type StringFieldPropertiesDto struct {
 	// Indicates that the inline editor is enabled for this field.
 	InlineEditable bool `json:"inlineEditable,omitempty"`
 	// How the string content should be interpreted.
-	ContentType OneOfStringContentType `json:"contentType,omitempty"`
+	ContentType StringContentType `json:"contentType,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfStringFieldEditor `json:"editor,omitempty"`
+	Editor StringFieldEditor `json:"editor,omitempty"`
 }

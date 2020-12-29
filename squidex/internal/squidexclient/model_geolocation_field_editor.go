@@ -13,5 +13,5 @@ type GeolocationFieldEditor string
 
 // List of GeolocationFieldEditor
 const (
-	MAP GeolocationFieldEditor = "Map"
+	GeolocationFieldEditorMAP GeolocationFieldEditor = "Map"
 )

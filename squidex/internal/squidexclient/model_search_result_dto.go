@@ -15,7 +15,7 @@ type SearchResultDto struct {
 	// The name of the search result.
 	Name string `json:"name"`
 	// The type of the search result.
-	Type OneOfSearchResultType `json:"type"`
+	Type SearchResultType `json:"type"`
 	// An optional label.
 	Label *string `json:"label,omitempty"`
 }

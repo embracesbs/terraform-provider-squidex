@@ -22,7 +22,7 @@ type ContentDtoAllOf struct {
 	// The data of the content item.
 	Data interface{} `json:"data"`
 	// The reference data for the frontend UI.
-	ReferenceData *OneOfNamedContentData `json:"referenceData,omitempty"`
+	ReferenceData *NamedContentData `json:"referenceData,omitempty"`
 	// The date and time when the content item has been created.
 	Created time.Time `json:"created,omitempty"`
 	// The date and time when the content item has been modified last.
@@ -36,7 +36,7 @@ type ContentDtoAllOf struct {
 	// The color of the new status.
 	NewStatusColor *string `json:"newStatusColor,omitempty"`
 	// The scheduled status.
-	ScheduleJob *OneOfScheduleJobDto `json:"scheduleJob,omitempty"`
+	ScheduleJob *ScheduleJobDto `json:"scheduleJob,omitempty"`
 	// The name of the schema.
 	SchemaName *string `json:"schemaName,omitempty"`
 	// The display name of the schema.

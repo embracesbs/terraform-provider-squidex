@@ -8,10 +8,5 @@
  */
 
 package squidexclient
-// UiFieldEditor the model 'UiFieldEditor'
-type UiFieldEditor string
-
-// List of UIFieldEditor
-const (
-	UiFieldEditorSEPARATOR UiFieldEditor = "Separator"
-)
+// FilterNodeOfIJsonValue struct for FilterNodeOfIJsonValue
+type FilterNodeOfIJsonValue struct {}

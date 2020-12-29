@@ -13,6 +13,6 @@ type SortOrder string
 
 // List of SortOrder
 const (
-	ASCENDING SortOrder = "Ascending"
-	DESCENDING SortOrder = "Descending"
+	SortOrderASCENDING SortOrder = "Ascending"
+	SortOrderDESCENDING SortOrder = "Descending"
 )

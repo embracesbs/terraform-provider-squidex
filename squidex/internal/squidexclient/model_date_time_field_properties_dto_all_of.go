@@ -20,7 +20,7 @@ type DateTimeFieldPropertiesDtoAllOf struct {
 	// The minimum allowed value for the field value.
 	MinValue *time.Time `json:"minValue,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfDateTimeFieldEditor `json:"editor,omitempty"`
+	Editor DateTimeFieldEditor `json:"editor,omitempty"`
 	// The calculated default value for the field value.
-	CalculatedDefaultValue *OneOfDateTimeCalculatedDefaultValue `json:"calculatedDefaultValue,omitempty"`
+	CalculatedDefaultValue *DateTimeCalculatedDefaultValue `json:"calculatedDefaultValue,omitempty"`
 }

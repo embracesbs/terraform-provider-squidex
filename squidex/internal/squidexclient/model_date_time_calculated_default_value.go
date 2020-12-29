@@ -13,6 +13,6 @@ type DateTimeCalculatedDefaultValue string
 
 // List of DateTimeCalculatedDefaultValue
 const (
-	NOW DateTimeCalculatedDefaultValue = "Now"
-	TODAY DateTimeCalculatedDefaultValue = "Today"
+	DateTimeCalculatedDefaultValueNOW DateTimeCalculatedDefaultValue = "Now"
+	DateTimeCalculatedDefaultValueTODAY DateTimeCalculatedDefaultValue = "Today"
 )

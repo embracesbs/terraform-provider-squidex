@@ -30,5 +30,5 @@ type BooleanFieldPropertiesDto struct {
 	// Indicates that the inline editor is enabled for this field.
 	InlineEditable bool `json:"inlineEditable,omitempty"`
 	// The editor that is used to manage this field.
-	Editor OneOfBooleanFieldEditor `json:"editor,omitempty"`
+	Editor BooleanFieldEditor `json:"editor,omitempty"`
 }

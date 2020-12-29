@@ -26,5 +26,5 @@ type BackupJobDto struct {
 	// The number of handled assets.
 	HandledAssets int32 `json:"handledAssets,omitempty"`
 	// The status of the operation.
-	Status OneOfJobStatus `json:"status,omitempty"`
+	Status JobStatus `json:"status,omitempty"`
 }

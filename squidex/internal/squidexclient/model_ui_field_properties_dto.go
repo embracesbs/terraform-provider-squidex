@@ -26,5 +26,5 @@ type UiFieldPropertiesDto struct {
 	Tags *[]string `json:"tags,omitempty"`
 	FieldType string `json:"fieldType"`
 	// The editor that is used to manage this field.
-	Editor OneOfUiFieldEditor `json:"editor,omitempty"`
+	Editor UiFieldEditor `json:"editor,omitempty"`
 }

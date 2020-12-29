@@ -13,8 +13,8 @@ type AssetType string
 
 // List of AssetType
 const (
-	UNKNOWN AssetType = "Unknown"
-	IMAGE AssetType = "Image"
-	AUDIO AssetType = "Audio"
-	VIDEO AssetType = "Video"
+	AssetTypeUNKNOWN AssetType = "Unknown"
+	AssetTypeIMAGE AssetType = "Image"
+	AssetTypeAUDIO AssetType = "Audio"
+	AssetTypeVIDEO AssetType = "Video"
 )

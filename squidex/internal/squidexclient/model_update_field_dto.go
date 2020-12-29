@@ -11,5 +11,5 @@ package squidexclient
 // UpdateFieldDto struct for UpdateFieldDto
 type UpdateFieldDto struct {
 	// The field properties.
-	Properties OneOfFieldPropertiesDto `json:"properties"`
+	Properties FieldPropertiesDto `json:"properties"`
 }

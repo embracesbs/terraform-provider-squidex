@@ -25,7 +25,7 @@ type FieldDto struct {
 	// Defines the partitioning of the field.
 	Partitioning string `json:"partitioning"`
 	// The field properties.
-	Properties OneOfFieldPropertiesDto `json:"properties"`
+	Properties FieldPropertiesDto `json:"properties"`
 	// The nested fields.
 	Nested *[]NestedFieldDto `json:"nested,omitempty"`
 }
