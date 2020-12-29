@@ -1,48 +1,44 @@
 terraform {
   required_providers {
-    restapi = {
-      source  = "terraform.embracecloud.nl/mastercard/restapi"
-      version = "1.14.0"
-    }
     squidex = {
-      source  = "terraform.embracecloud.nl/embracecloud/squidex"
-      version = "0.3.0"
+      source = "terraform.embracecloud.nl/embracecloud/squidex"
+    
     }
   }
 }
 
-variable "url" {
-}
-variable "app_name" {
-}
-variable "client_id" {
-}
-variable "client_secret" {
-}
 
 provider "squidex" {
-  url           = var.url
-  app_name      = var.app_name
-  client_id     = var.client_id
-  client_secret = var.client_secret
+  client_id = "root"
+  client_secret = "4HUt5ONG1k0OknPA"
+  token_endpoint = "https://squidex-embracecloudte.features.embracecloud.io/identity-server/connect/token"
+  url = "https://squidex-embracecloudte.features.embracecloud.io/api"
+  
+}
+resource "squidex_app" "test" {
+  name = "test-sven-test"
+  description = "description1"
+}
+resource "squidex_client" "test" {
+  app_name = squidex_app.test.name
+  name = "testsven"
+  role = "squidex"
+}
+resource "squidex_languages" "test" {
+  app_name = squidex_app.test.name
+
+
+
+        language {
+      language = "en"
+      is_master = true
+    }
+
+
+  
 }
 
-module "acme" {
-  source = "./acme"
-  languages = {
-    "nl" = false
-    "de" = false
-  }
-  clients = {
-    "gateway"                        = "Owner"
-    "content-provider-introspection" = "Reader"
-  }
-}
 
-output "languages" {
-  value = module.acme.all_languages
-}
 
-output "clients" {
-  value = module.acme.all_clients
-}
+
+

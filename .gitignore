@@ -46,3 +46,4 @@ override.tf.json
 vendor/
 
 artifacts/
+.DS_Store

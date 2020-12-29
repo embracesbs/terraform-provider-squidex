@@ -3,6 +3,7 @@ package squidex
 import (
 	"context"
 
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -14,6 +15,10 @@ func resourceClient() *schema.Resource {
 		UpdateContext: resourceClientUpdate,
 		DeleteContext: resourceClientDelete,
 		Schema: map[string]*schema.Schema{
+			"app_name": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -27,83 +32,54 @@ func resourceClient() *schema.Resource {
 }
 
 func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	apiClient := meta.(*APIClient)
-	// Warning or errors can be collected in a slice type
+
 	var diags diag.Diagnostics
-
-	id := data.Id()
-
-	client, err := apiClient.GetClientByName(id)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	data.SetId(client.Name)
-
-	if err := data.Set("name", client.Name); err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := data.Set("role", client.Role); err != nil {
-		return diag.FromErr(err)
-	}
 
 	return diags
 }
 
 func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	apiClient := meta.(*APIClient)
+
+	client := meta.(*squidexclient.APIClient)
 
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	newClient := &Client{
-		Name: data.Get("name").(string),
-		Role: data.Get("role").(string),
-	}
+	appName := data.Get("app_name").(string)
+	name := data.Get("name").(string)
 
-	_, err := apiClient.CreateClient(newClient)
+	result, _, err := client.AppsApi.AppClientsPostClient(ctx, appName, squidexclient.CreateClientDto{
+		Id: name,
+	})
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	client, err := apiClient.UpdateClient(newClient)
+	id := result.Items[0].Id
 
-	data.SetId(newClient.Name)
+	data.SetId(id)
 
-	if err := data.Set("name", client.Name); err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := data.Set("role", client.Role); err != nil {
-		return diag.FromErr(err)
-	}
+	//resourceClientUpdate(ctx, data, meta)
 
 	return diags
 }
 
 func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	apiClient := meta.(*APIClient)
-	// Warning or errors can be collected in a slice type
+	client := meta.(*squidexclient.APIClient)
+
 	var diags diag.Diagnostics
 
-	updateClient := &Client{
-		Name: data.Get("name").(string),
-		Role: data.Get("role").(string),
-	}
+	appName := data.Get("app_name").(string)
+	name := data.Get("name").(string)
+	role := data.Get("role").(*string)
 
-	client, err := apiClient.UpdateClient(updateClient)
+	_, _, err := client.AppsApi.AppClientsPutClient(ctx, appName, name, squidexclient.UpdateClientDto{
+		Name: name,
+		Role: role,
+	})
+
 	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	data.SetId(updateClient.Name)
-
-	if err := data.Set("name", client.Name); err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := data.Set("role", client.Role); err != nil {
 		return diag.FromErr(err)
 	}
 
@@ -111,13 +87,16 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	apiClient := meta.(*APIClient)
-	// Warning or errors can be collected in a slice type
+
+	client := meta.(*squidexclient.APIClient)
+
 	var diags diag.Diagnostics
 
-	id := data.Id()
+	appName := data.Get("app_name").(string)
+	name := data.Get("name").(string)
 
-	err := apiClient.DeleteClient(id)
+	_, _, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, name)
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
