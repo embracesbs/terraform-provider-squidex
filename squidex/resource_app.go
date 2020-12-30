@@ -18,10 +18,15 @@ func resourceApp() *schema.Resource {
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
+				ForceNew: true,
+			},
+			"label": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 			"description": &schema.Schema{
 				Type:     schema.TypeString,
-				Required: true,
+				Optional: true,
 			},
 		},
 	}
@@ -62,9 +67,11 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	var diags diag.Diagnostics
 
 	name := data.Get("name").(string)
+	label := data.Get("label").(string)
 	description := data.Get("description").(string)
 
 	_, _, err := client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
+		Label: &label,
 		Description: &description,
 	})
 

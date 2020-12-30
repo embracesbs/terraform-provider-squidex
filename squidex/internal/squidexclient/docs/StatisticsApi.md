@@ -1,12 +1,11 @@
 # \StatisticsApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**UsagesGetCurrentStorageSize**](StatisticsApi.md#UsagesGetCurrentStorageSize) | **Get** /apps/{app}/usages/storage/today | Get total asset size.
 [**UsagesGetLog**](StatisticsApi.md#UsagesGetLog) | **Get** /apps/{app}/usages/log | Get api calls as log file.
-[**UsagesGetMonthlyCalls**](StatisticsApi.md#UsagesGetMonthlyCalls) | **Get** /apps/{app}/usages/calls/month | Get api calls for this month.
 [**UsagesGetStorageSizes**](StatisticsApi.md#UsagesGetStorageSizes) | **Get** /apps/{app}/usages/storage/{fromDate}/{toDate} | Get asset usage by date.
 [**UsagesGetUsages**](StatisticsApi.md#UsagesGetUsages) | **Get** /apps/{app}/usages/calls/{fromDate}/{toDate} | Get api calls in date range.
 
@@ -76,41 +75,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UsagesGetMonthlyCalls
-
-> CurrentCallsDto UsagesGetMonthlyCalls(ctx, app)
-
-Get api calls for this month.
-
-### Required Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string**| The name of the app. | 
-
-### Return type
-
-[**CurrentCallsDto**](CurrentCallsDto.md)
-
-### Authorization
-
-[squidex-oauth-auth](../README.md#squidex-oauth-auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UsagesGetStorageSizes
 
-> []StorageUsageDto UsagesGetStorageSizes(ctx, app, fromDate, toDate)
+> []StorageUsagePerDateDto UsagesGetStorageSizes(ctx, app, fromDate, toDate)
 
 Get asset usage by date.
 
@@ -126,7 +93,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]StorageUsageDto**](StorageUsageDto.md)
+[**[]StorageUsagePerDateDto**](StorageUsagePerDateDto.md)
 
 ### Authorization
 
@@ -144,7 +111,7 @@ Name | Type | Description  | Notes
 
 ## UsagesGetUsages
 
-> map[string][]CallsUsageDto UsagesGetUsages(ctx, app, fromDate, toDate)
+> CallsUsageDtoDto UsagesGetUsages(ctx, app, fromDate, toDate)
 
 Get api calls in date range.
 
@@ -160,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**map[string][]CallsUsageDto**](array.md)
+[**CallsUsageDtoDto**](CallsUsageDtoDto.md)
 
 ### Authorization
 

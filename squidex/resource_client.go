@@ -71,12 +71,13 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
+	id := data.Get("id").(string)
 	name := data.Get("name").(string)
-	role := data.Get("role").(*string)
+	role := data.Get("role").(string)
 
-	_, _, err := client.AppsApi.AppClientsPutClient(ctx, appName, name, squidexclient.UpdateClientDto{
-		Name: name,
-		Role: role,
+	_, _, err := client.AppsApi.AppClientsPutClient(ctx, appName, id, squidexclient.UpdateClientDto{
+		Name: &name,
+		Role: &role,
 	})
 
 	if err != nil {
@@ -93,9 +94,9 @@ func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta i
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-	name := data.Get("name").(string)
+	id := data.Get("id").(string)
 
-	_, _, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, name)
+	_, _, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
 
 	if err != nil {
 		return diag.FromErr(err)

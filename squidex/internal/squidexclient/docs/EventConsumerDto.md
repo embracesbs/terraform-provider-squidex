@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Links** | [**map[string]ResourceLink**](ResourceLink.md) | The links. | 
 **IsStopped** | **bool** |  | [optional] 
 **IsResetting** | **bool** |  | [optional] 
+**Count** | **int32** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Error** | Pointer to **string** |  | [optional] 
 **Position** | Pointer to **string** |  | [optional] 

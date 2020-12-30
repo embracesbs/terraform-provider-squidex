@@ -1,28 +1,28 @@
 # \SchemasApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**SchemaFieldsDeleteField**](SchemasApi.md#SchemaFieldsDeleteField) | **Delete** /apps/{app}/schemas/{name}/fields/{id} | Delete a schema field.
-[**SchemaFieldsDeleteNestedField**](SchemasApi.md#SchemaFieldsDeleteNestedField) | **Delete** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Delete a nested schema field.
+[**SchemaFieldsDeleteNestedField**](SchemasApi.md#SchemaFieldsDeleteNestedField) | **Delete** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Delete a nested field.
 [**SchemaFieldsDisableField**](SchemasApi.md#SchemaFieldsDisableField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/disable | Disable a schema field.
-[**SchemaFieldsDisableNestedField**](SchemasApi.md#SchemaFieldsDisableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/disable | Disable nested a schema field.
+[**SchemaFieldsDisableNestedField**](SchemasApi.md#SchemaFieldsDisableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/disable | Disable a nested field.
 [**SchemaFieldsEnableField**](SchemasApi.md#SchemaFieldsEnableField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/enable | Enable a schema field.
-[**SchemaFieldsEnableNestedField**](SchemasApi.md#SchemaFieldsEnableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/enable | Enable a nested schema field.
+[**SchemaFieldsEnableNestedField**](SchemasApi.md#SchemaFieldsEnableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/enable | Enable a nested field.
 [**SchemaFieldsHideField**](SchemasApi.md#SchemaFieldsHideField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/hide | Hide a schema field.
-[**SchemaFieldsHideNestedField**](SchemasApi.md#SchemaFieldsHideNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/hide | Hide a nested schema field.
+[**SchemaFieldsHideNestedField**](SchemasApi.md#SchemaFieldsHideNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/hide | Hide a nested field.
 [**SchemaFieldsLockField**](SchemasApi.md#SchemaFieldsLockField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/lock | Lock a schema field.
-[**SchemaFieldsLockNestedField**](SchemasApi.md#SchemaFieldsLockNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/lock | Lock a nested schema field.
+[**SchemaFieldsLockNestedField**](SchemasApi.md#SchemaFieldsLockNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/lock | Lock a nested field.
 [**SchemaFieldsPostField**](SchemasApi.md#SchemaFieldsPostField) | **Post** /apps/{app}/schemas/{name}/fields | Add a schema field.
-[**SchemaFieldsPostNestedField**](SchemasApi.md#SchemaFieldsPostNestedField) | **Post** /apps/{app}/schemas/{name}/fields/{parentId}/nested | Add a nested schema field.
+[**SchemaFieldsPostNestedField**](SchemasApi.md#SchemaFieldsPostNestedField) | **Post** /apps/{app}/schemas/{name}/fields/{parentId}/nested | Add a nested field.
 [**SchemaFieldsPutField**](SchemasApi.md#SchemaFieldsPutField) | **Put** /apps/{app}/schemas/{name}/fields/{id} | Update a schema field.
-[**SchemaFieldsPutNestedField**](SchemasApi.md#SchemaFieldsPutNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Update a nested schema field.
+[**SchemaFieldsPutNestedField**](SchemasApi.md#SchemaFieldsPutNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Update a nested field.
 [**SchemaFieldsPutNestedFieldOrdering**](SchemasApi.md#SchemaFieldsPutNestedFieldOrdering) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/ordering | Reorders the nested fields.
 [**SchemaFieldsPutSchemaFieldOrdering**](SchemasApi.md#SchemaFieldsPutSchemaFieldOrdering) | **Put** /apps/{app}/schemas/{name}/fields/ordering | Reorders the fields.
 [**SchemaFieldsPutSchemaUIFields**](SchemasApi.md#SchemaFieldsPutSchemaUIFields) | **Put** /apps/{app}/schemas/{name}/fields/ui | Configure UI fields.
 [**SchemaFieldsShowField**](SchemasApi.md#SchemaFieldsShowField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/show | Show a schema field.
-[**SchemaFieldsShowNestedField**](SchemasApi.md#SchemaFieldsShowNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/show | Show a nested schema field.
+[**SchemaFieldsShowNestedField**](SchemasApi.md#SchemaFieldsShowNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/show | Show a nested field.
 [**SchemasDeleteSchema**](SchemasApi.md#SchemasDeleteSchema) | **Delete** /apps/{app}/schemas/{name} | Delete a schema.
 [**SchemasGetSchema**](SchemasApi.md#SchemasGetSchema) | **Get** /apps/{app}/schemas/{name} | Get a schema by name.
 [**SchemasGetSchemas**](SchemasApi.md#SchemasGetSchemas) | **Get** /apps/{app}/schemas | Get schemas.
@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**SchemasPublishSchema**](SchemasApi.md#SchemasPublishSchema) | **Put** /apps/{app}/schemas/{name}/publish | Publish a schema.
 [**SchemasPutCategory**](SchemasApi.md#SchemasPutCategory) | **Put** /apps/{app}/schemas/{name}/category | Update a schema category.
 [**SchemasPutPreviewUrls**](SchemasApi.md#SchemasPutPreviewUrls) | **Put** /apps/{app}/schemas/{name}/preview-urls | Update the preview urls.
+[**SchemasPutRules**](SchemasApi.md#SchemasPutRules) | **Put** /apps/{app}/schemas/{name}/rules | Update the rules.
 [**SchemasPutSchema**](SchemasApi.md#SchemasPutSchema) | **Put** /apps/{app}/schemas/{name} | Update a schema.
 [**SchemasPutSchemaSync**](SchemasApi.md#SchemasPutSchemaSync) | **Put** /apps/{app}/schemas/{name}/sync | Synchronize a schema.
 [**SchemasPutScripts**](SchemasApi.md#SchemasPutScripts) | **Put** /apps/{app}/schemas/{name}/scripts | Update the scripts.
@@ -75,7 +76,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsDeleteNestedField(ctx, app, name, parentId, id)
 
-Delete a nested schema field.
+Delete a nested field.
 
 ### Required Parameters
 
@@ -146,7 +147,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsDisableNestedField(ctx, app, name, parentId, id)
 
-Disable nested a schema field.
+Disable a nested field.
 
 A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
@@ -219,7 +220,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsEnableNestedField(ctx, app, name, parentId, id)
 
-Enable a nested schema field.
+Enable a nested field.
 
 A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
@@ -292,7 +293,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsHideNestedField(ctx, app, name, parentId, id)
 
-Hide a nested schema field.
+Hide a nested field.
 
 A hidden field is not part of the API response, but can still be edited in the portal.
 
@@ -365,7 +366,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsLockNestedField(ctx, app, name, parentId, id)
 
-Lock a nested schema field.
+Lock a nested field.
 
 A locked field cannot be edited or deleted.
 
@@ -436,7 +437,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsPostNestedField(ctx, app, name, parentId, addFieldDto)
 
-Add a nested schema field.
+Add a nested field.
 
 ### Required Parameters
 
@@ -506,7 +507,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsPutNestedField(ctx, app, name, parentId, id, updateFieldDto)
 
-Update a nested schema field.
+Update a nested field.
 
 ### Required Parameters
 
@@ -681,7 +682,7 @@ Name | Type | Description  | Notes
 
 > SchemaDetailsDto SchemaFieldsShowNestedField(ctx, app, name, parentId, id)
 
-Show a nested schema field.
+Show a nested field.
 
 A hidden field is not part of the API response, but can still be edited in the portal.
 
@@ -927,6 +928,40 @@ Name | Type | Description  | Notes
 **app** | **string**| The name of the app. | 
 **name** | **string**| The name of the schema. | 
 **requestBody** | [**map[string]string**](string.md)| The preview urls for the schema. | 
+
+### Return type
+
+[**SchemaDetailsDto**](SchemaDetailsDto.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SchemasPutRules
+
+> SchemaDetailsDto SchemasPutRules(ctx, app, name, configureFieldRulesDto)
+
+Update the rules.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app. | 
+**name** | **string**| The name of the schema. | 
+**configureFieldRulesDto** | [**ConfigureFieldRulesDto**](ConfigureFieldRulesDto.md)| The schema rules object that needs to updated. | 
 
 ### Return type
 

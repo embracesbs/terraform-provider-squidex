@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | The message of the event. | 
+**Message** | **string** | The message for the event. | 
+**EventType** | **string** | The type of the original event. | 
 **Actor** | **string** | The user who called the action. | 
 **EventId** | **string** | Gets a unique id for the event. | [optional] 
 **Created** | [**time.Time**](time.Time.md) | The time when the event happened. | [optional] 

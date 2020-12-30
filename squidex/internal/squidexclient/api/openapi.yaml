@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
   title: Squidex API
-  version: 4.1.3.0
+  version: 5.3.0.0
   x-logo:
-    url: https://squidex-embracecloudte.features.embracecloud.io/images/logo-white.png
+    url: https://squidex.dev.embracecloud.io/images/logo-white.png
     backgroundColor: '#3f83df'
 externalDocs:
   url: https://docs.squidex.io
 servers:
-- url: https://squidex-embracecloudte.features.embracecloud.io/api
+- url: https://squidex.dev.embracecloud.io/api
 security:
 - squidex-oauth-auth: []
 paths:
@@ -136,7 +136,7 @@ paths:
       - Users
   /apps/{app}/translations:
     post:
-      operationId: Translations_GetLanguages
+      operationId: Translations_PostTranslation
       parameters:
       - description: The name of the app.
         explode: false
@@ -171,7 +171,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.translate
       summary: Translate a text.
       tags:
       - Translations
@@ -205,42 +205,8 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.usage
       summary: Get api calls as log file.
-      tags:
-      - Statistics
-  /apps/{app}/usages/calls/month:
-    get:
-      operationId: Usages_GetMonthlyCalls
-      parameters:
-      - description: The name of the app.
-        explode: false
-        in: path
-        name: app
-        required: true
-        schema:
-          type: string
-        style: simple
-        x-position: 1
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CurrentCallsDto'
-          description: Usage tracking results returned.
-        "404":
-          description: App not found.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDto'
-          description: Operation failed
-      security:
-      - squidex-oauth-auth:
-        - squidex.apps.{app}.common
-      summary: Get api calls for this month.
       tags:
       - Statistics
   /apps/{app}/usages/calls/{fromDate}/{toDate}:
@@ -279,11 +245,7 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  items:
-                    $ref: '#/components/schemas/CallsUsageDto'
-                  type: array
-                type: object
+                $ref: '#/components/schemas/CallsUsageDtoDto'
           description: API call returned.
         "404":
           description: App not found.
@@ -302,7 +264,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.usage
       summary: Get api calls in date range.
       tags:
       - Statistics
@@ -336,7 +298,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.usage
       summary: Get total asset size.
       tags:
       - Statistics
@@ -377,7 +339,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/StorageUsageDto'
+                  $ref: '#/components/schemas/StorageUsagePerDateDto'
                 type: array
           description: Storage usage returned.
         "400":
@@ -397,10 +359,56 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.usage
       summary: Get asset usage by date.
       tags:
       - Statistics
+  /apps/{app}/search:
+    get:
+      operationId: Search_GetSearchResults
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The search query.
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+        x-position: 2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SearchResultDto'
+                type: array
+          description: Search results returned.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.search
+      summary: Get search results.
+      tags:
+      - Search
   /apps/{app}/schemas/{name}/fields:
     post:
       operationId: SchemaFields_PostField
@@ -444,7 +452,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field properties not valid.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "409":
@@ -518,7 +526,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field properties not valid.
+          description: Schema request not valid.
         "409":
           content:
             application/json:
@@ -536,7 +544,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Add a nested schema field.
+      summary: Add a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/ui:
@@ -582,7 +590,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field contains invalid field names.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -640,7 +648,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field ids do not cover the fields of the schema.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -708,7 +716,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field ids do not cover the fields of the schema.
+          description: Schema field request not valid.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -767,7 +775,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Field is locked.
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -834,7 +842,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field properties not valid or field is locked.
+          description: Schema field request not valid.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -903,7 +911,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Field is locked.
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -915,7 +923,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Delete a nested schema field.
+      summary: Delete a nested field.
       tags:
       - Schemas
     put:
@@ -980,7 +988,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema field properties not valid or field is locked.
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -992,7 +1000,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Update a nested schema field.
+      summary: Update a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/{id}/lock:
@@ -1035,6 +1043,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field shown.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1099,6 +1113,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field hidden.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Field, schema, or app not found.
         "500":
@@ -1110,7 +1130,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Lock a nested schema field.
+      summary: Lock a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/{id}/hide:
@@ -1154,6 +1174,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field hidden.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1219,6 +1245,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field hidden.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Field, schema, or app not found.
         "500":
@@ -1230,7 +1262,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Hide a nested schema field.
+      summary: Hide a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/{id}/show:
@@ -1274,6 +1306,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field shown.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1339,6 +1377,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field shown.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1350,7 +1394,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Show a nested schema field.
+      summary: Show a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/{id}/enable:
@@ -1394,6 +1438,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field enabled.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1459,6 +1509,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field enabled.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1470,7 +1526,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Enable a nested schema field.
+      summary: Enable a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/fields/{id}/disable:
@@ -1514,6 +1570,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field disabled.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1579,6 +1641,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema field disabled.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema field request not valid or field locked.
         "404":
           description: Schema, field or app not found.
         "500":
@@ -1590,7 +1658,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.update
-      summary: Disable nested a schema field.
+      summary: Disable a nested field.
       tags:
       - Schemas
   /apps/{app}/schemas:
@@ -1623,7 +1691,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.schemas.read
       summary: Get schemas.
       tags:
       - Schemas
@@ -1660,7 +1728,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema name or properties are not valid.
+          description: Schema request not valid.
         "409":
           content:
             application/json:
@@ -1675,7 +1743,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.schemas.{name}.create
+        - squidex.apps.{app}.schemas.create
       summary: Create a new schema.
       tags:
       - Schemas
@@ -1756,7 +1824,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.schemas.read
       summary: Get a schema by name.
       tags:
       - Schemas
@@ -1802,7 +1870,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema properties are not valid.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -1860,7 +1928,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema properties are not valid.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -1913,6 +1981,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -1965,6 +2039,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
           description: Schema updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -2022,7 +2102,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Schema properties are not valid.
+          description: Schema request not valid.
         "404":
           description: Schema or app not found.
         "500":
@@ -2035,6 +2115,64 @@ paths:
       - squidex-oauth-auth:
         - squidex.apps.{app}.schemas.{name}.scripts
       summary: Update the scripts.
+      tags:
+      - Schemas
+  /apps/{app}/schemas/{name}/rules:
+    put:
+      operationId: Schemas_PutRules
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The name of the schema.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureFieldRulesDto'
+        description: The schema rules object that needs to updated.
+        required: true
+        x-name: request
+        x-position: 3
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDetailsDto'
+          description: Schema updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Schema request not valid.
+        "404":
+          description: Schema or app not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.schemas.{name}.update
+      summary: Update the rules.
       tags:
       - Schemas
   /apps/{app}/schemas/{name}/publish:
@@ -2065,7 +2203,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
-          description: Schema has been published.
+          description: Schema published.
         "404":
           description: Schema or app not found.
         "500":
@@ -2108,7 +2246,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SchemaDetailsDto'
-          description: Schema has been unpublished.
+          description: Schema unpublished.
         "404":
           description: Schema or app not found.
         "500":
@@ -2143,7 +2281,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth: []
-      summary: Get the supported rule actions.
+      summary: Get supported rule actions.
       tags:
       - Rules
   /apps/{app}/rules:
@@ -2213,7 +2351,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Rule is not valid.
+          description: Rule request not valid.
         "404":
           description: App not found.
         "500":
@@ -2226,6 +2364,34 @@ paths:
       - squidex-oauth-auth:
         - squidex.apps.{app}.rules.create
       summary: Create a new rule.
+      tags:
+      - Rules
+  /apps/{app}/rules/run:
+    delete:
+      operationId: Rules_DeleteRuleRun
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      responses:
+        "204":
+          description: Rule run cancelled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.rules.events
+      summary: Cancel the current run.
       tags:
       - Rules
   /apps/{app}/rules/{id}:
@@ -2268,8 +2434,6 @@ paths:
       tags:
       - Rules
     put:
-      description: All events for the specified schemas will be sent to the url. The
-        timeout is 2 seconds.
       operationId: Rules_PutRule
       parameters:
       - description: The name of the app.
@@ -2311,7 +2475,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Rule is not valid.
+          description: Rule request not valid.
         "404":
           description: Rule or app not found.
         "500":
@@ -2451,6 +2615,43 @@ paths:
       summary: Trigger a rule.
       tags:
       - Rules
+  /apps/{app}/rules/{id}/run:
+    put:
+      operationId: Rules_PutRuleRun
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The id of the rule to run.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 2
+      responses:
+        "204":
+          description: Rule started.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.rules.events
+      summary: Run a rule.
+      tags:
+      - Rules
   /apps/{app}/rules/events:
     get:
       operationId: Rules_GetEvents
@@ -2470,7 +2671,6 @@ paths:
         name: ruleId
         required: false
         schema:
-          format: guid
           nullable: true
           type: string
         style: form
@@ -2554,7 +2754,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.rules.events
-      summary: Cancels the event and retries.
+      summary: Cancels an event.
       tags:
       - Rules
     put:
@@ -2694,7 +2894,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
           description: Operation failed
-      summary: Get general info status of the API.
+      summary: Get API information.
       tags:
       - Ping
   /ping:
@@ -2738,13 +2938,13 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.ping
       summary: Get ping status.
       tags:
       - Ping
   /news/features:
     get:
-      operationId: News_GetLanguages
+      operationId: News_GetNews
       parameters:
       - description: The latest received version.
         explode: true
@@ -2840,8 +3040,8 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
-      summary: Get the events from the history.
+        - squidex.apps.{app}.history
+      summary: Get historical events.
       tags:
       - History
   /apps/{app}/comments/{commentsId}:
@@ -2884,7 +3084,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentsDto'
-          description: All comments returned.
+          description: Comments returned.
         "404":
           description: App not found.
         "500":
@@ -2895,7 +3095,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.comments.read
       summary: Get all comments.
       tags:
       - Comments
@@ -2941,7 +3141,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Comment is not valid.
+          description: Comment request not valid.
         "404":
           description: App not found.
         "500":
@@ -2952,7 +3152,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.comments.create
       summary: Create a new comment.
       tags:
       - Comments
@@ -3000,7 +3200,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.comments.delete
       summary: Deletes the comment.
       tags:
       - Comments
@@ -3051,7 +3251,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Comment text not valid.
+          description: Comment request not valid.
         "404":
           description: Comment or app not found.
         "500":
@@ -3062,7 +3262,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.comments.update
       summary: Updates the comment.
       tags:
       - Comments
@@ -3171,7 +3371,7 @@ paths:
         x-position: 2
       responses:
         "204":
-          description: Backup started.
+          description: Backup deleted.
         "404":
           description: Backup or app not found.
         "500":
@@ -3275,6 +3475,12 @@ paths:
       responses:
         "204":
           description: Backup started.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Backup contingent reached.
         "404":
           description: App not found.
         "500":
@@ -3359,16 +3565,6 @@ paths:
           type: string
         style: simple
         x-position: 2
-      - description: Optional suffix that can be used to seo-optimize the link to
-          the image Has not effect.
-        explode: false
-        in: path
-        name: more
-        required: true
-        schema:
-          type: string
-        style: simple
-        x-position: 3
       - description: The optional version of the asset.
         explode: true
         in: query
@@ -3378,7 +3574,7 @@ paths:
           format: int64
           type: integer
         style: form
-        x-position: 4
+        x-position: 3
       - description: The cache duration in seconds.
         explode: true
         in: query
@@ -3388,7 +3584,7 @@ paths:
           format: int64
           type: integer
         style: form
-        x-position: 5
+        x-position: 4
       - description: Set it to 0 to prevent download.
         explode: true
         in: query
@@ -3398,7 +3594,7 @@ paths:
           format: int32
           type: integer
         style: form
-        x-position: 6
+        x-position: 5
       - description: The target width of the asset, if it is an image.
         explode: true
         in: query
@@ -3409,7 +3605,7 @@ paths:
           nullable: true
           type: integer
         style: form
-        x-position: 7
+        x-position: 6
       - description: The target height of the asset, if it is an image.
         explode: true
         in: query
@@ -3420,7 +3616,7 @@ paths:
           nullable: true
           type: integer
         style: form
-        x-position: 8
+        x-position: 7
       - description: Optional image quality, it is is an jpeg image.
         explode: true
         in: query
@@ -3431,7 +3627,7 @@ paths:
           nullable: true
           type: integer
         style: form
-        x-position: 9
+        x-position: 8
       - description: The resize mode when the width and height is defined.
         explode: true
         in: query
@@ -3442,7 +3638,7 @@ paths:
           oneOf:
           - $ref: '#/components/schemas/ResizeMode'
         style: form
-        x-position: 10
+        x-position: 9
       - description: Override the y focus point.
         explode: true
         in: query
@@ -3453,7 +3649,7 @@ paths:
           nullable: true
           type: number
         style: form
-        x-position: 11
+        x-position: 10
       - description: Override the x focus point.
         explode: true
         in: query
@@ -3464,7 +3660,7 @@ paths:
           nullable: true
           type: number
         style: form
-        x-position: 12
+        x-position: 11
       - description: True to ignore the asset focus point if any.
         explode: true
         in: query
@@ -3473,7 +3669,213 @@ paths:
         schema:
           type: boolean
         style: form
+        x-position: 12
+      - description: 'True to not use JPEG encoding when quality is set and the image
+          is not a JPEG. Default: false.'
+        explode: true
+        in: query
+        name: keepformat
+        required: false
+        schema:
+          type: boolean
+        style: form
         x-position: 13
+      - description: True to force a new resize even if it already stored.
+        explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-position: 14
+      - description: True to force a new resize even if it already stored.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          $ref: '#/components/schemas/ImageFormat'
+        style: form
+        x-position: 15
+      - description: Optional suffix that can be used to seo-optimize the link to
+          the image Has not effect.
+        explode: false
+        in: path
+        name: more
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 16
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: Asset found and content or (resized) image returned.
+        "404":
+          description: Asset or app not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth: []
+      summary: Get the asset content.
+      tags:
+      - Assets
+  /assets/{id}:
+    get:
+      deprecated: true
+      operationId: AssetContent_GetAssetContent
+      parameters:
+      - description: The id of the asset.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The optional version of the asset.
+        explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+        x-position: 2
+      - description: The cache duration in seconds.
+        explode: true
+        in: query
+        name: cache
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+        x-position: 3
+      - description: Set it to 0 to prevent download.
+        explode: true
+        in: query
+        name: download
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+        x-position: 4
+      - description: The target width of the asset, if it is an image.
+        explode: true
+        in: query
+        name: width
+        required: false
+        schema:
+          format: int32
+          nullable: true
+          type: integer
+        style: form
+        x-position: 5
+      - description: The target height of the asset, if it is an image.
+        explode: true
+        in: query
+        name: height
+        required: false
+        schema:
+          format: int32
+          nullable: true
+          type: integer
+        style: form
+        x-position: 6
+      - description: Optional image quality, it is is an jpeg image.
+        explode: true
+        in: query
+        name: quality
+        required: false
+        schema:
+          format: int32
+          nullable: true
+          type: integer
+        style: form
+        x-position: 7
+      - description: The resize mode when the width and height is defined.
+        explode: true
+        in: query
+        name: mode
+        required: false
+        schema:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ResizeMode'
+        style: form
+        x-position: 8
+      - description: Override the y focus point.
+        explode: true
+        in: query
+        name: focusX
+        required: false
+        schema:
+          format: float
+          nullable: true
+          type: number
+        style: form
+        x-position: 9
+      - description: Override the x focus point.
+        explode: true
+        in: query
+        name: focusY
+        required: false
+        schema:
+          format: float
+          nullable: true
+          type: number
+        style: form
+        x-position: 10
+      - description: True to ignore the asset focus point if any.
+        explode: true
+        in: query
+        name: nofocus
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-position: 11
+      - description: 'True to not use JPEG encoding when quality is set and the image
+          is not a JPEG. Default: false.'
+        explode: true
+        in: query
+        name: keepformat
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-position: 12
+      - description: True to force a new resize even if it already stored.
+        explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-position: 13
+      - description: True to force a new resize even if it already stored.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          $ref: '#/components/schemas/ImageFormat'
+        style: form
+        x-position: 14
       responses:
         "200":
           content:
@@ -3515,7 +3917,6 @@ paths:
         name: parentId
         required: false
         schema:
-          format: guid
           type: string
         style: form
         x-position: 2
@@ -3568,6 +3969,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssetDto'
           description: Asset folder created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset folder request not valid.
         "404":
           description: App not found.
         "500":
@@ -3608,7 +4015,7 @@ paths:
         "204":
           description: Asset folder deleted.
         "404":
-          description: Asset or app not found.
+          description: Asset folder or app not found.
         "500":
           content:
             application/json:
@@ -3663,9 +4070,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Asset folder name not valid.
+          description: Asset folder request not valid.
         "404":
-          description: Asset or app not found.
+          description: Asset folder or app not found.
         "500":
           content:
             application/json:
@@ -3716,8 +4123,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssetDto'
           description: Asset folder moved.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset folder request not valid.
         "404":
-          description: Asset or app not found.
+          description: Asset folder or app not found.
         "500":
           content:
             application/json:
@@ -3768,6 +4181,234 @@ paths:
       summary: Get assets tags.
       tags:
       - Assets
+  /apps/{app}/assets:
+    get:
+      description: Get all assets for the app.
+      operationId: Assets_GetAssets
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The optional parent folder id.
+        explode: true
+        in: query
+        name: parentId
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+        x-position: 2
+      - description: The optional asset ids.
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+        x-position: 3
+      - description: The optional json query.
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+        x-position: 4
+      - description: Optional number of assets to take.
+        explode: true
+        in: query
+        name: $top
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Optional number of assets to skip.
+        explode: true
+        in: query
+        name: $skip
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Optional OData order definition.
+        explode: true
+        in: query
+        name: $orderby
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Optional OData filter definition.
+        explode: true
+        in: query
+        name: $filter
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetsDto'
+          description: Assets returned.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.assets.read
+      summary: Get assets.
+      tags:
+      - Assets
+    post:
+      description: You can only upload one file at a time. The mime type of the file
+        is not calculated by Squidex and is required correctly.
+      operationId: Assets_PostAsset
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The optional parent folder id.
+        explode: true
+        in: query
+        name: parentId
+        required: false
+        schema:
+          type: string
+        style: form
+        x-position: 2
+      - description: The optional custom asset id.
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+        x-position: 3
+      - description: True to duplicate the asset, event if the file has been uploaded.
+        explode: true
+        in: query
+        name: duplicate
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+        x-position: 4
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetDto'
+          description: Asset created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset request not valid.
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset exceeds the maximum upload size.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.assets.create
+      summary: Upload a new asset.
+      tags:
+      - Assets
+  /apps/{app}/assets/query:
+    post:
+      description: Get all assets for the app.
+      operationId: Assets_GetAssetsPost
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryDto'
+        description: The required query object.
+        required: true
+        x-name: query
+        x-position: 2
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetsDto'
+          description: Assets returned.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.assets.read
+      summary: Get assets.
+      tags:
+      - Assets
   /apps/{app}/assets/{id}:
     delete:
       operationId: Assets_DeleteAsset
@@ -3790,6 +4431,16 @@ paths:
           type: string
         style: simple
         x-position: 2
+      - description: True to check referrers of this asset.
+        explode: true
+        in: query
+        name: checkReferrers
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+        x-position: 3
       responses:
         "204":
           description: Asset deleted.
@@ -3891,7 +4542,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Asset name not valid.
+          description: Asset request not valid.
         "404":
           description: Asset or app not found.
         "500":
@@ -3904,6 +4555,73 @@ paths:
       - squidex-oauth-auth:
         - squidex.apps.{app}.assets.update
       summary: Updates the asset.
+      tags:
+      - Assets
+  /apps/{app}/assets/{id}/content:
+    put:
+      description: Use multipart request to upload an asset.
+      operationId: Assets_PutAssetContent
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      - description: The id of the asset.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 2
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetDto'
+          description: Asset updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset request not valid.
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset exceeds the maximum upload size.
+        "404":
+          description: Asset or app not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.assets.upload
+      summary: Replace asset content.
       tags:
       - Assets
   /apps/{app}/assets/{id}/parent:
@@ -3944,6 +4662,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssetDto'
           description: Asset moved.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Asset request not valid.
         "404":
           description: Asset or app not found.
         "500":
@@ -3978,7 +4702,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientsDto'
-          description: Client keys returned.
+          description: Clients returned.
         "404":
           description: App not found.
         "500":
@@ -4023,7 +4747,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientsDto'
-          description: Client generated.
+          description: Client created.
         "400":
           content:
             application/json:
@@ -4074,7 +4798,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClientsDto'
-          description: Client revoked.
+          description: Client deleted.
         "404":
           description: Client or app not found.
         "500":
@@ -4166,7 +4890,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContributorsDto'
-          description: App contributors returned.
+          description: Contributors returned.
         "404":
           description: App not found.
         "500":
@@ -4177,7 +4901,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.contributors.read
       summary: Get app contributors.
       tags:
       - Apps
@@ -4208,13 +4932,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContributorsDto'
-          description: User assigned to app.
+          description: Contributor assigned to app.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: User is not found.
+          description: Contributor request not valid.
         "404":
           description: App not found.
         "500":
@@ -4227,6 +4951,39 @@ paths:
       - squidex-oauth-auth:
         - squidex.apps.{app}.contributors.assign
       summary: Assign contributor to app.
+      tags:
+      - Apps
+  /apps/{app}/contributors/me:
+    delete:
+      operationId: AppContributors_DeleteMyself
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContributorsDto'
+          description: Contributor removed.
+        "404":
+          description: Contributor or app not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth: []
+      summary: Remove yourself.
       tags:
       - Apps
   /apps/{app}/contributors/{id}:
@@ -4257,7 +5014,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContributorsDto'
-          description: User removed from app.
+          description: Contributor removed.
         "404":
           description: Contributor or app not found.
         "500":
@@ -4269,7 +5026,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.contributors.revoke
-      summary: Remove contributor from app.
+      summary: Remove contributor.
       tags:
       - Apps
   /apps/{app}/languages:
@@ -4291,7 +5048,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppLanguagesDto'
-          description: Language configuration returned.
+          description: Languages returned.
         "404":
           description: App not found.
         "500":
@@ -4302,7 +5059,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.languages.read
       summary: Get app languages.
       tags:
       - Apps
@@ -4383,6 +5140,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AppLanguagesDto'
           description: Language deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Language is master language.
         "404":
           description: Language or app not found.
         "500":
@@ -4486,7 +5249,7 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.common
+        - squidex.apps.{app}.patterns.read
       summary: Get app patterns.
       tags:
       - Apps
@@ -4517,7 +5280,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatternsDto'
-          description: Pattern generated.
+          description: Pattern created.
         "400":
           content:
             application/json:
@@ -4568,7 +5331,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatternsDto'
-          description: Pattern removed.
+          description: Pattern deleted.
         "404":
           description: Pattern or app not found.
         "500":
@@ -4580,7 +5343,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.patterns.delete
-      summary: Delete an existing app pattern.
+      summary: Delete an app pattern.
       tags:
       - Apps
     put:
@@ -4637,7 +5400,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.patterns.update
-      summary: Update an existing app pattern.
+      summary: Update an app pattern.
       tags:
       - Apps
   /apps/{app}/roles:
@@ -4659,7 +5422,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RolesDto'
-          description: App roles returned.
+          description: Roles returned.
         "404":
           description: App not found.
         "500":
@@ -4701,13 +5464,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RolesDto'
-          description: User assigned to app.
+          description: Role created.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Role name already in use.
+          description: Role request not valid.
         "404":
           description: App not found.
         "500":
@@ -4758,7 +5521,7 @@ paths:
       summary: Get app permissions.
       tags:
       - Apps
-  /apps/{app}/roles/{name}:
+  /apps/{app}/roles/{roleName}:
     delete:
       operationId: AppRoles_DeleteRole
       parameters:
@@ -4774,7 +5537,7 @@ paths:
       - description: The name of the role.
         explode: false
         in: path
-        name: name
+        name: roleName
         required: true
         schema:
           type: string
@@ -4792,7 +5555,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Role is in use by contributor or client or default role.
+          description: Role is in use by contributor or client or a default role.
         "404":
           description: Role or app not found.
         "500":
@@ -4822,7 +5585,7 @@ paths:
       - description: The name of the role to be updated.
         explode: false
         in: path
-        name: name
+        name: roleName
         required: true
         schema:
           type: string
@@ -4861,7 +5624,7 @@ paths:
       security:
       - squidex-oauth-auth:
         - squidex.apps.{app}.roles.update
-      summary: Update an existing app role.
+      summary: Update an app role.
       tags:
       - Apps
   /apps:
@@ -5024,6 +5787,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AppDto'
           description: App updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: App request not valid.
         "404":
           description: App not found.
         "500":
@@ -5034,8 +5803,123 @@ paths:
           description: Operation failed
       security:
       - squidex-oauth-auth:
-        - squidex.apps.{app}.general
+        - squidex.apps.{app}.update
       summary: Update the app.
+      tags:
+      - Apps
+  /apps/{app}/image:
+    delete:
+      operationId: Apps_DeleteImage
+      parameters:
+      - description: The name of the app to update.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDto'
+          description: App image removed.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.image
+      summary: Remove the app image.
+      tags:
+      - Apps
+    get:
+      operationId: Apps_GetImage
+      parameters:
+      - description: The name of the app.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: App image found and content or (resized) image returned.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      summary: Get the app image.
+      tags:
+      - Apps
+    post:
+      operationId: Apps_UploadImage
+      parameters:
+      - description: The name of the app to update.
+        explode: false
+        in: path
+        name: app
+        required: true
+        schema:
+          type: string
+        style: simple
+        x-position: 1
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDto'
+          description: App image uploaded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: App request not valid.
+        "404":
+          description: App not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+          description: Operation failed
+      security:
+      - squidex-oauth-auth:
+        - squidex.apps.{app}.image
+      summary: Upload the app image.
       tags:
       - Apps
   /apps/{app}/workflows:
@@ -5057,7 +5941,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowsDto'
-          description: App workflows returned.
+          description: Workflows returned.
         "404":
           description: App not found.
         "500":
@@ -5099,13 +5983,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowsDto'
-          description: Workflow updated.
+          description: Workflow created.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Workflow request is not valid.
+          description: Workflow request not valid.
         "404":
           description: Workflow or app not found.
         "500":
@@ -5205,7 +6089,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDto'
-          description: Workflow request is not valid.
+          description: Workflow request not valid.
         "404":
           description: Workflow or app not found.
         "500":
@@ -5221,7 +6105,36 @@ paths:
       tags:
       - Apps
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
   schemas:
+    UserProperty:
+      additionalProperties: false
+      properties:
+        name:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+      required:
+      - name
+      - value
+      type: object
     UsersDto:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -5266,7 +6179,6 @@ components:
       properties:
         email:
           description: The email of the user. Unique value.
-          format: email
           minLength: 1
           type: string
         displayName:
@@ -5294,7 +6206,6 @@ components:
       properties:
         email:
           description: The email of the user. Unique value.
-          format: email
           minLength: 1
           type: string
         displayName:
@@ -5362,12 +6273,10 @@ components:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/EventConsumerDto_allOf'
-    GraphQLQuery:
+    GraphQLPostDto:
       additionalProperties: false
       properties:
         operationName:
-          type: string
-        namedQuery:
           type: string
         query:
           type: string
@@ -5389,7 +6298,9 @@ components:
     ContentDataOfString:
       allOf:
       - additionalProperties:
-          $ref: '#/components/schemas/ContentFieldData'
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ContentFieldData'
         type: object
       - $ref: '#/components/schemas/ContentDataOfString_allOf'
     KeyValuePairOfStringAndContentFieldData:
@@ -5411,7 +6322,6 @@ components:
       properties:
         id:
           description: The id of the schedule job.
-          format: guid
           type: string
         status:
           description: The new status.
@@ -5419,6 +6329,9 @@ components:
         dueTime:
           description: The target date and time when the content should be scheduled.
           format: date-time
+          type: string
+        color:
+          description: The color of the scheduled status.
           type: string
         scheduledBy:
           description: The user who schedule the content.
@@ -5468,6 +6381,9 @@ components:
         isRequired:
           description: Indicates if the field is required.
           type: boolean
+        isHalfWidth:
+          description: Indicates if the field should be rendered with half width only.
+          type: boolean
         editorUrl:
           description: Optional url to the editor.
           nullable: true
@@ -5492,6 +6408,16 @@ components:
       allOf:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/AssetsFieldPropertiesDto_allOf'
+    AssetPreviewMode:
+      enum:
+      - ImageAndFileName
+      - Image
+      - FileName
+      type: string
+      x-enumNames:
+      - ImageAndFileName
+      - Image
+      - FileName
     BooleanFieldPropertiesDto:
       allOf:
       - $ref: '#/components/schemas/FieldPropertiesDto'
@@ -5564,15 +6490,27 @@ components:
       - List
       - Dropdown
       - Tags
+      - Checkboxes
       type: string
       x-enumNames:
       - List
       - Dropdown
       - Tags
+      - Checkboxes
     StringFieldPropertiesDto:
       allOf:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/StringFieldPropertiesDto_allOf'
+    StringContentType:
+      enum:
+      - Unspecified
+      - Html
+      - Markdown
+      type: string
+      x-enumNames:
+      - Unspecified
+      - Html
+      - Markdown
     StringFieldEditor:
       enum:
       - Input
@@ -5640,7 +6578,46 @@ components:
       - color
       - status
       type: object
-    ImportResultDto:
+    ContentsIdsQueryDto:
+      additionalProperties: false
+      properties:
+        ids:
+          description: The list of ids to query.
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      type: object
+    QueryDto:
+      additionalProperties: false
+      example:
+        q: ""
+        oData: oData
+        ids:
+        - ids
+        - ids
+        parentId: parentId
+      properties:
+        ids:
+          description: The optional list of ids to query.
+          items:
+            type: string
+          nullable: true
+          type: array
+        oData:
+          description: The optional odata query.
+          nullable: true
+          type: string
+        q:
+          description: The optional json query.
+          nullable: true
+        parentId:
+          description: The parent id (for assets).
+          nullable: true
+          type: string
+      type: object
+    BulkResultDto:
       additionalProperties: false
       properties:
         error:
@@ -5650,7 +6627,6 @@ components:
           - $ref: '#/components/schemas/ErrorDto'
         contentId:
           description: The id of the content when the import succeeds.
-          format: guid
           nullable: true
           type: string
       type: object
@@ -5678,7 +6654,6 @@ components:
         statusCode:
           description: Status code of the http response.
           format: int32
-          nullable: true
           type: integer
       required:
       - message
@@ -5704,6 +6679,113 @@ components:
       required:
       - datas
       type: object
+    BulkUpdateDto:
+      additionalProperties: false
+      properties:
+        jobs:
+          description: The contents to update or insert.
+          items:
+            $ref: '#/components/schemas/BulkUpdateJobDto'
+          type: array
+        publish:
+          description: True to automatically publish the content.
+          type: boolean
+        doNotScript:
+          description: 'True to turn off scripting for faster inserts. Default: true.'
+          type: boolean
+        optimizeValidation:
+          description: 'True to turn off costly validation: Unique checks, asset checks
+            and reference checks. Default: true.'
+          type: boolean
+      required:
+      - jobs
+      type: object
+    BulkUpdateJobDto:
+      additionalProperties: false
+      properties:
+        query:
+          description: An optional query to identify the content to update.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/QueryOfIJsonValue'
+        id:
+          description: An optional id of the content to update.
+          nullable: true
+          type: string
+        data:
+          description: The data of the content when type is set to 'Upsert'.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/NamedContentData'
+        status:
+          description: The new status when the type is set to 'ChangeStatus'.
+          nullable: true
+          type: string
+        type:
+          description: The update type.
+          oneOf:
+          - $ref: '#/components/schemas/BulkUpdateType'
+      type: object
+    QueryOfIJsonValue:
+      additionalProperties: false
+      properties:
+        filter:
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/FilterNodeOfIJsonValue'
+        fullText:
+          nullable: true
+          type: string
+        skip:
+          format: int64
+          type: integer
+        take:
+          format: int64
+          type: integer
+        top:
+          format: int64
+          type: integer
+        sort:
+          items:
+            $ref: '#/components/schemas/SortNode'
+          type: array
+      type: object
+    FilterNodeOfIJsonValue:
+      additionalProperties: false
+      type: object
+      x-abstract: true
+    SortNode:
+      additionalProperties: false
+      properties:
+        path:
+          items:
+            type: string
+          type: array
+        order:
+          $ref: '#/components/schemas/SortOrder'
+      type: object
+    PropertyPath:
+      items:
+        type: string
+      type: array
+    SortOrder:
+      enum:
+      - Ascending
+      - Descending
+      type: string
+      x-enumNames:
+      - Ascending
+      - Descending
+    BulkUpdateType:
+      enum:
+      - Upsert
+      - ChangeStatus
+      - Delete
+      type: string
+      x-enumNames:
+      - Upsert
+      - ChangeStatus
+      - Delete
     ChangeStatusDto:
       additionalProperties: false
       properties:
@@ -5784,36 +6866,94 @@ components:
           nullable: true
           type: string
       type: object
-    CurrentCallsDto:
+    CallsUsageDtoDto:
       additionalProperties: false
       example:
-        maxAllowed: 6
-        count: 0
+        totalCalls: 0
+        allowedBytes: 2
+        monthBytes: 5
+        blockingApiCalls: 5
+        totalBytes: 6
+        details:
+          key:
+          - date: 2000-01-23T04:56:07.000+00:00
+            totalCalls: 3
+            totalBytes: 2
+            averageElapsedMs: 4.145608029883936
+          - date: 2000-01-23T04:56:07.000+00:00
+            totalCalls: 3
+            totalBytes: 2
+            averageElapsedMs: 4.145608029883936
+        allowedCalls: 7
+        averageElapsedMs: 9.301444243932576
+        monthCalls: 1
       properties:
-        count:
-          description: The number of calls.
+        totalCalls:
+          description: The total number of API calls.
           format: int64
           type: integer
-        maxAllowed:
-          description: The number of maximum allowed calls.
+        totalBytes:
+          description: The total number of bytes transferred.
           format: int64
           type: integer
+        monthCalls:
+          description: The total number of API calls this month.
+          format: int64
+          type: integer
+        monthBytes:
+          description: The total number of bytes transferred this month.
+          format: int64
+          type: integer
+        blockingApiCalls:
+          description: The amount of calls that will block the app.
+          format: int64
+          type: integer
+        allowedBytes:
+          description: The included API traffic.
+          format: int64
+          type: integer
+        allowedCalls:
+          description: The included API calls.
+          format: int64
+          type: integer
+        averageElapsedMs:
+          description: The average duration in milliseconds.
+          format: double
+          type: number
+        details:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/CallsUsagePerDateDto'
+            type: array
+          description: The statistics by date and group.
+          type: object
+      required:
+      - details
       type: object
-    CallsUsageDto:
+    CallsUsagePerDateDto:
       additionalProperties: false
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        totalCalls: 3
+        totalBytes: 2
+        averageElapsedMs: 4.145608029883936
       properties:
         date:
           description: The date when the usage was tracked.
           format: date-time
           type: string
-        count:
-          description: The number of calls.
+        totalCalls:
+          description: The total number of API calls.
           format: int64
           type: integer
-        averageMs:
+        totalBytes:
+          description: The total number of bytes transferred.
+          format: int64
+          type: integer
+        averageElapsedMs:
           description: The average duration in milliseconds.
-          format: int64
-          type: integer
+          format: double
+          type: number
       type: object
     CurrentStorageDto:
       additionalProperties: false
@@ -5830,26 +6970,46 @@ components:
           format: int64
           type: integer
       type: object
-    StorageUsageDto:
+    StorageUsagePerDateDto:
       additionalProperties: false
       example:
         date: 2000-01-23T04:56:07.000+00:00
-        size: 6
-        count: 0
+        totalSize: 6
+        totalCount: 0
       properties:
         date:
           description: The date when the usage was tracked.
           format: date-time
           type: string
-        count:
+        totalCount:
           description: The number of assets.
           format: int64
           type: integer
-        size:
+        totalSize:
           description: The size in bytes.
           format: int64
           type: integer
       type: object
+    SearchResultDto:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/SearchResultDto_allOf'
+    SearchResultType:
+      enum:
+      - Asset
+      - Content
+      - Dashboard
+      - Setting
+      - Rule
+      - Schema
+      type: string
+      x-enumNames:
+      - Asset
+      - Content
+      - Dashboard
+      - Setting
+      - Rule
+      - Schema
     SchemaDetailsDto:
       allOf:
       - $ref: '#/components/schemas/SchemaDto'
@@ -5884,10 +7044,39 @@ components:
           nullable: true
           type: string
       type: object
-    FieldNames:
-      items:
-        type: string
-      type: array
+    FieldRuleDto:
+      additionalProperties: false
+      example:
+        condition: condition
+        field: field
+        action: ""
+      properties:
+        action:
+          description: The action to perform when the condition is met.
+          oneOf:
+          - $ref: '#/components/schemas/FieldRuleAction'
+        field:
+          description: The field to update.
+          minLength: 1
+          type: string
+        condition:
+          description: The condition.
+          nullable: true
+          type: string
+      required:
+      - action
+      - field
+      type: object
+    FieldRuleAction:
+      enum:
+      - Disable
+      - Hide
+      - Require
+      type: string
+      x-enumNames:
+      - Disable
+      - Hide
+      - Require
     SchemaDto:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -5905,6 +7094,14 @@ components:
           description: Hints to describe the schema.
           maxLength: 1000
           minLength: 0
+          nullable: true
+          type: string
+        contentsSidebarUrl:
+          description: The url to a the sidebar plugin for content lists.
+          nullable: true
+          type: string
+        contentSidebarUrl:
+          description: The url to a the sidebar plugin for content items.
           nullable: true
           type: string
         tags:
@@ -5943,14 +7140,16 @@ components:
       properties:
         fieldsInLists:
           description: The name of fields that are used in content lists.
+          items:
+            type: string
           nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          type: array
         fieldsInReferences:
           description: The name of fields that are used in content references.
+          items:
+            type: string
           nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          type: array
       type: object
     ReorderFieldsDto:
       additionalProperties: false
@@ -6003,15 +7202,17 @@ components:
           - $ref: '#/components/schemas/SchemaScriptsDto'
         fieldsInReferences:
           description: The names of the fields that should be used in references.
+          items:
+            type: string
           nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          type: array
         fieldsInLists:
           description: The names of the fields that should be shown in lists, including
             meta fields.
+          items:
+            type: string
           nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          type: array
         fields:
           description: Optional fields.
           items:
@@ -6098,6 +7299,8 @@ components:
       example:
         hints: hints
         label: label
+        contentsSidebarUrl: contentsSidebarUrl
+        contentSidebarUrl: contentSidebarUrl
         tags:
         - tags
         - tags
@@ -6112,6 +7315,14 @@ components:
           description: Hints to describe the schema.
           maxLength: 1000
           minLength: 0
+          nullable: true
+          type: string
+        contentsSidebarUrl:
+          description: The url to a the sidebar plugin for content lists.
+          nullable: true
+          type: string
+        contentSidebarUrl:
+          description: The url to a the sidebar plugin for content items.
           nullable: true
           type: string
         tags:
@@ -6138,6 +7349,24 @@ components:
     ConfigurePreviewUrlsDto:
       additionalProperties:
         type: string
+      type: object
+    ConfigureFieldRulesDto:
+      additionalProperties: false
+      example:
+        fieldRules:
+        - condition: condition
+          field: field
+          action: ""
+        - condition: condition
+          field: field
+          action: ""
+      properties:
+        fieldRules:
+          description: The field rules to configure.
+          items:
+            $ref: '#/components/schemas/FieldRuleDto'
+          nullable: true
+          type: array
       type: object
     RuleElementDto:
       additionalProperties: false
@@ -6191,6 +7420,12 @@ components:
           description: The label to use.
           minLength: 1
           type: string
+        options:
+          description: The options, if the editor is a dropdown.
+          items:
+            type: string
+          nullable: true
+          type: array
         description:
           description: The optional description.
           nullable: true
@@ -6209,6 +7444,7 @@ components:
     RuleActionPropertyEditor:
       enum:
       - Checkbox
+      - Dropdown
       - Email
       - Number
       - Password
@@ -6218,6 +7454,7 @@ components:
       type: string
       x-enumNames:
       - Checkbox
+      - Dropdown
       - Email
       - Number
       - Password
@@ -6267,7 +7504,6 @@ components:
       properties:
         schemaId:
           description: The id of the schema.
-          format: guid
           type: string
         condition:
           description: Javascript condition when to trigger.
@@ -6300,12 +7536,14 @@ components:
           Email: '#/components/schemas/EmailRuleActionDto'
           ElasticSearch: '#/components/schemas/ElasticSearchRuleActionDto'
           Discourse: '#/components/schemas/DiscourseRuleActionDto'
+          CreateContent: '#/components/schemas/CreateContentRuleActionDto'
           Comment: '#/components/schemas/CommentRuleActionDto'
           AzureQueue: '#/components/schemas/AzureQueueRuleActionDto'
           Algolia: '#/components/schemas/AlgoliaRuleActionDto'
         propertyName: actionType
       properties:
         actionType:
+          nullable: false
           type: string
       required:
       - actionType
@@ -6386,22 +7624,28 @@ components:
       example:
         currentPlanId: currentPlanId
         plans:
-        - costs: costs
-          maxAssetSize: 6
-          maxContributors: 1
+        - maxApiBytes: 0
+          costs: costs
+          maxAssetSize: 1
+          maxContributors: 5
           yearlyId: yearlyId
-          maxApiCalls: 0
+          maxApiCalls: 6
           name: name
           yearlyCosts: yearlyCosts
+          confirmText: confirmText
           id: id
-        - costs: costs
-          maxAssetSize: 6
-          maxContributors: 1
+          yearlyConfirmText: yearlyConfirmText
+        - maxApiBytes: 0
+          costs: costs
+          maxAssetSize: 1
+          maxContributors: 5
           yearlyId: yearlyId
-          maxApiCalls: 0
+          maxApiCalls: 6
           name: name
           yearlyCosts: yearlyCosts
+          confirmText: confirmText
           id: id
+          yearlyConfirmText: yearlyConfirmText
         hasPortal: true
         planOwner: planOwner
       properties:
@@ -6427,14 +7671,17 @@ components:
     PlanDto:
       additionalProperties: false
       example:
+        maxApiBytes: 0
         costs: costs
-        maxAssetSize: 6
-        maxContributors: 1
+        maxAssetSize: 1
+        maxContributors: 5
         yearlyId: yearlyId
-        maxApiCalls: 0
+        maxApiCalls: 6
         name: name
         yearlyCosts: yearlyCosts
+        confirmText: confirmText
         id: id
+        yearlyConfirmText: yearlyConfirmText
       properties:
         id:
           description: The id of the plan.
@@ -6448,6 +7695,14 @@ components:
           description: The monthly costs of the plan.
           minLength: 1
           type: string
+        confirmText:
+          description: An optional confirm text for the monthly subscription.
+          nullable: true
+          type: string
+        yearlyConfirmText:
+          description: An optional confirm text for the yearly subscription.
+          nullable: true
+          type: string
         yearlyCosts:
           description: The yearly costs of the plan.
           nullable: true
@@ -6456,6 +7711,10 @@ components:
           description: The yearly id of the plan.
           nullable: true
           type: string
+        maxApiBytes:
+          description: The maximum number of API traffic.
+          format: int64
+          type: integer
         maxApiCalls:
           description: The maximum number of API calls.
           format: int64
@@ -6563,11 +7822,16 @@ components:
         actor: actor
         eventId: eventId
         created: 2000-01-23T04:56:07.000+00:00
+        eventType: eventType
         message: message
         version: 0
       properties:
         message:
-          description: The message of the event.
+          description: The message for the event.
+          minLength: 1
+          type: string
+        eventType:
+          description: The type of the original event.
           minLength: 1
           type: string
         actor:
@@ -6576,7 +7840,6 @@ components:
           type: string
         eventId:
           description: Gets a unique id for the event.
-          format: guid
           type: string
         created:
           description: The time when the event happened.
@@ -6588,6 +7851,7 @@ components:
           type: integer
       required:
       - actor
+      - eventType
       - message
       type: object
     CommentsDto:
@@ -6635,7 +7899,6 @@ components:
         deletedComments:
           description: The deleted comments since the last version.
           items:
-            format: guid
             type: string
           nullable: true
           type: array
@@ -6655,7 +7918,6 @@ components:
       properties:
         id:
           description: The id of the comment.
-          format: guid
           type: string
         time:
           description: The time when the comment was created or updated last.
@@ -6791,6 +8053,20 @@ components:
       - Max
       - Min
       - Stretch
+    ImageFormat:
+      enum:
+      - Auto
+      - PNG
+      - JPEG
+      - TGA
+      - GIF
+      type: string
+      x-enumNames:
+      - Auto
+      - PNG
+      - JPEG
+      - TGA
+      - GIF
     AssetsDto:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -6830,7 +8106,6 @@ components:
           type: string
         parentId:
           description: The id of the parent folder.
-          format: guid
           type: string
       required:
       - folderName
@@ -6854,7 +8129,6 @@ components:
       properties:
         parentId:
           description: The parent folder id.
-          format: guid
           type: string
       type: object
     AnnotateAssetDto:
@@ -6918,18 +8192,38 @@ components:
     UpdateClientDto:
       additionalProperties: false
       example:
+        allowAnonymous: true
+        apiTrafficLimit: 6
         role: role
         name: name
+        apiCallsLimit: 0
       properties:
         name:
           description: The new display name of the client.
           maxLength: 20
           minLength: 0
+          nullable: true
           type: string
         role:
           description: The role of the client.
           nullable: true
           type: string
+        allowAnonymous:
+          description: True to allow anonymous access without an access token for
+            this client.
+          nullable: true
+          type: boolean
+        apiCallsLimit:
+          description: The number of allowed api calls per month for this client.
+          format: int64
+          nullable: true
+          type: integer
+        apiTrafficLimit:
+          description: The number of allowed api traffic bytes per month for this
+            client.
+          format: int64
+          nullable: true
+          type: integer
       type: object
     ContributorsDto:
       allOf:
@@ -7066,12 +8360,20 @@ components:
         permissions:
         - permissions
         - permissions
+        properties:
+          key: ""
       properties:
         permissions:
           description: Associated list of permissions.
           items:
             type: string
           type: array
+        properties:
+          additionalProperties:
+            description: Any JSON type
+          description: Associated list of UI properties.
+          nullable: true
+          type: object
       required:
       - permissions
       type: object
@@ -7229,20 +8531,31 @@ components:
         schemaIds:
           description: The schema ids.
           items:
-            format: guid
             type: string
           nullable: true
           type: array
         initial:
           description: The initial step.
+          minLength: 1
           type: string
       required:
+      - initial
       - steps
       type: object
     WebhookRuleActionDto:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/WebhookRuleActionDto_allOf'
+    WebhookMethod:
+      enum:
+      - POST
+      - PUT
+      - GET
+      type: string
+      x-enumNames:
+      - POST
+      - PUT
+      - GET
     TweetRuleActionDto:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
@@ -7279,6 +8592,10 @@ components:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/DiscourseRuleActionDto_allOf'
+    CreateContentRuleActionDto:
+      allOf:
+      - $ref: '#/components/schemas/RuleAction'
+      - $ref: '#/components/schemas/CreateContentRuleActionDto_allOf'
     CommentRuleActionDto:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
@@ -7291,6 +8608,27 @@ components:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/AlgoliaRuleActionDto_allOf'
+    inline_object:
+      properties:
+        file:
+          format: binary
+          nullable: true
+          type: string
+      type: object
+    inline_object_1:
+      properties:
+        file:
+          format: binary
+          nullable: true
+          type: string
+      type: object
+    inline_object_2:
+      properties:
+        file:
+          format: binary
+          nullable: true
+          type: string
+      type: object
     UsersDto_allOf:
       properties:
         total:
@@ -7346,6 +8684,9 @@ components:
           type: boolean
         isResetting:
           type: boolean
+        count:
+          format: int32
+          type: integer
         name:
           type: string
         error:
@@ -7377,7 +8718,6 @@ components:
       properties:
         id:
           description: The if of the content item.
-          format: guid
           type: string
         createdBy:
           description: The user that has created the content item.
@@ -7387,22 +8727,11 @@ components:
           type: string
         data:
           description: The data of the content item.
-        dataDraft:
-          description: The pending changes of the content item.
-          nullable: true
         referenceData:
           description: The reference data for the frontend UI.
           nullable: true
           oneOf:
           - $ref: '#/components/schemas/NamedContentData'
-        isPending:
-          description: Indicates if the draft data is pending.
-          type: boolean
-        scheduleJob:
-          description: The scheduled status.
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/ScheduleJobDto'
         created:
           description: The date and time when the content item has been created.
           format: date-time
@@ -7414,9 +8743,22 @@ components:
         status:
           description: The status of the content.
           type: string
+        newStatus:
+          description: The new status of the content.
+          nullable: true
+          type: string
         statusColor:
           description: The color of the status.
           type: string
+        newStatusColor:
+          description: The color of the new status.
+          nullable: true
+          type: string
+        scheduleJob:
+          description: The scheduled status.
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/ScheduleJobDto'
         schemaName:
           description: The name of the schema.
           nullable: true
@@ -7497,6 +8839,10 @@ components:
           type: integer
     AssetsFieldPropertiesDto_allOf:
       properties:
+        previewMode:
+          description: The preview mode for the asset.
+          oneOf:
+          - $ref: '#/components/schemas/AssetPreviewMode'
         minItems:
           description: The minimum allowed items for the field value.
           format: int32
@@ -7550,9 +8896,14 @@ components:
         mustBeImage:
           description: Defines if the asset must be an image.
           type: boolean
+        resolveFirst:
+          description: True to resolve first asset in the content list.
+          type: boolean
         resolveImage:
+          deprecated: true
           description: True to resolve first image in the content list.
           type: boolean
+          x-deprecatedMessage: Use ResolveFirst now
         allowedExtensions:
           description: The allowed file extensions.
           items:
@@ -7671,7 +9022,6 @@ components:
         schemaIds:
           description: The id of the referenced schemas.
           items:
-            format: guid
             type: string
           nullable: true
           type: array
@@ -7699,6 +9049,26 @@ components:
           format: int32
           nullable: true
           type: integer
+        minCharacters:
+          description: The minimum allowed of normal characters for the field value.
+          format: int32
+          nullable: true
+          type: integer
+        maxCharacters:
+          description: The maximum allowed of normal characters for the field value.
+          format: int32
+          nullable: true
+          type: integer
+        minWords:
+          description: The minimum allowed number of words for the field value.
+          format: int32
+          nullable: true
+          type: integer
+        maxWords:
+          description: The maximum allowed number of words for the field value.
+          format: int32
+          nullable: true
+          type: integer
         allowedValues:
           description: The allowed values for the field value.
           items:
@@ -7712,6 +9082,10 @@ components:
         inlineEditable:
           description: Indicates that the inline editor is enabled for this field.
           type: boolean
+        contentType:
+          description: How the string content should be interpreted.
+          oneOf:
+          - $ref: '#/components/schemas/StringContentType'
         editor:
           description: The editor that is used to manage this field.
           oneOf:
@@ -7771,6 +9145,23 @@ components:
       required:
       - name
       - properties
+    SearchResultDto_allOf:
+      properties:
+        name:
+          description: The name of the search result.
+          minLength: 1
+          type: string
+        type:
+          description: The type of the search result.
+          oneOf:
+          - $ref: '#/components/schemas/SearchResultType'
+        label:
+          description: An optional label.
+          nullable: true
+          type: string
+      required:
+      - name
+      - type
     SchemaDetailsDto_allOf:
       properties:
         scripts:
@@ -7784,12 +9175,19 @@ components:
           type: object
         fieldsInLists:
           description: The name of fields that are used in content lists.
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          items:
+            type: string
+          type: array
         fieldsInReferences:
           description: The name of fields that are used in content references.
-          oneOf:
-          - $ref: '#/components/schemas/FieldNames'
+          items:
+            type: string
+          type: array
+        fieldRules:
+          description: The field rules.
+          items:
+            $ref: '#/components/schemas/FieldRuleDto'
+          type: array
         fields:
           description: The list of fields.
           items:
@@ -7805,7 +9203,6 @@ components:
       properties:
         id:
           description: The id of the schema.
-          format: guid
           type: string
         name:
           description: The name of the schema. Unique within the app.
@@ -7883,13 +9280,16 @@ components:
           items:
             $ref: '#/components/schemas/RuleDto'
           type: array
+        runningRuleId:
+          description: The id of the rule that is currently rerunning.
+          nullable: true
+          type: string
       required:
       - items
     RuleDto_allOf:
       properties:
         id:
           description: The id of the rule.
-          format: guid
           type: string
         createdBy:
           description: The user that has created the rule.
@@ -7991,7 +9391,6 @@ components:
       properties:
         id:
           description: The id of the event.
-          format: guid
           type: string
         created:
           description: The time when the event has been created.
@@ -8042,7 +9441,6 @@ components:
       properties:
         id:
           description: The id of the backup job.
-          format: guid
           type: string
         started:
           description: The time when the job has been started.
@@ -8082,11 +9480,9 @@ components:
       properties:
         id:
           description: The id of the asset.
-          format: guid
           type: string
         parentId:
           description: The id of the parent folder. Empty for files without parent.
-          format: guid
           type: string
         fileName:
           description: The file name.
@@ -8160,14 +9556,17 @@ components:
           oneOf:
           - $ref: '#/components/schemas/AssetMeta'
         isImage:
+          deprecated: true
           description: Determines of the created file is an image.
           type: boolean
         pixelWidth:
+          deprecated: true
           description: The width of the image in pixels if the asset is an image.
           format: int32
           nullable: true
           type: integer
         pixelHeight:
+          deprecated: true
           description: The height of the image in pixels if the asset is an image.
           format: int32
           nullable: true
@@ -8209,6 +9608,19 @@ components:
           description: The role of the client.
           nullable: true
           type: string
+        apiCallsLimit:
+          description: The number of allowed api calls per month for this client.
+          format: int64
+          type: integer
+        apiTrafficLimit:
+          description: The number of allowed api traffic bytes per month for this
+            client.
+          format: int64
+          type: integer
+        allowAnonymous:
+          description: True to allow anonymous access without an access token for
+            this client.
+          type: boolean
       required:
       - id
       - name
@@ -8299,7 +9711,6 @@ components:
       properties:
         id:
           description: Unique id of the pattern.
-          format: guid
           type: string
         name:
           description: The name of the suggestion.
@@ -8347,9 +9758,15 @@ components:
           items:
             type: string
           type: array
+        properties:
+          additionalProperties:
+            description: Any JSON type
+          description: Associated list of UI properties.
+          type: object
       required:
       - name
       - permissions
+      - properties
     AppDto_allOf:
       properties:
         name:
@@ -8371,7 +9788,6 @@ components:
           type: integer
         id:
           description: The id of the app.
-          format: guid
           type: string
         created:
           description: The timestamp when the app has been created.
@@ -8387,8 +9803,10 @@ components:
             type: string
           type: array
         canAccessApi:
+          deprecated: true
           description: Indicates if the user can access the api.
           type: boolean
+          x-deprecatedMessage: Usage role properties
         canAccessContent:
           description: Indicates if the user can access at least one content.
           type: boolean
@@ -8400,8 +9818,14 @@ components:
           description: Gets the next plan name.
           nullable: true
           type: string
+        roleProperties:
+          additionalProperties:
+            description: Any JSON type
+          description: The properties from the role.
+          type: object
       required:
       - name
+      - roleProperties
     WorkflowsDto_allOf:
       properties:
         items:
@@ -8421,7 +9845,6 @@ components:
       properties:
         id:
           description: The workflow id.
-          format: guid
           type: string
         name:
           description: The name of the workflow.
@@ -8435,7 +9858,6 @@ components:
         schemaIds:
           description: The schema ids.
           items:
-            format: guid
             type: string
           nullable: true
           type: array
@@ -8452,17 +9874,34 @@ components:
           minLength: 1
           title: Url
           type: string
+        method:
+          description: The type of the request.
+          oneOf:
+          - $ref: '#/components/schemas/WebhookMethod'
+          title: Method
+        payload:
+          description: Leave it empty to use the full event as body.
+          nullable: true
+          title: Payload (Optional)
+          type: string
+        payloadType:
+          description: The mime type of the payload.
+          nullable: true
+          title: Payload Type
+          type: string
+        headers:
+          description: The message headers in the format '[Key]=[Value]', one entry
+            per line.
+          nullable: true
+          title: Headers (Optional)
+          type: string
         sharedSecret:
-          description: The shared secret that is used to calculate the signature.
+          description: The shared secret that is used to calculate the payload signature.
           nullable: true
           title: Shared Secret
           type: string
-        payload:
-          description: The optional custom request payload.
-          nullable: true
-          title: Payload
-          type: string
       required:
+      - method
       - url
     TweetRuleActionDto_allOf:
       properties:
@@ -8614,15 +10053,15 @@ components:
             to encrypt the connection.
           title: Use SSL
           type: boolean
-        serverPassword:
-          description: The password for the SMTP server.
-          minLength: 1
-          title: Password
-          type: string
         serverUsername:
           description: The username for the SMTP server.
           minLength: 1
           title: Username
+          type: string
+        serverPassword:
+          description: The password for the SMTP server.
+          minLength: 1
+          title: Password
           type: string
         messageFrom:
           description: The email sending address.
@@ -8667,11 +10106,6 @@ components:
           minLength: 1
           title: Index Name
           type: string
-        indexType:
-          description: The name of the index type.
-          minLength: 1
-          title: Index Type
-          type: string
         username:
           description: The optional username.
           nullable: true
@@ -8682,10 +10116,19 @@ components:
           nullable: true
           title: Password
           type: string
+        document:
+          description: The optional custom document.
+          nullable: true
+          title: Document
+          type: string
+        delete:
+          description: The condition when to delete the document.
+          nullable: true
+          title: Deletion
+          type: string
       required:
       - host
       - indexName
-      - indexType
     DiscourseRuleActionDto_allOf:
       properties:
         url:
@@ -8731,6 +10174,30 @@ components:
       - apiUsername
       - text
       - url
+    CreateContentRuleActionDto_allOf:
+      properties:
+        data:
+          description: The content data.
+          minLength: 1
+          title: Data
+          type: string
+        schema:
+          description: The name of the schema.
+          minLength: 1
+          title: Schema
+          type: string
+        client:
+          description: An optional client name.
+          nullable: true
+          title: Client
+          type: string
+        publish:
+          description: Publish the content.
+          title: Publish
+          type: boolean
+      required:
+      - data
+      - schema
     CommentRuleActionDto_allOf:
       properties:
         text:
@@ -8782,6 +10249,11 @@ components:
           nullable: true
           title: Document
           type: string
+        delete:
+          description: The condition when to delete the entry.
+          nullable: true
+          title: Deletion
+          type: string
       required:
       - apiKey
       - appId
@@ -8791,7 +10263,7 @@ components:
       description: "Squidex uses oauth2 client authentication. Read more about it\
         \ at: https://oauth.net/2/ and https://tools.ietf.org/html/rfc6750.\n\nTo\
         \ retrieve an access token, the client id must make a request to the token\
-        \ url. For example:\n\n    $ curl\n        -X POST 'https://squidex-embracecloudte.features.embracecloud.io/identity-server/connect/token'\
+        \ url. For example:\n\n    $ curl\n        -X POST 'https://squidex.dev.embracecloud.io/identity-server/connect/token'\
         \ \n        -H 'Content-Type: application/x-www-form-urlencoded' \n      \
         \  -d 'grant_type=client_credentials&\n            client_id=[APP_NAME]:[CLIENT_ID]&\n\
         \            client_secret=[CLIENT_SECRET]&\n\t\t\tscope=squidex-api'\n\n\
@@ -8802,6 +10274,6 @@ components:
         clientCredentials:
           scopes:
             squidex-api: Read and write access to the API
-          tokenUrl: https://squidex-embracecloudte.features.embracecloud.io/identity-server/connect/token
+          tokenUrl: https://squidex.dev.embracecloud.io/identity-server/connect/token
       type: oauth2
-x-generator: NSwag v13.2.2.0 (NJsonSchema v10.1.5.0 (Newtonsoft.Json v12.0.0.0))
+x-generator: NSwag v13.8.2.0 (NJsonSchema v10.2.2.0 (Newtonsoft.Json v12.0.0.0))

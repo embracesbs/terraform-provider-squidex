@@ -1,16 +1,16 @@
 # \TranslationsApi
 
-All URIs are relative to *https://squidex-embracecloudte.features.embracecloud.io/api*
+All URIs are relative to *https://squidex.dev.embracecloud.io/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**TranslationsGetLanguages**](TranslationsApi.md#TranslationsGetLanguages) | **Post** /apps/{app}/translations | Translate a text.
+[**TranslationsPostTranslation**](TranslationsApi.md#TranslationsPostTranslation) | **Post** /apps/{app}/translations | Translate a text.
 
 
 
-## TranslationsGetLanguages
+## TranslationsPostTranslation
 
-> TranslationDto TranslationsGetLanguages(ctx, app, translateDto)
+> TranslationDto TranslationsPostTranslation(ctx, app, translateDto)
 
 Translate a text.
 
