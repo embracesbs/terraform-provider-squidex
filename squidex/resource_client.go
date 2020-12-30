@@ -72,12 +72,12 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 
 	appName := data.Get("app_name").(string)
 	id := data.Get("id").(string)
-	name := data.Get("name").(*string)
-	role := data.Get("role").(*string)
+	name := data.Get("name").(string)
+	role := data.Get("role").(string)
 
 	_, _, err := client.AppsApi.AppClientsPutClient(ctx, appName, id, squidexclient.UpdateClientDto{
-		Name: name,
-		Role: role,
+		Name: &name,
+		Role: &role,
 	})
 
 	if err != nil {
