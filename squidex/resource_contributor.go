@@ -19,9 +19,9 @@ func resourceContributor() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
-			"contributor_id": &schema.Schema{
+			"contributor_email": &schema.Schema{
 				Type:     schema.TypeString,
-				Description: "The id of the user to add or delete to the app.",
+				Description: "The email of the user to add to the app.",
 				Required: true,
 				ForceNew: true,
 			},
@@ -81,12 +81,12 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-	contributorID := data.Get("contributor_id").(string)
+	contributorEmail := data.Get("contributor_email").(string)
 	role := data.Get("role").(string)
 	invite := data.Get("invite").(bool)
 
-	_, _, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
-		ContributorId: contributorID,
+	result, _, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+		ContributorId: contributorEmail,
 		Role: &role,
 		Invite: invite,
 	})
@@ -94,8 +94,16 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	if err != nil {
 		return diag.FromErr(err)
 	}
+	
+	var resultItem *squidexclient.ContributorDto
+	for i := range result.Items {
+    	if result.Items[i].ContributorEmail == contributorEmail {
+			resultItem = &result.Items[i]
+        	break
+    	}
+	}
 
-	data.SetId(contributorID)
+	data.SetId(resultItem.ContributorId)
 
 	// there are no new values from the server, resourceContributorUpdate(ctx, data, meta)
 
@@ -108,7 +116,7 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-	contributorID := data.Get("contributor_id").(string)
+	contributorID := data.Id()
 	role := data.Get("role").(string)
 	invite := false // no invites send for updating role
 	
@@ -132,7 +140,7 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	appName := data.Get("app_name").(string)
-	contributorID := data.Get("contributor_id").(string)
+	contributorID := data.Id()
 
 	client := meta.(*squidexclient.APIClient)
 	var diags diag.Diagnostics
