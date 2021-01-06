@@ -38,6 +38,7 @@ func Provider() *schema.Provider {
 			"squidex_client":    resourceClient(),
 			"squidex_languages": resourceLanguage(),
 			"squidex_schema": resourceSchema(),
+			"squidex_role": resourceRole(),
 		},
 		DataSourcesMap:       map[string]*schema.Resource{},
 		ConfigureContextFunc: providerConfigure,

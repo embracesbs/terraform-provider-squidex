@@ -110,9 +110,9 @@ func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta int
 
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
-	permissions := data.Get("permissions").([]string)
+	permissions := toStringArray(data.Get("permissions").([]interface{}))
 	properties := data.Get("properties").(map[string]interface{})
-
+	
 	_, _, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
 		Permissions: permissions,
 		Properties: &properties,
@@ -144,4 +144,16 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 
 	return diags
 
+}
+
+// TODO: move to helper class
+func toStringArray(list []interface{}) []string {
+	vs := make([]string, 0, len(list))
+	for _, v := range list {
+		val, ok := v.(string)
+		if ok && val != "" {
+			vs = append(vs, v.(string))
+		}
+	}
+	return vs
 }
