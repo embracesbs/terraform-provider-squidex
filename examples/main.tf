@@ -42,20 +42,19 @@ resource "squidex_schema" "test" {
 }
 
 resource "squidex_role" "test" {
-  app_name = squidex_app.test.name
-  name = "squidex-provider-test"
+  app_name    = squidex_app.test.name
+  name        = "squidex-provider-test"
   permissions = [
     "*",
     "contents.*",
     "schemas.read",
   ]
-  properties = {}
+  properties  = {}
 }
-resource "squidex_role" "test3" {
-  app_name = squidex_app.test.name
-  name = "squidex-provider-test3"
-  permissions = [
-    "contents.*"
-  ]
-  properties = {}
+
+resource "squidex_contributor" "test" {
+  app_name          = squidex_app.test.name
+  contributor_email = "michiel@qvision.nl"
+  role              =  squidex_role.test.name
+  invite            = false
 }
