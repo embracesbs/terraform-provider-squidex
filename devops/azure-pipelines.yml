@@ -24,6 +24,7 @@ steps:
         VERSION=$(Version) ./devops/scripts/build_release.sh
 
   - task: UniversalPackages@0
+    condition: and(succeeded(), not(eq(variables['Build.Reason'], 'PullRequest')))
     displayName: Release
     inputs:
       command: "publish"
