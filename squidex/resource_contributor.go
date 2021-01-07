@@ -21,19 +21,19 @@ func resourceContributor() *schema.Resource {
 			},
 			"contributor_email": &schema.Schema{
 				Type:     schema.TypeString,
-				Description: "The email of the user to add to the app.",
+				Description: "The emailaddress of the user to add to the app.",
 				Required: true,
 				ForceNew: true,
 			},
 			"role": &schema.Schema{
 				Type:     schema.TypeString,
 				Description: "The role of the contributor.",
-				Optional: true,
+				Required: true,
 			},
 			"invite": &schema.Schema{
 				Type:     schema.TypeBool,
 				Description: "Set to true to (email) invite the user, on creation, if he does not exist.",
-				Required: true,
+				Optional: true,
 				Default: false,
 			},
 		},
@@ -101,6 +101,10 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 			resultItem = &result.Items[i]
         	break
     	}
+	}
+
+	if resultItem == nil {
+		return diag.Errorf("Not Found: Contributor with email %s", contributorEmail)
 	}
 
 	data.SetId(resultItem.ContributorId)
