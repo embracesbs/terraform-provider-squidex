@@ -6,8 +6,10 @@ import (
 	"encoding/json"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 // https://docs.squidex.io/02-documentation/concepts/schemas
 func resourceSchema() *schema.Resource {
@@ -56,7 +58,19 @@ func resourceSchema() *schema.Resource {
 		"field_type": {
 			Type: schema.TypeString,
 			Required: true,
-			Description: "",
+			Description: "Type of the field.",
+			ValidateFunc: validation.StringInSlice([]string{
+					"Assets",
+					"Array",
+					"Boolean",
+					"DateTime",
+					"Geolocation",
+					"Json",
+					"Number",
+					"References",
+					"String",
+					"Tags",
+					"UI"}, false),
 		},
 	}
 	return &schema.Resource{
@@ -199,7 +213,7 @@ func resourceSchema() *schema.Resource {
 						},
 						"properties": {
 							Type: schema.TypeList,
-							Optional: true,
+							Required: true,
 							MaxItems: 1,
 							Description: "Determines the optional partitioning of the field.",
 							Elem: &schema.Resource{
@@ -273,6 +287,7 @@ func resourceSchema() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 				Description: "The name of the schema.",
+				ValidateFunc: validation.StringMatch("^[a-z0-9]+(\-[a-z0-9]+)*$", ""),
 			},
 			"singleton": {
 				Type:     schema.TypeBool,
@@ -474,10 +489,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 			field := v.(map[string]interface{})
 			if field["name"] != nil {
 				squidexfields[i].Name = field["name"].(string)
+				properties := field["properties"].(map[string]interface{})
+				properties["field_type"]
 				squidexfields[i].Properties = squidexclient.FieldPropertiesDto{FieldType: "String"}
 			}
 			// todo
-			// "fields":[{"name":"author","properties":{"fieldType":""}}]
 		}
 		squidexschema.Fields = &squidexfields
 		// TODO: get fields from data
