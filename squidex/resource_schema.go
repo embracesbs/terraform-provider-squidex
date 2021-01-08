@@ -1,7 +1,9 @@
 package squidex
 
 import (
+	"log"
 	"context"
+	"encoding/json"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -339,6 +341,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 
 	fields := make([]map[string]interface{}, len(schema.Fields))
 	for i, v := range schema.Fields {
+		fields[i] = make(map[string]interface{})
 		fields[i]["name"] = v.Name
 		fields[i]["hidden"] = v.IsHidden
 		fields[i]["locked"] = v.IsLocked
@@ -366,16 +369,26 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 	data.Set("fields", []interface{}{fields})
 	
 	data.Set("fields_in_references", []interface{}{schema.FieldsInReferences})
-	data.Set("fields_in_lists", []interface{}{schema.FieldsInLists})
+	data.Set("fields_in_list", []interface{}{schema.FieldsInLists})
 	data.Set("preview_urls", []interface{}{schema.PreviewUrls})
 	
 	return nil
 }
 
+// TODO: move to utils
 func interfaceSliceToStringSlice(iv []interface{}) []string {
 	var sv []string
 	for _, i := range iv {
 		sv = append(sv, i.(string))
+	}
+	return sv
+}
+
+// TODO: move to utils
+func interfaceMapToStringMap(iv map[string]interface{}) map[string]string {
+	sv := make(map[string]string)
+	for k, v := range iv {
+		sv[k] = v.(string)
 	}
 	return sv
 }
@@ -391,7 +404,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		x := category.(string)
 		squidexschema.Category = &x
 	}
-// panic: interface conversion: interface {} is []interface {}, not []string
+	// {"properties":{"label":"blog3","hints":"","contentsSidebarUrl":"","contentSidebarUrl":"","tags":null},"isPublished":true,"name":"blog3"
 	if v, ok := data.GetOk("properties"); ok {
 		properties := v.([]interface{})[0].(map[string]interface{})
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
@@ -400,7 +413,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 			squidexschema.Properties.Label = &x
 		}
 		if p, ok := properties["hints"]; ok { 
-			x := p.(string)
+			x := p.(string)			
 			squidexschema.Properties.Hints = &x
 		}
 		if p, ok := properties["contents_sidebar_url"]; ok { 
@@ -442,20 +455,31 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		}
 	}
 	if v, ok := data.GetOk("fields_in_references"); ok {
-		fieldsInReferences := v.([]string)
+		fieldsInReferences := interfaceSliceToStringSlice(v.([]interface{}))
 		squidexschema.FieldsInReferences = &fieldsInReferences		
 	}
-	if v, ok := data.GetOk("fields_in_lists"); ok {
-		fieldsInLists := v.([]string)
+	if v, ok := data.GetOk("fields_in_list"); ok {
+		fieldsInLists := interfaceSliceToStringSlice(v.([]interface{}))
 		squidexschema.FieldsInLists = &fieldsInLists		
 	}
 	if v, ok := data.GetOk("preview_urls"); ok {
-		previewUrls := v.(map[string]string)
+		previewUrls := interfaceMapToStringMap(v.(map[string]interface {}))
 		squidexschema.PreviewUrls = &previewUrls
+		//panic: interface conversion: interface {} is map[string]interface {}, not map[string]string
 	}
 	if v, ok := data.GetOk("fields"); ok {
-		fields := v.([]squidexclient.UpsertSchemaFieldDto)
-		squidexschema.Fields = &fields
+		fields := v.([]interface{}) //[]squidexclient.UpsertSchemaFieldDto)
+		squidexfields := make([]squidexclient.UpsertSchemaFieldDto, len(fields))
+		for i, v := range fields {
+			field := v.(map[string]interface{})
+			if field["name"] != nil {
+				squidexfields[i].Name = field["name"].(string)
+				squidexfields[i].Properties = squidexclient.FieldPropertiesDto{FieldType: "String"}
+			}
+			// todo
+			// "fields":[{"name":"author","properties":{"fieldType":""}}]
+		}
+		squidexschema.Fields = &squidexfields
 		// TODO: get fields from data
 	}
 		//for _, _ := range fields {
@@ -582,8 +606,11 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-	
+	log.Println("create dto: start")
 	dto, _ := getCreateSchemaDtoFromData(data)
+	source, _ := json.Marshal(dto)
+	log.Printf("create dto: \n%s", source)
+	 // {"properties":{"label":"blog3","hints":"","contentsSidebarUrl":"","contentSidebarUrl":"","tags":null},"isPublished":true,"name":"blog3"
 	// TODO: handle all errors
 	result, _, err := client.SchemasApi.SchemasPostSchema(ctx, appName, dto)
 
@@ -614,6 +641,10 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	dto, _ := getUpdateSchemaDtoFromData(data)
 	// TODO: handle all errors
 	result, _, err := client.SchemasApi.SchemasPutSchema(ctx, appName, name, dto)
+	// TODO: use syncchronize with nofield deletion recreation to true (and message why it's not allowed)
+	//result, _, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, squidexclient.SynchronizeSchemaDto{
+	//
+	//})
 
 	if err != nil {
 		return diag.FromErr(err)
