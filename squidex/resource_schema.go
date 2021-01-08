@@ -111,8 +111,9 @@ func resourceSchema() *schema.Resource {
 				},
 			},
 			"scripts": {
-				Type: schema.TypeMap,
+				Type: schema.TypeList,
 				Optional: true,
+				MaxItems: 1,
 				Description: "The optional scripts.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
@@ -390,7 +391,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		x := category.(string)
 		squidexschema.Category = &x
 	}
-
+// panic: interface conversion: interface {} is []interface {}, not []string
 	if v, ok := data.GetOk("properties"); ok {
 		properties := v.([]interface{})[0].(map[string]interface{})
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
@@ -411,8 +412,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 			squidexschema.Properties.ContentSidebarUrl = &x
 		}
 		if p, ok := properties["tags"]; ok { 
-			tags := p.([]string)
-			// tags := interfaceSliceToStringSlice(p.([]interface{}))
+			tags := interfaceSliceToStringSlice(p.([]interface{}))
 			squidexschema.Properties.Tags = &tags
 		}
 	}
@@ -567,8 +567,7 @@ func getUpdateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Update
 			squidexschema.ContentSidebarUrl = &x
 		}
 		if p, ok := properties["tags"]; ok { 
-			tags := p.([]string)
-			// tags := interfaceSliceToStringSlice(p.([]interface{}))
+			tags := interfaceSliceToStringSlice(p.([]interface{}))
 			squidexschema.Tags = &tags
 		}
 	}

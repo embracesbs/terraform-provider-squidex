@@ -1,7 +1,9 @@
 package squidex
 
 import (
+	"encoding/json"
 	"context"
+	"strings"
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -57,7 +59,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if result.Items[i].ContributorId == contributorID {
+    	if strings.EqualFold(result.Items[i].ContributorId, contributorID) {
 			resultItem = &result.Items[i]
         	break
     	}
@@ -97,14 +99,15 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if result.Items[i].ContributorEmail == contributorEmail {
+    	if strings.EqualFold(result.Items[i].ContributorEmail, contributorEmail) {
 			resultItem = &result.Items[i]
         	break
     	}
 	}
 
 	if resultItem == nil {
-		return diag.Errorf("Not Found: Contributor with email %s", contributorEmail)
+		source, _ := json.Marshal(result)
+		return diag.Errorf("Not Found: Contributor with email %s\nApi Response: %s", contributorEmail, string(source))
 	}
 
 	data.SetId(resultItem.ContributorId)

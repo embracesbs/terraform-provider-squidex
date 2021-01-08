@@ -15,7 +15,7 @@ provider "squidex" {
 
 # TODO: discuss strategy, do we allow for destroy and create on app resources?
 resource "squidex_app" "test" {
-  name = "squidex-provider-test2"
+  name = "squidex-provider-test3"
   description = "description1"
 }
 
@@ -33,14 +33,6 @@ resource "squidex_languages" "test" {
   }
 }
 
-# TODO: discuss strategy, do we allow for destroy and create on schema resources?
-resource "squidex_schema" "test" {
-  app_name  = squidex_app.test.name
-  name      = "squidex-provider-test-updated"
-  published = true
-  singleton = false
-}
-
 resource "squidex_role" "test" {
   app_name    = squidex_app.test.name
   name        = "squidex-provider-test"
@@ -55,6 +47,46 @@ resource "squidex_role" "test" {
 resource "squidex_contributor" "test" {
   app_name          = squidex_app.test.name
   contributor_email = "michiel@qvision.nl"
-  role              =  squidex_role.test.name
+  role              = squidex_role.test.name
   invite            = false
+}
+
+resource "squidex_contributor" "test_michiel_owner" {
+  app_name          = squidex_app.test.name
+  contributor_email = "michiel.vanklinken@embracecloud.nl"
+  role              = "Owner"
+  invite            = false
+}
+
+# TODO: discuss strategy, do we allow for destroy and create on schema resources?
+resource "squidex_schema" "test" {
+  app_name  = squidex_app.test.name
+  name      = "blog2"
+  published = true
+  singleton = false
+  properties {
+    label = "blog2"
+  }
+  //fields_in_list = [ 
+  //      "author",
+  //      "title",
+  //      "meta.created",
+  //      "meta.lastModified",
+  //      "meta.version" 
+  //      ]
+  //fields_in_references = [ "title", "author" ]
+  //fields {
+  //  name         = "author"
+  //  partitioning = "invariant"
+  //  properties {
+  //    field_type = "String"
+  //  }
+  //}
+  //fields {
+  //  name         = "title"
+  //  partitioning = "invariant"
+  //  properties {
+  //    field_type = "String"
+  //  }
+  //}
 }
