@@ -18,16 +18,19 @@ func resourceSchema() *schema.Resource {
 		"label": {
 			Type: schema.TypeString,
 			Optional: true,
+			Default: "",
 			Description: "Optional label for the editor.",
 		},
 		"hints": {
 			Type: schema.TypeString,
 			Optional: true,
+			Default: "",
 			Description: "Hints to describe the schema.",
 		},
 		"placeholder": {
 			Type: schema.TypeString,
 			Optional: true,
+			Default: "",
 			Description: "Placeholder to show when no value has been entered.",
 		},
 		"required": {
@@ -45,6 +48,7 @@ func resourceSchema() *schema.Resource {
 		"editor_url": {
 			Type: schema.TypeString,
 			Optional: true,
+			Default: "",
 			Description: "Optional url to the editor.",
 		},
 		"tags": {
@@ -58,7 +62,8 @@ func resourceSchema() *schema.Resource {
 		// Maybe make FieldType OneOfMany() but it's enums are not in the client
 		"field_type": {
 			Type: schema.TypeString,
-			Required: true,
+			Optional: true,
+			Default: "String",
 			Description: "Type of the field.",
 			ValidateFunc: validation.StringInSlice([]string{
 					"Assets",
@@ -87,7 +92,8 @@ func resourceSchema() *schema.Resource {
 				Type: schema.TypeString,
 				Required: true,
 				ForceNew: true,
-				Description: "",
+				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "app_name may only contain a-z 0-9 and - and not start with -."),
+				Description: "Name of the application. Can not be changed later. Only [a-z0-9] and may contain dashes - but not start with them.",
 			},
 			"properties": {
 				Type: schema.TypeList,
@@ -99,21 +105,25 @@ func resourceSchema() *schema.Resource {
 						"label": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "Optional label for the editor.",
 						},
 						"hints": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "Hints to describe the schema.",
 						},
 						"contents_sidebar_url": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The url to a the sidebar plugin for content lists.",
 						},
 						"content_sidebar_url": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The url to a the sidebar plugin for content items.",
 						},
 						"tags": {
@@ -137,26 +147,31 @@ func resourceSchema() *schema.Resource {
 						"query": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The script that is executed for each query when querying contents.",
 						},
 						"create": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The script that is executed when creating a content.",
 						},
 						"update": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The script that is executed when updating a content.",
 						},
 						"delete": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The script that is executed when deleting a content.",
 						},
 						"change": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "",
 							Description: "The script that is executed when change a content status.",
 						},
 					},
@@ -187,7 +202,8 @@ func resourceSchema() *schema.Resource {
 						"name": {
 							Type: schema.TypeString,
 							Required: true,
-							Description: "The name of the field. Must be unique within the schema.",
+							ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "name may only contain a-z 0-9 and - and not start with -."),
+							Description: "The name of the field. Must be unique within the schema. Only [a-z0-9] and may contain dashes - but not start with them.",
 						},
 						"hidden": {
 							Type: schema.TypeBool,
@@ -210,6 +226,7 @@ func resourceSchema() *schema.Resource {
 						"partitioning": {
 							Type: schema.TypeString,
 							Optional: true,
+							Default: "invariant",
 							Description: "Determines the optional partitioning of the field.",
 						},
 						"properties": {
@@ -276,11 +293,13 @@ func resourceSchema() *schema.Resource {
 			"category": {
 				Type:     schema.TypeString,
 				Optional: true,
+				Default: "",
 				Description: "The category.",
 			},
 			"published": {
 				Type:     schema.TypeBool,
-				Required: true,
+				Optional: true,
+				Default: true,
 				Description: "Set it to true to autopublish the schema.",
 			},
 			// TODO: add validation for all fields
@@ -288,12 +307,13 @@ func resourceSchema() *schema.Resource {
 				Type: schema.TypeString,
 				Required: true,
 				ForceNew: true,
-				Description: "The name of the schema.",
+				Description: "The name of the schema. Only [a-z0-9] and may contain dashes - but not start with them.",
 				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "Name may only contain a-z 0-9 and - and not start with -."),
 			},
 			"singleton": {
 				Type:     schema.TypeBool,
-				Required: true,
+				Optional: true,
+				Default: false,
 				Description: "Set to true to allow a single content item only.",
 			},
 		},
