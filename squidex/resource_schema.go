@@ -4,6 +4,7 @@ import (
 	"log"
 	"context"
 	"encoding/json"
+	"regexp"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 
@@ -192,19 +193,19 @@ func resourceSchema() *schema.Resource {
 							Type: schema.TypeBool,
 							Optional: true,
 							Default: false,
-							Description: "Defines if the field is hidden.",
+							Description: "Hide field in the Api",
 						},
 						"locked": {
 							Type: schema.TypeBool,
 							Optional: true,
 							Default: false,
-							Description: "Defines if the field is locked.",
+							Description: "Lock field and prevent changes.",
 						},
 						"disabled": {
 							Type: schema.TypeBool,
 							Optional: true,
 							Default: false,
-							Description: "Defines if the field is disabled.",
+							Description: "Disable field in the UI.",
 						},
 						"partitioning": {
 							Type: schema.TypeString,
@@ -282,12 +283,13 @@ func resourceSchema() *schema.Resource {
 				Required: true,
 				Description: "Set it to true to autopublish the schema.",
 			},
+			// TODO: add validation for all fields
 			"name": {
-				Type:     schema.TypeString,
+				Type: schema.TypeString,
 				Required: true,
 				ForceNew: true,
 				Description: "The name of the schema.",
-				ValidateFunc: validation.StringMatch("^[a-z0-9]+(\-[a-z0-9]+)*$", ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "Name may only contain a-z 0-9 and - and not start with -."),
 			},
 			"singleton": {
 				Type:     schema.TypeBool,
@@ -299,24 +301,26 @@ func resourceSchema() *schema.Resource {
 }
 
 func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	
+	log.Println("bladiebla33")
 
-	client := meta.(*squidexclient.APIClient)
+	//client := meta.(*squidexclient.APIClient)
 
 	var diags diag.Diagnostics
 
-	appName := data.Get("app_name").(string)
-	name := data.Get("name").(string)
+	//appName := data.Get("app_name").(string)
+	//name := data.Get("name").(string)
 
-	result, _, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
+	// result, _, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
 	
-	if err != nil {
-		return diag.FromErr(err)
-	}
+	// if err != nil {
+	// 	return diag.FromErr(err)
+	// }
 	
 	// prevent drift and set ALL values from the get
-	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
-		return diag.FromErr(err)
-	}
+	// if err = setDataFromSchemaDetailsDto(data, result); err != nil {
+	// 	return diag.FromErr(err)
+	// }
 
 	return diags
 }
@@ -358,17 +362,25 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 	for i, v := range schema.Fields {
 		fields[i] = make(map[string]interface{})
 		fields[i]["name"] = v.Name
-		fields[i]["hidden"] = v.IsHidden
-		fields[i]["locked"] = v.IsLocked
-		fields[i]["disabled"] = v.IsDisabled
+		//fields[i]["hidden"] = &v.IsHidden
+		//fields[i]["locked"] = &v.IsLocked
+		//fields[i]["disabled"] = &v.IsDisabled
 		fields[i]["partitioning"] = v.Partitioning
 		
 		if (squidexclient.FieldPropertiesDto{}) == v.Properties {
 			fields[i]["properties"] = nil
 		} else {
+			// TODO: handle nil values?
 			properties := make(map[string]interface{})
 			properties["hints"] = v.Properties.Hints
-			// TODO: fields - properties
+			//properties["editor_url"] = v.Properties.EditorUrl
+			//properties["fieldtype"] = v.Properties.FieldType
+			//properties["halfwidth"] = &v.Properties.IsHalfWidth
+			//properties["required"] = &v.Properties.IsRequired
+			//properties["label"] = v.Properties.Label
+			//properties["placeholder"] = v.Properties.Placeholder
+			//properties["tags"] = []interface{}{v.Properties.Tags}
+			// TODO: test fields - properties
 			fields[i]["properties"] = []interface{}{properties}
 		}
 		
@@ -414,12 +426,12 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		Name: data.Get("name").(string),
 		IsSingleton: data.Get("singleton").(bool),
 	}
-
+	
 	if category, ok := data.GetOk("category"); ok {
 		x := category.(string)
 		squidexschema.Category = &x
 	}
-	// {"properties":{"label":"blog3","hints":"","contentsSidebarUrl":"","contentSidebarUrl":"","tags":null},"isPublished":true,"name":"blog3"
+	
 	if v, ok := data.GetOk("properties"); ok {
 		properties := v.([]interface{})[0].(map[string]interface{})
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
@@ -488,105 +500,144 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		for i, v := range fields {
 			field := v.(map[string]interface{})
 			if field["name"] != nil {
+				// name is a required field
 				squidexfields[i].Name = field["name"].(string)
-				properties := field["properties"].(map[string]interface{})
-				properties["field_type"]
-				squidexfields[i].Properties = squidexclient.FieldPropertiesDto{FieldType: "String"}
 			}
-			// todo
+			if field["partitioning"] != nil {
+				partitioning := field["partitioning"].(string)
+				squidexfields[i].Partitioning = &partitioning
+			}
+			if field["hidden"] != nil {
+				squidexfields[i].IsHidden = field["hidden"].(bool)
+			}
+			if field["locked"] != nil {
+				squidexfields[i].IsLocked = field["locked"].(bool)
+			}
+			if field["disabled"] != nil {
+				squidexfields[i].IsDisabled = field["disabled"].(bool)
+			}
+			if field["properties"] != nil {
+				properties := field["properties"].([]interface{})
+				if len(properties) == 1 {
+					properties := properties[0].(map[string]interface{})
+					//panic: interface conversion: interface {} is []interface {}, not map[string]interface {}
+					squidexProperties := squidexclient.FieldPropertiesDto{}
+					if properties["label"] != nil {
+						label := properties["label"].(string)
+						squidexProperties.Label = &label
+					}
+					if properties["hints"] != nil {
+						hints := properties["hints"].(string)
+						squidexProperties.Hints = &hints
+					}
+					if properties["placeholder"] != nil {
+						placeholder := properties["placeholder"].(string)
+						squidexProperties.Placeholder = &placeholder
+					}
+					if properties["required"] != nil {
+						squidexProperties.IsRequired = properties["required"].(bool)
+					}
+					if properties["half_width"] != nil {
+						squidexProperties.IsHalfWidth = properties["half_width"].(bool)
+					}
+					if properties["editor_url"] != nil {
+						editorURL := properties["editor_url"].(string)
+						squidexProperties.EditorUrl = &editorURL
+					}
+					if properties["tags"] != nil {
+						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
+						squidexProperties.Tags = &tags
+					}
+					if properties["field_type"] != nil {
+						// field_type is a required field
+						squidexProperties.FieldType = properties["field_type"].(string)
+					}
+					squidexfields[i].Properties = squidexProperties
+				}
+			}
+			// Only array fields can have nested fields.
+			if squidexfields[i].Properties.FieldType == "Array" && field["nested"] != nil {
+				nesteds := field["nested"].([]interface{})
+				squidexNested := make([]squidexclient.UpsertSchemaNestedFieldDto, len(nesteds))
+				for i, v := range nesteds {
+					nested := v.(map[string]interface{})
+					if nested["name"] != nil {
+						squidexNested[i].Name = nested["name"].(string)
+					}
+					if nested["hidden"] != nil {
+						squidexNested[i].IsHidden = nested["hidden"].(bool)
+					}
+					if nested["locked"] != nil {
+						squidexNested[i].IsLocked = nested["locked"].(bool)
+					}
+					if nested["disabled"] != nil {
+						squidexNested[i].IsDisabled = nested["disabled"].(bool)
+					}
+					if nested["properties"] != nil {
+						properties := nested["properties"].([]interface{})
+						if len(properties) == 1 {
+							properties := properties[0].(map[string]interface{})
+							squidexProperties := squidexclient.FieldPropertiesDto{}
+							if properties["label"] != nil {
+								label := properties["label"].(string)
+								squidexProperties.Label = &label
+							}
+							if properties["hints"] != nil {
+								hints := properties["hints"].(string)
+								squidexProperties.Hints = &hints
+							}
+							if properties["placeholder"] != nil {
+								placeholder := properties["placeholder"].(string)
+								squidexProperties.Placeholder = &placeholder
+							}
+							if properties["required"] != nil {
+								squidexProperties.IsRequired = properties["required"].(bool)
+							}
+							if properties["half_width"] != nil {
+								squidexProperties.IsHalfWidth = properties["half_width"].(bool)
+							}
+							if properties["editor_url"] != nil {
+								editorURL := properties["editor_url"].(string)
+								squidexProperties.EditorUrl = &editorURL
+							}
+							if properties["tags"] != nil {
+								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
+								squidexProperties.Tags = &tags
+							}
+							if properties["field_type"] != nil {
+								// field_type is a required field
+								squidexProperties.FieldType = properties["field_type"].(string)
+							}
+							squidexNested[i].Properties = squidexProperties
+						}
+					}
+				}
+				squidexfields[i].Nested = &squidexNested
+			}
 		}
 		squidexschema.Fields = &squidexfields
-		// TODO: get fields from data
 	}
-		//for _, _ := range fields {
-			// append(squidexschema.Fields, squidexclient.UpsertSchemaFieldDto{
-			// })
-
-			/*
-			"name": {
-				Type: schema.TypeString,
-				Required: true,
-				Description: "The name of the field. Must be unique within the schema.",
-			},
-			"hidden": {
-				Type: schema.TypeBool,
-				Optional: true,
-				Default: false,
-				Description: "Defines if the field is hidden.",
-			},
-			"locked": {
-				Type: schema.TypeBool,
-				Optional: true,
-				Default: false,
-				Description: "Defines if the field is locked.",
-			},
-			"disabled": {
-				Type: schema.TypeBool,
-				Optional: true,
-				Default: false,
-				Description: "Defines if the field is disabled.",
-			},
-			"partitioning": {
-				Type: schema.TypeString,
-				Optional: true,
-				Description: "Determines the optional partitioning of the field.",
-			},
-			"properties": {
-				Type: schema.TypeList,
-				Optional: true,
-				MaxItems: 1,
-				Description: "Determines the optional partitioning of the field.",
-				Elem: &schema.Resource{
-					Schema: fieldPropertiesDto,
-				},
-			},
-			"nested": {
-				Type: schema.TypeList,
-				Optional: true,
-				Description: "The nested fields.",
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type: schema.TypeString,
-							Required: true,
-							Description: "The name of the field. Must be unique within the schema.",
-						},
-						"hidden": {
-							Type: schema.TypeBool,
-							Optional: true,
-							Default: false,
-							Description: "Defines if the field is hidden.",
-						},
-						"locked": {
-							Type: schema.TypeBool,
-							Optional: true,
-							Default: false,
-							Description: "Defines if the field is locked.",
-						},
-						"disabled": {
-							Type: schema.TypeBool,
-							Optional: true,
-							Default: false,
-							Description: "Defines if the field is disabled.",
-						},
-						"properties": {
-							Type: schema.TypeList,
-							Optional: true,
-							MaxItems: 1,
-							Description: "The field properties.",
-							Elem: &schema.Resource{
-								Schema: fieldPropertiesDto,
-							},
-						},
-					},
-				},
-			},
-			*/
-
 	return squidexschema, nil
 }
 
-func getUpdateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.UpdateSchemaDto, error) {
+func mapCreateSchemaDtoToSynchronizeSchemaDto(createSchema squidexclient.CreateSchemaDto) (squidexclient.SynchronizeSchemaDto) {
+	// use syncchronize with NoFieldDeletion & NoFieldRecreation to true (and message why it's not allowed on errors)
+	dto := squidexclient.SynchronizeSchemaDto{
+		NoFieldDeletion: true,
+		NoFieldRecreation: true,
+		Category: createSchema.Category,
+		Fields: createSchema.Fields,
+		FieldsInLists: createSchema.FieldsInLists,
+		FieldsInReferences: createSchema.FieldsInReferences,
+		IsPublished: createSchema.IsPublished,
+		PreviewUrls: createSchema.PreviewUrls,
+		Properties: createSchema.Properties,
+		Scripts: createSchema.Scripts,
+	}
+	return dto
+}
+
+func ObsoletegetUpdateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.UpdateSchemaDto, error) {
 	squidexschema := squidexclient.UpdateSchemaDto{}
 	if v, ok := data.GetOk("properties"); ok {
 		properties := v.([]interface{})[0].(map[string]interface{})
@@ -617,16 +668,17 @@ func getUpdateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Update
 func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	client := meta.(*squidexclient.APIClient)
-
+	
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
+	
 	log.Println("create dto: start")
 	dto, _ := getCreateSchemaDtoFromData(data)
 	source, _ := json.Marshal(dto)
-	log.Printf("create dto: \n%s", source)
-	 // {"properties":{"label":"blog3","hints":"","contentsSidebarUrl":"","contentSidebarUrl":"","tags":null},"isPublished":true,"name":"blog3"
+	log.Printf("create dto: \n%s", string(source))
+
 	// TODO: handle all errors
 	result, _, err := client.SchemasApi.SchemasPostSchema(ctx, appName, dto)
 
@@ -635,6 +687,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	}
 
 	// prevent drift and set ALL values from the result
+	// TODO: setDataFromSchemaDetailsDto() on all data
 	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
 		return diag.FromErr(err)
 	}
@@ -654,15 +707,17 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	dto, _ := getUpdateSchemaDtoFromData(data)
-	// TODO: handle all errors
-	result, _, err := client.SchemasApi.SchemasPutSchema(ctx, appName, name, dto)
-	// TODO: use syncchronize with nofield deletion recreation to true (and message why it's not allowed)
-	//result, _, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, squidexclient.SynchronizeSchemaDto{
-	//
-	//})
-
+	createDto, err := getCreateSchemaDtoFromData(data)
 	if err != nil {
+		return diag.FromErr(err)
+	}
+	dto := mapCreateSchemaDtoToSynchronizeSchemaDto(createDto)
+		
+	result, _, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, dto)
+	
+	if err != nil {
+		// TODO: handle all errors
+		// TODO: update - display correct error response and message
 		return diag.FromErr(err)
 	}
 	

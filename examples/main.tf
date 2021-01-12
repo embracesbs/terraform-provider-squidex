@@ -15,7 +15,7 @@ provider "squidex" {
 
 # TODO: discuss strategy, do we allow for destroy and create on app resources?
 resource "squidex_app" "test" {
-  name = "squidex-provider-test3"
+  name = "squidex-provider-test4"
   description = "description1"
 }
 
@@ -25,13 +25,13 @@ resource "squidex_client" "test" {
   role = "squidex"
 }
 
-resource "squidex_languages" "test" {
-  app_name = squidex_app.test.name
-  language {
-    language = "en-NL"
-    is_master = true
-  }
-}
+//resource "squidex_languages" "test" {
+//  app_name = squidex_app.test.name
+//  language {
+//    language = "en-NL"
+//    is_master = true
+//  }
+//}
 
 resource "squidex_role" "test" {
   app_name    = squidex_app.test.name
@@ -61,15 +61,15 @@ resource "squidex_contributor" "test_michiel_owner" {
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {
   app_name  = squidex_app.test.name
-  name      = "blog4"
+  name      = "blog7"
   published = true
   singleton = false
   properties {
-    label = "blog"
-    content_sidebar_url = "someuri_1"
+    label                = "blog"
+    content_sidebar_url  = "someuri_1"
     contents_sidebar_url = "someuri_2"
-    hints = "This is a hint"
-    tags = [ "tag1", "tag2" ]
+    hints                = "This is a hint"
+    tags                 = [ "tag1", "tag2" ]
   }
   fields_in_list = [ 
     "author",
@@ -79,24 +79,10 @@ resource "squidex_schema" "test" {
     "meta.version" 
     ]
   fields_in_references = [ "author", "title" ]
-  fields {
-    name         = "author"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-    }
-  }
-  fields {
-    name         = "title"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-    }
-  }
   preview_urls = {
     "somepagename" = "https://fqdn/page"
   }
-  category = "somecategory"
+  category = "somecategory2"
   scripts {
     query  = "value"
     update = "value"
@@ -104,4 +90,58 @@ resource "squidex_schema" "test" {
     delete = "value"
     change = "value"
   }
+
+  fields {
+    name         = "author"
+    partitioning = "invariant"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+		
+    properties {
+      field_type  = "Array"
+      label       = "author-label"
+      hints       = "hints"
+      placeholder = "placeholder"
+      required    = false
+      half_width  = false
+      editor_url  = "editor_url"
+      tags        = ["tag1", "tag2"]
+    }
+    // Only properties.field_type = "Array" effect nested block (ignored for other types)
+    nested {
+      name         = "nestedfield"    
+		  hidden       = false
+		  locked       = false # should not be used
+		  disabled     = false # should not be used
+    
+      properties {
+        field_type  = "String"
+        label       = "label"
+        hints       = "hints"
+        placeholder = "placeholder"
+        required    = false
+        half_width  = false
+        editor_url  = "editor_url"
+        tags        = ["tag1", "tag2"]
+      }
+    }
+  }
+
+  fields {
+    name         = "title"
+    partitioning = "invariant"
+    properties {
+      field_type = "String"
+    }
+  }
+
+  fields {
+    name         = "title-updated"
+    partitioning = "invariant"
+    properties {
+      field_type = "String"
+    }
+  }
+
 }
