@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -48,10 +49,12 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	result, _, err := client.AppsApi.AppClientsPostClient(ctx, appName, squidexclient.CreateClientDto{
+	result, resp, err := client.AppsApi.AppClientsPostClient(ctx, appName, squidexclient.CreateClientDto{
 		Id: name,
 	})
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -75,11 +78,13 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	name := data.Get("name").(string)
 	role := data.Get("role").(string)
 
-	_, _, err := client.AppsApi.AppClientsPutClient(ctx, appName, id, squidexclient.UpdateClientDto{
+	_, resp, err := client.AppsApi.AppClientsPutClient(ctx, appName, id, squidexclient.UpdateClientDto{
 		Name: &name,
 		Role: &role,
 	})
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -96,8 +101,10 @@ func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	id := data.Get("id").(string)
 
-	_, _, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
+	_, resp, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}

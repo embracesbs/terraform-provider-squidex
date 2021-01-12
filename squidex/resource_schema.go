@@ -7,6 +7,7 @@ import (
 	"regexp"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -320,32 +321,8 @@ func resourceSchema() *schema.Resource {
 	}
 }
 
-func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	
-	log.Println("bladiebla33")
-
-	//client := meta.(*squidexclient.APIClient)
-
-	var diags diag.Diagnostics
-
-	//appName := data.Get("app_name").(string)
-	//name := data.Get("name").(string)
-
-	// result, _, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
-	
-	// if err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	
-	// prevent drift and set ALL values from the get
-	// if err = setDataFromSchemaDetailsDto(data, result); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-
-	return diags
-}
-
 func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient.SchemaDetailsDto) (error) {
+	log.Printf("ids: %s %s", data.Id(), schema.Id)
 	data.SetId(schema.Id)
 
 	data.Set("name", schema.Name)
@@ -362,7 +339,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 		properties["contents_sidebar_url"] = schema.Properties.ContentsSidebarUrl
 		properties["content_sidebar_url"] = schema.Properties.ContentSidebarUrl
 		// TODO: properties - tags -> how to set array?
-		// properties["tags"] = schema.Properties.Tags
+		properties["tags"] = schema.Properties.Tags
 		data.Set("properties", []interface{}{properties})
 	}
 
@@ -382,42 +359,58 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 	for i, v := range schema.Fields {
 		fields[i] = make(map[string]interface{})
 		fields[i]["name"] = v.Name
-		//fields[i]["hidden"] = &v.IsHidden
-		//fields[i]["locked"] = &v.IsLocked
-		//fields[i]["disabled"] = &v.IsDisabled
+		fields[i]["hidden"] = &v.IsHidden
+		fields[i]["locked"] = &v.IsLocked
+		fields[i]["disabled"] = &v.IsDisabled
 		fields[i]["partitioning"] = v.Partitioning
 		
 		if (squidexclient.FieldPropertiesDto{}) == v.Properties {
 			fields[i]["properties"] = nil
 		} else {
-			// TODO: handle nil values?
 			properties := make(map[string]interface{})
 			properties["hints"] = v.Properties.Hints
-			//properties["editor_url"] = v.Properties.EditorUrl
-			//properties["fieldtype"] = v.Properties.FieldType
-			//properties["halfwidth"] = &v.Properties.IsHalfWidth
-			//properties["required"] = &v.Properties.IsRequired
-			//properties["label"] = v.Properties.Label
-			//properties["placeholder"] = v.Properties.Placeholder
-			//properties["tags"] = []interface{}{v.Properties.Tags}
-			// TODO: test fields - properties
+			properties["editor_url"] = v.Properties.EditorUrl
+			properties["field_type"] = v.Properties.FieldType
+			properties["half_width"] = &v.Properties.IsHalfWidth
+			properties["required"] = &v.Properties.IsRequired
+			properties["label"] = v.Properties.Label
+			properties["placeholder"] = v.Properties.Placeholder
+			properties["tags"] = v.Properties.Tags
 			fields[i]["properties"] = []interface{}{properties}
 		}
 		
 		if v.Nested == nil {
 			fields[i]["nested"] = nil
 		} else {
-			// nested := make([]map[string]interface{}, len(*v.Nested))
-			// for i, v := range nested { }
-			// TODO: fields - nested
-			// fields[i]["nested"] = []interface{}{nested}
+			nesteds := make([]map[string]interface{}, len(*v.Nested))
+			for i, nested := range *v.Nested { 
+				nesteds[i] = make(map[string]interface{})
+				nesteds[i]["name"] = nested.Name
+				nesteds[i]["hidden"] = nested.IsHidden
+				nesteds[i]["locked"] = nested.IsLocked
+				nesteds[i]["disabled"] = nested.IsDisabled
+
+				properties := make(map[string]interface{})
+				properties["hints"] = nested.Properties.Hints
+				properties["editor_url"] = nested.Properties.EditorUrl
+				properties["field_type"] = nested.Properties.FieldType
+				properties["half_width"] = nested.Properties.IsHalfWidth
+				properties["required"] = nested.Properties.IsRequired
+				properties["label"] = nested.Properties.Label
+				properties["placeholder"] = nested.Properties.Placeholder
+				tags := *nested.Properties.Tags
+				properties["tags"] = tags
+				nesteds[i]["properties"] = []interface{}{properties}
+			}
+			fields[i]["nested"] = nesteds
 		}
 	}
-	data.Set("fields", []interface{}{fields})
+	data.Set("fields", fields)
 	
-	data.Set("fields_in_references", []interface{}{schema.FieldsInReferences})
-	data.Set("fields_in_list", []interface{}{schema.FieldsInLists})
-	data.Set("preview_urls", []interface{}{schema.PreviewUrls})
+	data.Set("fields_in_references", schema.FieldsInReferences)
+	data.Set("fields_in_list", schema.FieldsInLists)
+	
+	data.Set("preview_urls", stringMapToInterfaceMap(schema.PreviewUrls))
 	
 	return nil
 }
@@ -436,6 +429,26 @@ func interfaceMapToStringMap(iv map[string]interface{}) map[string]string {
 	sv := make(map[string]string)
 	for k, v := range iv {
 		sv[k] = v.(string)
+	}
+	return sv
+}
+
+// TODO: move to utils
+func stringMapToInterfaceMap(iv map[string]string) map[string]interface{} {
+	sv := make(map[string]interface{})
+	for k, v := range iv {
+		sv[k] = v
+	}
+	return sv
+}
+
+func stringArrayToNonNilStringArray(iv []string) []string {
+	if iv == nil {
+		return make([]string, 0)
+	}
+	sv := make([]string, len(iv))
+	for _, v := range iv {
+		sv = append(sv, v)
 	}
 	return sv
 }
@@ -515,7 +528,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		//panic: interface conversion: interface {} is map[string]interface {}, not map[string]string
 	}
 	if v, ok := data.GetOk("fields"); ok {
-		fields := v.([]interface{}) //[]squidexclient.UpsertSchemaFieldDto)
+		fields := v.([]interface{})
 		squidexfields := make([]squidexclient.UpsertSchemaFieldDto, len(fields))
 		for i, v := range fields {
 			field := v.(map[string]interface{})
@@ -540,7 +553,6 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 				properties := field["properties"].([]interface{})
 				if len(properties) == 1 {
 					properties := properties[0].(map[string]interface{})
-					//panic: interface conversion: interface {} is []interface {}, not map[string]interface {}
 					squidexProperties := squidexclient.FieldPropertiesDto{}
 					if properties["label"] != nil {
 						label := properties["label"].(string)
@@ -657,34 +669,6 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(createSchema squidexclient.CreateS
 	return dto
 }
 
-func ObsoletegetUpdateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.UpdateSchemaDto, error) {
-	squidexschema := squidexclient.UpdateSchemaDto{}
-	if v, ok := data.GetOk("properties"); ok {
-		properties := v.([]interface{})[0].(map[string]interface{})
-		if p, ok := properties["label"]; ok { 
-			x := p.(string)
-			squidexschema.Label = &x
-		}
-		if p, ok := properties["hints"]; ok { 
-			x := p.(string)
-			squidexschema.Hints = &x
-		}
-		if p, ok := properties["contents_sidebar_url"]; ok { 
-			x := p.(string)
-			squidexschema.ContentsSidebarUrl = &x
-		}
-		if p, ok := properties["content_sidebar_url"]; ok { 
-			x := p.(string)
-			squidexschema.ContentSidebarUrl = &x
-		}
-		if p, ok := properties["tags"]; ok { 
-			tags := interfaceSliceToStringSlice(p.([]interface{}))
-			squidexschema.Tags = &tags
-		}
-	}
-	return squidexschema, nil
-}
-
 func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	client := meta.(*squidexclient.APIClient)
@@ -700,7 +684,9 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	log.Printf("create dto: \n%s", string(source))
 
 	// TODO: handle all errors
-	result, _, err := client.SchemasApi.SchemasPostSchema(ctx, appName, dto)
+	result, resp, err := client.SchemasApi.SchemasPostSchema(ctx, appName, dto)
+
+	common.HandleAPIError(resp)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -719,6 +705,32 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	return diags
 }
 
+func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	
+	client := meta.(*squidexclient.APIClient)
+
+	var diags diag.Diagnostics
+
+	appName := data.Get("app_name").(string)
+	name := data.Get("name").(string)
+
+	result, resp, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
+
+	common.HandleAPIError(resp)
+
+	if err != nil {
+		// log.Printf("", response.)
+		return diag.FromErr(err)
+	}
+
+	//prevent drift and set ALL values from the get
+	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
+		return diag.FromErr(err)
+	}
+
+	return diags
+}
+
 func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	client := meta.(*squidexclient.APIClient)
 
@@ -733,8 +745,10 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	}
 	dto := mapCreateSchemaDtoToSynchronizeSchemaDto(createDto)
 		
-	result, _, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, dto)
+	result, resp, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, dto)
 	
+	common.HandleAPIError(resp)
+
 	if err != nil {
 		// TODO: handle all errors
 		// TODO: update - display correct error response and message
@@ -742,6 +756,7 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	}
 	
 	// prevent drift and set ALL values from the result
+	// to test this, do once with, and once without, and compare results
 	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
 		return diag.FromErr(err)
 	}
@@ -758,8 +773,10 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	_, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
-
+	resp, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
+	
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}

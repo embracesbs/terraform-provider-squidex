@@ -15,7 +15,7 @@ provider "squidex" {
 
 # TODO: discuss strategy, do we allow for destroy and create on app resources?
 resource "squidex_app" "test" {
-  name = "squidex-provider-test4"
+  name = "squidex-provider-test5"
   description = "description1"
 }
 
@@ -25,13 +25,13 @@ resource "squidex_client" "test" {
   role = "squidex"
 }
 
-//resource "squidex_languages" "test" {
-//  app_name = squidex_app.test.name
-//  language {
-//    language = "en-NL"
-//    is_master = true
-//  }
-//}
+resource "squidex_languages" "test" {
+  app_name = squidex_app.test.name
+  language {
+    language = "nl-NL"
+    is_master = true
+  }
+}
 
 resource "squidex_role" "test" {
   app_name    = squidex_app.test.name
@@ -61,11 +61,11 @@ resource "squidex_contributor" "test_michiel_owner" {
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {
   app_name  = squidex_app.test.name
-  name      = "blog7"
+  name      = "blog1"
   published = true
   singleton = false
   properties {
-    label                = "blog"
+    label                = "bloglabel"
     content_sidebar_url  = "someuri_1"
     contents_sidebar_url = "someuri_2"
     hints                = "This is a hint"
