@@ -32,6 +32,11 @@ func Provider() *schema.Provider {
 				Required:  true,
 				Sensitive: true,
 			},
+			// TODO: add settings to allow/forbid 1. deleting schemas 2. deleting fields of schemas 3. recreating fields of schemas
+			// if not allowed, only delete terraform references, making it no longer under terraform control but no changes to server are made.
+			// when they are needed again, they need to be imported first
+			// this will serve as a safeguard for accidental removal of data
+			// needs discussion
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"squidex_app":       resourceApp(),

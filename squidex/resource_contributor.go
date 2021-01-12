@@ -1,8 +1,13 @@
 package squidex
 
 import (
+	"encoding/json"
 	"context"
+	"strings"
+
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -49,15 +54,17 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 	appName := data.Get("app_name").(string)
 	contributorID := data.Id()
 	
-	result, _, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
+	result, resp, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if result.Items[i].ContributorId == contributorID {
+    	if strings.EqualFold(result.Items[i].ContributorId, contributorID) {
 			resultItem = &result.Items[i]
         	break
     	}
@@ -85,26 +92,29 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	role := data.Get("role").(string)
 	invite := data.Get("invite").(bool)
 
-	result, _, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+	result, resp, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorEmail,
 		Role: &role,
 		Invite: invite,
 	})
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}
 	
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if result.Items[i].ContributorEmail == contributorEmail {
+    	if strings.EqualFold(result.Items[i].ContributorEmail, contributorEmail) {
 			resultItem = &result.Items[i]
         	break
     	}
 	}
 
 	if resultItem == nil {
-		return diag.Errorf("Not Found: Contributor with email %s", contributorEmail)
+		source, _ := json.Marshal(result)
+		return diag.Errorf("Not Found: Contributor with email %s\nApi Response: %s", contributorEmail, string(source))
 	}
 
 	data.SetId(resultItem.ContributorId)
@@ -125,12 +135,14 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	invite := false // no invites send for updating role
 	
 	// there is no update method, just use the create to set it again, but no invite!
-	_, _, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+	_, resp, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorID,
 		Role: &role,
 		Invite: invite,
 	})
 
+	common.HandleAPIError(resp)
+	
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -148,7 +160,9 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 
 	client := meta.(*squidexclient.APIClient)
 	var diags diag.Diagnostics
-	_, _, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
+	_, resp, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
+	
+	common.HandleAPIError(resp)
 
 	if err != nil {
 		return diag.FromErr(err)
