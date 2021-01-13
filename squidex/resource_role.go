@@ -36,7 +36,7 @@ func resourceRole() *schema.Resource {
 				Type:     schema.TypeMap,
 				Optional: true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString,
+					Type: schema.TypeBool,
 				},
 			},
 		},

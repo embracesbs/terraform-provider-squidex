@@ -41,7 +41,9 @@ resource "squidex_role" "test" {
     "contents.*",
     "schemas.read",
   ]
-  properties  = {}
+  properties  = {
+    "ui.api.hide" = true
+  }
 }
 
 resource "squidex_contributor" "test" {
@@ -101,7 +103,7 @@ resource "squidex_schema" "test" {
     properties {
       field_type  = "Array"
       label       = "author-label"
-      hints       = "hints"
+      hints       = "hints2"
       placeholder = "placeholder"
       required    = false
       half_width  = false

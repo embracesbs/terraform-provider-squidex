@@ -369,7 +369,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 		} else {
 			properties := make(map[string]interface{})
 			properties["hints"] = v.Properties.Hints
-			properties["editor_url"] = v.Properties.EditorUrl
+			properties["editor_url"] = v.Properties.EditorURL
 			properties["field_type"] = v.Properties.FieldType
 			properties["half_width"] = &v.Properties.IsHalfWidth
 			properties["required"] = &v.Properties.IsRequired
@@ -392,7 +392,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 
 				properties := make(map[string]interface{})
 				properties["hints"] = nested.Properties.Hints
-				properties["editor_url"] = nested.Properties.EditorUrl
+				properties["editor_url"] = nested.Properties.EditorURL
 				properties["field_type"] = nested.Properties.FieldType
 				properties["half_width"] = nested.Properties.IsHalfWidth
 				properties["required"] = nested.Properties.IsRequired
@@ -574,7 +574,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					}
 					if properties["editor_url"] != nil {
 						editorURL := properties["editor_url"].(string)
-						squidexProperties.EditorUrl = &editorURL
+						squidexProperties.EditorURL = &editorURL
 					}
 					if properties["tags"] != nil {
 						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
@@ -630,7 +630,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							}
 							if properties["editor_url"] != nil {
 								editorURL := properties["editor_url"].(string)
-								squidexProperties.EditorUrl = &editorURL
+								squidexProperties.EditorURL = &editorURL
 							}
 							if properties["tags"] != nil {
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
