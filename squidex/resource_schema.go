@@ -52,6 +52,273 @@ func resourceSchema() *schema.Resource {
 			Default: "",
 			Description: "Optional url to the editor.",
 		},
+		"unique": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Default: false,
+			Description: "Indicates if the field value must be unique. Ignored for nested fields and localized fields.",
+		},
+		"editor": {
+			Type: schema.TypeString,
+			Optional: true,
+			ValidateFunc: validation.StringInSlice([]string{
+					"Checkbox",
+					"Toggle",
+					"DateTime",
+					"Date",
+					"Map",
+					"Input",
+					"Radio",
+					"Stars",
+					"List",
+					"Checkboxes",
+					"Tags",
+					"Slug",
+					"TextArea",
+					"RichText",
+					"Markdown",
+					"Color",
+					"Html",
+					"StockPhoto",
+					"Dropdown",
+					"Separator"}, false),
+			Description: "The editor that is used to manage this field. Possible Values are; \nBoolean: Checkbox Toggle, \nDateTime: DateTime Date, \nGeoLocation: Map, \nNumber: Input Radio Dropdown Stars, \nReferences: List Dropdown Checkboxes Tags, \nString: Input Slug TextArea RichText Markdown Dropdown Radio Color Html StockPhoto, \nTags: Tags Checkboxes Dropdown, \nUI: Separator",
+		},
+// TODO: test these new fields on all crud mappings:
+		"min_items": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum allowed items for the field value.",
+		},
+		"max_items": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum allowed items for the field value.",
+		},
+		"preview_mode": {
+			Type: schema.TypeString,
+			Optional: true,
+			Default: "ImageAndFileName",
+			Description: "(Asset field_type only) The preview mode for the asset.",
+			ValidateFunc: validation.StringInSlice([]string{
+					"ImageAndFileName",
+					"Image",
+					"FileName"}, false),
+		},
+		"default_values": {
+			Type: schema.TypeMap,
+			Optional: true,
+			Description: "The language specific default value as a list of asset ids.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+/*	DefaultValues The language specific default value as a list of asset ids.
+	DefaultValue *interface{} `json:"defaultValue,omitempty"`
+		Options: 
+		- lists: {"nl-NL": ["asset1","tag2"]}
+		- string: {"nl-NL": "asset1"}
+		- int/double: {"nl-NL": 10.9}
+		- bool: {"nl-NL": true}
+	*/ 
+			// TODO: test if strings are accepted on api for all field_type's
+			// how about arrays?
+		},
+		"default_value": {
+			Type: schema.TypeList,
+			/*	DefaultValue The default value for the field value.
+	DefaultValues *map[string]interface{} `json:"defaultValues,omitempty"`
+		Options:
+		- lists: ["asset1","tag2"]
+		- string: "asset1"
+		- int/double: 10.9
+		- bool: true
+	*/
+			// TODO: test if strings are accepted on api for all field_type's
+			Optional: true,
+			Description: "The language specific default value as a list of asset ids.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"min_size": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum file size in bytes.",
+		},
+		"max_size": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum file size in bytes.",
+		},
+		"min_width": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum image width in pixels.",
+		},
+		"max_width": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum image width in pixels.",
+		},
+		"min_height": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum image height in pixels.",
+		},
+		"max_height": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum image height in pixels.",
+		},
+		"aspect_width": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The image aspect width in pixels.",
+		},
+		"aspect_height": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The image aspect height in pixels.",
+		},
+		"must_be_image": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "Defines if the asset must be an image.",
+		},
+		"resolve_first": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "True to resolve first asset in the content list.",
+		},
+		"allowed_extensions": {
+			Type: schema.TypeList,
+			Optional: true,
+			Description: "The allowed file extensions.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"allow_duplicates": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "True, if duplicate values are allowed.",
+		},
+		"inline_editable": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "Indicates that the inline editor is enabled for this field.",
+		},
+		"max_value": {
+			/*	MaxValue The maximum allowed value for the field value.
+			MaxValue *interface{} `json:"maxValue,omitempty"`
+				Options:
+				string
+				float32
+			*/
+			Type: schema.TypeString,
+			Optional: true,
+			Description: "The maximum allowed value for the field value.",
+		},
+		"min_value": {
+			/*	
+			MinValue *interface{} `json:"minValue,omitempty"`
+				Options:
+				string
+				float32
+			*/
+			Type: schema.TypeString,
+			Optional: true,
+			Description: "The minimum allowed value for the field value.",
+		},
+		"calculated_default_value": {
+			Type: schema.TypeString,
+			Optional: true,
+			Description: "(DateTime field_type only) The calculated default value for the field value.",
+			ValidateFunc: validation.StringInSlice([]string{
+					"Now",
+					"Today"}, false),
+		},
+		"allowed_values": {
+			/*	AllowedValues The allowed values for the field value.
+				Options:
+				[]string
+				[]float32
+			*/
+			Type: schema.TypeList,
+			Optional: true,
+			Description: "The allowed values for the field value.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"resolve_reference": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "True to resolve references in the content list. (Required for fieldtype References)",
+		},
+		"must_be_published": {
+			Type: schema.TypeBool,
+			Optional: true,
+			Description: "True when all references must be published. (Required for fieldtype References)",
+		},
+		"schema_ids": {
+			Type: schema.TypeList,
+			Optional: true,
+			Description: "The id of the referenced schemas.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"pattern": {
+			Type: schema.TypeString,
+			Optional: true,
+			Description: "The pattern to enforce a specific format for the field value.",
+		},
+		"pattern_message": {
+			Type: schema.TypeString,
+			Optional: true,
+			Description: "The validation message for the pattern.",
+		},
+		"min_length": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum allowed length for the field value.",
+		},
+		"max_length": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum allowed length for the field value.",
+		},
+		"min_characters": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum allowed of normal characters for the field value.",
+		},
+		"max_characters": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum allowed of normal characters for the field value.",
+		},
+		"min_words": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The minimum allowed number of words for the field value.",
+		},
+		"max_words": {
+			Type: schema.TypeInt,
+			Optional: true,
+			Description: "The maximum allowed number of words for the field value.",
+		},
+		"content_type": {
+			Type: schema.TypeString,
+			Optional: true,
+			Default: "Unspecified",
+			Description: "How the string content should be interpreted. (Required for fieldtype string)",
+			ValidateFunc: validation.StringInSlice([]string{
+					"Unspecified",
+					"Markdown",
+					"Html"}, false),
+		},
 		"tags": {
 			Type: schema.TypeList,
 			Optional: true,
@@ -370,6 +637,42 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties := make(map[string]interface{})
 			properties["hints"] = v.Properties.Hints
 			properties["editor_url"] = v.Properties.EditorURL
+			properties["min_items"] = v.Properties.MinItems
+			properties["max_items"] = v.Properties.MaxItems
+			properties["preview_mode"] = v.Properties.PreviewMode
+			properties["default_values"] = v.Properties.DefaultValues
+			properties["default_value"] = v.Properties.DefaultValue
+			properties["min_size"] = v.Properties.MinSize
+			properties["max_size"] = v.Properties.MaxSize
+			properties["min_width"] = v.Properties.MinWidth
+			properties["max_width"] = v.Properties.MaxWidth
+			properties["min_height"] = v.Properties.MinHeight
+			properties["max_height"] = v.Properties.MaxHeight
+			properties["aspect_width"] = v.Properties.AspectWidth
+			properties["aspect_height"] = v.Properties.AspectHeight
+			properties["must_be_image"] = v.Properties.MustBeImage
+			properties["resolve_first"] = v.Properties.ResolveFirst
+			properties["allowed_extensions"] = v.Properties.AllowedExtensions
+			properties["allow_duplicates"] = v.Properties.AllowDuplicates
+			properties["inline_editable"] = v.Properties.InlineEditable
+			properties["max_value"] = v.Properties.MaxValue
+			properties["min_value"] = v.Properties.MinValue
+			properties["calculated_default_value"] = v.Properties.CalculatedDefaultValue
+			properties["allowed_values"] = v.Properties.AllowedValues
+			properties["resolve_reference"] = v.Properties.ResolveReference
+			properties["must_be_published"] = v.Properties.MustBePublished
+			properties["schema_ids"] = v.Properties.SchemaIds
+			properties["pattern"] = v.Properties.Pattern
+			properties["pattern_message"] = v.Properties.PatternMessage
+			properties["min_length"] = v.Properties.MinLength
+			properties["max_length"] = v.Properties.MaxLength
+			properties["min_characters"] = v.Properties.MinCharacters
+			properties["max_characters"] = v.Properties.MaxCharacters
+			properties["min_words"] = v.Properties.MinWords
+			properties["max_words"] = v.Properties.MaxWords
+			properties["content_type"] = v.Properties.ContentType
+			properties["unique"] = v.Properties.Unique
+			properties["editor"] = v.Properties.Editor
 			properties["field_type"] = v.Properties.FieldType
 			properties["half_width"] = &v.Properties.IsHalfWidth
 			properties["required"] = &v.Properties.IsRequired
@@ -393,11 +696,48 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties := make(map[string]interface{})
 				properties["hints"] = nested.Properties.Hints
 				properties["editor_url"] = nested.Properties.EditorURL
+				properties["min_items"] = nested.Properties.PreviewMode
+				properties["max_items"] = nested.Properties.PreviewMode
+				properties["preview_mode"] = nested.Properties.PreviewMode
+				properties["default_values"] = nested.Properties.DefaultValues
+				properties["default_value"] = nested.Properties.DefaultValue
+				properties["min_size"] = nested.Properties.MinSize
+				properties["max_size"] = nested.Properties.MaxSize
+				properties["min_width"] = nested.Properties.MinWidth
+				properties["max_width"] = nested.Properties.MaxWidth
+				properties["min_height"] = nested.Properties.MinHeight
+				properties["max_height"] = nested.Properties.MaxHeight
+				properties["aspect_width"] = nested.Properties.AspectWidth
+				properties["aspect_height"] = nested.Properties.AspectHeight
+				properties["must_be_image"] = nested.Properties.MustBeImage
+				properties["resolve_first"] = nested.Properties.ResolveFirst
+				properties["allowed_extensions"] = nested.Properties.AllowedExtensions
+				properties["allow_duplicates"] = nested.Properties.AllowDuplicates
+				properties["inline_editable"] = nested.Properties.InlineEditable
+				properties["max_value"] = nested.Properties.MaxValue
+				properties["min_value"] = nested.Properties.MinValue
+				properties["calculated_default_value"] = nested.Properties.CalculatedDefaultValue
+				properties["allowed_values"] = nested.Properties.AllowedValues
+				properties["resolve_reference"] = nested.Properties.ResolveReference
+				properties["must_be_published"] = nested.Properties.MustBePublished
+				properties["schema_ids"] = nested.Properties.SchemaIds
+				properties["pattern"] = nested.Properties.Pattern
+				properties["pattern_message"] = nested.Properties.PatternMessage
+				properties["min_length"] = nested.Properties.MinLength
+				properties["max_length"] = nested.Properties.MaxLength
+				properties["min_characters"] = nested.Properties.MinCharacters
+				properties["max_characters"] = nested.Properties.MaxCharacters
+				properties["min_words"] = nested.Properties.MinWords
+				properties["max_words"] = nested.Properties.MaxWords
+				properties["content_type"] = nested.Properties.ContentType
+				properties["unique"] = nested.Properties.Unique
+				properties["editor"] = nested.Properties.Editor
 				properties["field_type"] = nested.Properties.FieldType
 				properties["half_width"] = nested.Properties.IsHalfWidth
 				properties["required"] = nested.Properties.IsRequired
 				properties["label"] = nested.Properties.Label
 				properties["placeholder"] = nested.Properties.Placeholder
+
 				tags := *nested.Properties.Tags
 				properties["tags"] = tags
 				nesteds[i]["properties"] = []interface{}{properties}
@@ -576,6 +916,150 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						editorURL := properties["editor_url"].(string)
 						squidexProperties.EditorURL = &editorURL
 					}
+					if properties["min_items"] != nil {
+						minitems := properties["min_items"].(int)
+						squidexProperties.MinItems = &minitems
+					}
+					if properties["max_items"] != nil {
+						maxitems := properties["max_items"].(int)
+						squidexProperties.MaxItems = &maxitems
+					}
+					if properties["preview_mode"] != nil {
+						previewMode := properties["preview_mode"].(string)
+						squidexProperties.PreviewMode = &previewMode
+					}
+					if properties["default_values"] != nil {
+						defaultvalues := properties["default_values"].(map[string]interface{})
+						squidexProperties.DefaultValues = &defaultvalues
+					}
+					if properties["default_value"] != nil {
+						defaultvalue := properties["default_value"].(interface{})
+						squidexProperties.DefaultValue = &defaultvalue
+					}
+					if properties["min_size"] != nil {
+						minsize := properties["min_size"].(int)
+						squidexProperties.MinSize = &minsize
+					}
+					if properties["max_size"] != nil {
+						maxsize := properties["max_size"].(int)
+						squidexProperties.MaxSize = &maxsize
+					}
+					if properties["min_width"] != nil {
+						minwidth := properties["min_width"].(int)
+						squidexProperties.MinWidth = &minwidth
+					}
+					if properties["max_width"] != nil {
+						maxwidth := properties["max_width"].(int)
+						squidexProperties.MaxWidth = &maxwidth
+					}
+					if properties["min_height"] != nil {
+						minheight := properties["min_height"].(int)
+						squidexProperties.MinHeight = &minheight
+					}
+					if properties["max_height"] != nil {
+						maxheight := properties["max_height"].(int)
+						squidexProperties.MaxHeight = &maxheight
+					}
+					if properties["aspect_width"] != nil {
+						aspectwidth := properties["aspect_width"].(int)
+						squidexProperties.AspectWidth = &aspectwidth
+					}
+					if properties["aspect_height"] != nil {
+						aspectheight := properties["aspect_height"].(int)
+						squidexProperties.AspectHeight = &aspectheight
+					}
+					if properties["must_be_image"] != nil {
+						mustbeimage := properties["must_be_image"].(bool)
+						squidexProperties.MustBeImage = &mustbeimage
+					}
+					if properties["resolve_first"] != nil {
+						resolvefirst := properties["resolve_first"].(bool)
+						squidexProperties.ResolveFirst = &resolvefirst
+					}
+					if properties["allowed_extensions"] != nil {
+						allowedextensions := properties["allowed_extensions"].([]string)
+						squidexProperties.AllowedExtensions = &allowedextensions
+					}
+					if properties["allow_duplicates"] != nil {
+						val := properties["allow_duplicates"].(bool)
+						squidexProperties.AllowDuplicates = &val
+					}
+					if properties["inline_editable"] != nil {
+						val := properties["inline_editable"].(bool)
+						squidexProperties.InlineEditable = &val
+					}
+					if properties["max_value"] != nil {
+						val := properties["max_value"]
+						squidexProperties.MaxValue = &val
+					}
+					if properties["min_value"] != nil {
+						val := properties["min_value"]
+						squidexProperties.MinValue = &val
+					}
+					if properties["calculated_default_value"] != nil {
+						val := properties["calculated_default_value"].(string)
+						squidexProperties.CalculatedDefaultValue = &val
+					}
+					if properties["allowed_values"] != nil {
+						val := properties["allowed_values"].([]interface{})
+						squidexProperties.AllowedValues = &val
+					}
+					if properties["resolve_reference"] != nil {
+						val := properties["resolve_reference"].(bool)
+						squidexProperties.ResolveReference = &val
+					}
+					if properties["must_be_published"] != nil {
+						val := properties["must_be_published"].(bool)
+						squidexProperties.MustBePublished = &val
+					}
+					if properties["schema_ids"] != nil {
+						val := properties["schema_ids"].([]string)
+						squidexProperties.SchemaIds = &val
+					}
+					if properties["pattern"] != nil {
+						val := properties["pattern"].(string)
+						squidexProperties.Pattern = &val
+					}
+					if properties["pattern_message"] != nil {
+						val := properties["pattern_message"].(string)
+						squidexProperties.PatternMessage = &val
+					}
+					if properties["min_length"] != nil {
+						val := properties["min_length"].(int)
+						squidexProperties.MinLength = &val
+					}
+					if properties["max_length"] != nil {
+						val := properties["max_length"].(int)
+						squidexProperties.MaxLength = &val
+					}
+					if properties["min_characters"] != nil {
+						val := properties["min_characters"].(int)
+						squidexProperties.MinCharacters = &val
+					}
+					if properties["max_characters"] != nil {
+						val := properties["max_characters"].(int)
+						squidexProperties.MaxCharacters = &val
+					}
+					if properties["min_words"] != nil {
+						val := properties["min_words"].(int)
+						squidexProperties.MinWords = &val
+					}
+					if properties["max_words"] != nil {
+						val := properties["max_words"].(int)
+						squidexProperties.MaxWords = &val
+					}
+					if properties["content_type"] != nil {
+						val := properties["content_type"].(string)
+						squidexProperties.ContentType = &val
+					}
+					if properties["unique"] != nil {
+						unique := properties["unique"].(bool)
+						squidexProperties.Unique = &unique
+					}
+					if properties["editor"] != nil {
+						editor := properties["editor"].(string)
+						squidexProperties.Editor = &editor
+					}
 					if properties["tags"] != nil {
 						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
 						squidexProperties.Tags = &tags
@@ -631,6 +1115,78 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							if properties["editor_url"] != nil {
 								editorURL := properties["editor_url"].(string)
 								squidexProperties.EditorURL = &editorURL
+							}
+
+							if properties["min_items"] != nil {
+								minitems := properties["min_items"].(int)
+								squidexProperties.MinItems = &minitems
+							}
+							if properties["max_items"] != nil {
+								maxitems := properties["max_items"].(int)
+								squidexProperties.MaxItems = &maxitems
+							}
+							if properties["preview_mode"] != nil {
+								previewMode := properties["preview_mode"].(string)
+								squidexProperties.PreviewMode = &previewMode
+							}
+							if properties["default_values"] != nil {
+								defaultvalues := properties["default_values"].(map[string]interface{})
+								squidexProperties.DefaultValues = &defaultvalues
+							}
+							if properties["default_value"] != nil {
+								defaultvalue := properties["default_value"].(interface{})
+								squidexProperties.DefaultValue = &defaultvalue
+							}
+							if properties["min_size"] != nil {
+								minsize := properties["min_size"].(int)
+								squidexProperties.MinSize = &minsize
+							}
+							if properties["max_size"] != nil {
+								maxsize := properties["max_size"].(int)
+								squidexProperties.MaxSize = &maxsize
+							}
+							if properties["min_width"] != nil {
+								minwidth := properties["min_width"].(int)
+								squidexProperties.MinWidth = &minwidth
+							}
+							if properties["max_width"] != nil {
+								maxwidth := properties["max_width"].(int)
+								squidexProperties.MaxWidth = &maxwidth
+							}
+							if properties["min_height"] != nil {
+								minheight := properties["min_height"].(int)
+								squidexProperties.MinHeight = &minheight
+							}
+							if properties["max_height"] != nil {
+								maxheight := properties["max_height"].(int)
+								squidexProperties.MaxHeight = &maxheight
+							}
+							if properties["aspect_width"] != nil {
+								aspectwidth := properties["aspect_width"].(int)
+								squidexProperties.AspectWidth = &aspectwidth
+							}
+							if properties["aspect_height"] != nil {
+								aspectheight := properties["aspect_height"].(int)
+								squidexProperties.AspectHeight = &aspectheight
+							}
+							if properties["must_be_image"] != nil {
+								mustbeimage := properties["must_be_image"].(bool)
+								squidexProperties.MustBeImage = &mustbeimage
+							}
+							if properties["resolve_first"] != nil {
+								resolvefirst := properties["resolve_first"].(bool)
+								squidexProperties.ResolveFirst = &resolvefirst
+							}
+
+
+
+							if properties["unique"] != nil {
+								unique := properties["unique"].(bool)
+								squidexProperties.Unique = &unique
+							}
+							if properties["editor"] != nil {
+								editor := properties["editor"].(string)
+								squidexProperties.Editor = &editor
 							}
 							if properties["tags"] != nil {
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))

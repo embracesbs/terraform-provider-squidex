@@ -23,16 +23,29 @@ type FieldPropertiesDto struct {
 	Tags *[]string `json:"tags,omitempty"`
 	// FieldType, depending the field type there are other fields required (prefixed with fieldType) other are ignored.
 	FieldType string `json:"fieldType"`
-	
-	// Editor
+	// Unique Indicates if the field value must be unique. Ignored for nested fields and localized fields.
+	Unique *bool `json:"isUnique,omitempty"`
+	/*	Editor
+		Options:
+		- Boolean: Checkbox Toggle
+		- DateTime: DateTime Date
+		- GeoLocation: Map (only has 1)
+		- Number: Input Radio Dropdown Stars
+		- References: List Dropdown Checkboxes Tags
+		- String: Input Slug TextArea RichText Markdown Dropdown Radio Color Html StockPhoto
+		- Tags: Tags Checkboxes Dropdown
+		- UI: Separator (only has 1)
+	*/
 	Editor *string `json:"editor,omitempty"`
 	// MinItems The minimum allowed items for the field value.
 	MinItems *int `json:"minItems,omitempty"`
 	// MaxItems The maximum allowed items for the field value.
 	MaxItems *int `json:"maxItems,omitempty"`
-	// PreviewMode The preview mode for the asset.
-	/*	Options: 
-		- asset(ImageAndFileName Image FileName)
+	/*	PreviewMode The preview mode for the asset.
+		Options: 
+		- ImageAndFileName 
+		- Image 
+		- FileName
 	*/
 	PreviewMode *string `json:"previewMode,omitempty"`
 	/*	DefaultValues The language specific default value as a list of asset ids.
@@ -89,8 +102,12 @@ type FieldPropertiesDto struct {
 		float32
 	*/
 	MinValue *interface{} `json:"minValue,omitempty"`
-	// CalculatedDefaultValue The calculated default value for the field value.
-	// Options: Now Today (or leave empty for none)
+	/*	CalculatedDefaultValue The calculated default value for the field value.
+		Options: 
+		- Now 
+		- Today 
+		- (or leave empty for none)
+	*/
 	CalculatedDefaultValue *string `json:"calculatedDefaultValue,omitempty"`
 	/*	AllowedValues The allowed values for the field value.
 		Options:
@@ -98,8 +115,6 @@ type FieldPropertiesDto struct {
 	 	[]float32
 	*/
 	AllowedValues *[]interface{} `json:"allowedValues,omitempty"`
-	// Unique Indicates if the field value must be unique. Ignored for nested fields and localized fields.
-	Unique *bool `json:"isUnique,omitempty"`
 	// ResolveReference True to resolve references in the content list. (Required for fieldtype References)
 	ResolveReference *bool `json:"resolveReference,omitempty"`
 	// MustBePublished True when all references must be published. (Required for fieldtype References)

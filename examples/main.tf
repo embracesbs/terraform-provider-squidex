@@ -101,13 +101,15 @@ resource "squidex_schema" "test" {
 		disabled     = false # should not be used
 		
     properties {
-      field_type  = "Array"
+      field_type  = "String"
+      editor      = "Input"
       label       = "author-label"
       hints       = "hints2"
       placeholder = "placeholder"
       required    = false
       half_width  = false
       editor_url  = "editor_url"
+      unique      = true
       tags        = ["tag1", "tag2"]
     }
     // Only properties.field_type = "Array" effect nested block (ignored for other types)
@@ -119,14 +121,28 @@ resource "squidex_schema" "test" {
     
       properties {
         field_type  = "String"
+        editor      = "Input"
         label       = "label"
         hints       = "hints"
         placeholder = "placeholder"
         required    = false
         half_width  = false
         editor_url  = "editor_url"
+        unique      = true
         tags        = ["tag1", "tag2"]
       }
+    }
+  }
+
+  fields {
+    name         = "title-unique"
+    partitioning = "invariant"
+    properties {
+      field_type = "String"
+      editor     = "Color"
+      // TODO: describe & discuss: behavior of provider: it ignores chnages that require deleteing or recreating schema's.
+      // maybe make it a provider and/or resource setting
+      unique     = true
     }
   }
 
@@ -135,6 +151,8 @@ resource "squidex_schema" "test" {
     partitioning = "invariant"
     properties {
       field_type = "String"
+      editor     = "Input"
+      unique     = true
     }
   }
 
@@ -143,6 +161,15 @@ resource "squidex_schema" "test" {
     partitioning = "invariant"
     properties {
       field_type = "String"
+      editor     = "Input"
+    }
+  }
+  fields {
+    name         = "asset-test"
+    partitioning = "invariant"
+    properties {
+      field_type   = "Assets"
+      preview_mode = "ImageAndFileName"
     }
   }
 
