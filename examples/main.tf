@@ -67,7 +67,7 @@ resource "squidex_contributor" "test_michiel_owner" {
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {
   app_name  = squidex_app.test.name
-  name      = "blog2"
+  name      = "blog1"
   published = true
   singleton = false
   properties {
@@ -78,11 +78,13 @@ resource "squidex_schema" "test" {
     tags                 = [ "tag1", "tag2" ]
   }
   fields_in_list = [ 
+    "author",
+    "title",
     "meta.created",
     "meta.lastModified",
     "meta.version" 
     ]
-  fields_in_references = []
+  fields_in_references = [ "author", "title" ]
   preview_urls = {
     "somepagename" = "https://fqdn/page"
   }

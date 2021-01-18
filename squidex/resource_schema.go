@@ -742,7 +742,6 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["required"] = nested.Properties.IsRequired
 				properties["label"] = nested.Properties.Label
 				properties["placeholder"] = nested.Properties.Placeholder
-
 				tags := *nested.Properties.Tags
 				properties["tags"] = tags
 				nesteds[i]["properties"] = []interface{}{properties}
