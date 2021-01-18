@@ -31,6 +31,10 @@ resource "squidex_languages" "test" {
     language = "nl-NL"
     is_master = true
   }
+  language {
+    language = "en-US"
+    is_master = false
+  }
 }
 
 resource "squidex_role" "test" {
@@ -63,7 +67,7 @@ resource "squidex_contributor" "test_michiel_owner" {
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {
   app_name  = squidex_app.test.name
-  name      = "blog1"
+  name      = "blog2"
   published = true
   singleton = false
   properties {
@@ -74,13 +78,11 @@ resource "squidex_schema" "test" {
     tags                 = [ "tag1", "tag2" ]
   }
   fields_in_list = [ 
-    "author",
-    "title",
     "meta.created",
     "meta.lastModified",
     "meta.version" 
     ]
-  fields_in_references = [ "author", "title" ]
+  fields_in_references = []
   preview_urls = {
     "somepagename" = "https://fqdn/page"
   }
@@ -94,7 +96,83 @@ resource "squidex_schema" "test" {
   }
 
   fields {
-    name         = "author"
+    name         = "reference-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "References"
+      editor      = "Tags"
+      default_values = {
+        "nl-NL" = "string-1"
+        "en-US" = "string-3"
+      }
+    }
+  }
+
+  fields {
+    name         = "number-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "Number"
+      editor      = "Input"
+      default_values = {
+        "nl-NL" = "1234.67895"
+        "en-US" = "999999369"
+      }
+    }
+  }
+
+  fields {
+    name         = "bool-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "Boolean"
+      editor      = "Checkbox"
+      default_values = {
+        "nl-NL" = "True"
+        "en-US" = "false"
+      }
+    }
+  }
+  
+  fields {
+    name         = "string-3"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "String"
+      editor      = "Input"
+    }
+  }
+  
+  fields {
+    name         = "string-2"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "String"
+      editor      = "Input"
+      default_value = ["fake"]
+      default_values = {
+        "nl-NL" = "defaultvalue-nl-2"
+      }
+    }
+  }
+
+  fields {
+    name         = "string-1"
     partitioning = "invariant"
 		hidden       = false # 
 		locked       = false # should not be used
@@ -111,6 +189,7 @@ resource "squidex_schema" "test" {
       editor_url  = "editor_url"
       unique      = true
       tags        = ["tag1", "tag2"]
+      default_value = [ "defaultvalue" ]
     }
     // Only properties.field_type = "Array" effect nested block (ignored for other types)
     nested {
@@ -134,43 +213,7 @@ resource "squidex_schema" "test" {
     }
   }
 
-  fields {
-    name         = "title-unique"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-      editor     = "Color"
-      // TODO: describe & discuss: behavior of provider: it ignores chnages that require deleteing or recreating schema's.
-      // maybe make it a provider and/or resource setting
-      unique     = true
-    }
-  }
 
-  fields {
-    name         = "title"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-      editor     = "Input"
-      unique     = true
-    }
-  }
 
-  fields {
-    name         = "title-updated"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-      editor     = "Input"
-    }
-  }
-  fields {
-    name         = "asset-test"
-    partitioning = "invariant"
-    properties {
-      field_type   = "Assets"
-      preview_mode = "ImageAndFileName"
-    }
-  }
 
 }

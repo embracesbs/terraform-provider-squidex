@@ -1,6 +1,8 @@
 package squidex
 
 import (
+	"strings"
+	"strconv"
 	"log"
 	"context"
 	"encoding/json"
@@ -495,7 +497,10 @@ func resourceSchema() *schema.Resource {
 							Type: schema.TypeString,
 							Optional: true,
 							Default: "invariant",
-							Description: "Determines the optional partitioning of the field.",
+							Description: "Determines the optional partitioning of the field. Possible values are; invariant, language.",
+							ValidateFunc: validation.StringInSlice([]string{					
+								"invariant",
+								"language"}, false),
 						},
 						"properties": {
 							Type: schema.TypeList,
@@ -872,13 +877,14 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexfields := make([]squidexclient.UpsertSchemaFieldDto, len(fields))
 		for i, v := range fields {
 			field := v.(map[string]interface{})
+			
+			// required field:
+			partitioning := field["partitioning"].(string)
+			squidexfields[i].Partitioning = &partitioning
+
 			if field["name"] != nil {
 				// name is a required field
 				squidexfields[i].Name = field["name"].(string)
-			}
-			if field["partitioning"] != nil {
-				partitioning := field["partitioning"].(string)
-				squidexfields[i].Partitioning = &partitioning
 			}
 			if field["hidden"] != nil {
 				squidexfields[i].IsHidden = field["hidden"].(bool)
@@ -894,6 +900,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 				if len(properties) == 1 {
 					properties := properties[0].(map[string]interface{})
 					squidexProperties := squidexclient.FieldPropertiesDto{}
+
+					// required field:
+					fieldType := properties["field_type"].(string)
+					squidexProperties.FieldType = fieldType
+
 					if properties["label"] != nil {
 						label := properties["label"].(string)
 						squidexProperties.Label = &label
@@ -929,11 +940,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.PreviewMode = &previewMode
 					}
 					if properties["default_values"] != nil {
-						defaultvalues := properties["default_values"].(map[string]interface{})
+						defaultvalues := defaultValuesToInterface(fieldType, partitioning, properties["default_values"])
 						squidexProperties.DefaultValues = &defaultvalues
 					}
 					if properties["default_value"] != nil {
-						defaultvalue := properties["default_value"].(interface{})
+						defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
 						squidexProperties.DefaultValue = &defaultvalue
 					}
 					if properties["min_size"] != nil {
@@ -977,7 +988,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.ResolveFirst = &resolvefirst
 					}
 					if properties["allowed_extensions"] != nil {
-						allowedextensions := properties["allowed_extensions"].([]string)
+						allowedextensions := interfaceSliceToStringSlice(properties["allowed_extensions"].([]interface{}))
 						squidexProperties.AllowedExtensions = &allowedextensions
 					}
 					if properties["allow_duplicates"] != nil {
@@ -1013,7 +1024,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.MustBePublished = &val
 					}
 					if properties["schema_ids"] != nil {
-						val := properties["schema_ids"].([]string)
+						val := interfaceSliceToStringSlice(properties["schema_ids"].([]interface{}))
 						squidexProperties.SchemaIds = &val
 					}
 					if properties["pattern"] != nil {
@@ -1064,10 +1075,6 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
 						squidexProperties.Tags = &tags
 					}
-					if properties["field_type"] != nil {
-						// field_type is a required field
-						squidexProperties.FieldType = properties["field_type"].(string)
-					}
 					squidexfields[i].Properties = squidexProperties
 				}
 			}
@@ -1094,6 +1101,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						if len(properties) == 1 {
 							properties := properties[0].(map[string]interface{})
 							squidexProperties := squidexclient.FieldPropertiesDto{}
+							
+							// required field:
+							fieldType := properties["field_type"].(string)	
+							squidexProperties.FieldType = fieldType
+
 							if properties["label"] != nil {
 								label := properties["label"].(string)
 								squidexProperties.Label = &label
@@ -1130,11 +1142,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 								squidexProperties.PreviewMode = &previewMode
 							}
 							if properties["default_values"] != nil {
-								defaultvalues := properties["default_values"].(map[string]interface{})
+								defaultvalues := defaultValuesToInterface(fieldType, partitioning, properties["default_values"])
 								squidexProperties.DefaultValues = &defaultvalues
 							}
 							if properties["default_value"] != nil {
-								defaultvalue := properties["default_value"].(interface{})
+								defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
 								squidexProperties.DefaultValue = &defaultvalue
 							}
 							if properties["min_size"] != nil {
@@ -1177,9 +1189,6 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 								resolvefirst := properties["resolve_first"].(bool)
 								squidexProperties.ResolveFirst = &resolvefirst
 							}
-
-
-
 							if properties["unique"] != nil {
 								unique := properties["unique"].(bool)
 								squidexProperties.Unique = &unique
@@ -1192,10 +1201,6 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
 								squidexProperties.Tags = &tags
 							}
-							if properties["field_type"] != nil {
-								// field_type is a required field
-								squidexProperties.FieldType = properties["field_type"].(string)
-							}
 							squidexNested[i].Properties = squidexProperties
 						}
 					}
@@ -1206,6 +1211,93 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexschema.Fields = &squidexfields
 	}
 	return squidexschema, nil
+}
+
+func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) interface{}{
+	if  partitioning != "language" ||
+		defaultValue == nil || 
+		fieldType == "Array" || 
+		fieldType == "Geolocation" || 
+		fieldType == "Json" || 
+		fieldType == "UI" {
+		return nil
+	}
+	// defaultValues is always a map[string]string in the schema
+	v := interfaceMapToStringMap(defaultValue.(map[string]interface{}))
+	// where map key is the language as 'nl-NL'
+	switch fieldType {
+		case "Assets", "References", "Tags":
+			target := make(map[string][]string)
+			for key, value := range v {
+				value = strings.TrimLeft(value, "[")
+				value = strings.TrimRight(value, "]")
+				value := strings.Replace(value, "\", \"","\",\"", -1)
+				valueSlice := strings.Split(value, "\",\"")
+				// message := ("Error converting default_values to []string. Expected {\"nl-NL\" = \"[\"string1\", \"string2\"]\"], got %s", value)
+				target[key] = valueSlice
+			}
+			return target
+		case "Boolean":
+			target := make(map[string]bool)
+			for key, value := range v {
+				result, err := strconv.ParseBool(value)
+				if err != nil {
+					log.Panicf("Error converting default_values to boolean. Expected {\"nl-NL\" = \"true\"], got %s %s", key, value)
+				}
+				target[key] = result
+			}
+			return target
+		case "DateTime", "String":
+			return v
+		case "Number":
+			target := make(map[string]float64)
+			for key, value := range v {
+				result, err := strconv.ParseFloat(value, 64)
+				if err != nil {
+					log.Panicf("Error converting default_values to float32. Expected {\"nl-NL\" = \"1234.5678\"], got %s %s", key, value)
+				}
+				target[key] = result
+			}
+			return target
+		default:
+			// Any unknown field_type is ignored
+			return nil
+	}
+}
+func defaultValueToInterface(fieldType string, defaultValue interface{}) interface{}{
+	if defaultValue == nil || 
+		fieldType == "Array" || 
+		fieldType == "Geolocation" || 
+		fieldType == "Json" || 
+		fieldType == "UI" {
+		return nil
+	}
+	// defaultValue is always a string slice in the schema
+	v := interfaceSliceToStringSlice(defaultValue.([]interface{}))
+	if len(v) == 0 {
+		return nil
+	}
+	switch fieldType {
+		case "Assets", "References", "Tags":
+			return v
+		case "Boolean":
+			result, err := strconv.ParseBool(v[0])
+			if err != nil {
+				log.Panicf("Error converting default_value to boolean. Expected [\"true\"], got %s", v[0])
+			}
+			return result
+		case "DateTime", "String":
+			return v[0]
+		case "Number":
+			result, err := strconv.ParseFloat(v[0], 64)
+			if err != nil {
+				log.Panicf("Error converting default_value to float32. Expected [\"1234.5678\"], got %s", v[0])
+			}
+			return result
+		default:
+			// Any unknown field_type is ignored
+			return nil
+	}
 }
 
 func mapCreateSchemaDtoToSynchronizeSchemaDto(createSchema squidexclient.CreateSchemaDto) (squidexclient.SynchronizeSchemaDto) {

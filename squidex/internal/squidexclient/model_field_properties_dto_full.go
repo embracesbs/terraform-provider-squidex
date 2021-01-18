@@ -55,7 +55,7 @@ type FieldPropertiesDto struct {
 		- int/double: {"nl-NL": 10.9}
 		- bool: {"nl-NL": true}
 	*/ 
-	DefaultValues *map[string]interface{} `json:"defaultValues,omitempty"`
+	DefaultValues *interface{} `json:"defaultValues,omitempty"`
 	/*	DefaultValue The default value for the field value.
 		Options:
 		- lists: ["asset1","tag2"]
