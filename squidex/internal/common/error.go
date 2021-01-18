@@ -28,10 +28,12 @@ func HandleAPIError(resp *http.Response) {
 		// do nothing
 		return
 	}
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal(err)
+	if resp.StatusCode == http.StatusBadRequest {
+		bodyBytes, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+		bodyString := string(bodyBytes)
+		log.Panicf("Bad Api Response: %s", bodyString)
 	}
-	bodyString := string(bodyBytes)
-	log.Panicf("Bad Api Response:\n%s", bodyString)
 }

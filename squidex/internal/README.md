@@ -10,3 +10,8 @@ The squidexclient package is scaffolded using the [openapi-generator](https://gi
   - rename all golang constants (enums) because they are duplicated. Just prefix them with the type name they belong to.
   - I had to add 1 type manually `FilterNodeOfIJsonValue`, because it was missing and implemented as type object instead.
   - Correct all types on the dto's by removing the `OneOf...` prefix of the type name.
+
+TODO: describe model_field_properties_dto_full.go custom replacement
+
+- copy `model_field_properties_dto_full.go` to squidexclient folder/package
+- delete `model_field_properties_dto.go` from squidexclient folder/package

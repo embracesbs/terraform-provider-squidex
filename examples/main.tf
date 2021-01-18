@@ -31,6 +31,10 @@ resource "squidex_languages" "test" {
     language = "nl-NL"
     is_master = true
   }
+  language {
+    language = "en-US"
+    is_master = false
+  }
 }
 
 resource "squidex_role" "test" {
@@ -41,7 +45,9 @@ resource "squidex_role" "test" {
     "contents.*",
     "schemas.read",
   ]
-  properties  = {}
+  properties  = {
+    "ui.api.hide" = true
+  }
 }
 
 resource "squidex_contributor" "test" {
@@ -92,21 +98,100 @@ resource "squidex_schema" "test" {
   }
 
   fields {
-    name         = "author"
+    name         = "reference-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "References"
+      editor      = "Tags"
+      default_values = {
+        "nl-NL" = "string-1"
+        "en-US" = "string-3"
+      }
+    }
+  }
+
+  fields {
+    name         = "number-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "Number"
+      editor      = "Input"
+      default_values = {
+        "nl-NL" = "1234.67895"
+        "en-US" = "999999369"
+      }
+    }
+  }
+
+  fields {
+    name         = "bool-1"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "Boolean"
+      editor      = "Checkbox"
+      default_values = {
+        "nl-NL" = "True"
+        "en-US" = "false"
+      }
+    }
+  }
+  
+  fields {
+    name         = "string-3"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "String"
+      editor      = "Input"
+    }
+  }
+  
+  fields {
+    name         = "string-2"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "String"
+      editor      = "Input"
+      default_value = ["fake"]
+      default_values = {
+        "nl-NL" = "defaultvalue-nl-2"
+      }
+    }
+  }
+
+  fields {
+    name         = "string-1"
     partitioning = "invariant"
 		hidden       = false # 
 		locked       = false # should not be used
 		disabled     = false # should not be used
 		
     properties {
-      field_type  = "Array"
+      field_type  = "String"
+      editor      = "Input"
       label       = "author-label"
-      hints       = "hints"
+      hints       = "hints2"
       placeholder = "placeholder"
       required    = false
       half_width  = false
       editor_url  = "editor_url"
+      unique      = true
       tags        = ["tag1", "tag2"]
+      default_value = [ "defaultvalue" ]
     }
     // Only properties.field_type = "Array" effect nested block (ignored for other types)
     nested {
@@ -117,31 +202,20 @@ resource "squidex_schema" "test" {
     
       properties {
         field_type  = "String"
+        editor      = "Input"
         label       = "label"
         hints       = "hints"
         placeholder = "placeholder"
         required    = false
         half_width  = false
         editor_url  = "editor_url"
+        unique      = true
         tags        = ["tag1", "tag2"]
       }
     }
   }
 
-  fields {
-    name         = "title"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-    }
-  }
 
-  fields {
-    name         = "title-updated"
-    partitioning = "invariant"
-    properties {
-      field_type = "String"
-    }
-  }
+
 
 }
