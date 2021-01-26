@@ -472,8 +472,8 @@ func resourceSchema() *schema.Resource {
 						"name": {
 							Type: schema.TypeString,
 							Required: true,
-							ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "name may only contain a-z 0-9 and - and not start with -."),
-							Description: "The name of the field. Must be unique within the schema. Only [a-z0-9] and may contain dashes - but not start with them.",
+							ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-Z0-9]+(\-[a-Z0-9]+)*$`), "name may only contain a-Z 0-9 and - and not start with -."),
+							Description: "The name of the field. Must be unique within the schema. Only [a-Z0-9] and may contain dashes - but not start with them.",
 						},
 						"hidden": {
 							Type: schema.TypeBool,

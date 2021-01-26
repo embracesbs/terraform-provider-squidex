@@ -35,11 +35,7 @@ Either connect to a remote existing squidex, or run a local docker;
 
 ```bash
 docker-compose --env-file ./docker-compose.env up -d
-docker-compose down
-# re-run with same data or...
-# remove persistant localhost stuff from mongo, /etc/squidex/mongo/db:/data/db:
-# if local volume mount:
-rm -rf ./data/db 
+# docker-compose down
 ```
 
 Run the following command to initialize the workspace and apply the sample configuration.
