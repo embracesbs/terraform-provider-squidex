@@ -54,9 +54,9 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 	appName := data.Get("app_name").(string)
 	contributorID := data.Id()
 	
-	result, resp, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
+	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -92,13 +92,13 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	role := data.Get("role").(string)
 	invite := data.Get("invite").(bool)
 
-	result, resp, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorEmail,
 		Role: &role,
 		Invite: invite,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -135,13 +135,13 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	invite := false // no invites send for updating role
 	
 	// there is no update method, just use the create to set it again, but no invite!
-	_, resp, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+	_, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorID,
 		Role: &role,
 		Invite: invite,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -160,9 +160,9 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 
 	client := meta.(*squidexclient.APIClient)
 	var diags diag.Diagnostics
-	_, resp, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
+	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
 	
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 
 	if err != nil {
 		return diag.FromErr(err)

@@ -52,9 +52,9 @@ func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta inter
 	appName := data.Get("app_name").(string)
 	name := data.Id()
 	
-	result, resp, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
+	result, response, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -91,11 +91,11 @@ func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta int
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	_, resp, err := client.AppsApi.AppRolesPostRole(ctx, appName, squidexclient.AddRoleDto{
+	_, response, err := client.AppsApi.AppRolesPostRole(ctx, appName, squidexclient.AddRoleDto{
 		Name: name,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -118,12 +118,12 @@ func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta int
 	permissions := toStringArray(data.Get("permissions").([]interface{}))
 	properties := data.Get("properties").(map[string]interface{})
 	
-	_, resp, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
+	_, response, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
 		Permissions: permissions,
 		Properties: &properties,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -143,9 +143,9 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 
 	client := meta.(*squidexclient.APIClient)
 	var diags diag.Diagnostics
-	_, resp, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
+	_, response, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)

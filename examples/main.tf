@@ -22,7 +22,7 @@ resource "squidex_app" "test" {
 resource "squidex_client" "test" {
   app_name = squidex_app.test.name
   name = "squidex-provider-test"
-  role = "squidex"
+  role = squidex_role.test.name
 }
 
 resource "squidex_languages" "test" {
@@ -78,13 +78,11 @@ resource "squidex_schema" "test" {
     tags                 = [ "tag1", "tag2" ]
   }
   fields_in_list = [ 
-    "author",
-    "title",
     "meta.created",
     "meta.lastModified",
     "meta.version" 
     ]
-  fields_in_references = [ "author", "title" ]
+  fields_in_references = []
   preview_urls = {
     "somepagename" = "https://fqdn/page"
   }
@@ -215,7 +213,15 @@ resource "squidex_schema" "test" {
     }
   }
 
-
-
+  //fields {
+  //  name         = "datetime-1"
+  //  partitioning = "invariant"
+  //  properties {
+  //    field_type  = "DateTime"
+  //    editor      = "DateTime"
+  //    min_value = "null"
+  //    max_value = "null"
+  //  }
+  //}
 
 }

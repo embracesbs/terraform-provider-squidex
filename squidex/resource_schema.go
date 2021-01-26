@@ -5,7 +5,6 @@ import (
 	"strconv"
 	"log"
 	"context"
-	"encoding/json"
 	"regexp"
 
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
@@ -230,6 +229,7 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type: schema.TypeString,
 			Optional: true,
+			// ? empty string doesn't parse correct for DateTime fields Default: nil,
 			Description: "The minimum allowed value for the field value.",
 		},
 		"calculated_default_value": {
@@ -661,7 +661,12 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["allow_duplicates"] = v.Properties.AllowDuplicates
 			properties["inline_editable"] = v.Properties.InlineEditable
 			properties["max_value"] = v.Properties.MaxValue
-			properties["min_value"] = v.Properties.MinValue
+			
+			log.Printf("v.Properties.MinValue: %s", v.Properties.MinValue)
+			if (v.Properties.MinValue != nil) { 
+				properties["min_value"] = v.Properties.MinValue
+			}
+
 			properties["calculated_default_value"] = v.Properties.CalculatedDefaultValue
 			properties["allowed_values"] = v.Properties.AllowedValues
 			properties["resolve_reference"] = v.Properties.ResolveReference
@@ -701,8 +706,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties := make(map[string]interface{})
 				properties["hints"] = nested.Properties.Hints
 				properties["editor_url"] = nested.Properties.EditorURL
-				properties["min_items"] = nested.Properties.PreviewMode
-				properties["max_items"] = nested.Properties.PreviewMode
+				properties["min_items"] = nested.Properties.MinItems
+				properties["max_items"] = nested.Properties.MaxItems
 				properties["preview_mode"] = nested.Properties.PreviewMode
 				properties["default_values"] = nested.Properties.DefaultValues
 				properties["default_value"] = nested.Properties.DefaultValue
@@ -1320,34 +1325,28 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 
 	client := meta.(*squidexclient.APIClient)
 	
-	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
 	
-	log.Println("create dto: start")
-	dto, _ := getCreateSchemaDtoFromData(data)
-	source, _ := json.Marshal(dto)
-	log.Printf("create dto: \n%s", string(source))
+	createDto, _ := getCreateSchemaDtoFromData(data)
 
 	// TODO: handle all errors
-	result, resp, err := client.SchemasApi.SchemasPostSchema(ctx, appName, dto)
+	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	// prevent drift and set ALL values from the result
-	// TODO: setDataFromSchemaDetailsDto() on all data
-	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
+	err = setDataFromSchemaDetailsDto(data, result)
+	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	id := result.Id
-
-	data.SetId(id)
+	data.SetId(result.Id)
 
 	return diags
 }
@@ -1361,17 +1360,17 @@ func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta int
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	result, resp, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
+	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 
 	if err != nil {
-		// log.Printf("", response.)
 		return diag.FromErr(err)
 	}
 
 	//prevent drift and set ALL values from the get
-	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
+	err = setDataFromSchemaDetailsDto(data, result)
+	if err != nil {
 		return diag.FromErr(err)
 	}
 
@@ -1390,11 +1389,11 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	dto := mapCreateSchemaDtoToSynchronizeSchemaDto(createDto)
+	syncDto := mapCreateSchemaDtoToSynchronizeSchemaDto(createDto)
 		
-	result, resp, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, dto)
+	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, syncDto)
 	
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 
 	if err != nil {
 		// TODO: handle all errors
@@ -1404,7 +1403,8 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	
 	// prevent drift and set ALL values from the result
 	// to test this, do once with, and once without, and compare results
-	if err = setDataFromSchemaDetailsDto(data, result); err != nil {
+	err = setDataFromSchemaDetailsDto(data, result);
+	if err != nil {
 		return diag.FromErr(err)
 	}
 
@@ -1420,9 +1420,9 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	resp, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
+	response, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
 	
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -1431,6 +1431,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 	// d.SetId("") is automatically called assuming delete returns no errors, but
 	// it is added here for explicitness.
 	data.SetId("")
+	
 
 	return diags
 }
