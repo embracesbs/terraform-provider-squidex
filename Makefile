@@ -4,7 +4,7 @@ NAMESPACE=terraform.embracecloud.nl
 COMPANY=embracecloud
 PROVIDER=squidex
 BINARY=terraform-provider-squidex
-VERSION=0.4.2
+VERSION=0.6.1
 OS=windows
 ARCH=amd64
 
@@ -24,11 +24,13 @@ install: build
 
 local-install: build
 	mkdir -p ./examples/.terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
+	mkdir -p ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
 	cp ./bin/${BINARY}_v${VERSION} ./examples/.terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
 	mv ./bin/${BINARY}_v${VERSION} ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
 	
 local-install-win: build-win
 	mkdir -p ./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
+	mkdir -p ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
 	cp ./bin/${BINARY}_v${VERSION}.exe ./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
 	mv ./bin/${BINARY}_v${VERSION}.exe ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/ 
 	
