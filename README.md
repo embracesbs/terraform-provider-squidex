@@ -29,7 +29,19 @@ Copy that binary into the location that Terraform will try to find it.
 Depending on the OS, version and Terraform version this could differ. On Windows 64 with Terraformn 0.13: /terraform.d/plugins/terraform.embracecloud.nl/embracecloud/squidex/0.4.0/windows_amd64"
 
 Then, create a file `terraform.tfvars` in `./examples` directory.  
-Configure values for your test Squidex application.  
+Configure values for your test Squidex application/host.
+
+Either connect to a remote existing squidex, or run a local docker;
+
+```bash
+docker-compose --env-file ./docker-compose.env up -d
+docker-compose down
+# re-run with same data or...
+# remove persistant localhost stuff from mongo, /etc/squidex/mongo/db:/data/db:
+# if local volume mount:
+rm -rf ./data/db 
+```
+
 Run the following command to initialize the workspace and apply the sample configuration.
 
 ```shell
