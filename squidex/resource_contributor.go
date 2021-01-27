@@ -1,12 +1,12 @@
 package squidex
 
 import (
-	"encoding/json"
 	"context"
+	"encoding/json"
 	"strings"
 
-	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -19,6 +19,11 @@ func resourceContributor() *schema.Resource {
 		UpdateContext: resourceContributorUpdate,
 		DeleteContext: resourceContributorDelete,
 		Schema: map[string]*schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
 			"app_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -35,12 +40,13 @@ func resourceContributor() *schema.Resource {
 				Description: "The role of the contributor.",
 				Required: true,
 			},
-			"invite": &schema.Schema{
-				Type:     schema.TypeBool,
-				Description: "Set to true to (email) invite the user, on creation, if he does not exist.",
-				Optional: true,
-				Default: false,
-			},
+			// Disabled as input, because new users must have it 'true' and updating is always with 'false'
+			//"invite": &schema.Schema{
+			//	Type:     schema.TypeBool,
+			//	Description: "Set to true to (email) invite the user, on creation, if he does not exist.",
+			//	Optional: true,
+			//	Default: false,
+			//},
 		},
 	}
 }
@@ -54,6 +60,8 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 	appName := data.Get("app_name").(string)
 	contributorID := data.Id()
 	
+	data.Set("invalidated_state", false)
+
 	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
 	err = common.HandleAPIError(response, err)
@@ -90,7 +98,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	appName := data.Get("app_name").(string)
 	contributorEmail := data.Get("contributor_email").(string)
 	role := data.Get("role").(string)
-	invite := data.Get("invite").(bool)
+	invite := true // required for new users, only existing users may be added as contributer without invite data.Get("invite").(bool)
 
 	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorEmail,
@@ -101,6 +109,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 	
@@ -113,6 +122,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	}
 
 	if resultItem == nil {
+		data.Set("invalidated_state", true)
 		source, _ := json.Marshal(result)
 		return diag.Errorf("Not Found: Contributor with email %s\nApi Response: %s", contributorEmail, string(source))
 	}
@@ -144,6 +154,7 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 

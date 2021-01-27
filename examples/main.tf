@@ -54,18 +54,23 @@ resource "squidex_contributor" "test" {
   app_name          = squidex_app.test.name
   contributor_email = "michiel@qvision.nl"
   role              = squidex_role.test.name
-  invite            = false
 }
 
 resource "squidex_contributor" "test_michiel_owner" {
   app_name          = squidex_app.test.name
   contributor_email = "michiel.vanklinken@embracecloud.nl"
   role              = "Owner"
-  invite            = false
+}
+
+resource "squidex_contributor" "test_pietje_puk" {
+  app_name          = squidex_app.test.name
+  contributor_email = "pietje.puk@embracecloud.nl"
+  role              = squidex_role.test.name
 }
 
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {
+  depends_on = [squidex_languages.test]
   app_name  = squidex_app.test.name
   name      = "blog1"
   published = true
@@ -219,8 +224,6 @@ resource "squidex_schema" "test" {
   //  properties {
   //    field_type  = "DateTime"
   //    editor      = "DateTime"
-  //    min_value = "null"
-  //    max_value = "null"
   //  }
   //}
 

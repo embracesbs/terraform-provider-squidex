@@ -2,8 +2,6 @@ version: "3.8"
 services:
   squidex_mongo:
     image: mongo:4.4.1
-    volumes:
-      - /etc/squidex/mongo/db:/data/db
       
     networks:
       - internal

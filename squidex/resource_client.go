@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -17,6 +17,11 @@ func resourceClient() *schema.Resource {
 		UpdateContext: resourceClientUpdate,
 		DeleteContext: resourceClientDelete,
 		Schema: map[string]*schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
 			"app_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -49,6 +54,8 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	appName := data.Get("app_name").(string)
 	id := data.Id()
+	
+	data.Set("invalidated_state", false)
 	
 	result, response, err := client.AppsApi.AppClientsGetClients(ctx, appName)
 
@@ -97,6 +104,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -109,6 +117,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 	}
 
 	if resultItem == nil {
+		data.Set("invalidated_state", true)
 		return diag.Errorf("Not Found: Client with name %s", name)
 	}
 
@@ -137,6 +146,7 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 

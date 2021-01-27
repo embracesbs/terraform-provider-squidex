@@ -1,19 +1,20 @@
 package squidex
 
 import (
-	"strings"
-	"strconv"
-	"log"
 	"context"
+	"log"
 	"regexp"
+	"strconv"
+	"strings"
 
-	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
+
 // https://docs.squidex.io/02-documentation/concepts/schemas
 func resourceSchema() *schema.Resource {
 	fieldPropertiesDto := map[string]*schema.Schema{
@@ -358,6 +359,11 @@ func resourceSchema() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
 			"app_name": {
 				Type: schema.TypeString,
 				Required: true,
@@ -472,8 +478,8 @@ func resourceSchema() *schema.Resource {
 						"name": {
 							Type: schema.TypeString,
 							Required: true,
-							ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-Z0-9]+(\-[a-Z0-9]+)*$`), "name may only contain a-Z 0-9 and - and not start with -."),
-							Description: "The name of the field. Must be unique within the schema. Only [a-Z0-9] and may contain dashes - but not start with them.",
+							ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "name may only contain a-z 0-9 and - and not start with -."),
+							Description: "The name of the field. Must be unique within the schema. Only [a-z0-9] and may contain dashes - but not start with them.",
 						},
 						"hidden": {
 							Type: schema.TypeBool,
@@ -1337,6 +1343,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	err = common.HandleAPIError(response, err)
 
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -1359,6 +1366,8 @@ func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
+
+	data.Set("invalidated_state", false)
 
 	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
 
@@ -1396,6 +1405,7 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	err = common.HandleAPIError(response, err)
 
 	if err != nil {
+		data.Set("invalidated_state", true)
 		// TODO: handle all errors
 		// TODO: update - display correct error response and message
 		return diag.FromErr(err)
