@@ -115,6 +115,22 @@ resource "squidex_schema" "test" {
       }
     }
   }
+  
+  fields {
+    name         = "referenceCAPS-2"
+    partitioning = "language"
+		hidden       = false # 
+		locked       = false # should not be used
+		disabled     = false # should not be used
+    properties {
+      field_type  = "References"
+      editor      = "Tags"
+      default_values = {
+        "nl-NL" = "string-1"
+        "en-US" = "string-3"
+      }
+    }
+  }
 
   fields {
     name         = "number-1"
