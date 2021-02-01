@@ -1,3 +1,3 @@
-host          = "https://squidex.dev.embracecloud.io"
-client_id     = "root"
-client_secret = "some_hashy_secret"
+host          = "http://localhost:8081"
+client_id     = "rootclient"
+client_secret = "jtr89DHJDE-7"

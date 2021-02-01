@@ -15,6 +15,11 @@ func resourceApp() *schema.Resource {
 		UpdateContext: resourceAppUpdate,
 		DeleteContext: resourceAppDelete,
 		Schema: map[string]*schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -35,12 +40,14 @@ func resourceApp() *schema.Resource {
 func resourceAppRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	var diags diag.Diagnostics
+	// TODO: all read stuff
+	data.Set("invalidated_state", false)
 	return diags
 }
 
 func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -51,6 +58,7 @@ func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta inte
 	})
 
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -62,7 +70,7 @@ func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta inte
 }
 
 func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -76,6 +84,7 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	})
 
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -87,7 +96,7 @@ func resourceAppDelete(ctx context.Context, data *schema.ResourceData, meta inte
 
 	name := data.Get("name").(string)
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 	_, err := client.AppsApi.AppsDeleteApp(ctx, name)
 

@@ -18,7 +18,12 @@ func resourceLanguage() *schema.Resource {
 		UpdateContext: resourceLanguageUpdate,
 		DeleteContext: resourceLanguageDelete,
 		Schema: map[string]*schema.Schema{
-			"app_name": &schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
+			"app_name": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
@@ -69,6 +74,8 @@ func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta i
 
 	//todo: inplement read thingy
 	var diags diag.Diagnostics
+	
+	data.Set("invalidated_state", false)
 
 	return diags
 }
@@ -80,7 +87,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 
 	var diags diag.Diagnostics
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var hasEn = false
 
@@ -96,6 +103,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 			})
 
 			if err != nil {
+				data.Set("invalidated_state", true)
 				return diag.Errorf("failed to add language")
 			}
 		}
@@ -109,6 +117,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 			})
 
 			if err != nil {
+				data.Set("invalidated_state", true)
 				return diag.Errorf("failed to set master")
 			}
 		}
@@ -124,6 +133,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 		_, _, err := client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, "en")
 
 		if err != nil {
+			data.Set("invalidated_state", true)
 			return diag.FromErr(err)
 		}
 	}
@@ -140,7 +150,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 
 	var diags diag.Diagnostics
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	for _, element := range result {
 		rs := element.(map[string]interface{})
@@ -154,7 +164,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 			})
 
 			if err != nil {
-
+				data.Set("invalidated_state", true)
 				return diag.Errorf("failed to perform update :  create " + name)
 			}
 
@@ -163,7 +173,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 			})
 
 			if err_update != nil {
-
+				data.Set("invalidated_state", true)
 				return diag.Errorf("failed to perform update :  set active " + name)
 			}
 		}
@@ -192,6 +202,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 		if CheckDelete(rs,result) == false {
 
 			if isActive == true {
+				data.Set("invalidated_state", true)
 				return diag.Errorf("cannot delete language that is master " + name)
 			} 
 
@@ -217,7 +228,7 @@ func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta
 
 	result := data.Get("language").([]interface{})
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	existing, _, err := client.AppsApi.AppLanguagesGetLanguages(ctx, appName)
 

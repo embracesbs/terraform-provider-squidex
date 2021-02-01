@@ -2,8 +2,9 @@ package squidex
 
 import (
 	"context"
-	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
+
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -15,6 +16,11 @@ func resourceRole() *schema.Resource {
 		UpdateContext: resourceRoleUpdate,
 		DeleteContext: resourceRoleDelete,
 		Schema: map[string]*schema.Schema{
+			"invalidated_state": {
+				Type: schema.TypeBool,
+				Computed: true,
+				Description: "Hidden field to invalidate state on response errors.",
+			},
 			"app_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -45,16 +51,18 @@ func resourceRole() *schema.Resource {
 
 func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
 	name := data.Id()
 	
-	result, resp, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
+	data.Set("invalidated_state", false)
 
-	common.HandleAPIError(resp)
+	result, response, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
+
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)
@@ -84,20 +92,21 @@ func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta inter
 
 func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	_, resp, err := client.AppsApi.AppRolesPostRole(ctx, appName, squidexclient.AddRoleDto{
+	_, response, err := client.AppsApi.AppRolesPostRole(ctx, appName, squidexclient.AddRoleDto{
 		Name: name,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -109,7 +118,7 @@ func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta int
 }
 
 func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -118,14 +127,15 @@ func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta int
 	permissions := toStringArray(data.Get("permissions").([]interface{}))
 	properties := data.Get("properties").(map[string]interface{})
 	
-	_, resp, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
+	_, response, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
 		Permissions: permissions,
 		Properties: &properties,
 	})
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
@@ -141,11 +151,11 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
-	_, resp, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
+	_, response, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
 
-	common.HandleAPIError(resp)
+	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
 		return diag.FromErr(err)

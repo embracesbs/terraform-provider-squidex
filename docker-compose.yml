@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  squidex_mongo:
+    image: mongo:4.4.1
+      
+    networks:
+      - internal
+    restart: unless-stopped
+
+  squidex_squidex:
+    image: "squidex/squidex:5"
+    ports:
+      - "8081:80"
+    environment:
+      - URLS__BASEURL=http://${SQUIDEX_DOMAIN}:8081/
+      - EVENTSTORE__TYPE=MongoDB
+      - EVENTSTORE__MONGODB__CONFIGURATION=mongodb://squidex_mongo
+      - STORE__MONGODB__CONFIGURATION=mongodb://squidex_mongo
+      - IDENTITY__ADMINEMAIL=${SQUIDEX_ADMINEMAIL}
+      - IDENTITY__ADMINPASSWORD=${SQUIDEX_ADMINPASSWORD}
+      - IDENTITY__ADMINCLIENTID=${SQUIDEX_ADMINCLIENTID}
+      - IDENTITY__ADMINCLIENTSECRET=${SQUIDEX_ADMINCLIENTSECRET}
+      - IDENTITY__GOOGLECLIENT=${SQUIDEX_GOOGLECLIENT}
+      - IDENTITY__GOOGLESECRET=${SQUIDEX_GOOGLESECRET}
+      - IDENTITY__GITHUBCLIENT=${SQUIDEX_GITHUBCLIENT}
+      - IDENTITY__GITHUBSECRET=${SQUIDEX_GITHUBSECRET}
+      - IDENTITY__MICROSOFTCLIENT=${SQUIDEX_MICROSOFTCLIENT}
+      - IDENTITY__MICROSOFTSECRET=${SQUIDEX_MICROSOFTSECRET}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://${SQUIDEX_DOMAIN}:8081/healthz"]
+      start_period: 60s
+    depends_on:
+      - squidex_mongo
+    volumes:
+      - /etc/squidex/assets:/app/Assets
+    networks:
+      - internal
+    restart: unless-stopped
+    
+networks:
+  internal:
+    driver: bridge
