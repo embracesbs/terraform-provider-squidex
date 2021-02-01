@@ -32,6 +32,12 @@ func Provider() *schema.Provider {
 				Required:  true,
 				Sensitive: true,
 			},
+			"schema_delete_allow": {
+				Type:      schema.TypeBool,
+				Optional:  true,
+				Default: false,
+				Description: "Allow deleting schemas.",
+			},
 			// TODO: add settings to allow/forbid 1. deleting schemas 2. deleting fields of schemas 3. recreating fields of schemas
 			// if not allowed, only delete terraform references, making it no longer under terraform control but no changes to server are made.
 			// when they are needed again, they need to be imported first
@@ -51,6 +57,11 @@ func Provider() *schema.Provider {
 	}
 }
 
+type providerConfig struct {
+	Client *squidexclient.APIClient
+	SchemaDeleteAllowed bool
+}
+
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 
 	url := d.Get("url").(string)
@@ -65,6 +76,10 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 		HTTPClient: common.NewClient(clientID, clientSecret, tokenEndpoint, "squidex-api"),
 	}
 
-	return squidexclient.NewAPIClient(config), diags
+	return providerConfig{
+		Client: squidexclient.NewAPIClient(config),
+		SchemaDeleteAllowed: d.Get("schema_delete_allow").(bool),
+	}, diags
+	// return squidexclient.NewAPIClient(config), diags
 
 }

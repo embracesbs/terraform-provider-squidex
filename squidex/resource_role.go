@@ -51,7 +51,7 @@ func resourceRole() *schema.Resource {
 
 func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -92,7 +92,7 @@ func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta inter
 
 func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -118,7 +118,7 @@ func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta int
 }
 
 func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -151,7 +151,7 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 	_, response, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
 

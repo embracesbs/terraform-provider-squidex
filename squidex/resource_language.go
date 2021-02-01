@@ -87,7 +87,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 
 	var diags diag.Diagnostics
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var hasEn = false
 
@@ -150,7 +150,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 
 	var diags diag.Diagnostics
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	for _, element := range result {
 		rs := element.(map[string]interface{})
@@ -228,7 +228,7 @@ func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta
 
 	result := data.Get("language").([]interface{})
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	existing, _, err := client.AppsApi.AppLanguagesGetLanguages(ctx, appName)
 

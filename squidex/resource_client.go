@@ -48,7 +48,7 @@ func setDataFromClientDto(data *schema.ResourceData, client *squidexclient.Clien
 
 func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -89,7 +89,7 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
@@ -129,7 +129,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -155,7 +155,7 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 
 func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 

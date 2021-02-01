@@ -53,7 +53,7 @@ func resourceContributor() *schema.Resource {
 
 func resourceContributorRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -91,7 +91,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -135,7 +135,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 }
 
 func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -169,7 +169,7 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 	appName := data.Get("app_name").(string)
 	contributorID := data.Id()
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
 	

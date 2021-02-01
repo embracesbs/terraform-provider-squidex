@@ -3,6 +3,7 @@ package squidex
 import (
 	"context"
 	"log"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -219,6 +220,7 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type: schema.TypeString,
 			Optional: true,
+			Default: nil,
 			Description: "The maximum allowed value for the field value.",
 		},
 		"min_value": {
@@ -230,6 +232,7 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type: schema.TypeString,
 			Optional: true,
+			Default: nil,
 			// ? empty string doesn't parse correct for DateTime fields Default: nil,
 			Description: "The minimum allowed value for the field value.",
 		},
@@ -359,6 +362,18 @@ func resourceSchema() *schema.Resource {
 			State: schema.ImportStatePassthrough,
 		},
 		Schema: map[string]*schema.Schema{
+			"schema_field_delete_allow": {
+				Type:      schema.TypeBool,
+				Optional:  true,
+				Default: false,
+				Description: "Allow deleting schema fields. Corresponds to the 'Delete fields' feature of schema sync.",
+			},
+			"schema_field_recreate_allow": {
+				Type:      schema.TypeBool,
+				Optional:  true,
+				Default: false,
+				Description: "Allow recreating schema fields. Corresponds to the 'Recreate fields' feature of schema sync.",
+			},
 			"invalidated_state": {
 				Type: schema.TypeBool,
 				Computed: true,
@@ -667,12 +682,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["allow_duplicates"] = v.Properties.AllowDuplicates
 			properties["inline_editable"] = v.Properties.InlineEditable
 			properties["max_value"] = v.Properties.MaxValue
-			
-			log.Printf("v.Properties.MinValue: %s", v.Properties.MinValue)
-			if (v.Properties.MinValue != nil) { 
-				properties["min_value"] = v.Properties.MinValue
-			}
-
+			properties["min_value"] = v.Properties.MinValue
 			properties["calculated_default_value"] = v.Properties.CalculatedDefaultValue
 			properties["allowed_values"] = v.Properties.AllowedValues
 			properties["resolve_reference"] = v.Properties.ResolveReference
@@ -778,8 +788,6 @@ func interfaceSliceToStringSlice(iv []interface{}) []string {
 	}
 	return sv
 }
-
-// TODO: move to utils
 func interfaceMapToStringMap(iv map[string]interface{}) map[string]string {
 	sv := make(map[string]string)
 	for k, v := range iv {
@@ -787,8 +795,6 @@ func interfaceMapToStringMap(iv map[string]interface{}) map[string]string {
 	}
 	return sv
 }
-
-// TODO: move to utils
 func stringMapToInterfaceMap(iv map[string]string) map[string]interface{} {
 	sv := make(map[string]interface{})
 	for k, v := range iv {
@@ -880,7 +886,6 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	if v, ok := data.GetOk("preview_urls"); ok {
 		previewUrls := interfaceMapToStringMap(v.(map[string]interface {}))
 		squidexschema.PreviewUrls = &previewUrls
-		//panic: interface conversion: interface {} is map[string]interface {}, not map[string]string
 	}
 	if v, ok := data.GetOk("fields"); ok {
 		fields := v.([]interface{})
@@ -1010,11 +1015,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.InlineEditable = &val
 					}
 					if properties["max_value"] != nil {
-						val := properties["max_value"]
+						val := emptyStringToNil(fieldType, properties["max_value"])
 						squidexProperties.MaxValue = &val
 					}
 					if properties["min_value"] != nil {
-						val := properties["min_value"]
+						val := emptyStringToNil(fieldType, properties["min_value"])
 						squidexProperties.MinValue = &val
 					}
 					if properties["calculated_default_value"] != nil {
@@ -1223,6 +1228,18 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	return squidexschema, nil
 }
 
+func emptyStringToNil(fieldType string, source interface{}) interface{} {
+	if (reflect.TypeOf(source) != reflect.TypeOf(reflect.String)) {
+		// wil return nil if source is nil, otherwise the value of source
+		return source
+	}
+	if (fieldType == "DateTime" &&
+		strings.TrimSpace(source.(string)) == "") { 
+		return nil
+	}
+	return source
+}
+
 func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) interface{}{
 	if  partitioning != "language" ||
 		defaultValue == nil || 
@@ -1310,11 +1327,14 @@ func defaultValueToInterface(fieldType string, defaultValue interface{}) interfa
 	}
 }
 
-func mapCreateSchemaDtoToSynchronizeSchemaDto(createSchema squidexclient.CreateSchemaDto) (squidexclient.SynchronizeSchemaDto) {
-	// use syncchronize with NoFieldDeletion & NoFieldRecreation to true (and message why it's not allowed on errors)
+func mapCreateSchemaDtoToSynchronizeSchemaDto(
+	createSchema squidexclient.CreateSchemaDto,
+	schemaFieldDeleteAllowed bool,
+	schemaFieldRecreateAllowed bool,
+	) (squidexclient.SynchronizeSchemaDto) {
 	dto := squidexclient.SynchronizeSchemaDto{
-		NoFieldDeletion: true,
-		NoFieldRecreation: true,
+		NoFieldDeletion: !schemaFieldDeleteAllowed,
+		NoFieldRecreation: !schemaFieldRecreateAllowed,
 		Category: createSchema.Category,
 		Fields: createSchema.Fields,
 		FieldsInLists: createSchema.FieldsInLists,
@@ -1329,7 +1349,7 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(createSchema squidexclient.CreateS
 
 func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	
 	var diags diag.Diagnostics
 
@@ -1337,7 +1357,6 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	
 	createDto, _ := getCreateSchemaDtoFromData(data)
 
-	// TODO: handle all errors
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
 	err = common.HandleAPIError(response, err)
@@ -1350,24 +1369,26 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	// prevent drift and set ALL values from the result
 	err = setDataFromSchemaDetailsDto(data, result)
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
-
+	
 	data.SetId(result.Id)
 
+	data.Set("invalidated_state", false)
 	return diags
 }
 
 func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	
-	client := meta.(*squidexclient.APIClient)
-
 	var diags diag.Diagnostics
+
+	///invalidatedState := data.Get("invalidated_state")
+	
+	client := meta.(providerConfig).Client
 
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
-
-	data.Set("invalidated_state", false)
 
 	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
 
@@ -1376,21 +1397,27 @@ func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta int
 	if err != nil {
 		return diag.FromErr(err)
 	}
-
+	
 	//prevent drift and set ALL values from the get
 	err = setDataFromSchemaDetailsDto(data, result)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
+	// only works for create, because that doesn't do a read first, an update reads first and therefor doesnt work
+	data.Set("invalidated_state", false)
 	return diags
 }
 
 func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
-
+	
 	var diags diag.Diagnostics
 
+	context := meta.(providerConfig)
+	client := context.Client
+
+	schemaFieldDeleteAllowed := data.Get("schema_field_delete_allow").(bool)
+	schemaFieldRecreateAllowed := data.Get("schema_field_recreate_allow").(bool)
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
@@ -1398,50 +1425,87 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	syncDto := mapCreateSchemaDtoToSynchronizeSchemaDto(createDto)
-		
+	syncDto := mapCreateSchemaDtoToSynchronizeSchemaDto(
+		createDto,
+		schemaFieldDeleteAllowed,
+		schemaFieldRecreateAllowed)
+	
 	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, syncDto)
 	
 	err = common.HandleAPIError(response, err)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
-		// TODO: handle all errors
-		// TODO: update - display correct error response and message
 		return diag.FromErr(err)
 	}
 	
+	// TODO: test nofieldeletion & nofieldrecreation in state
+	// if input fields != output fields (name/type & determine what causes recreation of fields?)
+	// then invalidate state with data.Set("invalidated_state", true)
+	if syncDto.NoFieldDeletion {
+		if len(result.Fields) > len(*syncDto.Fields) {
+			data.Set("invalidated_state", true)
+			return diag.Errorf("Not able to delete schema fields when resource field schema_field_delete_allow is set to false.")
+		}
+	}
+	if syncDto.NoFieldRecreation {
+		for _, field := range *syncDto.Fields {
+			found := false
+			for _, resultField := range result.Fields {
+				if  resultField.Name == field.Name && 
+					resultField.Properties.FieldType == field.Properties.FieldType {
+					// TODO: are these all use-cases of recreate fields?
+					found = true
+				}
+			}
+			if !found {
+				data.Set("invalidated_state", true)
+				return diag.Errorf("Not able to recreate schema field '%s' when resource field schema_field_recreate_allow is set to false.", field.Name)
+			}
+		}
+	}
+
 	// prevent drift and set ALL values from the result
 	// to test this, do once with, and once without, and compare results
 	err = setDataFromSchemaDetailsDto(data, result);
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
-
+	
+	data.Set("invalidated_state", false)
 	return diags
 }
 
 func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-
-	client := meta.(*squidexclient.APIClient)
 
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
+	context := meta.(providerConfig)
+
+	if context.SchemaDeleteAllowed == false {
+		data.Set("invalidated_state", true)
+		return diag.Errorf("Not allowed to delete schema '%s'. \nSet provider field schema_delete_allow to true to allow this.", name)
+	}
+	
+	client := context.Client
+
 	response, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
 	
 	err = common.HandleAPIError(response, err)
 	
 	if err != nil {
+		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
 	// d.SetId("") is automatically called assuming delete returns no errors, but
 	// it is added here for explicitness.
 	data.SetId("")
-	
 
+	data.Set("invalidated_state", false)
 	return diags
 }

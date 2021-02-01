@@ -47,7 +47,7 @@ func resourceAppRead(ctx context.Context, data *schema.ResourceData, meta interf
 
 func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -70,7 +70,7 @@ func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta inte
 }
 
 func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
 
@@ -96,7 +96,7 @@ func resourceAppDelete(ctx context.Context, data *schema.ResourceData, meta inte
 
 	name := data.Get("name").(string)
 
-	client := meta.(*squidexclient.APIClient)
+	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 	_, err := client.AppsApi.AppsDeleteApp(ctx, name)
 
