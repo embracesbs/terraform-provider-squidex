@@ -5,12 +5,10 @@
 
 trigger:
   - refs/tags/v*
-  - features/0.6.3
 
 variables:
   - name: version
-    value: 0.5.0
-    # ${{ replace(variables['Build.SourceBranchName'],'v','') }}
+    value: ${{ replace(variables['Build.SourceBranchName'],'v','') }}
 
 pool:
   vmImage: "ubuntu-latest"
