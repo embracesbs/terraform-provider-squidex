@@ -11,7 +11,11 @@ mkdir -p artifacts
 echo "Done."
 
 echo "Step 3. Building provider for linux..."
-GOOS=linux GOARCH=amd64 go build -o ./artifacts/terraform-provider-squidex_v${VERSION}
+GOOS=linux GOARCH=amd64 go build -o ./artifacts/linux/terraform-provider-squidex_v${VERSION}
+echo "Done."
+
+echo "Step 3. Building provider for windows..."
+GOOS=windows GOARCH=amd64 go build -o ./artifacts/windows/terraform-provider-squidex_v${VERSION}.exe
 echo "Done."
 
 echo "Step 4. Changing current dir to $(pwd)/artifacts"
@@ -19,7 +23,9 @@ cd ./artifacts
 echo "Done."
 
 echo "Step 5. Zipping provider..."
-zip terraform-provider-squidex_v${VERSION}_linux_amd64.zip ./terraform-provider-squidex_v${VERSION}
-rm ./terraform-provider-squidex_v${VERSION}
+zip terraform-provider-squidex_v${VERSION}_linux_amd64.zip ./linux/terraform-provider-squidex_v${VERSION}
+zip terraform-provider-squidex_v${VERSION}_windows_amd64.zip ./windows/terraform-provider-squidex_v${VERSION}.exe
+rm -r linux
+rm -r windows
 sha256sum -b * >SHA256SUMS
 echo "Done."

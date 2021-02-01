@@ -67,6 +67,7 @@ func HandleAPIError(response *http.Response, err interface{}) error {
 				}
 			}
 			// mapped response to error
+			apierror.Message = genericMessage + "\n" + apierror.Message
 			return apierror
 		}
 	}
