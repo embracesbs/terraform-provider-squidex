@@ -23,8 +23,11 @@ cd ./artifacts
 echo "Done."
 
 echo "Step 5. Zipping provider..."
-zip terraform-provider-squidex_v${VERSION}_linux_amd64.zip ./linux/terraform-provider-squidex_v${VERSION}
-zip terraform-provider-squidex_v${VERSION}_windows_amd64.zip ./windows/terraform-provider-squidex_v${VERSION}.exe
+cd linux
+zip ../terraform-provider-squidex_v${VERSION}_linux_amd64.zip ./terraform-provider-squidex_v${VERSION}
+cd ../windows
+zip ../terraform-provider-squidex_v${VERSION}_windows_amd64.zip ./terraform-provider-squidex_v${VERSION}.exe
+cd ..
 rm -r linux
 rm -r windows
 sha256sum -b * >SHA256SUMS
