@@ -3,9 +3,9 @@ package common
 import (
 	// "github.com/hashicorp/errwrap"
 	"encoding/json"
-	"net/http"
-	"log"
 	"fmt"
+	"log"
+	"net/http"
 	"strconv"
 	"strings"
 

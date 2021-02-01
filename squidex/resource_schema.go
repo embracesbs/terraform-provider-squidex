@@ -220,7 +220,6 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type: schema.TypeString,
 			Optional: true,
-			Default: nil,
 			Description: "The maximum allowed value for the field value.",
 		},
 		"min_value": {
@@ -232,8 +231,6 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type: schema.TypeString,
 			Optional: true,
-			Default: nil,
-			// ? empty string doesn't parse correct for DateTime fields Default: nil,
 			Description: "The minimum allowed value for the field value.",
 		},
 		"calculated_default_value": {
@@ -722,8 +719,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties := make(map[string]interface{})
 				properties["hints"] = nested.Properties.Hints
 				properties["editor_url"] = nested.Properties.EditorURL
-				properties["min_items"] = nested.Properties.MinItems
-				properties["max_items"] = nested.Properties.MaxItems
+				properties["min_items"] = nested.Properties.PreviewMode
+				properties["max_items"] = nested.Properties.PreviewMode
 				properties["preview_mode"] = nested.Properties.PreviewMode
 				properties["default_values"] = nested.Properties.DefaultValues
 				properties["default_value"] = nested.Properties.DefaultValue
@@ -1015,11 +1012,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.InlineEditable = &val
 					}
 					if properties["max_value"] != nil {
-						val := emptyStringToNil(fieldType, properties["max_value"])
+						val := properties["max_value"]
 						squidexProperties.MaxValue = &val
 					}
 					if properties["min_value"] != nil {
-						val := emptyStringToNil(fieldType, properties["min_value"])
+						val := properties["min_value"]
 						squidexProperties.MinValue = &val
 					}
 					if properties["calculated_default_value"] != nil {
