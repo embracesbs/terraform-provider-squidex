@@ -22,6 +22,7 @@ First, build and install locally the provider.
 
 ```shell
 make local-install
+# on windows: make local-install-win
 ```
 
 This will create the provider binary.
@@ -42,12 +43,14 @@ Run the following command to initialize the workspace and apply the sample confi
 
 ```shell
 cd examples
-terraform init && terraform apply
+terraform init -backend=false
+terraform apply -auto-approve
 ```
 
 ## Release
 
 Use a git tag with semver (e.g. v0.4.2). This will trigger a pipeline to release the provider as a package.
+Currently the package is zip containing linux 64 & windows 64 binaries.
 
 - Trigger & pipeline: Azure Pipelines
 - Package: Azure Artifacts (Universal)

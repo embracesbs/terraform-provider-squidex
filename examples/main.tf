@@ -10,7 +10,7 @@ provider "squidex" {
   client_secret       = var.client_secret
   token_endpoint      = "${var.host}/identity-server/connect/token"
   url                 = "${var.host}/api"
-  schema_delete_allow = false
+  schema_delete_allow = true
 }
 
 # TODO: discuss strategy, do we allow for destroy and create on app resources?

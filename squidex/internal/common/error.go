@@ -28,7 +28,9 @@ func (e APIError) Error() string {
 
 func HandleAPIError(response *http.Response, err interface{}) error {
 	
-	if response.StatusCode == http.StatusOK || response.StatusCode == http.StatusCreated {
+	if	response.StatusCode == http.StatusOK || 
+		response.StatusCode == http.StatusCreated || 
+		response.StatusCode == http.StatusNoContent {
 		// do nothing
 		return nil
 	}
