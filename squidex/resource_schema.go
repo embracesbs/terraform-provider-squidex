@@ -813,7 +813,7 @@ func stringArrayToNonNilStringArray(iv []string) []string {
 	return sv
 }
 
-func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.CreateSchemaDto, error) {
+func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.CreateSchemaDto, diag.Diagnostics) {
 	squidexschema := squidexclient.CreateSchemaDto{
 		IsPublished: data.Get("published").(bool),
 		Name: data.Get("name").(string),
@@ -826,7 +826,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	}
 	
 	if v, ok := data.GetOk("properties"); ok {
-		properties := v.([]interface{})[0].(map[string]interface{})
+        raw_properties := v.([]interface{})[0]
+        if raw_properties == nil {
+            return squidexclient.CreateSchemaDto{}, diag.Errorf("Properties are nil: %#v", v)
+        }
+		properties := raw_properties.(map[string]interface{})
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
 		if p, ok := properties["label"]; ok { 
 			x := p.(string)
@@ -1354,7 +1358,10 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 
 	appName := data.Get("app_name").(string)
 	
-	createDto, _ := getCreateSchemaDtoFromData(data)
+	createDto, diags := getCreateSchemaDtoFromData(data)
+    if diags != nil {
+        return diags
+    }
 
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
@@ -1420,9 +1427,9 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	createDto, err := getCreateSchemaDtoFromData(data)
-	if err != nil {
-		return diag.FromErr(err)
+	createDto, diags := getCreateSchemaDtoFromData(data)
+	if diags != nil {
+		return diags
 	}
 	syncDto := mapCreateSchemaDtoToSynchronizeSchemaDto(
 		createDto,
