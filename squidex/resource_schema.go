@@ -2,6 +2,7 @@ package squidex
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"reflect"
 	"regexp"
@@ -1362,7 +1363,8 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
         return diag.FromErr(err)
     }
 
-    log.Printf("[TRACE] Creating a new schema with dto %#v.", createDto)
+    createDtoJson, _ := json.MarshalIndent(createDto, "", "  ")
+    log.Printf("[TRACE] Creating a new schema with dto %s.", string(createDtoJson))
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
 	err = common.HandleAPIError(response, err)
