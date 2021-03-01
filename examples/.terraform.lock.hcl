@@ -4,6 +4,6 @@
 provider "terraform.embracecloud.nl/embracecloud/squidex" {
   version = "0.6.1"
   hashes = [
-    "h1:7q4JJfQJKk5UrdS6a/0HxkcCBzUmmVFux/0n3e/eUpQ=",
+    "h1:qBMi3zVH/xSj2owUKx1M+Ox8BwgBmAPPtXw8DBfyhwU=",
   ]
 }

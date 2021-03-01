@@ -1362,6 +1362,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
         return diag.FromErr(err)
     }
 
+    log.Printf("[TRACE] Creating a new schema with dto %#v.", createDto)
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
 	err = common.HandleAPIError(response, err)
