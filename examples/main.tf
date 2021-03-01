@@ -56,6 +56,12 @@ resource "squidex_contributor" "test" {
   role              = squidex_role.test.name
 }
 
+resource "squidex_contributor" "niksa_owner" {
+  app_name          = squidex_app.test.name
+  contributor_email = "niksa.sporin@embracecloud.nl"
+  role              = "Owner"
+}
+
 resource "squidex_contributor" "test_michiel_owner" {
   app_name          = squidex_app.test.name
   contributor_email = "michiel.vanklinken@embracecloud.nl"
