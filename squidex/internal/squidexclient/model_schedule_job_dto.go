@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // ScheduleJobDto struct for ScheduleJobDto
 type ScheduleJobDto struct {
 	// The id of the schedule job.

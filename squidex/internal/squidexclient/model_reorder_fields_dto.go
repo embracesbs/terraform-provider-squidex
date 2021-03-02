@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ReorderFieldsDto struct for ReorderFieldsDto
 type ReorderFieldsDto struct {
 	// The field ids in the target order.

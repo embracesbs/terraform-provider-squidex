@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // EmailRuleActionDto struct for EmailRuleActionDto
 type EmailRuleActionDto struct {
 	ActionType string `json:"actionType"`

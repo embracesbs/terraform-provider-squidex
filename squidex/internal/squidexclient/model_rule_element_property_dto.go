@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleElementPropertyDto struct for RuleElementPropertyDto
 type RuleElementPropertyDto struct {
 	// The html editor.

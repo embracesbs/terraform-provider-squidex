@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RoleDtoAllOf struct for RoleDtoAllOf
 type RoleDtoAllOf struct {
 	// The role name.

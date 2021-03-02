@@ -42,7 +42,7 @@ func (a *PingApiService) PingGetAppPing(ctx _context.Context, app string) (*_net
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/ping/{app}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

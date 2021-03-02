@@ -11,11 +11,11 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -28,7 +28,7 @@ type SearchApiService service
 
 // SearchGetSearchResultsOpts Optional parameters for the method 'SearchGetSearchResults'
 type SearchGetSearchResultsOpts struct {
-    Query optional.String
+	Query optional.String
 }
 
 /*
@@ -51,7 +51,7 @@ func (a *SearchApiService) SearchGetSearchResults(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/search"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

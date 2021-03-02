@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WorkflowsDto struct for WorkflowsDto
 type WorkflowsDto struct {
 	// The links.

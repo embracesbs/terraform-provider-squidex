@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AppLanguagesDtoAllOf struct for AppLanguagesDtoAllOf
 type AppLanguagesDtoAllOf struct {
 	// The languages.

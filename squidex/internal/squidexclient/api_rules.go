@@ -11,11 +11,11 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -43,9 +43,9 @@ func (a *RulesApiService) RulesDeleteEvent(ctx _context.Context, app string, id 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/events/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -121,9 +121,9 @@ func (a *RulesApiService) RulesDeleteRule(ctx _context.Context, app string, id s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -198,7 +198,7 @@ func (a *RulesApiService) RulesDeleteRuleRun(ctx _context.Context, app string) (
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/run"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -276,9 +276,9 @@ func (a *RulesApiService) RulesDisableRule(ctx _context.Context, app string, id 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}/disable"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -365,9 +365,9 @@ func (a *RulesApiService) RulesEnableRule(ctx _context.Context, app string, id s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}/enable"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -520,9 +520,9 @@ func (a *RulesApiService) RulesGetActions(ctx _context.Context) (map[string]Rule
 
 // RulesGetEventsOpts Optional parameters for the method 'RulesGetEvents'
 type RulesGetEventsOpts struct {
-    RuleId optional.String
-    Skip optional.Int32
-    Take optional.Int32
+	RuleId optional.String
+	Skip   optional.Int32
+	Take   optional.Int32
 }
 
 /*
@@ -547,7 +547,7 @@ func (a *RulesApiService) RulesGetEvents(ctx _context.Context, app string, local
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/events"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -642,7 +642,7 @@ func (a *RulesApiService) RulesGetRules(ctx _context.Context, app string) (Rules
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -729,7 +729,7 @@ func (a *RulesApiService) RulesPostRule(ctx _context.Context, app string, create
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -826,9 +826,9 @@ func (a *RulesApiService) RulesPutEvent(ctx _context.Context, app string, id str
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/events/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -907,9 +907,9 @@ func (a *RulesApiService) RulesPutRule(ctx _context.Context, app string, id stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1006,9 +1006,9 @@ func (a *RulesApiService) RulesPutRuleRun(ctx _context.Context, app string, id s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}/run"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1084,9 +1084,9 @@ func (a *RulesApiService) RulesTriggerRule(ctx _context.Context, app string, id 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/rules/{id}/trigger"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

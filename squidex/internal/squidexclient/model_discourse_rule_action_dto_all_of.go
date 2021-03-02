@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // DiscourseRuleActionDtoAllOf struct for DiscourseRuleActionDtoAllOf
 type DiscourseRuleActionDtoAllOf struct {
 	// The url to the discourse server.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateLanguageDto struct for UpdateLanguageDto
 type UpdateLanguageDto struct {
 	// Set the value to true to make the language the master.

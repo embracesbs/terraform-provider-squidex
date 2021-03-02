@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // BulkUpdateType the model 'BulkUpdateType'
 type BulkUpdateType string
 
 // List of BulkUpdateType
 const (
-	BulkUpdateTypeUPSERT BulkUpdateType = "Upsert"
+	BulkUpdateTypeUPSERT        BulkUpdateType = "Upsert"
 	BulkUpdateTypeCHANGE_STATUS BulkUpdateType = "ChangeStatus"
-	BulkUpdateTypeDELETE BulkUpdateType = "Delete"
+	BulkUpdateTypeDELETE        BulkUpdateType = "Delete"
 )

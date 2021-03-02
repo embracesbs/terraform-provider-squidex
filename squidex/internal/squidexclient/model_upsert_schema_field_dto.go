@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpsertSchemaFieldDto struct for UpsertSchemaFieldDto
 type UpsertSchemaFieldDto struct {
 	// The name of the field. Must be unique within the schema.

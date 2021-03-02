@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // IJsonValue struct for IJsonValue
 type IJsonValue struct {
 	Type JsonValueType `json:"type,omitempty"`

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // GeolocationFieldPropertiesDto struct for GeolocationFieldPropertiesDto
 type GeolocationFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,8 +24,8 @@ type GeolocationFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The default value for the field value.
 	DefaultValue *bool `json:"defaultValue,omitempty"`
 	// The editor that is used to manage this field.

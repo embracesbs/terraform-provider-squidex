@@ -1,5 +1,5 @@
-
 package squidexclient
+
 // FieldPropertiesDto struct for FieldPropertiesDto
 // For field descriptions, requirements etc. check out the full documentation on https://cloud.squidex.io/api/docs (ensure correct version)
 // All ...DefaultValues fields: if partitioning=language, then there is a default for each language, otherwise use defaultvalue field
@@ -42,19 +42,19 @@ type FieldPropertiesDto struct {
 	// MaxItems The maximum allowed items for the field value.
 	MaxItems *int `json:"maxItems,omitempty"`
 	/*	PreviewMode The preview mode for the asset.
-		Options: 
-		- ImageAndFileName 
-		- Image 
+		Options:
+		- ImageAndFileName
+		- Image
 		- FileName
 	*/
 	PreviewMode *string `json:"previewMode,omitempty"`
 	/*	DefaultValues The language specific default value as a list of asset ids.
-		Options: 
+		Options:
 		- lists: {"nl-NL": ["asset1","tag2"]}
 		- string: {"nl-NL": "asset1"}
 		- int/double: {"nl-NL": 10.9}
 		- bool: {"nl-NL": true}
-	*/ 
+	*/
 	DefaultValues *interface{} `json:"defaultValues,omitempty"`
 	/*	DefaultValue The default value for the field value.
 		Options:
@@ -97,22 +97,22 @@ type FieldPropertiesDto struct {
 	*/
 	MaxValue *interface{} `json:"maxValue,omitempty"`
 	/* MinValue The minimum allowed value for the field value.
-		Options:
-		string
-		float32
+	Options:
+	string
+	float32
 	*/
 	MinValue *interface{} `json:"minValue,omitempty"`
 	/*	CalculatedDefaultValue The calculated default value for the field value.
-		Options: 
-		- Now 
-		- Today 
+		Options:
+		- Now
+		- Today
 		- (or leave empty for none)
 	*/
 	CalculatedDefaultValue *string `json:"calculatedDefaultValue,omitempty"`
 	/*	AllowedValues The allowed values for the field value.
-		Options:
-	 	[]string
-	 	[]float32
+			Options:
+		 	[]string
+		 	[]float32
 	*/
 	AllowedValues *[]interface{} `json:"allowedValues,omitempty"`
 	// ResolveReference True to resolve references in the content list. (Required for fieldtype References)
@@ -138,9 +138,9 @@ type FieldPropertiesDto struct {
 	// MaxWords The maximum allowed number of words for the field value.
 	MaxWords *int `json:"maxWords,omitempty"`
 	/*	ContentType How the string content should be interpreted. (Required for fieldtype string)
-		Options: 
-		Unspecified 
-		Markdown 
+		Options:
+		Unspecified
+		Markdown
 		Html
 	*/
 	ContentType *string `json:"contentType,omitempty"`

@@ -8,14 +8,15 @@
  */
 
 package squidexclient
+
 // TranslationResult the model 'TranslationResult'
 type TranslationResult string
 
 // List of TranslationResult
 const (
-	TranslationResultTRANSLATED TranslationResult = "Translated"
+	TranslationResultTRANSLATED             TranslationResult = "Translated"
 	TranslationResultLANGUAGE_NOT_SUPPORTED TranslationResult = "LanguageNotSupported"
-	TranslationResultNOT_TRANSLATED TranslationResult = "NotTranslated"
-	TranslationResultNOT_IMPLEMENTED TranslationResult = "NotImplemented"
-	TranslationResultFAILED TranslationResult = "Failed"
+	TranslationResultNOT_TRANSLATED         TranslationResult = "NotTranslated"
+	TranslationResultNOT_IMPLEMENTED        TranslationResult = "NotImplemented"
+	TranslationResultFAILED                 TranslationResult = "Failed"
 )

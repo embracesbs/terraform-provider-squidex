@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TweetRuleActionDtoAllOf struct for TweetRuleActionDtoAllOf
 type TweetRuleActionDtoAllOf struct {
 	//  The generated access token.

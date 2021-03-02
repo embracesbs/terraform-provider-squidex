@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // HistoryEventDto struct for HistoryEventDto
 type HistoryEventDto struct {
 	// The message for the event.

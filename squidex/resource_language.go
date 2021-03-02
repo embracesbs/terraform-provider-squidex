@@ -19,8 +19,8 @@ func resourceLanguage() *schema.Resource {
 		DeleteContext: resourceLanguageDelete,
 		Schema: map[string]*schema.Schema{
 			"invalidated_state": {
-				Type: schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
 			"app_name": {
@@ -64,17 +64,17 @@ func resourceLanguage() *schema.Resource {
 	}
 }
 
-const ( 
-	Sleep = "sleep" 
-	Update = "update" 
-	Create = "create" 
+const (
+	Sleep  = "sleep"
+	Update = "update"
+	Create = "create"
 )
 
 func resourceLanguageRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	//todo: inplement read thingy
 	var diags diag.Diagnostics
-	
+
 	data.Set("invalidated_state", false)
 
 	return diags
@@ -184,7 +184,7 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 				IsMaster: &isActive,
 			})
 
-			if err_update != nil  {
+			if err_update != nil {
 
 				return diag.Errorf("failed to perform update :  Update " + name)
 			}
@@ -192,29 +192,24 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 		}
 	}
 
-
 	for _, element := range oldResult {
 
 		rs := element.(map[string]interface{})
 		name := rs["language"].(string)
 		isActive := rs["is_master"].(bool)
 
-		if CheckDelete(rs,result) == false {
+		if CheckDelete(rs, result) == false {
 
 			if isActive == true {
 				data.Set("invalidated_state", true)
 				return diag.Errorf("cannot delete language that is master " + name)
-			} 
-
+			}
 
 			client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, name)
 
 		}
 
-
 	}
-
-
 
 	return diags
 
@@ -313,7 +308,7 @@ func CheckUpdate(n map[string]interface{}, na []interface{}, o []interface{}) st
 			if updateIsActive != isActive {
 				return Update
 			}
-		}else{
+		} else {
 			return Create
 		}
 

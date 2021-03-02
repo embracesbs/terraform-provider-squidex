@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleTriggerDto struct for RuleTriggerDto
 type RuleTriggerDto struct {
 	TriggerType string `json:"triggerType"`

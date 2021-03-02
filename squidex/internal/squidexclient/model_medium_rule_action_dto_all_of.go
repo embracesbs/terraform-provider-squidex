@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // MediumRuleActionDtoAllOf struct for MediumRuleActionDtoAllOf
 type MediumRuleActionDtoAllOf struct {
 	// The self issued access token.

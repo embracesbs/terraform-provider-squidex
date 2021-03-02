@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FastlyRuleActionDto struct for FastlyRuleActionDto
 type FastlyRuleActionDto struct {
 	ActionType string `json:"actionType"`

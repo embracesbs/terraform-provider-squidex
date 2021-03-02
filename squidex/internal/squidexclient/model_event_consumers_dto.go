@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // EventConsumersDto struct for EventConsumersDto
 type EventConsumersDto struct {
 	// The links.

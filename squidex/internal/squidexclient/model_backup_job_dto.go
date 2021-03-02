@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // BackupJobDto struct for BackupJobDto
 type BackupJobDto struct {
 	// The links.

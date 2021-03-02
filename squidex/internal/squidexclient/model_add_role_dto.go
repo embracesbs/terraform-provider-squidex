@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AddRoleDto struct for AddRoleDto
 type AddRoleDto struct {
 	// The role name.

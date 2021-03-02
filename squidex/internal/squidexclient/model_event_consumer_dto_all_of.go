@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // EventConsumerDtoAllOf struct for EventConsumerDtoAllOf
 type EventConsumerDtoAllOf struct {
-	IsStopped bool `json:"isStopped,omitempty"`
-	IsResetting bool `json:"isResetting,omitempty"`
-	Count int32 `json:"count,omitempty"`
-	Name string `json:"name,omitempty"`
-	Error *string `json:"error,omitempty"`
-	Position *string `json:"position,omitempty"`
+	IsStopped   bool    `json:"isStopped,omitempty"`
+	IsResetting bool    `json:"isResetting,omitempty"`
+	Count       int32   `json:"count,omitempty"`
+	Name        string  `json:"name,omitempty"`
+	Error       *string `json:"error,omitempty"`
+	Position    *string `json:"position,omitempty"`
 }

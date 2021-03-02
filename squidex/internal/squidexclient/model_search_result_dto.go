@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SearchResultDto struct for SearchResultDto
 type SearchResultDto struct {
 	// The links.

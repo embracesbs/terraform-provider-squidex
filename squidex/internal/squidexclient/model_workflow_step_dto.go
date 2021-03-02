@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WorkflowStepDto struct for WorkflowStepDto
 type WorkflowStepDto struct {
 	// The transitions.

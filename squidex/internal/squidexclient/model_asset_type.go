@@ -8,13 +8,14 @@
  */
 
 package squidexclient
+
 // AssetType the model 'AssetType'
 type AssetType string
 
 // List of AssetType
 const (
 	AssetTypeUNKNOWN AssetType = "Unknown"
-	AssetTypeIMAGE AssetType = "Image"
-	AssetTypeAUDIO AssetType = "Audio"
-	AssetTypeVIDEO AssetType = "Video"
+	AssetTypeIMAGE   AssetType = "Image"
+	AssetTypeAUDIO   AssetType = "Audio"
+	AssetTypeVIDEO   AssetType = "Video"
 )

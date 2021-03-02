@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentChangedRuleTriggerDto struct for ContentChangedRuleTriggerDto
 type ContentChangedRuleTriggerDto struct {
 	TriggerType string `json:"triggerType"`

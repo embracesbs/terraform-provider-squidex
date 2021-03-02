@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ErrorDto struct for ErrorDto
 type ErrorDto struct {
 	// Error message.

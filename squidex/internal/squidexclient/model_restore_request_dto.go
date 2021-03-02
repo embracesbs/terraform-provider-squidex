@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RestoreRequestDto struct for RestoreRequestDto
 type RestoreRequestDto struct {
 	// The name of the app.

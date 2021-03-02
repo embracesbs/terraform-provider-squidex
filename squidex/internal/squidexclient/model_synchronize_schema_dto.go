@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SynchronizeSchemaDto struct for SynchronizeSchemaDto
 type SynchronizeSchemaDto struct {
 	// The optional properties.

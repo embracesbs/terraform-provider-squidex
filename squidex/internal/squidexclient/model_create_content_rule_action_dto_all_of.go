@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateContentRuleActionDtoAllOf struct for CreateContentRuleActionDtoAllOf
 type CreateContentRuleActionDtoAllOf struct {
 	// The content data.

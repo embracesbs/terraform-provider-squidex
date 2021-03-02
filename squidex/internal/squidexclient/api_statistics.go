@@ -43,7 +43,7 @@ func (a *StatisticsApiService) UsagesGetCurrentStorageSize(ctx _context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/usages/storage/today"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -129,7 +129,7 @@ func (a *StatisticsApiService) UsagesGetLog(ctx _context.Context, app string) (L
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/usages/log"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -217,11 +217,11 @@ func (a *StatisticsApiService) UsagesGetStorageSizes(ctx _context.Context, app s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/usages/storage/{fromDate}/{toDate}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"fromDate"+"}", _neturl.QueryEscape(parameterToString(fromDate, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fromDate"+"}", _neturl.QueryEscape(parameterToString(fromDate, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"toDate"+"}", _neturl.QueryEscape(parameterToString(toDate, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"toDate"+"}", _neturl.QueryEscape(parameterToString(toDate, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -319,11 +319,11 @@ func (a *StatisticsApiService) UsagesGetUsages(ctx _context.Context, app string,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/usages/calls/{fromDate}/{toDate}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"fromDate"+"}", _neturl.QueryEscape(parameterToString(fromDate, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"fromDate"+"}", _neturl.QueryEscape(parameterToString(fromDate, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"toDate"+"}", _neturl.QueryEscape(parameterToString(toDate, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"toDate"+"}", _neturl.QueryEscape(parameterToString(toDate, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

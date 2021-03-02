@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateWorkflowDto struct for UpdateWorkflowDto
 type UpdateWorkflowDto struct {
 	// The name of the workflow.

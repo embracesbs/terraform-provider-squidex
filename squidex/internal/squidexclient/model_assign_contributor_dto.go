@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssignContributorDto struct for AssignContributorDto
 type AssignContributorDto struct {
 	// The id or email of the user to add to the app.

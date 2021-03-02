@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // StatusInfoDto struct for StatusInfoDto
 type StatusInfoDto struct {
 	// The name of the status.

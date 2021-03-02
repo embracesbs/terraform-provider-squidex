@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // ContentDto struct for ContentDto
 type ContentDto struct {
 	// The links.

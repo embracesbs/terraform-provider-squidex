@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // JsonFieldPropertiesDto struct for JsonFieldPropertiesDto
 type JsonFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,6 +24,6 @@ type JsonFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 }

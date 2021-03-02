@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContributorDtoAllOf struct for ContributorDtoAllOf
 type ContributorDtoAllOf struct {
 	// The id of the user that contributes to the app.

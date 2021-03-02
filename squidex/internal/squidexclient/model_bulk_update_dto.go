@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BulkUpdateDto struct for BulkUpdateDto
 type BulkUpdateDto struct {
 	// The contents to update or insert.

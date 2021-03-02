@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpsertCommentDto struct for UpsertCommentDto
 type UpsertCommentDto struct {
 	// The comment text.

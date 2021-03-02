@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TagsFieldPropertiesDto struct for TagsFieldPropertiesDto
 type TagsFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,8 +24,8 @@ type TagsFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The minimum allowed items for the field value.
 	MinItems *int32 `json:"minItems,omitempty"`
 	// The maximum allowed items for the field value.

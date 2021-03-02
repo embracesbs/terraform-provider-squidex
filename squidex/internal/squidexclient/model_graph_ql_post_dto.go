@@ -8,9 +8,10 @@
  */
 
 package squidexclient
+
 // GraphQlPostDto struct for GraphQlPostDto
 type GraphQlPostDto struct {
-	OperationName string `json:"operationName,omitempty"`
-	Query string `json:"query,omitempty"`
-	Variables interface{} `json:"variables,omitempty"`
+	OperationName string      `json:"operationName,omitempty"`
+	Query         string      `json:"query,omitempty"`
+	Variables     interface{} `json:"variables,omitempty"`
 }

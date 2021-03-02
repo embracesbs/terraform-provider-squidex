@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentsDtoAllOf struct for ContentsDtoAllOf
 type ContentsDtoAllOf struct {
 	// The total number of content items.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AlgoliaRuleActionDto struct for AlgoliaRuleActionDto
 type AlgoliaRuleActionDto struct {
 	ActionType string `json:"actionType"`

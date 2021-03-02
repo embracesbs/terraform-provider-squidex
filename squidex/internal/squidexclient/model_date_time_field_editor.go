@@ -8,11 +8,12 @@
  */
 
 package squidexclient
+
 // DateTimeFieldEditor the model 'DateTimeFieldEditor'
 type DateTimeFieldEditor string
 
 // List of DateTimeFieldEditor
 const (
-	DateTimeFieldEditorDATE DateTimeFieldEditor = "Date"
+	DateTimeFieldEditorDATE      DateTimeFieldEditor = "Date"
 	DateTimeFieldEditorDATE_TIME DateTimeFieldEditor = "DateTime"
 )

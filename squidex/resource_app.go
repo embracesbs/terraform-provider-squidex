@@ -16,8 +16,8 @@ func resourceApp() *schema.Resource {
 		DeleteContext: resourceAppDelete,
 		Schema: map[string]*schema.Schema{
 			"invalidated_state": {
-				Type: schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
 			"name": &schema.Schema{
@@ -79,7 +79,7 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	description := data.Get("description").(string)
 
 	_, _, err := client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
-		Label: &label,
+		Label:       &label,
 		Description: &description,
 	})
 

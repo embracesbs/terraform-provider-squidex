@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"os"
 )
+
 // InlineObject2 struct for InlineObject2
 type InlineObject2 struct {
 	File **os.File `json:"file,omitempty"`

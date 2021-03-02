@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PrerenderRuleActionDto struct for PrerenderRuleActionDto
 type PrerenderRuleActionDto struct {
 	ActionType string `json:"actionType"`

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleEventsDto struct for RuleEventsDto
 type RuleEventsDto struct {
 	// The links.

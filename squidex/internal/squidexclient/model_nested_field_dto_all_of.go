@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NestedFieldDtoAllOf struct for NestedFieldDtoAllOf
 type NestedFieldDtoAllOf struct {
 	// The id of the field.

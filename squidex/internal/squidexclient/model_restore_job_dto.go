@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // RestoreJobDto struct for RestoreJobDto
 type RestoreJobDto struct {
 	// The uri to load from.

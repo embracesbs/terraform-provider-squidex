@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NumberFieldPropertiesDtoAllOf struct for NumberFieldPropertiesDtoAllOf
 type NumberFieldPropertiesDtoAllOf struct {
 	// The default value for the field value.

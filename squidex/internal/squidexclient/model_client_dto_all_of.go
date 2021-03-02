@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ClientDtoAllOf struct for ClientDtoAllOf
 type ClientDtoAllOf struct {
 	// The client id.

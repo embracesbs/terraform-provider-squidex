@@ -5,7 +5,7 @@ COMPANY=embracecloud
 PROVIDER=squidex
 BINARY=terraform-provider-squidex
 VERSION=0.6.1
-OS=windows
+OS=linux
 ARCH=amd64
 
 default: local-install

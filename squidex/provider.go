@@ -33,9 +33,9 @@ func Provider() *schema.Provider {
 				Sensitive: true,
 			},
 			"schema_delete_allow": {
-				Type:      schema.TypeBool,
-				Optional:  true,
-				Default: false,
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 				Description: "Allow deleting schemas.",
 			},
 			// TODO: add settings to allow/forbid 1. deleting schemas 2. deleting fields of schemas 3. recreating fields of schemas
@@ -45,11 +45,11 @@ func Provider() *schema.Provider {
 			// needs discussion
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"squidex_app":       resourceApp(),
-			"squidex_client":    resourceClient(),
-			"squidex_languages": resourceLanguage(),
-			"squidex_schema": resourceSchema(),
-			"squidex_role": resourceRole(),
+			"squidex_app":         resourceApp(),
+			"squidex_client":      resourceClient(),
+			"squidex_languages":   resourceLanguage(),
+			"squidex_schema":      resourceSchema(),
+			"squidex_role":        resourceRole(),
 			"squidex_contributor": resourceContributor(),
 		},
 		DataSourcesMap:       map[string]*schema.Resource{},
@@ -58,7 +58,7 @@ func Provider() *schema.Provider {
 }
 
 type providerConfig struct {
-	Client *squidexclient.APIClient
+	Client              *squidexclient.APIClient
 	SchemaDeleteAllowed bool
 }
 
@@ -77,7 +77,7 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	}
 
 	return providerConfig{
-		Client: squidexclient.NewAPIClient(config),
+		Client:              squidexclient.NewAPIClient(config),
 		SchemaDeleteAllowed: d.Get("schema_delete_allow").(bool),
 	}, diags
 	// return squidexclient.NewAPIClient(config), diags

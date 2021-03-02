@@ -8,15 +8,16 @@
  */
 
 package squidexclient
+
 // JsonValueType the model 'JsonValueType'
 type JsonValueType string
 
 // List of JsonValueType
 const (
-	JsonValueTypeARRAY JsonValueType = "Array"
+	JsonValueTypeARRAY   JsonValueType = "Array"
 	JsonValueTypeBOOLEAN JsonValueType = "Boolean"
-	JsonValueTypeNULL JsonValueType = "Null"
-	JsonValueTypeNUMBER JsonValueType = "Number"
-	JsonValueTypeOBJECT JsonValueType = "Object"
-	JsonValueTypeSTRING JsonValueType = "String"
+	JsonValueTypeNULL    JsonValueType = "Null"
+	JsonValueTypeNUMBER  JsonValueType = "Number"
+	JsonValueTypeOBJECT  JsonValueType = "Object"
+	JsonValueTypeSTRING  JsonValueType = "String"
 )

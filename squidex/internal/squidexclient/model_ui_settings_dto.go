@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UiSettingsDto struct for UiSettingsDto
 type UiSettingsDto struct {
 	// True when the user can create apps.

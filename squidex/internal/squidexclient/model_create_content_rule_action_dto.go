@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateContentRuleActionDto struct for CreateContentRuleActionDto
 type CreateContentRuleActionDto struct {
 	ActionType string `json:"actionType"`

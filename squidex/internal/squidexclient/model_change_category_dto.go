@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ChangeCategoryDto struct for ChangeCategoryDto
 type ChangeCategoryDto struct {
 	// The name of the category.

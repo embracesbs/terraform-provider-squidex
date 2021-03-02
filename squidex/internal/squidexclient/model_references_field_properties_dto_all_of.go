@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ReferencesFieldPropertiesDtoAllOf struct for ReferencesFieldPropertiesDtoAllOf
 type ReferencesFieldPropertiesDtoAllOf struct {
 	// The minimum allowed items for the field value.

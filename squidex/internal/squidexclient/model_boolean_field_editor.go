@@ -8,11 +8,12 @@
  */
 
 package squidexclient
+
 // BooleanFieldEditor the model 'BooleanFieldEditor'
 type BooleanFieldEditor string
 
 // List of BooleanFieldEditor
 const (
 	BooleanFieldEditorCHECKBOX BooleanFieldEditor = "Checkbox"
-	BooleanFieldEditorTOGGLE BooleanFieldEditor = "Toggle"
+	BooleanFieldEditorTOGGLE   BooleanFieldEditor = "Toggle"
 )

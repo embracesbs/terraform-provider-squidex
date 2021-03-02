@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AlgoliaRuleActionDtoAllOf struct for AlgoliaRuleActionDtoAllOf
 type AlgoliaRuleActionDtoAllOf struct {
 	// The application ID.

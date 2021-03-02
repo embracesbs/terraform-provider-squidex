@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // QueryOfIJsonValue struct for QueryOfIJsonValue
 type QueryOfIJsonValue struct {
-	Filter *FilterNodeOfIJsonValue `json:"filter,omitempty"`
-	FullText *string `json:"fullText,omitempty"`
-	Skip int64 `json:"skip,omitempty"`
-	Take int64 `json:"take,omitempty"`
-	Top int64 `json:"top,omitempty"`
-	Sort []SortNode `json:"sort,omitempty"`
+	Filter   *FilterNodeOfIJsonValue `json:"filter,omitempty"`
+	FullText *string                 `json:"fullText,omitempty"`
+	Skip     int64                   `json:"skip,omitempty"`
+	Take     int64                   `json:"take,omitempty"`
+	Top      int64                   `json:"top,omitempty"`
+	Sort     []SortNode              `json:"sort,omitempty"`
 }

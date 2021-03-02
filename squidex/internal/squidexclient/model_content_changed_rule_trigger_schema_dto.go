@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentChangedRuleTriggerSchemaDto struct for ContentChangedRuleTriggerSchemaDto
 type ContentChangedRuleTriggerSchemaDto struct {
 	// The id of the schema.

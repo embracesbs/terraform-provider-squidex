@@ -20,8 +20,8 @@ func resourceContributor() *schema.Resource {
 		DeleteContext: resourceContributorDelete,
 		Schema: map[string]*schema.Schema{
 			"invalidated_state": {
-				Type: schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
 			"app_name": &schema.Schema{
@@ -30,15 +30,15 @@ func resourceContributor() *schema.Resource {
 				ForceNew: true,
 			},
 			"contributor_email": &schema.Schema{
-				Type:     schema.TypeString,
+				Type:        schema.TypeString,
 				Description: "The emailaddress of the user to add to the app.",
-				Required: true,
-				ForceNew: true,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"role": &schema.Schema{
-				Type:     schema.TypeString,
+				Type:        schema.TypeString,
 				Description: "The role of the contributor.",
-				Required: true,
+				Required:    true,
 			},
 			// Disabled as input, because new users must have it 'true' and updating is always with 'false'
 			//"invite": &schema.Schema{
@@ -59,23 +59,23 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 	appName := data.Get("app_name").(string)
 	contributorID := data.Id()
-	
+
 	data.Set("invalidated_state", false)
 
 	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if strings.EqualFold(result.Items[i].ContributorId, contributorID) {
+		if strings.EqualFold(result.Items[i].ContributorId, contributorID) {
 			resultItem = &result.Items[i]
-        	break
-    	}
+			break
+		}
 	}
 
 	if resultItem == nil {
@@ -102,23 +102,23 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 
 	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorEmail,
-		Role: &role,
-		Invite: invite,
+		Role:          &role,
+		Invite:        invite,
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
-	
+
 	var resultItem *squidexclient.ContributorDto
 	for i := range result.Items {
-    	if strings.EqualFold(result.Items[i].ContributorEmail, contributorEmail) {
+		if strings.EqualFold(result.Items[i].ContributorEmail, contributorEmail) {
 			resultItem = &result.Items[i]
-        	break
-    	}
+			break
+		}
 	}
 
 	if resultItem == nil {
@@ -143,16 +143,16 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	contributorID := data.Id()
 	role := data.Get("role").(string)
 	invite := false // no invites send for updating role
-	
+
 	// there is no update method, just use the create to set it again, but no invite!
 	_, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorID,
-		Role: &role,
-		Invite: invite,
+		Role:          &role,
+		Invite:        invite,
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
@@ -172,7 +172,7 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
-	
+
 	err = common.HandleAPIError(response, err)
 
 	if err != nil {

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleEventsDtoAllOf struct for RuleEventsDtoAllOf
 type RuleEventsDtoAllOf struct {
 	// The rule events.

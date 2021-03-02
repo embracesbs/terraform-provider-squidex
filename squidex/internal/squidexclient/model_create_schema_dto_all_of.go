@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateSchemaDtoAllOf struct for CreateSchemaDtoAllOf
 type CreateSchemaDtoAllOf struct {
 	// The name of the schema.

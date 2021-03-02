@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NestedFieldDto struct for NestedFieldDto
 type NestedFieldDto struct {
 	// The links.

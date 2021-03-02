@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleAction struct for RuleAction
 type RuleAction struct {
 	ActionType string `json:"actionType"`

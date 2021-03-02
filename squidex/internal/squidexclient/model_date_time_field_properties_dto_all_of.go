@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // DateTimeFieldPropertiesDtoAllOf struct for DateTimeFieldPropertiesDtoAllOf
 type DateTimeFieldPropertiesDtoAllOf struct {
 	// The default value for the field value.

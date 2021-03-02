@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // QueryDto struct for QueryDto
 type QueryDto struct {
 	// The optional list of ids to query.

@@ -8,8 +8,9 @@
  */
 
 package squidexclient
+
 // KeyValuePairOfStringAndContentFieldData struct for KeyValuePairOfStringAndContentFieldData
 type KeyValuePairOfStringAndContentFieldData struct {
-	Key string `json:"key,omitempty"`
+	Key   string                `json:"key,omitempty"`
 	Value map[string]IJsonValue `json:"value,omitempty"`
 }

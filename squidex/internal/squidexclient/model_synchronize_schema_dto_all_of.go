@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SynchronizeSchemaDtoAllOf struct for SynchronizeSchemaDtoAllOf
 type SynchronizeSchemaDtoAllOf struct {
 	// True, when fields should not be deleted.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RenameAssetFolderDto struct for RenameAssetFolderDto
 type RenameAssetFolderDto struct {
 	// The name of the folder.

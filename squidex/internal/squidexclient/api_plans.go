@@ -43,7 +43,7 @@ func (a *PlansApiService) AppPlansGetPlans(ctx _context.Context, app string) (Ap
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/plans"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -130,7 +130,7 @@ func (a *PlansApiService) AppPlansPutPlan(ctx _context.Context, app string, chan
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/plan"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

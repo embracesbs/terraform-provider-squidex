@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FeaturesDto struct for FeaturesDto
 type FeaturesDto struct {
 	// The latest features.

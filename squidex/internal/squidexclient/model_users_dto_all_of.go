@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UsersDtoAllOf struct for UsersDtoAllOf
 type UsersDtoAllOf struct {
 	// The total number of users.

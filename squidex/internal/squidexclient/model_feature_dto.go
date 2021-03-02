@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FeatureDto struct for FeatureDto
 type FeatureDto struct {
 	// The name of the feature.

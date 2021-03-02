@@ -8,8 +8,9 @@
  */
 
 package squidexclient
+
 // UserProperty struct for UserProperty
 type UserProperty struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
 	Value string `json:"value"`
 }

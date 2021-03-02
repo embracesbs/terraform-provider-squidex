@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // LanguageDto struct for LanguageDto
 type LanguageDto struct {
 	// The iso code of the language.

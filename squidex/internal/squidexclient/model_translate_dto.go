@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TranslateDto struct for TranslateDto
 type TranslateDto struct {
 	// The text to translate.

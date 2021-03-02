@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetsFieldPropertiesDtoAllOf struct for AssetsFieldPropertiesDtoAllOf
 type AssetsFieldPropertiesDtoAllOf struct {
 	// The preview mode for the asset.

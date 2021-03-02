@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateRuleDto struct for CreateRuleDto
 type CreateRuleDto struct {
 	// The trigger properties.

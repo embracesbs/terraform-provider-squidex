@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContributorsMetadata struct for ContributorsMetadata
 type ContributorsMetadata struct {
 	// Indicates whether the user has been invited.

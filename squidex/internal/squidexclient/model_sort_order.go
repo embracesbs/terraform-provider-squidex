@@ -8,11 +8,12 @@
  */
 
 package squidexclient
+
 // SortOrder the model 'SortOrder'
 type SortOrder string
 
 // List of SortOrder
 const (
-	SortOrderASCENDING SortOrder = "Ascending"
+	SortOrderASCENDING  SortOrder = "Ascending"
 	SortOrderDESCENDING SortOrder = "Descending"
 )

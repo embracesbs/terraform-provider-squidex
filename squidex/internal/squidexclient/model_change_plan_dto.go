@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ChangePlanDto struct for ChangePlanDto
 type ChangePlanDto struct {
 	// The new plan id.

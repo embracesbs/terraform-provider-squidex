@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // TagsFieldEditor the model 'TagsFieldEditor'
 type TagsFieldEditor string
 
 // List of TagsFieldEditor
 const (
-	TagsFieldEditorTAGS TagsFieldEditor = "Tags"
+	TagsFieldEditorTAGS       TagsFieldEditor = "Tags"
 	TagsFieldEditorCHECKBOXES TagsFieldEditor = "Checkboxes"
-	TagsFieldEditorDROPDOWN TagsFieldEditor = "Dropdown"
+	TagsFieldEditorDROPDOWN   TagsFieldEditor = "Dropdown"
 )

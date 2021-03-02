@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // LogDownloadDto struct for LogDownloadDto
 type LogDownloadDto struct {
 	// The url to download the log.

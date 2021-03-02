@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateClientDto struct for UpdateClientDto
 type UpdateClientDto struct {
 	// The new display name of the client.

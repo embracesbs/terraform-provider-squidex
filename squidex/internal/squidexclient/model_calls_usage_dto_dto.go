@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CallsUsageDtoDto struct for CallsUsageDtoDto
 type CallsUsageDtoDto struct {
 	// The total number of API calls.

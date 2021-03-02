@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetsDtoAllOf struct for AssetsDtoAllOf
 type AssetsDtoAllOf struct {
 	// The total number of assets.

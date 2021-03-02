@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NotificationRuleActionDto struct for NotificationRuleActionDto
 type NotificationRuleActionDto struct {
 	ActionType string `json:"actionType"`

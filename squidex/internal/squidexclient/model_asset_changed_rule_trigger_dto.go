@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetChangedRuleTriggerDto struct for AssetChangedRuleTriggerDto
 type AssetChangedRuleTriggerDto struct {
 	TriggerType string `json:"triggerType"`

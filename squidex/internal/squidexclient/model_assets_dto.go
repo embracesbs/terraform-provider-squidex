@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetsDto struct for AssetsDto
 type AssetsDto struct {
 	// The links.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SchemaChangedRuleTriggerDto struct for SchemaChangedRuleTriggerDto
 type SchemaChangedRuleTriggerDto struct {
 	TriggerType string `json:"triggerType"`

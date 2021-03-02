@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CommentsDto struct for CommentsDto
 type CommentsDto struct {
 	// The created comments including the updates.

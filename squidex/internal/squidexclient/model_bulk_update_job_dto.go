@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BulkUpdateJobDto struct for BulkUpdateJobDto
 type BulkUpdateJobDto struct {
 	// An optional query to identify the content to update.

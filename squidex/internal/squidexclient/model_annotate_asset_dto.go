@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AnnotateAssetDto struct for AnnotateAssetDto
 type AnnotateAssetDto struct {
 	// The new name of the asset.

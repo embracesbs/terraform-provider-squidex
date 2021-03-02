@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BackupJobsDtoAllOf struct for BackupJobsDtoAllOf
 type BackupJobsDtoAllOf struct {
 	// The backups.

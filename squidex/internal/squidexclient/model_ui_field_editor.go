@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UiFieldEditor the model 'UiFieldEditor'
 type UiFieldEditor string
 

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ConfigureUiFieldsDto struct for ConfigureUiFieldsDto
 type ConfigureUiFieldsDto struct {
 	// The name of fields that are used in content lists.

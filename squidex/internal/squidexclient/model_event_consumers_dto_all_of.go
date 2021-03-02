@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // EventConsumersDtoAllOf struct for EventConsumersDtoAllOf
 type EventConsumersDtoAllOf struct {
 	// The event consumers.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateFieldDto struct for UpdateFieldDto
 type UpdateFieldDto struct {
 	// The field properties.

@@ -11,11 +11,11 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -43,9 +43,9 @@ func (a *NotificationsApiService) UserNotificationsDeleteComment(ctx _context.Co
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/users/{userId}/notifications/{commentId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.QueryEscape(parameterToString(userId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.QueryEscape(parameterToString(userId, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -106,7 +106,7 @@ func (a *NotificationsApiService) UserNotificationsDeleteComment(ctx _context.Co
 
 // UserNotificationsGetNotificationsOpts Optional parameters for the method 'UserNotificationsGetNotifications'
 type UserNotificationsGetNotificationsOpts struct {
-    Version optional.Int64
+	Version optional.Int64
 }
 
 /*
@@ -130,7 +130,7 @@ func (a *NotificationsApiService) UserNotificationsGetNotifications(ctx _context
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/users/{userId}/notifications"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.QueryEscape(parameterToString(userId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", _neturl.QueryEscape(parameterToString(userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

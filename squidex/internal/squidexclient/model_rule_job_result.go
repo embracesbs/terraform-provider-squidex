@@ -8,14 +8,15 @@
  */
 
 package squidexclient
+
 // RuleJobResult the model 'RuleJobResult'
 type RuleJobResult string
 
 // List of RuleJobResult
 const (
-	RuleJobResultPENDING RuleJobResult = "Pending"
-	RuleJobResultSUCCESS RuleJobResult = "Success"
-	RuleJobResultRETRY RuleJobResult = "Retry"
-	RuleJobResultFAILED RuleJobResult = "Failed"
+	RuleJobResultPENDING   RuleJobResult = "Pending"
+	RuleJobResultSUCCESS   RuleJobResult = "Success"
+	RuleJobResultRETRY     RuleJobResult = "Retry"
+	RuleJobResultFAILED    RuleJobResult = "Failed"
 	RuleJobResultCANCELLED RuleJobResult = "Cancelled"
 )

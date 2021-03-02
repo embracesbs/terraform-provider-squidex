@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SchemaPropertiesDto struct for SchemaPropertiesDto
 type SchemaPropertiesDto struct {
 	// Optional label for the editor.

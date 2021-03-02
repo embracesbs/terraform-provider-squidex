@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PatternsDtoAllOf struct for PatternsDtoAllOf
 type PatternsDtoAllOf struct {
 	// The patterns.

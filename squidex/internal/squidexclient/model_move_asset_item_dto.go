@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // MoveAssetItemDto struct for MoveAssetItemDto
 type MoveAssetItemDto struct {
 	// The parent folder id.

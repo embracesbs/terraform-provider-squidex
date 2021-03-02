@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // GeolocationFieldEditor the model 'GeolocationFieldEditor'
 type GeolocationFieldEditor string
 

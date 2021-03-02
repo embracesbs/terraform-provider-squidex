@@ -8,11 +8,12 @@
  */
 
 package squidexclient
+
 // DateTimeCalculatedDefaultValue the model 'DateTimeCalculatedDefaultValue'
 type DateTimeCalculatedDefaultValue string
 
 // List of DateTimeCalculatedDefaultValue
 const (
-	DateTimeCalculatedDefaultValueNOW DateTimeCalculatedDefaultValue = "Now"
+	DateTimeCalculatedDefaultValueNOW   DateTimeCalculatedDefaultValue = "Now"
 	DateTimeCalculatedDefaultValueTODAY DateTimeCalculatedDefaultValue = "Today"
 )

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SlackRuleActionDtoAllOf struct for SlackRuleActionDtoAllOf
 type SlackRuleActionDtoAllOf struct {
 	// The slack webhook url.

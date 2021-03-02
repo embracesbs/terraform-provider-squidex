@@ -8,5 +8,6 @@
  */
 
 package squidexclient
+
 // FilterNodeOfIJsonValue struct for FilterNodeOfIJsonValue
-type FilterNodeOfIJsonValue struct {}
+type FilterNodeOfIJsonValue struct{}

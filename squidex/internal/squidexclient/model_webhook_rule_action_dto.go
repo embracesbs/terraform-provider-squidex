@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WebhookRuleActionDto struct for WebhookRuleActionDto
 type WebhookRuleActionDto struct {
 	ActionType string `json:"actionType"`

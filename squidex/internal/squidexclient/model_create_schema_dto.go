@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateSchemaDto struct for CreateSchemaDto
 type CreateSchemaDto struct {
 	// The optional properties.

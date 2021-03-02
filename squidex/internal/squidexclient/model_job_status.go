@@ -8,13 +8,14 @@
  */
 
 package squidexclient
+
 // JobStatus the model 'JobStatus'
 type JobStatus string
 
 // List of JobStatus
 const (
-	JobStatusCREATED JobStatus = "Created"
-	JobStatusSTARTED JobStatus = "Started"
+	JobStatusCREATED   JobStatus = "Created"
+	JobStatusSTARTED   JobStatus = "Started"
 	JobStatusCOMPLETED JobStatus = "Completed"
-	JobStatusFAILED JobStatus = "Failed"
+	JobStatusFAILED    JobStatus = "Failed"
 )

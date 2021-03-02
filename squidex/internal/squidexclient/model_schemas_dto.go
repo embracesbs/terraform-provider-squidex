@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SchemasDto struct for SchemasDto
 type SchemasDto struct {
 	// The links.

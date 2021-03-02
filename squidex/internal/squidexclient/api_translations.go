@@ -44,7 +44,7 @@ func (a *TranslationsApiService) TranslationsPostTranslation(ctx _context.Contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/translations"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

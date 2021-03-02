@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BackupJobsDto struct for BackupJobsDto
 type BackupJobsDto struct {
 	// The links.

@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // SchemaDtoAllOf struct for SchemaDtoAllOf
 type SchemaDtoAllOf struct {
 	// The id of the schema.

@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // BackupJobDtoAllOf struct for BackupJobDtoAllOf
 type BackupJobDtoAllOf struct {
 	// The id of the backup job.

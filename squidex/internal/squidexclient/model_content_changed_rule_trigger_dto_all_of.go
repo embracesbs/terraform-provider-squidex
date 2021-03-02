@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentChangedRuleTriggerDtoAllOf struct for ContentChangedRuleTriggerDtoAllOf
 type ContentChangedRuleTriggerDtoAllOf struct {
 	// The schema settings.

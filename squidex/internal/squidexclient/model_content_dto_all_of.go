@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // ContentDtoAllOf struct for ContentDtoAllOf
 type ContentDtoAllOf struct {
 	// The if of the content item.

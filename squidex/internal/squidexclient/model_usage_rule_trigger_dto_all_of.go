@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UsageRuleTriggerDtoAllOf struct for UsageRuleTriggerDtoAllOf
 type UsageRuleTriggerDtoAllOf struct {
 	// The number of monthly api calls.

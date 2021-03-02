@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleElementDto struct for RuleElementDto
 type RuleElementDto struct {
 	// Describes the action or trigger type.

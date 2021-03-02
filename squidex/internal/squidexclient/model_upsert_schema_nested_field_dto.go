@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpsertSchemaNestedFieldDto struct for UpsertSchemaNestedFieldDto
 type UpsertSchemaNestedFieldDto struct {
 	// The name of the field. Must be unique within the schema.

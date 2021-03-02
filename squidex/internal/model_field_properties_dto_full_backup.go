@@ -1,5 +1,5 @@
-
 package squidexclient
+
 // FieldPropertiesDto struct for FieldPropertiesDto
 // For field descriptions, requirements etc. check out the full documentation on https://cloud.squidex.io/api/docs (ensure correct version)
 // All ...DefaultValues fields: if partitioning=language, then there is a default for each language, otherwise use defaultvalue field
@@ -23,7 +23,7 @@ type FieldPropertiesDto struct {
 	Tags *[]string `json:"tags,omitempty"`
 	// FieldType, depending the field type there are other fields required (prefixed with fieldType) other are ignored.
 	FieldType string `json:"fieldType"`
-	
+
 	// Editor
 	Editor *string `json:"editor,omitempty"`
 	// MinItems The minimum allowed items for the field value.
@@ -31,17 +31,17 @@ type FieldPropertiesDto struct {
 	// MaxItems The maximum allowed items for the field value.
 	MaxItems *int `json:"maxItems,omitempty"`
 	// PreviewMode The preview mode for the asset.
-	/*	Options: 
+	/*	Options:
 		- asset(ImageAndFileName Image FileName)
 	*/
 	PreviewMode *string `json:"previewMode,omitempty"`
 	/*	DefaultValues The language specific default value as a list of asset ids.
-		Options: 
+		Options:
 		- lists: {"nl-NL": ["asset1","tag2"]}
 		- string: {"nl-NL": "asset1"}
 		- int/double: {"nl-NL": 10.9}
 		- bool: {"nl-NL": true}
-	*/ 
+	*/
 	DefaultValues *map[string]interface{} `json:"defaultValues,omitempty"`
 	/*	DefaultValue The default value for the field value.
 		Options:
@@ -84,18 +84,18 @@ type FieldPropertiesDto struct {
 	*/
 	MaxValue *interface{} `json:"maxValue,omitempty"`
 	/* MinValue The minimum allowed value for the field value.
-		Options:
-		string
-		float32
+	Options:
+	string
+	float32
 	*/
 	MinValue *interface{} `json:"minValue,omitempty"`
 	// CalculatedDefaultValue The calculated default value for the field value.
 	// Options: Now Today (or leave empty for none)
 	CalculatedDefaultValue *string `json:"calculatedDefaultValue,omitempty"`
 	/*	AllowedValues The allowed values for the field value.
-		Options:
-	 	[]string
-	 	[]float32
+			Options:
+		 	[]string
+		 	[]float32
 	*/
 	AllowedValues *[]interface{} `json:"allowedValues,omitempty"`
 	// Unique Indicates if the field value must be unique. Ignored for nested fields and localized fields.
@@ -123,9 +123,9 @@ type FieldPropertiesDto struct {
 	// MaxWords The maximum allowed number of words for the field value.
 	MaxWords *int `json:"maxWords,omitempty"`
 	/*	ContentType How the string content should be interpreted. (Required for fieldtype string)
-		Options: 
-		Unspecified 
-		Markdown 
+		Options:
+		Unspecified
+		Markdown
 		Html
 	*/
 	ContentType *string `json:"contentType,omitempty"`

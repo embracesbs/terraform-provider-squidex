@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RuleResult the model 'RuleResult'
 type RuleResult string
 
@@ -15,6 +16,6 @@ type RuleResult string
 const (
 	RuleResultPENDING RuleResult = "Pending"
 	RuleResultSUCCESS RuleResult = "Success"
-	RuleResultFAILED RuleResult = "Failed"
+	RuleResultFAILED  RuleResult = "Failed"
 	RuleResultTIMEOUT RuleResult = "Timeout"
 )

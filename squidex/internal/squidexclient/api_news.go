@@ -11,10 +11,10 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -27,7 +27,7 @@ type NewsApiService service
 
 // NewsGetNewsOpts Optional parameters for the method 'NewsGetNews'
 type NewsGetNewsOpts struct {
-    Version optional.Int32
+	Version optional.Int32
 }
 
 /*

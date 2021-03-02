@@ -8,14 +8,15 @@
  */
 
 package squidexclient
+
 // ImageFormat the model 'ImageFormat'
 type ImageFormat string
 
 // List of ImageFormat
 const (
 	ImageFormatAUTO ImageFormat = "Auto"
-	ImageFormatPNG ImageFormat = "PNG"
+	ImageFormatPNG  ImageFormat = "PNG"
 	ImageFormatJPEG ImageFormat = "JPEG"
-	ImageFormatTGA ImageFormat = "TGA"
-	ImageFormatGIF ImageFormat = "GIF"
+	ImageFormatTGA  ImageFormat = "TGA"
+	ImageFormatGIF  ImageFormat = "GIF"
 )

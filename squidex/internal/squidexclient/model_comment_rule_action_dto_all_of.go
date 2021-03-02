@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CommentRuleActionDtoAllOf struct for CommentRuleActionDtoAllOf
 type CommentRuleActionDtoAllOf struct {
 	// The comment text.

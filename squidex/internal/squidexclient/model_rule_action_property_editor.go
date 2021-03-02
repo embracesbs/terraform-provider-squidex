@@ -8,17 +8,18 @@
  */
 
 package squidexclient
+
 // RuleActionPropertyEditor the model 'RuleActionPropertyEditor'
 type RuleActionPropertyEditor string
 
 // List of RuleActionPropertyEditor
 const (
-	RuleActionPropertyEditorCHECKBOX RuleActionPropertyEditor = "Checkbox"
-	RuleActionPropertyEditorDROPDOWN RuleActionPropertyEditor = "Dropdown"
-	RuleActionPropertyEditorEMAIL RuleActionPropertyEditor = "Email"
-	RuleActionPropertyEditorNUMBER RuleActionPropertyEditor = "Number"
-	RuleActionPropertyEditorPASSWORD RuleActionPropertyEditor = "Password"
-	RuleActionPropertyEditorTEXT RuleActionPropertyEditor = "Text"
+	RuleActionPropertyEditorCHECKBOX  RuleActionPropertyEditor = "Checkbox"
+	RuleActionPropertyEditorDROPDOWN  RuleActionPropertyEditor = "Dropdown"
+	RuleActionPropertyEditorEMAIL     RuleActionPropertyEditor = "Email"
+	RuleActionPropertyEditorNUMBER    RuleActionPropertyEditor = "Number"
+	RuleActionPropertyEditorPASSWORD  RuleActionPropertyEditor = "Password"
+	RuleActionPropertyEditorTEXT      RuleActionPropertyEditor = "Text"
 	RuleActionPropertyEditorTEXT_AREA RuleActionPropertyEditor = "TextArea"
-	RuleActionPropertyEditorURL RuleActionPropertyEditor = "Url"
+	RuleActionPropertyEditorURL       RuleActionPropertyEditor = "Url"
 )

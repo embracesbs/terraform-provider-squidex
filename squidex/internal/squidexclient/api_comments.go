@@ -11,11 +11,11 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -44,11 +44,11 @@ func (a *CommentsApiService) CommentsDeleteComment(ctx _context.Context, app str
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/comments/{commentsId}/{commentId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -109,7 +109,7 @@ func (a *CommentsApiService) CommentsDeleteComment(ctx _context.Context, app str
 
 // CommentsGetCommentsOpts Optional parameters for the method 'CommentsGetComments'
 type CommentsGetCommentsOpts struct {
-    Version optional.Int64
+	Version optional.Int64
 }
 
 /*
@@ -134,9 +134,9 @@ func (a *CommentsApiService) CommentsGetComments(ctx _context.Context, app strin
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/comments/{commentsId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -227,9 +227,9 @@ func (a *CommentsApiService) CommentsPostComment(ctx _context.Context, app strin
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/comments/{commentsId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -328,11 +328,11 @@ func (a *CommentsApiService) CommentsPutComment(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/comments/{commentsId}/{commentId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentsId"+"}", _neturl.QueryEscape(parameterToString(commentsId, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", _neturl.QueryEscape(parameterToString(commentId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

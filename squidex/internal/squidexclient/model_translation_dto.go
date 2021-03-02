@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TranslationDto struct for TranslationDto
 type TranslationDto struct {
 	// The result of the translation.

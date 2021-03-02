@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AddLanguageDto struct for AddLanguageDto
 type AddLanguageDto struct {
 	// The language to add.

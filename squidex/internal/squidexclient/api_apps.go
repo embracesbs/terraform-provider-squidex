@@ -11,12 +11,12 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"os"
-	"github.com/antihax/optional"
+	"strings"
 )
 
 // Linger please
@@ -47,9 +47,9 @@ func (a *AppsApiService) AppClientsDeleteClient(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/clients/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -136,7 +136,7 @@ func (a *AppsApiService) AppClientsGetClients(ctx _context.Context, app string) 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/clients"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -224,7 +224,7 @@ func (a *AppsApiService) AppClientsPostClient(ctx _context.Context, app string, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/clients"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -325,9 +325,9 @@ func (a *AppsApiService) AppClientsPutClient(ctx _context.Context, app string, i
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/clients/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -426,9 +426,9 @@ func (a *AppsApiService) AppContributorsDeleteContributor(ctx _context.Context, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/contributors/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -514,7 +514,7 @@ func (a *AppsApiService) AppContributorsDeleteMyself(ctx _context.Context, app s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/contributors/me"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -600,7 +600,7 @@ func (a *AppsApiService) AppContributorsGetContributors(ctx _context.Context, ap
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/contributors"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -687,7 +687,7 @@ func (a *AppsApiService) AppContributorsPostContributor(ctx _context.Context, ap
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/contributors"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -786,9 +786,9 @@ func (a *AppsApiService) AppLanguagesDeleteLanguage(ctx _context.Context, app st
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/languages/{language}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", _neturl.QueryEscape(parameterToString(language, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", _neturl.QueryEscape(parameterToString(language, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -884,7 +884,7 @@ func (a *AppsApiService) AppLanguagesGetLanguages(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/languages"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -971,7 +971,7 @@ func (a *AppsApiService) AppLanguagesPostLanguage(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/languages"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1071,9 +1071,9 @@ func (a *AppsApiService) AppLanguagesPutLanguage(ctx _context.Context, app strin
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/languages/{language}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", _neturl.QueryEscape(parameterToString(language, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", _neturl.QueryEscape(parameterToString(language, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1173,9 +1173,9 @@ func (a *AppsApiService) AppPatternsDeletePattern(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/patterns/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1262,7 +1262,7 @@ func (a *AppsApiService) AppPatternsGetPatterns(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/patterns"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1349,7 +1349,7 @@ func (a *AppsApiService) AppPatternsPostPattern(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/patterns"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1449,9 +1449,9 @@ func (a *AppsApiService) AppPatternsPutPattern(ctx _context.Context, app string,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/patterns/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1550,9 +1550,9 @@ func (a *AppsApiService) AppRolesDeleteRole(ctx _context.Context, app string, ro
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/roles/{roleName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"roleName"+"}", _neturl.QueryEscape(parameterToString(roleName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"roleName"+"}", _neturl.QueryEscape(parameterToString(roleName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1648,7 +1648,7 @@ func (a *AppsApiService) AppRolesGetPermissions(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/roles/permissions"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1734,7 +1734,7 @@ func (a *AppsApiService) AppRolesGetRoles(ctx _context.Context, app string) (Rol
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/roles"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1821,7 +1821,7 @@ func (a *AppsApiService) AppRolesPostRole(ctx _context.Context, app string, addR
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/roles"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1921,9 +1921,9 @@ func (a *AppsApiService) AppRolesPutRole(ctx _context.Context, app string, roleN
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/roles/{roleName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"roleName"+"}", _neturl.QueryEscape(parameterToString(roleName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"roleName"+"}", _neturl.QueryEscape(parameterToString(roleName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2022,9 +2022,9 @@ func (a *AppsApiService) AppWorkflowsDeleteWorkflow(ctx _context.Context, app st
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/workflows/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2110,7 +2110,7 @@ func (a *AppsApiService) AppWorkflowsGetWorkflows(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/workflows"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2197,7 +2197,7 @@ func (a *AppsApiService) AppWorkflowsPostWorkflow(ctx _context.Context, app stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/workflows"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2297,9 +2297,9 @@ func (a *AppsApiService) AppWorkflowsPutWorkflow(ctx _context.Context, app strin
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/workflows/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2395,7 +2395,7 @@ func (a *AppsApiService) AppsDeleteApp(ctx _context.Context, app string) (*_neth
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2472,7 +2472,7 @@ func (a *AppsApiService) AppsDeleteImage(ctx _context.Context, app string) (AppD
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/image"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2558,7 +2558,7 @@ func (a *AppsApiService) AppsGetApp(ctx _context.Context, app string) (AppDto, *
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2728,7 +2728,7 @@ func (a *AppsApiService) AppsGetImage(ctx _context.Context, app string) (*os.Fil
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/image"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2922,7 +2922,7 @@ func (a *AppsApiService) AppsUpdateApp(ctx _context.Context, app string, updateA
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3004,7 +3004,7 @@ func (a *AppsApiService) AppsUpdateApp(ctx _context.Context, app string, updateA
 
 // AppsUploadImageOpts Optional parameters for the method 'AppsUploadImage'
 type AppsUploadImageOpts struct {
-    File optional.Interface
+	File optional.Interface
 }
 
 /*
@@ -3012,7 +3012,7 @@ AppsUploadImage Upload the app image.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param app The name of the app to update.
  * @param optional nil or *AppsUploadImageOpts - Optional Parameters:
- * @param "File" (optional.Interface of *os.File) - 
+ * @param "File" (optional.Interface of *os.File) -
 @return AppDto
 */
 func (a *AppsApiService) AppsUploadImage(ctx _context.Context, app string, localVarOptionals *AppsUploadImageOpts) (AppDto, *_nethttp.Response, error) {
@@ -3027,7 +3027,7 @@ func (a *AppsApiService) AppsUploadImage(ctx _context.Context, app string, local
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/image"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3056,7 +3056,7 @@ func (a *AppsApiService) AppsUploadImage(ctx _context.Context, app string, local
 		localVarFileOk := false
 		localVarFile, localVarFileOk = localVarOptionals.File.Value().(*os.File)
 		if !localVarFileOk {
-				return localVarReturnValue, nil, reportError("file should be *os.File")
+			return localVarReturnValue, nil, reportError("file should be *os.File")
 		}
 	}
 	if localVarFile != nil {

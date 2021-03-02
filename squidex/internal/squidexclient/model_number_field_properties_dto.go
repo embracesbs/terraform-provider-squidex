@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NumberFieldPropertiesDto struct for NumberFieldPropertiesDto
 type NumberFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,8 +24,8 @@ type NumberFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The default value for the field value.
 	DefaultValue *float64 `json:"defaultValue,omitempty"`
 	// The maximum allowed value for the field value.

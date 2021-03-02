@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // CallsUsagePerDateDto struct for CallsUsagePerDateDto
 type CallsUsagePerDateDto struct {
 	// The date when the usage was tracked.

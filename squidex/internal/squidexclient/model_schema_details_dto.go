@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // SchemaDetailsDto struct for SchemaDetailsDto
 type SchemaDetailsDto struct {
 	// The links.

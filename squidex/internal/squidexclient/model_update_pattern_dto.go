@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdatePatternDto struct for UpdatePatternDto
 type UpdatePatternDto struct {
 	// The name of the suggestion.

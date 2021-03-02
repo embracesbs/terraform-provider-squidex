@@ -8,16 +8,17 @@
  */
 
 package squidexclient
+
 // ResizeMode the model 'ResizeMode'
 type ResizeMode string
 
 // List of ResizeMode
 const (
-	ResizeModeCROP ResizeMode = "Crop"
+	ResizeModeCROP        ResizeMode = "Crop"
 	ResizeModeCROP_UPSIZE ResizeMode = "CropUpsize"
-	ResizeModePAD ResizeMode = "Pad"
-	ResizeModeBOX_PAD ResizeMode = "BoxPad"
-	ResizeModeMAX ResizeMode = "Max"
-	ResizeModeMIN ResizeMode = "Min"
-	ResizeModeSTRETCH ResizeMode = "Stretch"
+	ResizeModePAD         ResizeMode = "Pad"
+	ResizeModeBOX_PAD     ResizeMode = "BoxPad"
+	ResizeModeMAX         ResizeMode = "Max"
+	ResizeModeMIN         ResizeMode = "Min"
+	ResizeModeSTRETCH     ResizeMode = "Stretch"
 )

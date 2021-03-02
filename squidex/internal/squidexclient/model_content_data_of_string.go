@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentDataOfString struct for ContentDataOfString
 type ContentDataOfString struct {
 	ValidValues []KeyValuePairOfStringAndContentFieldData `json:"ValidValues,omitempty"`

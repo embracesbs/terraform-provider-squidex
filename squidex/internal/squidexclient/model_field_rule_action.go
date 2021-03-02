@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // FieldRuleAction the model 'FieldRuleAction'
 type FieldRuleAction string
 
 // List of FieldRuleAction
 const (
 	FieldRuleActionDISABLE FieldRuleAction = "Disable"
-	FieldRuleActionHIDE FieldRuleAction = "Hide"
+	FieldRuleActionHIDE    FieldRuleAction = "Hide"
 	FieldRuleActionREQUIRE FieldRuleAction = "Require"
 )

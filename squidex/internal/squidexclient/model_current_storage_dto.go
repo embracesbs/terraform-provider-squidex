@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CurrentStorageDto struct for CurrentStorageDto
 type CurrentStorageDto struct {
 	// The size in bytes.

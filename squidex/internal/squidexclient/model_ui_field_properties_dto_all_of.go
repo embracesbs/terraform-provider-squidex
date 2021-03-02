@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UiFieldPropertiesDtoAllOf struct for UiFieldPropertiesDtoAllOf
 type UiFieldPropertiesDtoAllOf struct {
 	// The editor that is used to manage this field.

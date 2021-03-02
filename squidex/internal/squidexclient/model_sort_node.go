@@ -8,8 +8,9 @@
  */
 
 package squidexclient
+
 // SortNode struct for SortNode
 type SortNode struct {
-	Path []string `json:"path,omitempty"`
+	Path  []string  `json:"path,omitempty"`
 	Order SortOrder `json:"order,omitempty"`
 }

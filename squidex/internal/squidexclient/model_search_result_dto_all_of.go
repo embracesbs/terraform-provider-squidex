@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SearchResultDtoAllOf struct for SearchResultDtoAllOf
 type SearchResultDtoAllOf struct {
 	// The name of the search result.

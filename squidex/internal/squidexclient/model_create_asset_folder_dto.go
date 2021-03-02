@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateAssetFolderDto struct for CreateAssetFolderDto
 type CreateAssetFolderDto struct {
 	// The name of the folder.

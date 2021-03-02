@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // ChangeStatusDto struct for ChangeStatusDto
 type ChangeStatusDto struct {
 	// The new status.

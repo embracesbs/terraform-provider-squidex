@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PatternDtoAllOf struct for PatternDtoAllOf
 type PatternDtoAllOf struct {
 	// Unique id of the pattern.

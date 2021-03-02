@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SchemasDtoAllOf struct for SchemasDtoAllOf
 type SchemasDtoAllOf struct {
 	// The schemas.

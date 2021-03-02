@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // DateTimeFieldPropertiesDto struct for DateTimeFieldPropertiesDto
 type DateTimeFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -26,8 +28,8 @@ type DateTimeFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The default value for the field value.
 	DefaultValue *time.Time `json:"defaultValue,omitempty"`
 	// The maximum allowed value for the field value.

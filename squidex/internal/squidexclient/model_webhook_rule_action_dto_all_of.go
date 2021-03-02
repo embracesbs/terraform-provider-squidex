@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WebhookRuleActionDtoAllOf struct for WebhookRuleActionDtoAllOf
 type WebhookRuleActionDtoAllOf struct {
 	// The url to the webhook.

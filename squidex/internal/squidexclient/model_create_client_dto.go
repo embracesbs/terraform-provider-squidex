@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateClientDto struct for CreateClientDto
 type CreateClientDto struct {
 	// The id of the client.

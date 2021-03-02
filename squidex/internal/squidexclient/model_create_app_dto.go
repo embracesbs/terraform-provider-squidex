@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateAppDto struct for CreateAppDto
 type CreateAppDto struct {
 	// The name of the app.

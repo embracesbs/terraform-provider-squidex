@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FieldDto struct for FieldDto
 type FieldDto struct {
 	// The links.

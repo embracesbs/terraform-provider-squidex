@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UsersDto struct for UsersDto
 type UsersDto struct {
 	// The links.

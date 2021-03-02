@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AzureQueueRuleActionDto struct for AzureQueueRuleActionDto
 type AzureQueueRuleActionDto struct {
 	ActionType string `json:"actionType"`

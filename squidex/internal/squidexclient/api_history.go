@@ -11,11 +11,11 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -28,7 +28,7 @@ type HistoryApiService service
 
 // HistoryGetHistoryOpts Optional parameters for the method 'HistoryGetHistory'
 type HistoryGetHistoryOpts struct {
-    Channel optional.String
+	Channel optional.String
 }
 
 /*
@@ -51,7 +51,7 @@ func (a *HistoryApiService) HistoryGetHistory(ctx _context.Context, app string, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/history"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetChangedRuleTriggerDtoAllOf struct for AssetChangedRuleTriggerDtoAllOf
 type AssetChangedRuleTriggerDtoAllOf struct {
 	// Javascript condition when to trigger.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FieldRuleDto struct for FieldRuleDto
 type FieldRuleDto struct {
 	// The action to perform when the condition is met.

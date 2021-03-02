@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CreateUserDto struct for CreateUserDto
 type CreateUserDto struct {
 	// The email of the user. Unique value.

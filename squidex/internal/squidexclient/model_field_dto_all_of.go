@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FieldDtoAllOf struct for FieldDtoAllOf
 type FieldDtoAllOf struct {
 	// The id of the field.

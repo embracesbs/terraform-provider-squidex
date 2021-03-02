@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PlanChangedDto struct for PlanChangedDto
 type PlanChangedDto struct {
 	// Optional redirect uri.

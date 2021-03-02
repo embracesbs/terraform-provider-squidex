@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // GeolocationFieldPropertiesDtoAllOf struct for GeolocationFieldPropertiesDtoAllOf
 type GeolocationFieldPropertiesDtoAllOf struct {
 	// The default value for the field value.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // FastlyRuleActionDtoAllOf struct for FastlyRuleActionDtoAllOf
 type FastlyRuleActionDtoAllOf struct {
 	// The API key to grant access to Squidex.

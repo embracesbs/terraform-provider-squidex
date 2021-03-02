@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AppLanguageDto struct for AppLanguageDto
 type AppLanguageDto struct {
 	// The links.

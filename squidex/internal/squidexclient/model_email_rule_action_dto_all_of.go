@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // EmailRuleActionDtoAllOf struct for EmailRuleActionDtoAllOf
 type EmailRuleActionDtoAllOf struct {
 	// The IP address or host to the SMTP server.

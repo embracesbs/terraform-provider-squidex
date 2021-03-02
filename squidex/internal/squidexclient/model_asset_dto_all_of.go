@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // AssetDtoAllOf struct for AssetDtoAllOf
 type AssetDtoAllOf struct {
 	// The id of the asset.

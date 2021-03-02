@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ClientsDtoAllOf struct for ClientsDtoAllOf
 type ClientsDtoAllOf struct {
 	// The clients.

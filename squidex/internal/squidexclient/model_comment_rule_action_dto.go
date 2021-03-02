@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // CommentRuleActionDto struct for CommentRuleActionDto
 type CommentRuleActionDto struct {
 	ActionType string `json:"actionType"`

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RulesDtoAllOf struct for RulesDtoAllOf
 type RulesDtoAllOf struct {
 	// The rules.

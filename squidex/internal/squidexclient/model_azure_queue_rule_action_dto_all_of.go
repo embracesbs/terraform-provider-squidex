@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AzureQueueRuleActionDtoAllOf struct for AzureQueueRuleActionDtoAllOf
 type AzureQueueRuleActionDtoAllOf struct {
 	// The connection string to the storage account.

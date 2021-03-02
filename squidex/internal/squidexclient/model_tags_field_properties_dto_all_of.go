@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TagsFieldPropertiesDtoAllOf struct for TagsFieldPropertiesDtoAllOf
 type TagsFieldPropertiesDtoAllOf struct {
 	// The minimum allowed items for the field value.

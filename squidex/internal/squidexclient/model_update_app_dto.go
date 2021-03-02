@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateAppDto struct for UpdateAppDto
 type UpdateAppDto struct {
 	// The optional label of your app.

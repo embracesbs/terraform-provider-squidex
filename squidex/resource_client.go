@@ -18,8 +18,8 @@ func resourceClient() *schema.Resource {
 		DeleteContext: resourceClientDelete,
 		Schema: map[string]*schema.Schema{
 			"invalidated_state": {
-				Type: schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
 			"app_name": &schema.Schema{
@@ -38,7 +38,7 @@ func resourceClient() *schema.Resource {
 	}
 }
 
-func setDataFromClientDto(data *schema.ResourceData, client *squidexclient.ClientDto) (error) {
+func setDataFromClientDto(data *schema.ResourceData, client *squidexclient.ClientDto) error {
 	data.SetId(client.Id)
 	data.Set("name", client.Name)
 	data.Set("role", client.Role)
@@ -54,9 +54,9 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	appName := data.Get("app_name").(string)
 	id := data.Id()
-	
+
 	data.Set("invalidated_state", false)
-	
+
 	result, response, err := client.AppsApi.AppClientsGetClients(ctx, appName)
 
 	err = common.HandleAPIError(response, err)
@@ -67,10 +67,10 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	var resultItem *squidexclient.ClientDto
 	for i := range result.Items {
-    	if strings.EqualFold(result.Items[i].Id, id) {
+		if strings.EqualFold(result.Items[i].Id, id) {
 			resultItem = &result.Items[i]
-        	break
-    	}
+			break
+		}
 	}
 
 	if resultItem == nil {
@@ -102,7 +102,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
@@ -110,10 +110,10 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 
 	var resultItem *squidexclient.ClientDto
 	for i := range result.Items {
-    	if strings.EqualFold(result.Items[i].Name, name) {
+		if strings.EqualFold(result.Items[i].Name, name) {
 			resultItem = &result.Items[i]
-        	break
-    	}
+			break
+		}
 	}
 
 	if resultItem == nil {
@@ -144,7 +144,7 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
@@ -165,7 +165,7 @@ func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta i
 	_, response, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		return diag.FromErr(err)
 	}

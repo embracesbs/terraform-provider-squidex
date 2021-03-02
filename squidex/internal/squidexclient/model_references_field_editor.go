@@ -8,13 +8,14 @@
  */
 
 package squidexclient
+
 // ReferencesFieldEditor the model 'ReferencesFieldEditor'
 type ReferencesFieldEditor string
 
 // List of ReferencesFieldEditor
 const (
-	ReferencesFieldEditorLIST ReferencesFieldEditor = "List"
-	ReferencesFieldEditorDROPDOWN ReferencesFieldEditor = "Dropdown"
-	ReferencesFieldEditorTAGS ReferencesFieldEditor = "Tags"
+	ReferencesFieldEditorLIST       ReferencesFieldEditor = "List"
+	ReferencesFieldEditorDROPDOWN   ReferencesFieldEditor = "Dropdown"
+	ReferencesFieldEditorTAGS       ReferencesFieldEditor = "Tags"
 	ReferencesFieldEditorCHECKBOXES ReferencesFieldEditor = "Checkboxes"
 )

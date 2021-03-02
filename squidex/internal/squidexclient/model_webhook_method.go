@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // WebhookMethod the model 'WebhookMethod'
 type WebhookMethod string
 
 // List of WebhookMethod
 const (
 	WebhookMethodPOST WebhookMethod = "POST"
-	WebhookMethodPUT WebhookMethod = "PUT"
-	WebhookMethodGET WebhookMethod = "GET"
+	WebhookMethodPUT  WebhookMethod = "PUT"
+	WebhookMethodGET  WebhookMethod = "GET"
 )

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PatternsDto struct for PatternsDto
 type PatternsDto struct {
 	// The links.

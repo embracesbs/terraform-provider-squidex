@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ElasticSearchRuleActionDtoAllOf struct for ElasticSearchRuleActionDtoAllOf
 type ElasticSearchRuleActionDtoAllOf struct {
 	// The url to the elastic search instance or cluster.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateSchemaDto struct for UpdateSchemaDto
 type UpdateSchemaDto struct {
 	// Optional label for the editor.

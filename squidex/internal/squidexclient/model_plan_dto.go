@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PlanDto struct for PlanDto
 type PlanDto struct {
 	// The id of the plan.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UiFieldPropertiesDto struct for UiFieldPropertiesDto
 type UiFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,8 +24,8 @@ type UiFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The editor that is used to manage this field.
 	Editor UiFieldEditor `json:"editor,omitempty"`
 }

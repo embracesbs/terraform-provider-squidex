@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-    log.SetOutput(os.Stderr)
-    log.Println("[INFO] Does this even work?")
+	log.SetOutput(os.Stderr)
+	log.Println("[INFO] Does this even work?")
 
 	plugin.Serve(&plugin.ServeOpts{
 		ProviderFunc: squidex.Provider,

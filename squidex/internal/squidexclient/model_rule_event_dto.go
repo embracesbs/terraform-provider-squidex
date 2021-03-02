@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // RuleEventDto struct for RuleEventDto
 type RuleEventDto struct {
 	// The links.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // RoleDto struct for RoleDto
 type RoleDto struct {
 	// The links.

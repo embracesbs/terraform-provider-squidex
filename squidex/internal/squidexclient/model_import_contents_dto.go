@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ImportContentsDto struct for ImportContentsDto
 type ImportContentsDto struct {
 	// The data to import.

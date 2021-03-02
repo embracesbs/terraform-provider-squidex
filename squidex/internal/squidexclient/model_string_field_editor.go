@@ -8,19 +8,20 @@
  */
 
 package squidexclient
+
 // StringFieldEditor the model 'StringFieldEditor'
 type StringFieldEditor string
 
 // List of StringFieldEditor
 const (
-	StringFieldEditorINPUT StringFieldEditor = "Input"
-	StringFieldEditorCOLOR StringFieldEditor = "Color"
-	StringFieldEditorMARKDOWN StringFieldEditor = "Markdown"
-	StringFieldEditorDROPDOWN StringFieldEditor = "Dropdown"
-	StringFieldEditorHTML StringFieldEditor = "Html"
-	StringFieldEditorRADIO StringFieldEditor = "Radio"
-	StringFieldEditorRICH_TEXT StringFieldEditor = "RichText"
-	StringFieldEditorSLUG StringFieldEditor = "Slug"
+	StringFieldEditorINPUT       StringFieldEditor = "Input"
+	StringFieldEditorCOLOR       StringFieldEditor = "Color"
+	StringFieldEditorMARKDOWN    StringFieldEditor = "Markdown"
+	StringFieldEditorDROPDOWN    StringFieldEditor = "Dropdown"
+	StringFieldEditorHTML        StringFieldEditor = "Html"
+	StringFieldEditorRADIO       StringFieldEditor = "Radio"
+	StringFieldEditorRICH_TEXT   StringFieldEditor = "RichText"
+	StringFieldEditorSLUG        StringFieldEditor = "Slug"
 	StringFieldEditorSTOCK_PHOTO StringFieldEditor = "StockPhoto"
-	StringFieldEditorTEXT_AREA StringFieldEditor = "TextArea"
+	StringFieldEditorTEXT_AREA   StringFieldEditor = "TextArea"
 )

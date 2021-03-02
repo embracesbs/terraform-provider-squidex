@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AddFieldDto struct for AddFieldDto
 type AddFieldDto struct {
 	// The name of the field. Must be unique within the schema.

@@ -11,12 +11,12 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"os"
-	"github.com/antihax/optional"
+	"strings"
 )
 
 // Linger please
@@ -45,7 +45,7 @@ func (a *UsersApiService) UsersGetUser(ctx _context.Context, id string) (UserDto
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/users/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -131,7 +131,7 @@ func (a *UsersApiService) UsersGetUserPicture(ctx _context.Context, id string) (
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/users/{id}/picture"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -284,7 +284,7 @@ func (a *UsersApiService) UsersGetUserResources(ctx _context.Context) (Resources
 
 // UsersGetUsersOpts Optional parameters for the method 'UsersGetUsers'
 type UsersGetUsersOpts struct {
-    Query optional.String
+	Query optional.String
 }
 
 /*

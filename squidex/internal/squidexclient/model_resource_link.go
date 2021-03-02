@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ResourceLink struct for ResourceLink
 type ResourceLink struct {
 	// The link url.

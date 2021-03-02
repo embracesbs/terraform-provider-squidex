@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ElasticSearchRuleActionDto struct for ElasticSearchRuleActionDto
 type ElasticSearchRuleActionDto struct {
 	ActionType string `json:"actionType"`

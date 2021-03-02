@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AppLanguageDtoAllOf struct for AppLanguageDtoAllOf
 type AppLanguageDtoAllOf struct {
 	// The iso code of the language.

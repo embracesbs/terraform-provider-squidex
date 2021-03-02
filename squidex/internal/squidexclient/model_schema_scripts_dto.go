@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SchemaScriptsDto struct for SchemaScriptsDto
 type SchemaScriptsDto struct {
 	// The script that is executed for each query when querying contents.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpsertSchemaDto struct for UpsertSchemaDto
 type UpsertSchemaDto struct {
 	// The optional properties.

@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // AppDtoAllOf struct for AppDtoAllOf
 type AppDtoAllOf struct {
 	// The name of the app.

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // SlackRuleActionDto struct for SlackRuleActionDto
 type SlackRuleActionDto struct {
 	ActionType string `json:"actionType"`

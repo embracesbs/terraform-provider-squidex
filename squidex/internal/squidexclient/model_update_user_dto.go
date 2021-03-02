@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateUserDto struct for UpdateUserDto
 type UpdateUserDto struct {
 	// The email of the user. Unique value.

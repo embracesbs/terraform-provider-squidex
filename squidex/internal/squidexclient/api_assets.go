@@ -11,12 +11,12 @@ package squidexclient
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"os"
-	"github.com/antihax/optional"
+	"strings"
 )
 
 // Linger please
@@ -29,19 +29,19 @@ type AssetsApiService service
 
 // AssetContentGetAssetContentOpts Optional parameters for the method 'AssetContentGetAssetContent'
 type AssetContentGetAssetContentOpts struct {
-    Version optional.Int64
-    Cache optional.Int64
-    Download optional.Int32
-    Width optional.Int32
-    Height optional.Int32
-    Quality optional.Int32
-    Mode optional.Interface
-    FocusX optional.Float32
-    FocusY optional.Float32
-    Nofocus optional.Bool
-    Keepformat optional.Bool
-    Force optional.Bool
-    Format optional.Interface
+	Version    optional.Int64
+	Cache      optional.Int64
+	Download   optional.Int32
+	Width      optional.Int32
+	Height     optional.Int32
+	Quality    optional.Int32
+	Mode       optional.Interface
+	FocusX     optional.Float32
+	FocusY     optional.Float32
+	Nofocus    optional.Bool
+	Keepformat optional.Bool
+	Force      optional.Bool
+	Format     optional.Interface
 }
 
 /*
@@ -76,7 +76,7 @@ func (a *AssetsApiService) AssetContentGetAssetContent(ctx _context.Context, id 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/assets/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -185,19 +185,19 @@ func (a *AssetsApiService) AssetContentGetAssetContent(ctx _context.Context, id 
 
 // AssetContentGetAssetContentBySlugOpts Optional parameters for the method 'AssetContentGetAssetContentBySlug'
 type AssetContentGetAssetContentBySlugOpts struct {
-    Version optional.Int64
-    Cache optional.Int64
-    Download optional.Int32
-    Width optional.Int32
-    Height optional.Int32
-    Quality optional.Int32
-    Mode optional.Interface
-    FocusX optional.Float32
-    FocusY optional.Float32
-    Nofocus optional.Bool
-    Keepformat optional.Bool
-    Force optional.Bool
-    Format optional.Interface
+	Version    optional.Int64
+	Cache      optional.Int64
+	Download   optional.Int32
+	Width      optional.Int32
+	Height     optional.Int32
+	Quality    optional.Int32
+	Mode       optional.Interface
+	FocusX     optional.Float32
+	FocusY     optional.Float32
+	Nofocus    optional.Bool
+	Keepformat optional.Bool
+	Force      optional.Bool
+	Format     optional.Interface
 }
 
 /*
@@ -234,11 +234,11 @@ func (a *AssetsApiService) AssetContentGetAssetContentBySlug(ctx _context.Contex
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/assets/{app}/{idOrSlug}/{more}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"idOrSlug"+"}", _neturl.QueryEscape(parameterToString(idOrSlug, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"idOrSlug"+"}", _neturl.QueryEscape(parameterToString(idOrSlug, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"more"+"}", _neturl.QueryEscape(parameterToString(more, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"more"+"}", _neturl.QueryEscape(parameterToString(more, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -362,9 +362,9 @@ func (a *AssetsApiService) AssetFoldersDeleteAssetFolder(ctx _context.Context, a
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/folders/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -425,7 +425,7 @@ func (a *AssetsApiService) AssetFoldersDeleteAssetFolder(ctx _context.Context, a
 
 // AssetFoldersGetAssetFoldersOpts Optional parameters for the method 'AssetFoldersGetAssetFolders'
 type AssetFoldersGetAssetFoldersOpts struct {
-    ParentId optional.String
+	ParentId optional.String
 }
 
 /*
@@ -449,7 +449,7 @@ func (a *AssetsApiService) AssetFoldersGetAssetFolders(ctx _context.Context, app
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/folders"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -539,7 +539,7 @@ func (a *AssetsApiService) AssetFoldersPostAssetFolder(ctx _context.Context, app
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/folders"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -639,9 +639,9 @@ func (a *AssetsApiService) AssetFoldersPutAssetFolder(ctx _context.Context, app 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/folders/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -741,9 +741,9 @@ func (a *AssetsApiService) AssetFoldersPutAssetFolderParent(ctx _context.Context
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/folders/{id}/parent"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -825,7 +825,7 @@ func (a *AssetsApiService) AssetFoldersPutAssetFolderParent(ctx _context.Context
 
 // AssetsDeleteAssetOpts Optional parameters for the method 'AssetsDeleteAsset'
 type AssetsDeleteAssetOpts struct {
-    CheckReferrers optional.Bool
+	CheckReferrers optional.Bool
 }
 
 /*
@@ -847,9 +847,9 @@ func (a *AssetsApiService) AssetsDeleteAsset(ctx _context.Context, app string, i
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -930,9 +930,9 @@ func (a *AssetsApiService) AssetsGetAsset(ctx _context.Context, app string, id s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1002,13 +1002,13 @@ func (a *AssetsApiService) AssetsGetAsset(ctx _context.Context, app string, id s
 
 // AssetsGetAssetsOpts Optional parameters for the method 'AssetsGetAssets'
 type AssetsGetAssetsOpts struct {
-    ParentId optional.String
-    Ids optional.String
-    Q optional.String
-    Top optional.Int32
-    Skip optional.Int32
-    Orderby optional.String
-    Filter optional.String
+	ParentId optional.String
+	Ids      optional.String
+	Q        optional.String
+	Top      optional.Int32
+	Skip     optional.Int32
+	Orderby  optional.String
+	Filter   optional.String
 }
 
 /*
@@ -1038,7 +1038,7 @@ func (a *AssetsApiService) AssetsGetAssets(ctx _context.Context, app string, loc
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1147,7 +1147,7 @@ func (a *AssetsApiService) AssetsGetAssetsPost(ctx _context.Context, app string,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/query"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1236,7 +1236,7 @@ func (a *AssetsApiService) AssetsGetTags(ctx _context.Context, app string) (map[
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/tags"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1306,10 +1306,10 @@ func (a *AssetsApiService) AssetsGetTags(ctx _context.Context, app string) (map[
 
 // AssetsPostAssetOpts Optional parameters for the method 'AssetsPostAsset'
 type AssetsPostAssetOpts struct {
-    ParentId optional.String
-    Id optional.String
-    Duplicate optional.Bool
-    File optional.Interface
+	ParentId  optional.String
+	Id        optional.String
+	Duplicate optional.Bool
+	File      optional.Interface
 }
 
 /*
@@ -1321,7 +1321,7 @@ You can only upload one file at a time. The mime type of the file is not calcula
  * @param "ParentId" (optional.String) -  The optional parent folder id.
  * @param "Id" (optional.String) -  The optional custom asset id.
  * @param "Duplicate" (optional.Bool) -  True to duplicate the asset, event if the file has been uploaded.
- * @param "File" (optional.Interface of *os.File) - 
+ * @param "File" (optional.Interface of *os.File) -
 @return AssetDto
 */
 func (a *AssetsApiService) AssetsPostAsset(ctx _context.Context, app string, localVarOptionals *AssetsPostAssetOpts) (AssetDto, *_nethttp.Response, error) {
@@ -1336,7 +1336,7 @@ func (a *AssetsApiService) AssetsPostAsset(ctx _context.Context, app string, loc
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1374,7 +1374,7 @@ func (a *AssetsApiService) AssetsPostAsset(ctx _context.Context, app string, loc
 		localVarFileOk := false
 		localVarFile, localVarFileOk = localVarOptionals.File.Value().(*os.File)
 		if !localVarFileOk {
-				return localVarReturnValue, nil, reportError("file should be *os.File")
+			return localVarReturnValue, nil, reportError("file should be *os.File")
 		}
 	}
 	if localVarFile != nil {
@@ -1468,9 +1468,9 @@ func (a *AssetsApiService) AssetsPutAsset(ctx _context.Context, app string, id s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1552,7 +1552,7 @@ func (a *AssetsApiService) AssetsPutAsset(ctx _context.Context, app string, id s
 
 // AssetsPutAssetContentOpts Optional parameters for the method 'AssetsPutAssetContent'
 type AssetsPutAssetContentOpts struct {
-    File optional.Interface
+	File optional.Interface
 }
 
 /*
@@ -1562,7 +1562,7 @@ Use multipart request to upload an asset.
  * @param app The name of the app.
  * @param id The id of the asset.
  * @param optional nil or *AssetsPutAssetContentOpts - Optional Parameters:
- * @param "File" (optional.Interface of *os.File) - 
+ * @param "File" (optional.Interface of *os.File) -
 @return AssetDto
 */
 func (a *AssetsApiService) AssetsPutAssetContent(ctx _context.Context, app string, id string, localVarOptionals *AssetsPutAssetContentOpts) (AssetDto, *_nethttp.Response, error) {
@@ -1577,9 +1577,9 @@ func (a *AssetsApiService) AssetsPutAssetContent(ctx _context.Context, app strin
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/{id}/content"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1608,7 +1608,7 @@ func (a *AssetsApiService) AssetsPutAssetContent(ctx _context.Context, app strin
 		localVarFileOk := false
 		localVarFile, localVarFileOk = localVarOptionals.File.Value().(*os.File)
 		if !localVarFileOk {
-				return localVarReturnValue, nil, reportError("file should be *os.File")
+			return localVarReturnValue, nil, reportError("file should be *os.File")
 		}
 	}
 	if localVarFile != nil {
@@ -1702,9 +1702,9 @@ func (a *AssetsApiService) AssetsPutAssetParent(ctx _context.Context, app string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/apps/{app}/assets/{id}/parent"
-	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app"+"}", _neturl.QueryEscape(parameterToString(app, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

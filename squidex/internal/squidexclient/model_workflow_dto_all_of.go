@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WorkflowDtoAllOf struct for WorkflowDtoAllOf
 type WorkflowDtoAllOf struct {
 	// The workflow id.

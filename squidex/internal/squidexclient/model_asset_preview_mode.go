@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // AssetPreviewMode the model 'AssetPreviewMode'
 type AssetPreviewMode string
 
 // List of AssetPreviewMode
 const (
 	AssetPreviewModeIMAGE_AND_FILE_NAME AssetPreviewMode = "ImageAndFileName"
-	AssetPreviewModeIMAGE AssetPreviewMode = "Image"
-	AssetPreviewModeFILE_NAME AssetPreviewMode = "FileName"
+	AssetPreviewModeIMAGE               AssetPreviewMode = "Image"
+	AssetPreviewModeFILE_NAME           AssetPreviewMode = "FileName"
 )

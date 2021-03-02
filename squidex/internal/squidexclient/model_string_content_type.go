@@ -8,12 +8,13 @@
  */
 
 package squidexclient
+
 // StringContentType the model 'StringContentType'
 type StringContentType string
 
 // List of StringContentType
 const (
 	StringContentTypeUNSPECIFIED StringContentType = "Unspecified"
-	StringContentTypeHTML StringContentType = "Html"
-	StringContentTypeMARKDOWN StringContentType = "Markdown"
+	StringContentTypeHTML        StringContentType = "Html"
+	StringContentTypeMARKDOWN    StringContentType = "Markdown"
 )

@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ContentsIdsQueryDto struct for ContentsIdsQueryDto
 type ContentsIdsQueryDto struct {
 	// The list of ids to query.

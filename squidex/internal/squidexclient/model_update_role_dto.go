@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateRoleDto struct for UpdateRoleDto
 type UpdateRoleDto struct {
 	// Associated list of permissions.

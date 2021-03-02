@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ConfigureFieldRulesDto struct for ConfigureFieldRulesDto
 type ConfigureFieldRulesDto struct {
 	// The field rules to configure.

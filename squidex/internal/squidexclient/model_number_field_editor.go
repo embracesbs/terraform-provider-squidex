@@ -8,13 +8,14 @@
  */
 
 package squidexclient
+
 // NumberFieldEditor the model 'NumberFieldEditor'
 type NumberFieldEditor string
 
 // List of NumberFieldEditor
 const (
-	NumberFieldEditorINPUT NumberFieldEditor = "Input"
-	NumberFieldEditorRADIO NumberFieldEditor = "Radio"
+	NumberFieldEditorINPUT    NumberFieldEditor = "Input"
+	NumberFieldEditorRADIO    NumberFieldEditor = "Radio"
 	NumberFieldEditorDROPDOWN NumberFieldEditor = "Dropdown"
-	NumberFieldEditorSTARS NumberFieldEditor = "Stars"
+	NumberFieldEditorSTARS    NumberFieldEditor = "Stars"
 )

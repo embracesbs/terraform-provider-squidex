@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AssetMeta struct for AssetMeta
 type AssetMeta struct {
 	// Indicates whether the asset is a duplicate.

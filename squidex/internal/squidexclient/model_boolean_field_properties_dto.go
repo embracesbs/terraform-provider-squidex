@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BooleanFieldPropertiesDto struct for BooleanFieldPropertiesDto
 type BooleanFieldPropertiesDto struct {
 	// Optional label for the editor.
@@ -23,8 +24,8 @@ type BooleanFieldPropertiesDto struct {
 	// Optional url to the editor.
 	EditorUrl *string `json:"editorUrl,omitempty"`
 	// Tags for automation processes.
-	Tags *[]string `json:"tags,omitempty"`
-	FieldType string `json:"fieldType"`
+	Tags      *[]string `json:"tags,omitempty"`
+	FieldType string    `json:"fieldType"`
 	// The default value for the field value.
 	DefaultValue *bool `json:"defaultValue,omitempty"`
 	// Indicates that the inline editor is enabled for this field.

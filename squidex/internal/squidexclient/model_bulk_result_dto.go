@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BulkResultDto struct for BulkResultDto
 type BulkResultDto struct {
 	// The error when the import failed.

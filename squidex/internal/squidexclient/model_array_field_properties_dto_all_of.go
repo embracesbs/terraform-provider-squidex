@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // ArrayFieldPropertiesDtoAllOf struct for ArrayFieldPropertiesDtoAllOf
 type ArrayFieldPropertiesDtoAllOf struct {
 	// The minimum allowed items for the field value.

@@ -17,8 +17,8 @@ func resourceRole() *schema.Resource {
 		DeleteContext: resourceRoleDelete,
 		Schema: map[string]*schema.Schema{
 			"invalidated_state": {
-				Type: schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
 			"app_name": &schema.Schema{
@@ -57,23 +57,23 @@ func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta inter
 
 	appName := data.Get("app_name").(string)
 	name := data.Id()
-	
+
 	data.Set("invalidated_state", false)
 
 	result, response, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	var resultItem *squidexclient.RoleDto
 	for i := range result.Items {
-    	if result.Items[i].Name == name {
+		if result.Items[i].Name == name {
 			resultItem = &result.Items[i]
-        	break
-    	}
+			break
+		}
 	}
 
 	if resultItem == nil {
@@ -104,7 +104,7 @@ func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta int
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
@@ -126,14 +126,14 @@ func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta int
 	name := data.Get("name").(string)
 	permissions := toStringArray(data.Get("permissions").([]interface{}))
 	properties := data.Get("properties").(map[string]interface{})
-	
+
 	_, response, err := client.AppsApi.AppRolesPutRole(ctx, appName, name, squidexclient.UpdateRoleDto{
 		Permissions: permissions,
-		Properties: &properties,
+		Properties:  &properties,
 	})
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
@@ -156,7 +156,7 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 	_, response, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
 
 	err = common.HandleAPIError(response, err)
-	
+
 	if err != nil {
 		return diag.FromErr(err)
 	}

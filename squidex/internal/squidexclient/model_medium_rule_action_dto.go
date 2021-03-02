@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // MediumRuleActionDto struct for MediumRuleActionDto
 type MediumRuleActionDto struct {
 	ActionType string `json:"actionType"`

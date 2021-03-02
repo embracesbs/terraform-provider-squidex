@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // PrerenderRuleActionDtoAllOf struct for PrerenderRuleActionDtoAllOf
 type PrerenderRuleActionDtoAllOf struct {
 	// The prerender token from your account.

@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // CommentDto struct for CommentDto
 type CommentDto struct {
 	// The id of the comment.

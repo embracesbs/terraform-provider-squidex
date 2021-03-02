@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // NotificationRuleActionDtoAllOf struct for NotificationRuleActionDtoAllOf
 type NotificationRuleActionDtoAllOf struct {
 	// The user id or email.

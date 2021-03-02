@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // TweetRuleActionDto struct for TweetRuleActionDto
 type TweetRuleActionDto struct {
 	ActionType string `json:"actionType"`

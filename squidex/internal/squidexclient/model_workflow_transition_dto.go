@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // WorkflowTransitionDto struct for WorkflowTransitionDto
 type WorkflowTransitionDto struct {
 	// The optional expression.

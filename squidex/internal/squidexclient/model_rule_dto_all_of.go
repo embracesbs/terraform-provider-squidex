@@ -8,9 +8,11 @@
  */
 
 package squidexclient
+
 import (
 	"time"
 )
+
 // RuleDtoAllOf struct for RuleDtoAllOf
 type RuleDtoAllOf struct {
 	// The id of the rule.

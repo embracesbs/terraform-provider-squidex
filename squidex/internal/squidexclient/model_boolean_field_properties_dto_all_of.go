@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // BooleanFieldPropertiesDtoAllOf struct for BooleanFieldPropertiesDtoAllOf
 type BooleanFieldPropertiesDtoAllOf struct {
 	// The default value for the field value.

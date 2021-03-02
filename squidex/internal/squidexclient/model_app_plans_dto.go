@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // AppPlansDto struct for AppPlansDto
 type AppPlansDto struct {
 	// The available plans.

@@ -8,14 +8,15 @@
  */
 
 package squidexclient
+
 // EventConsumerDto struct for EventConsumerDto
 type EventConsumerDto struct {
 	// The links.
-	Links map[string]ResourceLink `json:"_links"`
-	IsStopped bool `json:"isStopped,omitempty"`
-	IsResetting bool `json:"isResetting,omitempty"`
-	Count int32 `json:"count,omitempty"`
-	Name string `json:"name,omitempty"`
-	Error *string `json:"error,omitempty"`
-	Position *string `json:"position,omitempty"`
+	Links       map[string]ResourceLink `json:"_links"`
+	IsStopped   bool                    `json:"isStopped,omitempty"`
+	IsResetting bool                    `json:"isResetting,omitempty"`
+	Count       int32                   `json:"count,omitempty"`
+	Name        string                  `json:"name,omitempty"`
+	Error       *string                 `json:"error,omitempty"`
+	Position    *string                 `json:"position,omitempty"`
 }

@@ -8,15 +8,16 @@
  */
 
 package squidexclient
+
 // SearchResultType the model 'SearchResultType'
 type SearchResultType string
 
 // List of SearchResultType
 const (
-	SearchResultTypeASSET SearchResultType = "Asset"
-	SearchResultTypeCONTENT SearchResultType = "Content"
+	SearchResultTypeASSET     SearchResultType = "Asset"
+	SearchResultTypeCONTENT   SearchResultType = "Content"
 	SearchResultTypeDASHBOARD SearchResultType = "Dashboard"
-	SearchResultTypeSETTING SearchResultType = "Setting"
-	SearchResultTypeRULE SearchResultType = "Rule"
-	SearchResultTypeSCHEMA SearchResultType = "Schema"
+	SearchResultTypeSETTING   SearchResultType = "Setting"
+	SearchResultTypeRULE      SearchResultType = "Rule"
+	SearchResultTypeSCHEMA    SearchResultType = "Schema"
 )

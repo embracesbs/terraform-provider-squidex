@@ -8,6 +8,7 @@
  */
 
 package squidexclient
+
 // UpdateRuleDto struct for UpdateRuleDto
 type UpdateRuleDto struct {
 	// Optional rule name.
