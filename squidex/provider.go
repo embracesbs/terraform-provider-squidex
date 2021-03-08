@@ -15,19 +15,19 @@ import (
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"url": &schema.Schema{
+			"url": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"token_endpoint": &schema.Schema{
+			"token_endpoint": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"client_id": &schema.Schema{
+			"client_id": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"client_secret": &schema.Schema{
+			"client_secret": {
 				Type:      schema.TypeString,
 				Required:  true,
 				Sensitive: true,

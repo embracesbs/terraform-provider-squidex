@@ -23,19 +23,16 @@ func resourceSchema() *schema.Resource {
 		"label": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     "",
 			Description: "Optional label for the editor.",
 		},
 		"hints": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     "",
 			Description: "Hints to describe the schema.",
 		},
 		"placeholder": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     "",
 			Description: "Placeholder to show when no value has been entered.",
 		},
 		"required": {
@@ -53,7 +50,6 @@ func resourceSchema() *schema.Resource {
 		"editor_url": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     "",
 			Description: "Optional url to the editor.",
 		},
 		"unique": {
@@ -233,7 +229,7 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type:        schema.TypeString,
 			Optional:    true,
-			Default:     nil,
+			Default:     (*string)(nil),
 			Description: "The minimum allowed value for the field value.",
 		},
 		"calculated_default_value": {
@@ -252,6 +248,7 @@ func resourceSchema() *schema.Resource {
 			*/
 			Type:        schema.TypeList,
 			Optional:    true,
+			Default:     nil,
 			Description: "The allowed values for the field value.",
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
@@ -396,25 +393,21 @@ func resourceSchema() *schema.Resource {
 						"label": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "Optional label for the editor.",
 						},
 						"hints": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "Hints to describe the schema.",
 						},
 						"contents_sidebar_url": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The url to a the sidebar plugin for content lists.",
 						},
 						"content_sidebar_url": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The url to a the sidebar plugin for content items.",
 						},
 						"tags": {
@@ -438,31 +431,26 @@ func resourceSchema() *schema.Resource {
 						"query": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The script that is executed for each query when querying contents.",
 						},
 						"create": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The script that is executed when creating a content.",
 						},
 						"update": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The script that is executed when updating a content.",
 						},
 						"delete": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The script that is executed when deleting a content.",
 						},
 						"change": {
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "",
 							Description: "The script that is executed when change a content status.",
 						},
 					},
@@ -587,7 +575,6 @@ func resourceSchema() *schema.Resource {
 			"category": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "",
 				Description: "The category.",
 			},
 			"published": {
@@ -1350,6 +1337,50 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(
 	return dto
 }
 
+func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
+	for i, field := range *dto.Fields {
+		properties := field.Properties
+		if *properties.MinItems == 0 {
+			properties.MinItems = nil
+		}
+		if *properties.MaxItems == 0 {
+			properties.MaxItems = nil
+		}
+		if *properties.MaxValue == 0 {
+			properties.MaxValue = nil
+		}
+		if *properties.MinValue == 0 {
+			properties.MinValue = nil
+		}
+		if len(*properties.AllowedValues) == 0 {
+			properties.AllowedValues = nil
+		}
+		if *properties.Pattern == "" {
+			properties.Pattern = nil
+		}
+		if *properties.MaxCharacters == 0 {
+			properties.MaxCharacters = nil
+		}
+		if *properties.MinCharacters == 0 {
+			properties.MinCharacters = nil
+		}
+		if *properties.MaxWords == 0 {
+			properties.MaxWords = nil
+		}
+		if *properties.MinWords == 0 {
+			properties.MinWords = nil
+		}
+		if *properties.MaxLength == 0 {
+			properties.MaxLength = nil
+		}
+		if *properties.MinLength == 0 {
+			properties.MinLength = nil
+		}
+		field.Properties = properties
+		(*dto.Fields)[i] = field
+	}
+}
+
 func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 
 	client := meta.(providerConfig).Client
@@ -1363,6 +1394,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 		return diag.FromErr(err)
 	}
 
+	setCreationDefaults(&createDto)
 	createDtoJson, _ := json.MarshalIndent(createDto, "", "  ")
 	log.Printf("[TRACE] Creating a new schema with dto %s.", string(createDtoJson))
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
@@ -1433,6 +1465,7 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	if err != nil {
 		return diag.FromErr(err)
 	}
+	setCreationDefaults(&createDto)
 	syncDto := mapCreateSchemaDtoToSynchronizeSchemaDto(
 		createDto,
 		schemaFieldDeleteAllowed,

@@ -4,6 +4,8 @@ terraform {
       source = "terraform.embracecloud.nl/embracecloud/squidex"
     }
   }
+
+  required_version = "~> 0.14"
 }
 provider "squidex" {
   client_id           = var.client_id
@@ -15,7 +17,7 @@ provider "squidex" {
 
 # TODO: discuss strategy, do we allow for destroy and create on app resources?
 resource "squidex_app" "test" {
-  name        = "squidex-provider-test5"
+  name        = "squidex-provider-test9"
   description = "description1"
 }
 
@@ -117,10 +119,6 @@ resource "squidex_schema" "test" {
     properties {
       field_type = "References"
       editor     = "Tags"
-      default_values = {
-        "nl-NL" = "string-1"
-        "en-US" = "string-3"
-      }
     }
   }
 
@@ -149,10 +147,6 @@ resource "squidex_schema" "test" {
     properties {
       field_type = "Number"
       editor     = "Input"
-      default_values = {
-        "nl-NL" = "1234.67895"
-        "en-US" = "999999369"
-      }
     }
   }
 
@@ -253,4 +247,12 @@ resource "squidex_schema" "test" {
     }
   }
 
+  fields {
+    name         = "bug"
+    properties {
+      field_type = "DateTime"
+      editor     = "DateTime"
+      max_value  = ""
+    }
+  }
 }
