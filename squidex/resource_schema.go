@@ -1338,6 +1338,10 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(
 }
 
 func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
+	if dto.Fields == nil {
+		return
+	}
+
 	for i, field := range *dto.Fields {
 		properties := field.Properties
 		if *properties.MinItems == 0 {

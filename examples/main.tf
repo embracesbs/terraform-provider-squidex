@@ -30,11 +30,11 @@ resource "squidex_client" "test" {
 resource "squidex_languages" "test" {
   app_name = squidex_app.test.name
   language {
-    language  = "nl-NL"
+    language  = "en-US"
     is_master = true
   }
   language {
-    language  = "en-US"
+    language  = "nl-NL"
     is_master = false
   }
 }
@@ -252,7 +252,8 @@ resource "squidex_schema" "test" {
     properties {
       field_type = "DateTime"
       editor     = "DateTime"
-      max_value  = ""
+      min_value  = "1900-01-01T00:00:00Z"
+      max_value  = "2021-02-01T23:59:59Z"
     }
   }
 }
