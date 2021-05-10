@@ -6,28 +6,31 @@ services:
     networks:
       - internal
     restart: unless-stopped
-
+  
+    # use firefox !
   squidex_squidex:
     image: "squidex/squidex:5.5.0"
     ports:
       - "8081:80"
     environment:
-      - URLS__BASEURL=http://${SQUIDEX_DOMAIN}:8081/
+      - URLS__BASEURL=http://localhost:8081/
       - EVENTSTORE__TYPE=MongoDB
       - EVENTSTORE__MONGODB__CONFIGURATION=mongodb://squidex_mongo
       - STORE__MONGODB__CONFIGURATION=mongodb://squidex_mongo
-      - IDENTITY__ADMINEMAIL=${SQUIDEX_ADMINEMAIL}
-      - IDENTITY__ADMINPASSWORD=${SQUIDEX_ADMINPASSWORD}
-      - IDENTITY__ADMINCLIENTID=${SQUIDEX_ADMINCLIENTID}
-      - IDENTITY__ADMINCLIENTSECRET=${SQUIDEX_ADMINCLIENTSECRET}
-      - IDENTITY__GOOGLECLIENT=${SQUIDEX_GOOGLECLIENT}
-      - IDENTITY__GOOGLESECRET=${SQUIDEX_GOOGLESECRET}
-      - IDENTITY__GITHUBCLIENT=${SQUIDEX_GITHUBCLIENT}
-      - IDENTITY__GITHUBSECRET=${SQUIDEX_GITHUBSECRET}
-      - IDENTITY__MICROSOFTCLIENT=${SQUIDEX_MICROSOFTCLIENT}
-      - IDENTITY__MICROSOFTSECRET=${SQUIDEX_MICROSOFTSECRET}
+      - IDENTITY__DOMAIN=localhost
+      - IDENTITY__ADMINCLIENTID=rootclient
+      - IDENTITY__ADMINCLIENTSECRET=jtr89DHJDE-7
+      - IDENTITY__ADMINRECREATE=true
+      - IDENTITY__ADMINEMAIL=michiel@qvision.nl
+      - IDENTITY__ADMINPASSWORD=jtr89DHJDE-6
+      - IDENTITY__GOOGLECLIENT=
+      - IDENTITY__GOOGLESECRET=
+      - IDENTITY__GITHUBCLIENT=
+      - IDENTITY__GITHUBSECRET=
+      - IDENTITY__MICROSOFTCLIENT=
+      - IDENTITY__MICROSOFTSECRET=
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://${SQUIDEX_DOMAIN}:8081/healthz"]
+      test: ["CMD", "curl", "-f", "http://localhost:8081/healthz"]
       start_period: 60s
     depends_on:
       - squidex_mongo
