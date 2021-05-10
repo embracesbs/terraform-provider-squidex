@@ -383,6 +383,11 @@ func resourceSchema() *schema.Resource {
 				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "app_name may only contain a-z 0-9 and - and not start with -."),
 				Description:  "Name of the application. Can not be changed later. Only [a-z0-9] and may contain dashes - but not start with them.",
 			},
+			"self_reference_field": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				Description:  "Field that should have a reference to the schema.",
+			},
 			"properties": {
 				Type:        schema.TypeList,
 				Optional:    true,
@@ -1409,6 +1414,41 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
+
+
+	// start self_reference_field
+	if x, ok := data.GetOk("self_reference_field"); ok {
+		self_reference_field := x.(string)
+		//fetch field:
+		for _, field := range result.Fields {
+			if field.Name == self_reference_field {
+
+        		// create dto
+				dto := field.Properties
+				dto.SchemaIds = &[]string{result.Id}
+
+				// update field
+				schemaName := data.Get("name").(string)
+				updateFieldDto := squidexclient.UpdateFieldDto{Properties: dto}
+				updateFieldDtoJson, _ := json.MarshalIndent(updateFieldDto, "", "  ")
+				log.Printf("[TRACE] Creating a new schema, updating self-reference field with dto %s.", string(updateFieldDtoJson))
+				_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, field.FieldId, updateFieldDto)
+				
+				if fieldErr != nil {
+					// TODO: handle errors
+					return diag.FromErr(err)
+				}
+				// update for drift:
+				
+    		}
+		}
+	}
+	// end self_reference_field
+
+
+
+
+
 
 	// prevent drift and set ALL values from the result
 	err = setDataFromSchemaDetailsDto(data, result)
