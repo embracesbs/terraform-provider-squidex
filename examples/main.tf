@@ -109,7 +109,8 @@ resource "squidex_schema" "test" {
     delete = "value"
     change = "value"
   }
-
+  
+  self_reference_field = "reference-1"
   fields {
     name         = "reference-1"
     partitioning = "language"

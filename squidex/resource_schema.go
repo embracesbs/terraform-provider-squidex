@@ -383,10 +383,11 @@ func resourceSchema() *schema.Resource {
 				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "app_name may only contain a-z 0-9 and - and not start with -."),
 				Description:  "Name of the application. Can not be changed later. Only [a-z0-9] and may contain dashes - but not start with them.",
 			},
+			// NOTE:: doesn't work for nested fields. And only for 1 field
 			"self_reference_field": {
-				Type:         schema.TypeString,
-				Optional:     true,
-				Description:  "Field that should have a reference to the schema.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Sets a single schemaid on specified field(s). Conflicts if schema_ids is set to on the specified field(s). Nested fields not supported.",
 			},
 			"properties": {
 				Type:        schema.TypeList,
