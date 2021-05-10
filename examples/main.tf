@@ -5,7 +5,7 @@ terraform {
     }
   }
 
-  required_version = "~> 0.14"
+  required_version = "~> 0.13"
 }
 provider "squidex" {
   client_id           = var.client_id
