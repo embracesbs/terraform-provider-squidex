@@ -659,8 +659,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["min_items"] = v.Properties.MinItems
 			properties["max_items"] = v.Properties.MaxItems
 			properties["preview_mode"] = v.Properties.PreviewMode
-			properties["default_values"] = v.Properties.DefaultValues
-			properties["default_value"] = v.Properties.DefaultValue
+			//properties["default_values"] = v.Properties.DefaultValues
+			//properties["default_value"] = v.Properties.DefaultValue
 			properties["min_size"] = v.Properties.MinSize
 			properties["max_size"] = v.Properties.MaxSize
 			properties["min_width"] = v.Properties.MinWidth
@@ -950,14 +950,14 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						previewMode := properties["preview_mode"].(string)
 						squidexProperties.PreviewMode = &previewMode
 					}
-					if properties["default_values"] != nil {
-						defaultvalues := defaultValuesToInterface(fieldType, partitioning, properties["default_values"])
-						squidexProperties.DefaultValues = &defaultvalues
-					}
-					if properties["default_value"] != nil {
-						defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
-						squidexProperties.DefaultValue = &defaultvalue
-					}
+					//if properties["default_values"] != nil {
+					//	defaultvalues := defaultValuesToInterface(fieldType, partitioning, properties["default_values"])
+					//	squidexProperties.DefaultValues = &defaultvalues
+					//}
+					//if properties["default_value"] != nil {
+					//	defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
+					//	squidexProperties.DefaultValue = &defaultvalue
+					//}
 					if properties["min_size"] != nil {
 						minsize := properties["min_size"].(int)
 						squidexProperties.MinSize = &minsize

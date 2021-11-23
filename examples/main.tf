@@ -257,4 +257,13 @@ resource "squidex_schema" "test" {
       max_value  = "2021-02-01T23:59:59Z"
     }
   }
+  fields {
+    name         = "bug2"
+    properties {
+      field_type = "DateTime"
+      editor     = "DateTime"
+      min_value  = "1900-01-01T00:00:00Z"
+      max_value  = "2021-02-01T23:59:59Z"
+    }
+  }
 }
