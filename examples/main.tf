@@ -5,7 +5,7 @@ terraform {
     }
   }
 
-  required_version = "~> 0.14"
+  required_version = "~> 1.1.1"
 }
 provider "squidex" {
   client_id           = var.client_id
@@ -58,9 +58,9 @@ resource "squidex_contributor" "test" {
   role              = squidex_role.test.name
 }
 
-resource "squidex_contributor" "niksa_owner" {
+resource "squidex_contributor" "admin_owner" {
   app_name          = squidex_app.test.name
-  contributor_email = "niksa.sporin@embracecloud.nl"
+  contributor_email = "admin@embracecloud.nl"
   role              = "Owner"
 }
 
@@ -108,6 +108,19 @@ resource "squidex_schema" "test" {
     create = "value"
     delete = "value"
     change = "value"
+  }
+
+  fields {
+    name           = "self-reference-field"
+    partitioning   = "language"
+    self_reference = true
+    hidden         = false # 
+    locked         = false # should not be used
+    disabled       = false # should not be used
+    properties {
+      field_type = "References"
+      editor     = "Tags"
+    }
   }
 
   fields {
@@ -248,7 +261,7 @@ resource "squidex_schema" "test" {
   }
 
   fields {
-    name         = "bug"
+    name = "bug"
     properties {
       field_type = "DateTime"
       editor     = "DateTime"

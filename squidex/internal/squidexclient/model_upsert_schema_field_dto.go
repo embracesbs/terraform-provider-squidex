@@ -19,6 +19,8 @@ type UpsertSchemaFieldDto struct {
 	IsLocked bool `json:"isLocked,omitempty"`
 	// Defines if the field is disabled.
 	IsDisabled bool `json:"isDisabled,omitempty"`
+	// Defines if the field is disabled.
+	IsSelfReference bool `json:"isSelfReference,omitempty"`
 	// Determines the optional partitioning of the field.
 	Partitioning *string `json:"partitioning,omitempty"`
 	// The field properties.
