@@ -112,14 +112,14 @@ resource "squidex_schema" "test" {
 
   fields {
     name           = "self-reference-field"
-    partitioning   = "language"
+    partitioning   = "invariant"
     self_reference = true
     hidden         = false # 
     locked         = false # should not be used
     disabled       = false # should not be used
     properties {
       field_type = "References"
-      editor     = "Tags"
+      editor     = "List"
     }
   }
 
