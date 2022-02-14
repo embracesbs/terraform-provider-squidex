@@ -14,7 +14,18 @@ func main() {
 	log.SetOutput(os.Stderr)
 	log.Printf("[TRACE] Running version %s!", meta.SDKVersionString())
 
-	plugin.Serve(&plugin.ServeOpts{
+	opts := &plugin.ServeOpts{
 		ProviderFunc: squidex.Provider,
-	})
+	}
+
+	/// Uncomment to debug the plugin
+	// if true {
+	// 	err := plugin.Debug(context.Background(), "terraform.embracecloud.nl/embracecloud/squidex", opts)
+	// 	if err != nil {
+	// 		log.Fatal(err.Error())
+	// 	}
+	// 	return
+	// }
+
+	plugin.Serve(opts)
 }

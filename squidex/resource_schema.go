@@ -502,6 +502,12 @@ func resourceSchema() *schema.Resource {
 							Default:     false,
 							Description: "Disable field in the UI.",
 						},
+						"self_reference": {
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Enable self-reference field.",
+						},
 						"partitioning": {
 							Type:        schema.TypeString,
 							Optional:    true,
@@ -643,6 +649,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 		fields[i]["locked"] = &v.IsLocked
 		fields[i]["disabled"] = &v.IsDisabled
 		fields[i]["partitioning"] = v.Partitioning
+		fields[i]["self_reference"] = &v.IsSelfReference
 
 		if (squidexclient.FieldPropertiesDto{}) == v.Properties {
 			fields[i]["properties"] = nil
@@ -899,6 +906,9 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 			}
 			if field["disabled"] != nil {
 				squidexfields[i].IsDisabled = field["disabled"].(bool)
+			}
+			if field["self_reference"] != nil {
+				squidexfields[i].IsSelfReference = field["self_reference"].(bool)
 			}
 			if field["properties"] != nil {
 				properties := field["properties"].([]interface{})
@@ -1392,8 +1402,9 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-
+	name := data.Get("name").(string)
 	createDto, err := getCreateSchemaDtoFromData(data)
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -1409,6 +1420,8 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
+
+	updateSelfReferences(ctx, *client, appName, name, createDto, result)
 
 	// prevent drift and set ALL values from the result
 	err = setDataFromSchemaDetailsDto(data, result)
@@ -1476,13 +1489,14 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 		schemaFieldRecreateAllowed)
 
 	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, syncDto)
-
 	err = common.HandleAPIError(response, err)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
+
+	updateSelfReferences(ctx, *client, appName, name, createDto, result)
 
 	// TODO: test nofieldeletion & nofieldrecreation in state
 	// if input fields != output fields (name/type & determine what causes recreation of fields?)
@@ -1552,5 +1566,36 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 	data.SetId("")
 
 	data.Set("invalidated_state", false)
+	return diags
+}
+
+// Updates the fields in the created schema for self reference fields if this is specified with the IsSelfReference field.
+func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, appName string, schemaName string, createDto squidexclient.CreateSchemaDto, result squidexclient.SchemaDetailsDto) diag.Diagnostics {
+
+	var diags diag.Diagnostics
+
+	for _, field := range *createDto.Fields {
+		if field.IsSelfReference {
+			for _, resultField := range result.Fields {
+				if resultField.Name == field.Name {
+					// create dto
+					dto := field.Properties
+					dto.SchemaIds = &[]string{result.Id}
+
+					// update field
+					updateFieldDto := squidexclient.UpdateFieldDto{Properties: dto}
+					updateFieldDtoJson, _ := json.MarshalIndent(updateFieldDto, "", "  ")
+					log.Printf("[TRACE] Creating a new schema, updating self-reference field with dto %s.", string(updateFieldDtoJson))
+					_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, resultField.FieldId, updateFieldDto)
+
+					if fieldErr != nil {
+						// TODO: handle errors
+						return diag.FromErr(fieldErr)
+					}
+					// update for drift:
+				}
+			}
+		}
+	}
 	return diags
 }
