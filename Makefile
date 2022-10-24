@@ -4,7 +4,7 @@ NAMESPACE=terraform.embracecloud.nl
 COMPANY=embracecloud
 PROVIDER=squidex
 BINARY=terraform-provider-squidex
-VERSION=0.6.1
+VERSION=0.7.1
 OS=linux
 ARCH=amd64
 
@@ -15,7 +15,7 @@ build:
 	go build -o ./bin/${BINARY}_v${VERSION}
 
 build-win:
-	mkdir -p ./bin
+	if not exist "./bin" md "./bin"
 	go build -o ./bin/${BINARY}_v${VERSION}.exe
 
 install: build
@@ -29,10 +29,10 @@ local-install: build
 	mv ./bin/${BINARY}_v${VERSION} ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
 	
 local-install-win: build-win
-	mkdir -p ./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
-	mkdir -p ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}
-	cp ./bin/${BINARY}_v${VERSION}.exe ./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/
-	mv ./bin/${BINARY}_v${VERSION}.exe ./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/${OS}_${ARCH}/ 
+	if not exist "./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}" md "./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}"
+	if not exist "./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}" md "./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}"
+	copy .\bin\${BINARY}_v${VERSION}.exe "./examples/terraform.d/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}/"
+	move .\bin\${BINARY}_v${VERSION}.exe "./examples/.terraform/plugins/${NAMESPACE}/${COMPANY}/${PROVIDER}/${VERSION}/windows_${ARCH}/"
 	
 test:
 	go test -i $(TEST) || exit 1
