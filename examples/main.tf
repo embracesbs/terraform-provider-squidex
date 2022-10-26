@@ -95,7 +95,7 @@ resource "squidex_role" "app_admin" {
 }
 
 resource "squidex_contributor" "embracecloud_contributors" {
-  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl","test2@embracecloud.nl"]) //var.embracecloud_contributors
+  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
   app_name          = squidex_app.test.name
   contributor_email = each.value
   role              = squidex_role.embracecloud_admin.name
@@ -103,7 +103,7 @@ resource "squidex_contributor" "embracecloud_contributors" {
 
 
 resource "squidex_contributor" "app_admin_contributors" {
-  for_each          = toset(["admin@embracecloud.nl", "test2@embracecloud.nl"]) //var.app_admin_contributors
+  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
   app_name          = squidex_app.test.name
   contributor_email = each.value
   role              = squidex_role.app_admin.name
