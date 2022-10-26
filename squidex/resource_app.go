@@ -3,6 +3,7 @@ package squidex
 import (
 	"context"
 
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/common"
 	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -98,7 +99,9 @@ func resourceAppDelete(ctx context.Context, data *schema.ResourceData, meta inte
 
 	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
-	_, err := client.AppsApi.AppsDeleteApp(ctx, name)
+	response, err := client.AppsApi.AppsDeleteApp(ctx, name)
+
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		return diag.FromErr(err)

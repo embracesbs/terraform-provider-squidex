@@ -64,7 +64,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -106,7 +106,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 		Invite:        invite,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -151,7 +151,7 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 		Invite:        invite,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -190,7 +190,7 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 
 	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		return diag.FromErr(err)
