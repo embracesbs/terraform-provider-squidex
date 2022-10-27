@@ -2,6 +2,7 @@ terraform {
   required_providers {
     squidex = {
       source = "terraform.embracecloud.nl/embracecloud/squidex"
+      version = "0.7.1"
     }
   }
 
@@ -21,10 +22,15 @@ resource "squidex_app" "test" {
   description = "description1"
 }
 
+resource "squidex_app" "test2" {
+  name        = "squidex-provider-test2"
+  description = "description1"
+}
+
 resource "squidex_client" "test" {
   app_name = squidex_app.test.name
   name     = "squidex-provider-test"
-  role     = squidex_role.test.name
+  role     = squidex_role.embracecloud_admin.name
 }
 
 resource "squidex_languages" "test" {
@@ -39,42 +45,75 @@ resource "squidex_languages" "test" {
   }
 }
 
-resource "squidex_role" "test" {
+resource "squidex_role" "embracecloud_admin" {
   app_name = squidex_app.test.name
-  name     = "squidex-provider-test"
+  name     = "embracecloud-admin"
   permissions = [
-    "*",
     "contents.*",
     "schemas.read",
+    "roles",
+    "contributors",
+    "assets",
+    "languages",
+    "patterns",
+    "workflows",
+    "search",
+    "backups",
+    "comments",
+    "clients",
+    "history",
+    "ping",
+    "plans",
+    "rules",
+    "translate",
+    "usage"
   ]
-  properties = {
-    "ui.api.hide" = true
-  }
+  properties = {}
+}
+resource "squidex_role" "app_admin" {
+  app_name = squidex_app.test.name
+  name     = "app-admin"
+  permissions = [
+    "contents.*",
+    "schemas.read",
+    "roles.read",
+    "contributors",
+    "assets",
+    "languages.read",
+    "patterns.read",
+    "workflows.read",
+    "search",
+    "backups",
+    "comments",
+    "history",
+    "rules",
+    "translate",
+    "squidex.apps.*"
+  ]
+  //  properties  = {"ui.api.hide" = true}
+  properties = {}
 }
 
-resource "squidex_contributor" "test" {
+resource "squidex_contributor" "embracecloud_contributors" {
+  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
   app_name          = squidex_app.test.name
-  contributor_email = "michiel@qvision.nl"
-  role              = squidex_role.test.name
+  contributor_email = each.value
+  role              = squidex_role.embracecloud_admin.name
 }
 
-resource "squidex_contributor" "admin_owner" {
+
+resource "squidex_contributor" "app_admin_contributors" {
+  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
   app_name          = squidex_app.test.name
-  contributor_email = "admin@embracecloud.nl"
-  role              = "Owner"
+  contributor_email = each.value
+  role              = squidex_role.app_admin.name
 }
 
-resource "squidex_contributor" "test_michiel_owner" {
-  app_name          = squidex_app.test.name
-  contributor_email = "michiel.vanklinken@embracecloud.nl"
-  role              = "Owner"
-}
-
-resource "squidex_contributor" "test_pietje_puk" {
-  app_name          = squidex_app.test.name
-  contributor_email = "pietje.puk@embracecloud.nl"
-  role              = squidex_role.test.name
-}
+ resource "squidex_contributor" "admin_owner" {
+   app_name          = squidex_app.test.name
+   contributor_email = "admin@embracecloud.nl"
+   role              = "Owner"
+ }
 
 # TODO: discuss strategy, do we allow for destroy and create on schema resources?
 resource "squidex_schema" "test" {

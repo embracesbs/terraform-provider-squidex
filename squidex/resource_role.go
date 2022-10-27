@@ -62,7 +62,7 @@ func resourceRoleRead(ctx context.Context, data *schema.ResourceData, meta inter
 
 	result, response, err := client.AppsApi.AppRolesGetRoles(ctx, appName)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -103,7 +103,7 @@ func resourceRoleCreate(ctx context.Context, data *schema.ResourceData, meta int
 		Name: name,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -132,7 +132,7 @@ func resourceRoleUpdate(ctx context.Context, data *schema.ResourceData, meta int
 		Properties:  &properties,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -155,7 +155,7 @@ func resourceRoleDelete(ctx context.Context, data *schema.ResourceData, meta int
 	var diags diag.Diagnostics
 	_, response, err := client.AppsApi.AppRolesDeleteRole(ctx, appName, name)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		return diag.FromErr(err)

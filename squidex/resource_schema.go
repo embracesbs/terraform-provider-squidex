@@ -1414,7 +1414,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	log.Printf("[TRACE] Creating a new schema with dto %s.", string(createDtoJson))
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -1449,7 +1449,7 @@ func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -1489,7 +1489,7 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 		schemaFieldRecreateAllowed)
 
 	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, syncDto)
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -1545,7 +1545,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 
 	context := meta.(providerConfig)
 
-	if context.SchemaDeleteAllowed == false {
+	if !context.SchemaDeleteAllowed {
 		data.Set("invalidated_state", true)
 		return diag.Errorf("Not allowed to delete schema '%s'. \nSet provider field schema_delete_allow to true to allow this.", name)
 	}
@@ -1554,7 +1554,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 
 	response, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		data.Set("invalidated_state", true)

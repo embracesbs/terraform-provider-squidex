@@ -26,12 +26,16 @@ func (e APIError) Error() string {
 	return val
 }
 
-func HandleAPIError(response *http.Response, err interface{}) error {
+func HandleAPIError(response *http.Response, err interface{}, deleteFunction bool) error {
 
 	if response.StatusCode == http.StatusOK ||
 		response.StatusCode == http.StatusCreated ||
 		response.StatusCode == http.StatusNoContent {
 		// do nothing
+		return nil
+	}
+
+	if deleteFunction && response.StatusCode == http.StatusNotFound {
 		return nil
 	}
 

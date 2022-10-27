@@ -59,7 +59,7 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	result, response, err := client.AppsApi.AppClientsGetClients(ctx, appName)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -101,7 +101,7 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 		Id: name,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -143,7 +143,7 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 		Role: &role,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -160,11 +160,11 @@ func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta i
 	var diags diag.Diagnostics
 
 	appName := data.Get("app_name").(string)
-	id := data.Get("id").(string)
+	id := data.Id()
 
 	_, response, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		return diag.FromErr(err)

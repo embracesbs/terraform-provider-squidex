@@ -64,7 +64,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -106,7 +106,7 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 		Invite:        invite,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -145,18 +145,34 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	invite := false // no invites send for updating role
 
 	// there is no update method, just use the create to set it again, but no invite!
-	_, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
+	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
 		ContributorId: contributorID,
 		Role:          &role,
 		Invite:        invite,
 	})
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
+
+	var resultItem *squidexclient.ContributorDto
+	for i := range result.Items {
+		if strings.EqualFold(result.Items[i].ContributorId, contributorID) {
+			resultItem = &result.Items[i]
+			break
+		}
+	}
+
+	if resultItem == nil {
+		data.Set("invalidated_state", true)
+		source, _ := json.Marshal(result)
+		return diag.Errorf("Not Found: Contributor with id %s\nApi Response: %s", contributorID, string(source))
+	}
+
+	data.SetId(resultItem.ContributorId)
 
 	// there are no new values from the server, so no drifting, resourceContributorRead(ctx, data, meta)
 
@@ -171,9 +187,10 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 
 	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
+
 	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
 
-	err = common.HandleAPIError(response, err)
+	err = common.HandleAPIError(response, err, true)
 
 	if err != nil {
 		return diag.FromErr(err)
