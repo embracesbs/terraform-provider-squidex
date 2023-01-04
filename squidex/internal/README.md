@@ -4,6 +4,7 @@ The squidexclient package is scaffolded using the [openapi-generator](https://gi
 
 - download the openapi 3.0 json file, go to squidex gui, api, general api, hit the download OpenApi button.
 - [install the generator](https://github.com/OpenAPITools/openapi-generator#1---installation).
+- Installation can also be done with npm: `npm install @openapitools/openapi-generator-cli -g`
 - run the generator `openapi-generator-cli generate -g go -i ./squidex-5.3-swagger.json -o ./squidexclient`.
 - fix scaffolded issues related to this [GitHub issue](https://github.com/OpenAPITools/openapi-generator/pull/2897).
   - run a find & replace `package openapi` into `package squidexclient`
