@@ -20,10 +20,10 @@ type RuleResult string
 
 // List of RuleResult
 const (
-	PENDING RuleResult = "Pending"
-	SUCCESS RuleResult = "Success"
-	FAILED RuleResult = "Failed"
-	TIMEOUT RuleResult = "Timeout"
+	RuleResultPENDING RuleResult = "Pending"
+	RuleResultSUCCESS RuleResult = "Success"
+	RuleResultFAILED RuleResult = "Failed"
+	RuleResultTIMEOUT RuleResult = "Timeout"
 )
 
 // All allowed values of RuleResult enum

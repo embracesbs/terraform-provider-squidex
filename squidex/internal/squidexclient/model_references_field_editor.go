@@ -20,11 +20,11 @@ type ReferencesFieldEditor string
 
 // List of ReferencesFieldEditor
 const (
-	LIST ReferencesFieldEditor = "List"
-	DROPDOWN ReferencesFieldEditor = "Dropdown"
-	TAGS ReferencesFieldEditor = "Tags"
-	CHECKBOXES ReferencesFieldEditor = "Checkboxes"
-	INPUT ReferencesFieldEditor = "Input"
+	ReferencesFieldEditorLIST ReferencesFieldEditor = "List"
+	ReferencesFieldEditorDROPDOWN ReferencesFieldEditor = "Dropdown"
+	ReferencesFieldEditorTAGS ReferencesFieldEditor = "Tags"
+	ReferencesFieldEditorCHECKBOXES ReferencesFieldEditor = "Checkboxes"
+	ReferencesFieldEditorINPUT ReferencesFieldEditor = "Input"
 )
 
 // All allowed values of ReferencesFieldEditor enum

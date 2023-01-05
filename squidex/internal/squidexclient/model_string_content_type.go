@@ -20,9 +20,9 @@ type StringContentType string
 
 // List of StringContentType
 const (
-	UNSPECIFIED StringContentType = "Unspecified"
-	HTML StringContentType = "Html"
-	MARKDOWN StringContentType = "Markdown"
+	StringContentTypeUNSPECIFIED StringContentType = "Unspecified"
+	StringContentTypeHTML StringContentType = "Html"
+	StringContentTypeMARKDOWN StringContentType = "Markdown"
 )
 
 // All allowed values of StringContentType enum

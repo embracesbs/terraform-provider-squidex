@@ -20,8 +20,8 @@ type BooleanFieldEditor string
 
 // List of BooleanFieldEditor
 const (
-	CHECKBOX BooleanFieldEditor = "Checkbox"
-	TOGGLE BooleanFieldEditor = "Toggle"
+	BooleanFieldEditorCHECKBOX BooleanFieldEditor = "Checkbox"
+	BooleanFieldEditorTOGGLE BooleanFieldEditor = "Toggle"
 )
 
 // All allowed values of BooleanFieldEditor enum

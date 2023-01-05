@@ -20,11 +20,11 @@ type RuleJobResult string
 
 // List of RuleJobResult
 const (
-	PENDING RuleJobResult = "Pending"
-	SUCCESS RuleJobResult = "Success"
-	RETRY RuleJobResult = "Retry"
-	FAILED RuleJobResult = "Failed"
-	CANCELLED RuleJobResult = "Cancelled"
+	RuleJobResultPENDING RuleJobResult = "Pending"
+	RuleJobResultSUCCESS RuleJobResult = "Success"
+	RuleJobResultRETRY RuleJobResult = "Retry"
+	RuleJobResultFAILED RuleJobResult = "Failed"
+	RuleJobResultCANCELLED RuleJobResult = "Cancelled"
 )
 
 // All allowed values of RuleJobResult enum

@@ -20,12 +20,12 @@ type TranslationResultCode string
 
 // List of TranslationResultCode
 const (
-	TRANSLATED TranslationResultCode = "Translated"
-	LANGUAGE_NOT_SUPPORTED TranslationResultCode = "LanguageNotSupported"
-	NOT_TRANSLATED TranslationResultCode = "NotTranslated"
-	NOT_CONFIGURED TranslationResultCode = "NotConfigured"
-	UNAUTHORIZED TranslationResultCode = "Unauthorized"
-	FAILED TranslationResultCode = "Failed"
+	TranslationResultCodeTRANSLATED TranslationResultCode = "Translated"
+	TranslationResultCodeLANGUAGE_NOT_SUPPORTED TranslationResultCode = "LanguageNotSupported"
+	TranslationResultCodeNOT_TRANSLATED TranslationResultCode = "NotTranslated"
+	TranslationResultCodeNOT_CONFIGURED TranslationResultCode = "NotConfigured"
+	TranslationResultCodeUNAUTHORIZED TranslationResultCode = "Unauthorized"
+	TranslationResultCodeFAILED TranslationResultCode = "Failed"
 )
 
 // All allowed values of TranslationResultCode enum

@@ -20,9 +20,9 @@ type AssetPreviewMode string
 
 // List of AssetPreviewMode
 const (
-	IMAGE_AND_FILE_NAME AssetPreviewMode = "ImageAndFileName"
-	IMAGE AssetPreviewMode = "Image"
-	FILE_NAME AssetPreviewMode = "FileName"
+	AssetPreviewModeIMAGE_AND_FILE_NAME AssetPreviewMode = "ImageAndFileName"
+	AssetPreviewModeIMAGE AssetPreviewMode = "Image"
+	AssetPreviewModeFILE_NAME AssetPreviewMode = "FileName"
 )
 
 // All allowed values of AssetPreviewMode enum

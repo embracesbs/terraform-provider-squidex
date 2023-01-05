@@ -20,9 +20,9 @@ type BulkUpdateAssetType string
 
 // List of BulkUpdateAssetType
 const (
-	ANNOTATE BulkUpdateAssetType = "Annotate"
-	MOVE BulkUpdateAssetType = "Move"
-	DELETE BulkUpdateAssetType = "Delete"
+	BulkUpdateAssetTypeANNOTATE BulkUpdateAssetType = "Annotate"
+	BulkUpdateAssetTypeMOVE BulkUpdateAssetType = "Move"
+	BulkUpdateAssetTypeDELETE BulkUpdateAssetType = "Delete"
 )
 
 // All allowed values of BulkUpdateAssetType enum

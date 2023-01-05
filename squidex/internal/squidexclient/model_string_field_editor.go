@@ -20,16 +20,16 @@ type StringFieldEditor string
 
 // List of StringFieldEditor
 const (
-	INPUT StringFieldEditor = "Input"
-	COLOR StringFieldEditor = "Color"
-	MARKDOWN StringFieldEditor = "Markdown"
-	DROPDOWN StringFieldEditor = "Dropdown"
-	HTML StringFieldEditor = "Html"
-	RADIO StringFieldEditor = "Radio"
-	RICH_TEXT StringFieldEditor = "RichText"
-	SLUG StringFieldEditor = "Slug"
-	STOCK_PHOTO StringFieldEditor = "StockPhoto"
-	TEXT_AREA StringFieldEditor = "TextArea"
+	StringFieldEditorINPUT StringFieldEditor = "Input"
+	StringFieldEditorCOLOR StringFieldEditor = "Color"
+	StringFieldEditorMARKDOWN StringFieldEditor = "Markdown"
+	StringFieldEditorDROPDOWN StringFieldEditor = "Dropdown"
+	StringFieldEditorHTML StringFieldEditor = "Html"
+	StringFieldEditorRADIO StringFieldEditor = "Radio"
+	StringFieldEditorRICH_TEXT StringFieldEditor = "RichText"
+	StringFieldEditorSLUG StringFieldEditor = "Slug"
+	StringFieldEditorSTOCK_PHOTO StringFieldEditor = "StockPhoto"
+	StringFieldEditorTEXT_AREA StringFieldEditor = "TextArea"
 )
 
 // All allowed values of StringFieldEditor enum
