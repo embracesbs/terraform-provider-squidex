@@ -607,9 +607,9 @@ func resourceSchema() *schema.Resource {
 	}
 }
 
-func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient.SchemaDetailsDto) error {
+func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema *squidexclient.SchemaDto) error {
 	log.Printf("ids: %s %s", data.Id(), schema.Id)
-	data.SetId(schema.Id)
+	data.SetId(*schema.Id)
 
 	data.Set("name", schema.Name)
 	data.Set("published", schema.IsPublished)
@@ -656,7 +656,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 		} else {
 			properties := make(map[string]interface{})
 			properties["hints"] = v.Properties.Hints
-			properties["editor_url"] = v.Properties.EditorURL
+			properties["editor_url"] = v.Properties.EditorUrl
 			properties["min_items"] = v.Properties.MinItems
 			properties["max_items"] = v.Properties.MaxItems
 			properties["preview_mode"] = v.Properties.PreviewMode
@@ -705,8 +705,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 		if v.Nested == nil {
 			fields[i]["nested"] = nil
 		} else {
-			nesteds := make([]map[string]interface{}, len(*v.Nested))
-			for i, nested := range *v.Nested {
+			nesteds := make([]map[string]interface{}, len(v.Nested))
+			for i, nested := range v.Nested {
 				nesteds[i] = make(map[string]interface{})
 				nesteds[i]["name"] = nested.Name
 				nesteds[i]["hidden"] = nested.IsHidden
@@ -715,7 +715,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 
 				properties := make(map[string]interface{})
 				properties["hints"] = nested.Properties.Hints
-				properties["editor_url"] = nested.Properties.EditorURL
+				properties["editor_url"] = nested.Properties.EditorUrl
 				properties["min_items"] = nested.Properties.MinItems
 				properties["max_items"] = nested.Properties.MaxItems
 				properties["preview_mode"] = nested.Properties.PreviewMode
@@ -757,7 +757,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["required"] = nested.Properties.IsRequired
 				properties["label"] = nested.Properties.Label
 				properties["placeholder"] = nested.Properties.Placeholder
-				tags := *nested.Properties.Tags
+				tags := nested.Properties.Tags
 				properties["tags"] = tags
 				nesteds[i]["properties"] = []interface{}{properties}
 			}
@@ -810,14 +810,14 @@ func stringArrayToNonNilStringArray(iv []string) []string {
 
 func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.CreateSchemaDto, error) {
 	squidexschema := squidexclient.CreateSchemaDto{
-		IsPublished: data.Get("published").(bool),
+		IsPublished: data.Get("published").(*bool),
 		Name:        data.Get("name").(string),
-		IsSingleton: data.Get("singleton").(bool),
+		IsSingleton: data.Get("singleton").(*bool),
 	}
 
 	if category, ok := data.GetOk("category"); ok {
 		x := category.(string)
-		squidexschema.Category = &x
+		squidexschema.Category = *squidexclient.NewNullableString(&x)
 	}
 
 	if v, ok := data.GetOk("properties"); ok {
@@ -828,23 +828,23 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
 		if p, ok := properties["label"]; ok {
 			x := p.(string)
-			squidexschema.Properties.Label = &x
+			squidexschema.Properties.Label = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := properties["hints"]; ok {
 			x := p.(string)
-			squidexschema.Properties.Hints = &x
+			squidexschema.Properties.Hints = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := properties["contents_sidebar_url"]; ok {
 			x := p.(string)
-			squidexschema.Properties.ContentsSidebarUrl = &x
+			squidexschema.Properties.ContentsSidebarUrl = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := properties["content_sidebar_url"]; ok {
 			x := p.(string)
-			squidexschema.Properties.ContentSidebarUrl = &x
+			squidexschema.Properties.ContentSidebarUrl = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := properties["tags"]; ok {
 			tags := interfaceSliceToStringSlice(p.([]interface{}))
-			squidexschema.Properties.Tags = &tags
+			squidexschema.Properties.Tags = *&tags
 		}
 	}
 
@@ -853,36 +853,36 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexschema.Scripts = new(squidexclient.SchemaScriptsDto)
 		if p, ok := scripts["query"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Query = &x
+			squidexschema.Scripts.Query = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := scripts["create"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Create = &x
+			squidexschema.Scripts.Create = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := scripts["update"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Update = &x
+			squidexschema.Scripts.Update = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := scripts["delete"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Delete = &x
+			squidexschema.Scripts.Delete = *squidexclient.NewNullableString(&x)
 		}
 		if p, ok := scripts["change"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Change = &x
+			squidexschema.Scripts.Change = *squidexclient.NewNullableString(&x)
 		}
 	}
 	if v, ok := data.GetOk("fields_in_references"); ok {
 		fieldsInReferences := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInReferences = &fieldsInReferences
+		squidexschema.FieldsInReferences = *&fieldsInReferences
 	}
 	if v, ok := data.GetOk("fields_in_list"); ok {
 		fieldsInLists := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInLists = &fieldsInLists
+		squidexschema.FieldsInLists = *&fieldsInLists
 	}
 	if v, ok := data.GetOk("preview_urls"); ok {
 		previewUrls := interfaceMapToStringMap(v.(map[string]interface{}))
-		squidexschema.PreviewUrls = &previewUrls
+		squidexschema.PreviewUrls = *&previewUrls
 	}
 	if v, ok := data.GetOk("fields"); ok {
 		fields := v.([]interface{})
@@ -892,20 +892,20 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 			// required field:
 			partitioning := field["partitioning"].(string)
-			squidexfields[i].Partitioning = &partitioning
+			squidexfields[i].Partitioning = *squidexclient.NewNullableString(&partitioning)
 
 			if field["name"] != nil {
 				// name is a required field
 				squidexfields[i].Name = field["name"].(string)
 			}
 			if field["hidden"] != nil {
-				squidexfields[i].IsHidden = field["hidden"].(bool)
+				squidexfields[i].IsHidden = field["hidden"].(*bool)
 			}
 			if field["locked"] != nil {
-				squidexfields[i].IsLocked = field["locked"].(bool)
+				squidexfields[i].IsLocked = field["locked"].(*bool)
 			}
 			if field["disabled"] != nil {
-				squidexfields[i].IsDisabled = field["disabled"].(bool)
+				squidexfields[i].IsDisabled = field["disabled"].(*bool)
 			}
 			if field["self_reference"] != nil {
 				squidexfields[i].IsSelfReference = field["self_reference"].(bool)
@@ -922,25 +922,25 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 					if properties["label"] != nil {
 						label := properties["label"].(string)
-						squidexProperties.Label = &label
+						squidexProperties.Label = *squidexclient.NewNullableString(&label)
 					}
 					if properties["hints"] != nil {
 						hints := properties["hints"].(string)
-						squidexProperties.Hints = &hints
+						squidexProperties.Hints = *squidexclient.NewNullableString(&hints)
 					}
 					if properties["placeholder"] != nil {
 						placeholder := properties["placeholder"].(string)
-						squidexProperties.Placeholder = &placeholder
+						squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
 					}
 					if properties["required"] != nil {
-						squidexProperties.IsRequired = properties["required"].(bool)
+						squidexProperties.IsRequired = properties["required"].(*bool)
 					}
 					if properties["half_width"] != nil {
-						squidexProperties.IsHalfWidth = properties["half_width"].(bool)
+						squidexProperties.IsHalfWidth = properties["half_width"].(*bool)
 					}
 					if properties["editor_url"] != nil {
 						editorURL := properties["editor_url"].(string)
-						squidexProperties.EditorURL = &editorURL
+						squidexProperties.EditorUrl = *squidexclient.NewNullableString(&editorURL)
 					}
 					if properties["min_items"] != nil {
 						minitems := properties["min_items"].(int)
@@ -1088,7 +1088,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					}
 					if properties["tags"] != nil {
 						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
-						squidexProperties.Tags = &tags
+						squidexProperties.Tags = *&tags
 					}
 					squidexfields[i].Properties = squidexProperties
 				}
@@ -1103,13 +1103,13 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexNested[i].Name = nested["name"].(string)
 					}
 					if nested["hidden"] != nil {
-						squidexNested[i].IsHidden = nested["hidden"].(bool)
+						squidexNested[i].IsHidden = nested["hidden"].(*bool)
 					}
 					if nested["locked"] != nil {
-						squidexNested[i].IsLocked = nested["locked"].(bool)
+						squidexNested[i].IsLocked = nested["locked"].(*bool)
 					}
 					if nested["disabled"] != nil {
-						squidexNested[i].IsDisabled = nested["disabled"].(bool)
+						squidexNested[i].IsDisabled = nested["disabled"].(*bool)
 					}
 					if nested["properties"] != nil {
 						properties := nested["properties"].([]interface{})
@@ -1123,25 +1123,25 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 							if properties["label"] != nil {
 								label := properties["label"].(string)
-								squidexProperties.Label = &label
+								squidexProperties.Label = *squidexclient.NewNullableString(&label)
 							}
 							if properties["hints"] != nil {
 								hints := properties["hints"].(string)
-								squidexProperties.Hints = &hints
+								squidexProperties.Hints = *squidexclient.NewNullableString(&hints)
 							}
 							if properties["placeholder"] != nil {
 								placeholder := properties["placeholder"].(string)
-								squidexProperties.Placeholder = &placeholder
+								squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
 							}
 							if properties["required"] != nil {
-								squidexProperties.IsRequired = properties["required"].(bool)
+								squidexProperties.IsRequired = properties["required"].(*bool)
 							}
 							if properties["half_width"] != nil {
-								squidexProperties.IsHalfWidth = properties["half_width"].(bool)
+								squidexProperties.IsHalfWidth = properties["half_width"].(*bool)
 							}
 							if properties["editor_url"] != nil {
 								editorURL := properties["editor_url"].(string)
-								squidexProperties.EditorURL = &editorURL
+								squidexProperties.EditorUrl = *squidexclient.NewNullableString(&editorURL)
 							}
 
 							if properties["min_items"] != nil {
@@ -1214,16 +1214,16 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							}
 							if properties["tags"] != nil {
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
-								squidexProperties.Tags = &tags
+								squidexProperties.Tags = *&tags
 							}
 							squidexNested[i].Properties = squidexProperties
 						}
 					}
 				}
-				squidexfields[i].Nested = &squidexNested
+				squidexfields[i].Nested = *&squidexNested
 			}
 		}
-		squidexschema.Fields = &squidexfields
+		squidexschema.Fields = *&squidexfields
 	}
 	return squidexschema, nil
 }
@@ -1329,8 +1329,8 @@ func defaultValueToInterface(fieldType string, defaultValue interface{}) interfa
 
 func mapCreateSchemaDtoToSynchronizeSchemaDto(
 	createSchema squidexclient.CreateSchemaDto,
-	schemaFieldDeleteAllowed bool,
-	schemaFieldRecreateAllowed bool,
+	schemaFieldDeleteAllowed *bool,
+	schemaFieldRecreateAllowed *bool,
 ) squidexclient.SynchronizeSchemaDto {
 	dto := squidexclient.SynchronizeSchemaDto{
 		NoFieldDeletion:    !schemaFieldDeleteAllowed,
@@ -1352,7 +1352,7 @@ func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
 		return
 	}
 
-	for i, field := range *dto.Fields {
+	for i, field := range dto.Fields {
 		properties := field.Properties
 		if *properties.MinItems == 0 {
 			properties.MinItems = nil
@@ -1391,7 +1391,7 @@ func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
 			properties.MinLength = nil
 		}
 		field.Properties = properties
-		(*dto.Fields)[i] = field
+		(dto.Fields)[i] = field
 	}
 }
 
@@ -1475,8 +1475,8 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	context := meta.(providerConfig)
 	client := context.Client
 
-	schemaFieldDeleteAllowed := data.Get("schema_field_delete_allow").(bool)
-	schemaFieldRecreateAllowed := data.Get("schema_field_recreate_allow").(bool)
+	schemaFieldDeleteAllowed := data.Get("schema_field_delete_allow").(*bool)
+	schemaFieldRecreateAllowed := data.Get("schema_field_recreate_allow").(*bool)
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
@@ -1505,14 +1505,14 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	// TODO: test nofieldeletion & nofieldrecreation in state
 	// if input fields != output fields (name/type & determine what causes recreation of fields?)
 	// then invalidate state with data.Set("invalidated_state", true)
-	if syncDto.NoFieldDeletion {
-		if len(result.Fields) > len(*syncDto.Fields) {
+	if *syncDto.NoFieldDeletion {
+		if len(result.Fields) > len(syncDto.Fields) {
 			data.Set("invalidated_state", true)
 			return diag.Errorf("Not able to delete schema fields when resource field schema_field_delete_allow is set to false.")
 		}
 	}
-	if syncDto.NoFieldRecreation {
-		for _, field := range *syncDto.Fields {
+	if *syncDto.NoFieldRecreation {
+		for _, field := range syncDto.Fields {
 			found := false
 			for _, resultField := range result.Fields {
 				if resultField.Name == field.Name &&
@@ -1578,7 +1578,7 @@ func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, a
 
 	var diags diag.Diagnostics
 
-	for _, field := range *createDto.Fields {
+	for _, field := range createDto.Fields {
 		if field.IsSelfReference {
 			for _, resultField := range result.Fields {
 				if resultField.Name == field.Name {
