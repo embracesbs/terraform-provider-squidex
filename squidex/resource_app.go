@@ -54,16 +54,17 @@ func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta inte
 
 	name := data.Get("name").(string)
 
-	result, _, err := client.AppsApi.AppsPostApp(ctx, squidexclient.CreateAppDto{
-		Name: name,
-	})
+	result, _, err := client.AppsApi.AppsPostApp(ctx).CreateAppDto(
+		squidexclient.CreateAppDto{
+			Name: name,
+		}).Execute()
 
 	if err != nil {
 		data.Set("invalidated_state", true)
 		return diag.FromErr(err)
 	}
 
-	data.SetId(result.Id)
+	data.SetId(*result.Id)
 
 	resourceAppUpdate(ctx, data, meta)
 
@@ -79,10 +80,16 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	label := data.Get("label").(string)
 	description := data.Get("description").(string)
 
-	_, _, err := client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
-		Label:       &label,
-		Description: &description,
-	})
+	_, _, err := client.AppsApi.AppsPutApp(ctx, name).UpdateAppDto(
+		squidexclient.UpdateAppDto{
+			Label:       *squidexclient.NewNullableString(&label),
+			Description: *squidexclient.NewNullableString(&description),
+		}).Execute()
+
+	// client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
+	// 	Label:       &label,
+	// 	Description: &description,
+	// })
 
 	if err != nil {
 		data.Set("invalidated_state", true)
@@ -99,7 +106,7 @@ func resourceAppDelete(ctx context.Context, data *schema.ResourceData, meta inte
 
 	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
-	response, err := client.AppsApi.AppsDeleteApp(ctx, name)
+	response, err := client.AppsApi.AppsDeleteApp(ctx, name).Execute()
 
 	err = common.HandleAPIError(response, err, true)
 

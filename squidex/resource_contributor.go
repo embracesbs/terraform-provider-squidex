@@ -62,7 +62,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 
 	data.Set("invalidated_state", false)
 
-	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName)
+	result, response, err := client.AppsApi.AppContributorsGetContributors(ctx, appName).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -100,11 +100,12 @@ func resourceContributorCreate(ctx context.Context, data *schema.ResourceData, m
 	role := data.Get("role").(string)
 	invite := true // required for new users, only existing users may be added as contributer without invite data.Get("invite").(bool)
 
-	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
-		ContributorId: contributorEmail,
-		Role:          &role,
-		Invite:        invite,
-	})
+	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName).AssignContributorDto(
+		squidexclient.AssignContributorDto{
+			ContributorId: contributorEmail,
+			Role:          *squidexclient.NewNullableString(&role),
+			Invite:        &invite,
+		}).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -145,11 +146,12 @@ func resourceContributorUpdate(ctx context.Context, data *schema.ResourceData, m
 	invite := false // no invites send for updating role
 
 	// there is no update method, just use the create to set it again, but no invite!
-	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName, squidexclient.AssignContributorDto{
-		ContributorId: contributorID,
-		Role:          &role,
-		Invite:        invite,
-	})
+	result, response, err := client.AppsApi.AppContributorsPostContributor(ctx, appName).AssignContributorDto(
+		squidexclient.AssignContributorDto{
+			ContributorId: contributorID,
+			Role:          *squidexclient.NewNullableString(&role),
+			Invite:        &invite,
+		}).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -188,7 +190,7 @@ func resourceContributorDelete(ctx context.Context, data *schema.ResourceData, m
 	client := meta.(providerConfig).Client
 	var diags diag.Diagnostics
 
-	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID)
+	_, response, err := client.AppsApi.AppContributorsDeleteContributor(ctx, appName, contributorID).Execute()
 
 	err = common.HandleAPIError(response, err, true)
 

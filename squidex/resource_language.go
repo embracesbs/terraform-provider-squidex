@@ -98,9 +98,10 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 		if rs["language"].(string) == "en" {
 			hasEn = true
 		} else {
-			_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName, squidexclient.AddLanguageDto{
-				Language: rs["language"].(string),
-			})
+			_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName).AddLanguageDto(
+				squidexclient.AddLanguageDto{
+					Language: rs["language"].(string),
+				}).Execute()
 
 			if err != nil {
 				data.Set("invalidated_state", true)
@@ -112,9 +113,10 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 
 			bl := true
 
-			_, _, err := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, rs["language"].(string), squidexclient.UpdateLanguageDto{
-				IsMaster: &bl,
-			})
+			_, _, err := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, rs["language"].(string)).UpdateLanguageDto(
+				squidexclient.UpdateLanguageDto{
+					IsMaster: *squidexclient.NewNullableBool(&bl),
+				}).Execute()
 
 			if err != nil {
 				data.Set("invalidated_state", true)
@@ -130,7 +132,7 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 	}
 
 	if hasEn == false {
-		_, _, err := client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, "en")
+		_, _, err := client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, "en").Execute()
 
 		if err != nil {
 			data.Set("invalidated_state", true)
@@ -159,18 +161,20 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 		todo := CheckUpdate(rs, result, oldResult)
 
 		if todo == Create {
-			_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName, squidexclient.AddLanguageDto{
-				Language: name,
-			})
+			_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName).AddLanguageDto(
+				squidexclient.AddLanguageDto{
+					Language: name,
+				}).Execute()
 
 			if err != nil {
 				data.Set("invalidated_state", true)
 				return diag.Errorf("failed to perform update :  create " + name)
 			}
 
-			_, _, err_update := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, name, squidexclient.UpdateLanguageDto{
-				IsMaster: &isActive,
-			})
+			_, _, err_update := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, name).UpdateLanguageDto(
+				squidexclient.UpdateLanguageDto{
+					IsMaster: *squidexclient.NewNullableBool(&isActive),
+				}).Execute()
 
 			if err_update != nil {
 				data.Set("invalidated_state", true)
@@ -180,9 +184,10 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 
 		if todo == Update {
 
-			_, _, err_update := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, name, squidexclient.UpdateLanguageDto{
-				IsMaster: &isActive,
-			})
+			_, _, err_update := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, name).UpdateLanguageDto(
+				squidexclient.UpdateLanguageDto{
+					IsMaster: *squidexclient.NewNullableBool(&isActive),
+				}).Execute()
 
 			if err_update != nil {
 
@@ -225,7 +230,7 @@ func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta
 
 	client := meta.(providerConfig).Client
 
-	existing, _, err := client.AppsApi.AppLanguagesGetLanguages(ctx, appName)
+	existing, _, err := client.AppsApi.AppLanguagesGetLanguages(ctx, appName).Execute()
 
 	if err != nil {
 		return diag.FromErr(err)
@@ -237,13 +242,14 @@ func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta
 
 		if rs["language"].(string) != "en" {
 
-			if Same(existing, rs["language"].(string), rs["is_master"].(bool)) == true && rs["is_master"].(bool) == true {
+			if Same(*existing, rs["language"].(string), rs["is_master"].(bool)) == true && rs["is_master"].(bool) == true {
 
-				if Same(existing, "en", false) != true {
+				if Same(*existing, "en", false) != true {
 
-					_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName, squidexclient.AddLanguageDto{
-						Language: "en",
-					})
+					_, _, err := client.AppsApi.AppLanguagesPostLanguage(ctx, appName).AddLanguageDto(
+						squidexclient.AddLanguageDto{
+							Language: "en",
+						}).Execute()
 
 					if err != nil {
 						return diag.Errorf("failed to recreate default en language")
@@ -251,12 +257,13 @@ func resourceLanguageDelete(ctx context.Context, data *schema.ResourceData, meta
 
 				}
 				bl := true
-				client.AppsApi.AppLanguagesPutLanguage(ctx, appName, "en", squidexclient.UpdateLanguageDto{
-					IsMaster: &bl,
-				})
+				client.AppsApi.AppLanguagesPutLanguage(ctx, appName, "en").UpdateLanguageDto(
+					squidexclient.UpdateLanguageDto{
+						IsMaster: *squidexclient.NewNullableBool(&bl),
+					}).Execute()
 			}
 
-			_, _, err := client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, rs["language"].(string))
+			_, _, err := client.AppsApi.AppLanguagesDeleteLanguage(ctx, appName, rs["language"].(string)).Execute()
 
 			if err != nil {
 				return diag.Errorf("failed to delete: " + rs["language"].(string))
@@ -321,7 +328,7 @@ func Same(s squidexclient.AppLanguagesDto, b string, c bool) bool {
 
 	for _, a := range s.Items {
 
-		if a.Iso2Code == b && a.IsMaster == c {
+		if a.Iso2Code == b && *a.IsMaster == c {
 			return true
 		}
 	}

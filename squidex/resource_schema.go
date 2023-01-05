@@ -1412,7 +1412,9 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	setCreationDefaults(&createDto)
 	createDtoJson, _ := json.MarshalIndent(createDto, "", "  ")
 	log.Printf("[TRACE] Creating a new schema with dto %s.", string(createDtoJson))
-	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
+	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName).CreateSchemaDto(
+		createDto,
+	).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -1430,7 +1432,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 		return diag.FromErr(err)
 	}
 
-	data.SetId(result.Id)
+	data.SetId(*result.Id)
 
 	data.Set("invalidated_state", false)
 	return diags
@@ -1447,7 +1449,7 @@ func resourceSchemaRead(ctx context.Context, data *schema.ResourceData, meta int
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name)
+	result, response, err := client.SchemasApi.SchemasGetSchema(ctx, appName, name).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -1488,7 +1490,9 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 		schemaFieldDeleteAllowed,
 		schemaFieldRecreateAllowed)
 
-	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name, syncDto)
+	result, response, err := client.SchemasApi.SchemasPutSchemaSync(ctx, appName, name).SynchronizeSchemaDto(
+		syncDto,
+	).Execute()
 	err = common.HandleAPIError(response, err, false)
 
 	if err != nil {
@@ -1552,7 +1556,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 
 	client := context.Client
 
-	response, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name)
+	response, err := client.SchemasApi.SchemasDeleteSchema(ctx, appName, name).Execute()
 
 	err = common.HandleAPIError(response, err, true)
 
@@ -1586,7 +1590,9 @@ func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, a
 					updateFieldDto := squidexclient.UpdateFieldDto{Properties: dto}
 					updateFieldDtoJson, _ := json.MarshalIndent(updateFieldDto, "", "  ")
 					log.Printf("[TRACE] Creating a new schema, updating self-reference field with dto %s.", string(updateFieldDtoJson))
-					_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, resultField.FieldId, updateFieldDto)
+					_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, resultField.FieldId).UpdateFieldDto(
+						updateFieldDto,
+					).Execute()
 
 					if fieldErr != nil {
 						// TODO: handle errors

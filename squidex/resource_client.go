@@ -57,7 +57,7 @@ func resourceClientRead(ctx context.Context, data *schema.ResourceData, meta int
 
 	data.Set("invalidated_state", false)
 
-	result, response, err := client.AppsApi.AppClientsGetClients(ctx, appName)
+	result, response, err := client.AppsApi.AppClientsGetClients(ctx, appName).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -97,9 +97,10 @@ func resourceClientCreate(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
-	result, response, err := client.AppsApi.AppClientsPostClient(ctx, appName, squidexclient.CreateClientDto{
-		Id: name,
-	})
+	result, response, err := client.AppsApi.AppClientsPostClient(ctx, appName).CreateClientDto(
+		squidexclient.CreateClientDto{
+			Id: name,
+		}).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -138,10 +139,11 @@ func resourceClientUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	name := data.Get("name").(string)
 	role := data.Get("role").(string)
 
-	_, response, err := client.AppsApi.AppClientsPutClient(ctx, appName, id, squidexclient.UpdateClientDto{
-		Name: &name,
-		Role: &role,
-	})
+	_, response, err := client.AppsApi.AppClientsPutClient(ctx, appName, id).UpdateClientDto(
+		squidexclient.UpdateClientDto{
+			Name: *squidexclient.NewNullableString(&name),
+			Role: *squidexclient.NewNullableString(&role),
+		}).Execute()
 
 	err = common.HandleAPIError(response, err, false)
 
@@ -162,7 +164,7 @@ func resourceClientDelete(ctx context.Context, data *schema.ResourceData, meta i
 	appName := data.Get("app_name").(string)
 	id := data.Id()
 
-	_, response, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id)
+	_, response, err := client.AppsApi.AppClientsDeleteClient(ctx, appName, id).Execute()
 
 	err = common.HandleAPIError(response, err, true)
 
