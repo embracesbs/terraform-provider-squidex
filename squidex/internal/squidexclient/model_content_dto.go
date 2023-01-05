@@ -12,6 +12,7 @@ package squidexclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // ContentDto struct for ContentDto

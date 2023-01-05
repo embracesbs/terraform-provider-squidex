@@ -12,6 +12,7 @@ package squidexclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // SchemaDto struct for SchemaDto

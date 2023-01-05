@@ -12,6 +12,7 @@ package squidexclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // BackupJobDto struct for BackupJobDto
