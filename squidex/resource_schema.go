@@ -608,7 +608,7 @@ func resourceSchema() *schema.Resource {
 }
 
 func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema *squidexclient.SchemaDto) error {
-	log.Printf("ids: %s %s", data.Id(), schema.Id)
+	log.Printf("ids: %s %s", data.Id(), *schema.Id)
 	data.SetId(*schema.Id)
 
 	data.Set("name", schema.Name)
@@ -616,7 +616,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema *squidexclien
 	data.Set("singleton", schema.IsSingleton)
 	data.Set("category", schema.Category)
 
-	if (squidexclient.SchemaPropertiesDto{}) == schema.Properties {
+	if reflect.DeepEqual(schema.Properties, squidexclient.SchemaPropertiesDto{}) {
 		data.Set("properties", nil)
 	} else {
 		properties := make(map[string]interface{})
@@ -651,7 +651,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema *squidexclien
 		fields[i]["partitioning"] = v.Partitioning
 		fields[i]["self_reference"] = &v.IsSelfReference
 
-		if (squidexclient.FieldPropertiesDto{}) == v.Properties {
+		if reflect.DeepEqual(v.Properties, squidexclient.FieldPropertiesDto{}) {
 			fields[i]["properties"] = nil
 		} else {
 			properties := make(map[string]interface{})
@@ -1240,7 +1240,7 @@ func emptyStringToNil(fieldType string, source interface{}) interface{} {
 	return source
 }
 
-func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) interface{} {
+func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) map[string]interface{} {
 	if partitioning != "language" ||
 		defaultValue == nil ||
 		fieldType == "Array" ||
@@ -1249,47 +1249,49 @@ func defaultValuesToInterface(fieldType string, partitioning string, defaultValu
 		fieldType == "UI" {
 		return nil
 	}
+
+	return defaultValue.(map[string]interface{})
 	// defaultValues is always a map[string]string in the schema
-	v := interfaceMapToStringMap(defaultValue.(map[string]interface{}))
+	//v := interfaceMapToStringMap(defaultValue.(map[string]interface{}))
 	// where map key is the language as 'nl-NL'
-	switch fieldType {
-	case "Assets", "References", "Tags":
-		target := make(map[string][]string)
-		for key, value := range v {
-			value = strings.TrimLeft(value, "[")
-			value = strings.TrimRight(value, "]")
-			value := strings.Replace(value, "\", \"", "\",\"", -1)
-			valueSlice := strings.Split(value, "\",\"")
-			// message := ("Error converting default_values to []string. Expected {\"nl-NL\" = \"[\"string1\", \"string2\"]\"], got %s", value)
-			target[key] = valueSlice
-		}
-		return target
-	case "Boolean":
-		target := make(map[string]bool)
-		for key, value := range v {
-			result, err := strconv.ParseBool(value)
-			if err != nil {
-				log.Panicf("Error converting default_values to boolean. Expected {\"nl-NL\" = \"true\"], got %s %s", key, value)
-			}
-			target[key] = result
-		}
-		return target
-	case "DateTime", "String":
-		return v
-	case "Number":
-		target := make(map[string]float64)
-		for key, value := range v {
-			result, err := strconv.ParseFloat(value, 64)
-			if err != nil {
-				log.Panicf("Error converting default_values to float32. Expected {\"nl-NL\" = \"1234.5678\"], got %s %s", key, value)
-			}
-			target[key] = result
-		}
-		return target
-	default:
-		// Any unknown field_type is ignored
-		return nil
-	}
+	// switch fieldType {
+	// case "Assets", "References", "Tags":
+	// 	target := make(map[string][]string)
+	// 	for key, value := range v {
+	// 		value = strings.TrimLeft(value, "[")
+	// 		value = strings.TrimRight(value, "]")
+	// 		value := strings.Replace(value, "\", \"", "\",\"", -1)
+	// 		valueSlice := strings.Split(value, "\",\"")
+	// 		// message := ("Error converting default_values to []string. Expected {\"nl-NL\" = \"[\"string1\", \"string2\"]\"], got %s", value)
+	// 		target[key] = valueSlice
+	// 	}
+	// 	return target
+	// case "Boolean":
+	// 	target := make(map[string]bool)
+	// 	for key, value := range v {
+	// 		result, err := strconv.ParseBool(value)
+	// 		if err != nil {
+	// 			log.Panicf("Error converting default_values to boolean. Expected {\"nl-NL\" = \"true\"], got %s %s", key, value)
+	// 		}
+	// 		target[key] = result
+	// 	}
+	// 	return target
+	// case "DateTime", "String":
+	// 	return v
+	// case "Number":
+	// 	target := make(map[string]float64)
+	// 	for key, value := range v {
+	// 		result, err := strconv.ParseFloat(value, 64)
+	// 		if err != nil {
+	// 			log.Panicf("Error converting default_values to float32. Expected {\"nl-NL\" = \"1234.5678\"], got %s %s", key, value)
+	// 		}
+	// 		target[key] = result
+	// 	}
+	// 	return target
+	// default:
+	// 	// Any unknown field_type is ignored
+	// 	return nil
+	// }
 }
 func defaultValueToInterface(fieldType string, defaultValue interface{}) interface{} {
 	if defaultValue == nil ||
@@ -1329,12 +1331,14 @@ func defaultValueToInterface(fieldType string, defaultValue interface{}) interfa
 
 func mapCreateSchemaDtoToSynchronizeSchemaDto(
 	createSchema squidexclient.CreateSchemaDto,
-	schemaFieldDeleteAllowed *bool,
-	schemaFieldRecreateAllowed *bool,
+	schemaFieldDeleteAllowed bool,
+	schemaFieldRecreateAllowed bool,
 ) squidexclient.SynchronizeSchemaDto {
+	noFieldDeletion := !schemaFieldDeleteAllowed
+	noFieldRecreation := !schemaFieldRecreateAllowed
 	dto := squidexclient.SynchronizeSchemaDto{
-		NoFieldDeletion:    !schemaFieldDeleteAllowed,
-		NoFieldRecreation:  !schemaFieldRecreateAllowed,
+		NoFieldDeletion:    &noFieldDeletion,
+		NoFieldRecreation:  &noFieldRecreation,
 		Category:           createSchema.Category,
 		Fields:             createSchema.Fields,
 		FieldsInLists:      createSchema.FieldsInLists,
@@ -1423,7 +1427,7 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 		return diag.FromErr(err)
 	}
 
-	updateSelfReferences(ctx, *client, appName, name, createDto, result)
+	updateSelfReferences(ctx, *client, appName, name, createDto, *result)
 
 	// prevent drift and set ALL values from the result
 	err = setDataFromSchemaDetailsDto(data, result)
@@ -1475,8 +1479,8 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 	context := meta.(providerConfig)
 	client := context.Client
 
-	schemaFieldDeleteAllowed := data.Get("schema_field_delete_allow").(*bool)
-	schemaFieldRecreateAllowed := data.Get("schema_field_recreate_allow").(*bool)
+	schemaFieldDeleteAllowed := data.Get("schema_field_delete_allow").(bool)
+	schemaFieldRecreateAllowed := data.Get("schema_field_recreate_allow").(bool)
 	appName := data.Get("app_name").(string)
 	name := data.Get("name").(string)
 
@@ -1500,7 +1504,7 @@ func resourceSchemaUpdate(ctx context.Context, data *schema.ResourceData, meta i
 		return diag.FromErr(err)
 	}
 
-	updateSelfReferences(ctx, *client, appName, name, createDto, result)
+	updateSelfReferences(ctx, *client, appName, name, createDto, *result)
 
 	// TODO: test nofieldeletion & nofieldrecreation in state
 	// if input fields != output fields (name/type & determine what causes recreation of fields?)
@@ -1574,7 +1578,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 // Updates the fields in the created schema for self reference fields if this is specified with the IsSelfReference field.
-func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, appName string, schemaName string, createDto squidexclient.CreateSchemaDto, result squidexclient.SchemaDetailsDto) diag.Diagnostics {
+func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, appName string, schemaName string, createDto squidexclient.CreateSchemaDto, result squidexclient.SchemaDto) diag.Diagnostics {
 
 	var diags diag.Diagnostics
 
@@ -1584,13 +1588,13 @@ func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, a
 				if resultField.Name == field.Name {
 					// create dto
 					dto := field.Properties
-					dto.SchemaIds = &[]string{result.Id}
+					dto.SchemaIds = &[]string{*result.Id}
 
 					// update field
 					updateFieldDto := squidexclient.UpdateFieldDto{Properties: dto}
 					updateFieldDtoJson, _ := json.MarshalIndent(updateFieldDto, "", "  ")
 					log.Printf("[TRACE] Creating a new schema, updating self-reference field with dto %s.", string(updateFieldDtoJson))
-					_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, resultField.FieldId).UpdateFieldDto(
+					_, _, fieldErr := client.SchemasApi.SchemaFieldsPutField(ctx, appName, schemaName, *resultField.FieldId).UpdateFieldDto(
 						updateFieldDto,
 					).Execute()
 
