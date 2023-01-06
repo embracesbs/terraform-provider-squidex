@@ -1,6 +1,6 @@
 module github.com/embracesbs/terraform-provider-squidex
 
-go 1.18
+go 1.14
 
 require (
 	github.com/antihax/optional v1.0.0
