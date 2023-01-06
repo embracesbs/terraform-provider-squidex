@@ -10,17 +10,18 @@ Testing CommentsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_CommentsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test CommentsApiService CommentsDeleteComment", func(t *testing.T) {
 
@@ -30,10 +31,9 @@ func Test_openapi_CommentsApiService(t *testing.T) {
 		var commentsId string
 		var commentId string
 
-		resp, httpRes, err := apiClient.CommentsApi.CommentsDeleteComment(context.Background(), app, commentsId, commentId).Execute()
+		httpRes, err := apiClient.CommentsApi.CommentsDeleteComment(context.Background(), app, commentsId, commentId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -91,10 +91,9 @@ func Test_openapi_CommentsApiService(t *testing.T) {
 		var commentsId string
 		var commentId string
 
-		resp, httpRes, err := apiClient.CommentsApi.CommentsPutComment(context.Background(), app, commentsId, commentId).Execute()
+		httpRes, err := apiClient.CommentsApi.CommentsPutComment(context.Background(), app, commentsId, commentId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

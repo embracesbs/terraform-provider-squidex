@@ -10,17 +10,18 @@ Testing AppsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_AppsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test AppsApiService AppAssetsGetAssetScripts", func(t *testing.T) {
 
@@ -401,10 +402,9 @@ func Test_openapi_AppsApiService(t *testing.T) {
 
 		var app string
 
-		resp, httpRes, err := apiClient.AppsApi.AppsDeleteApp(context.Background(), app).Execute()
+		httpRes, err := apiClient.AppsApi.AppsDeleteApp(context.Background(), app).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

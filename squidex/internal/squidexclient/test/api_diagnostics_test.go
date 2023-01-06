@@ -10,26 +10,26 @@ Testing DiagnosticsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_DiagnosticsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test DiagnosticsApiService DiagnosticsGetDump", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DiagnosticsApi.DiagnosticsGetDump(context.Background()).Execute()
+		httpRes, err := apiClient.DiagnosticsApi.DiagnosticsGetDump(context.Background()).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -38,10 +38,9 @@ func Test_openapi_DiagnosticsApiService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.DiagnosticsApi.DiagnosticsGetGCDump(context.Background()).Execute()
+		httpRes, err := apiClient.DiagnosticsApi.DiagnosticsGetGCDump(context.Background()).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

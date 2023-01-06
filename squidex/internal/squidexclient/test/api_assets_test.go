@@ -10,17 +10,18 @@ Testing AssetsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_AssetsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test AssetsApiService AssetContentGetAssetContent", func(t *testing.T) {
 
@@ -59,10 +60,9 @@ func Test_openapi_AssetsApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.AssetsApi.AssetFoldersDeleteAssetFolder(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.AssetsApi.AssetFoldersDeleteAssetFolder(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -146,10 +146,9 @@ func Test_openapi_AssetsApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.AssetsApi.AssetsDeleteAsset(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.AssetsApi.AssetsDeleteAsset(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

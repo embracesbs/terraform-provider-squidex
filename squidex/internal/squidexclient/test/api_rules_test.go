@@ -10,17 +10,18 @@ Testing RulesApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_RulesApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test RulesApiService RulesDeleteEvent", func(t *testing.T) {
 
@@ -29,10 +30,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesDeleteEvent(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesDeleteEvent(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -43,10 +43,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 
 		var app string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesDeleteEvents(context.Background(), app).Execute()
+		httpRes, err := apiClient.RulesApi.RulesDeleteEvents(context.Background(), app).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -58,10 +57,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesDeleteRule(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesDeleteRule(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -73,10 +71,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesDeleteRuleEvents(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesDeleteRuleEvents(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -87,10 +84,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 
 		var app string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesDeleteRuleRun(context.Background(), app).Execute()
+		httpRes, err := apiClient.RulesApi.RulesDeleteRuleRun(context.Background(), app).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -212,10 +208,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesPutEvent(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesPutEvent(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -242,10 +237,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesPutRuleRun(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesPutRuleRun(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -286,10 +280,9 @@ func Test_openapi_RulesApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.RulesApi.RulesTriggerRule(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.RulesApi.RulesTriggerRule(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -10,17 +10,18 @@ Testing BackupsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_BackupsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test BackupsApiService BackupContentGetBackupContent", func(t *testing.T) {
 
@@ -58,10 +59,9 @@ func Test_openapi_BackupsApiService(t *testing.T) {
 		var app string
 		var id string
 
-		resp, httpRes, err := apiClient.BackupsApi.BackupsDeleteBackup(context.Background(), app, id).Execute()
+		httpRes, err := apiClient.BackupsApi.BackupsDeleteBackup(context.Background(), app, id).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -86,10 +86,9 @@ func Test_openapi_BackupsApiService(t *testing.T) {
 
 		var app string
 
-		resp, httpRes, err := apiClient.BackupsApi.BackupsPostBackup(context.Background(), app).Execute()
+		httpRes, err := apiClient.BackupsApi.BackupsPostBackup(context.Background(), app).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -110,10 +109,9 @@ func Test_openapi_BackupsApiService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.BackupsApi.RestorePostRestoreJob(context.Background()).Execute()
+		httpRes, err := apiClient.BackupsApi.RestorePostRestoreJob(context.Background()).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

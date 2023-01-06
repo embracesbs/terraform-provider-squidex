@@ -10,17 +10,18 @@ Testing NotificationsApiService
 package squidexclient
 
 import (
-	openapiclient "./openapi"
 	"context"
+	"testing"
+
+	"github.com/embracesbs/terraform-provider-squidex/squidex/internal/squidexclient"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_NotificationsApiService(t *testing.T) {
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := squidexclient.NewConfiguration()
+	apiClient := squidexclient.NewAPIClient(configuration)
 
 	t.Run("Test NotificationsApiService UserNotificationsDeleteComment", func(t *testing.T) {
 
@@ -29,10 +30,9 @@ func Test_openapi_NotificationsApiService(t *testing.T) {
 		var userId string
 		var commentId string
 
-		resp, httpRes, err := apiClient.NotificationsApi.UserNotificationsDeleteComment(context.Background(), userId, commentId).Execute()
+		httpRes, err := apiClient.NotificationsApi.UserNotificationsDeleteComment(context.Background(), userId, commentId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
