@@ -52,7 +52,9 @@ func Provider() *schema.Provider {
 			"squidex_role":        resourceRole(),
 			"squidex_contributor": resourceContributor(),
 		},
-		DataSourcesMap:       map[string]*schema.Resource{},
+		DataSourcesMap: map[string]*schema.Resource{
+			"squidex_client": dataSourceClient(),
+		},
 		ConfigureContextFunc: providerConfigure,
 	}
 }
