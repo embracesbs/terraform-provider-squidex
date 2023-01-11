@@ -809,10 +809,14 @@ func stringArrayToNonNilStringArray(iv []string) []string {
 }
 
 func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.CreateSchemaDto, error) {
+
+	published := data.Get("published").(bool)
+	isSingleton := data.Get("singleton").(bool)
+
 	squidexschema := squidexclient.CreateSchemaDto{
-		IsPublished: data.Get("published").(*bool),
+		IsPublished: &published,
 		Name:        data.Get("name").(string),
-		IsSingleton: data.Get("singleton").(*bool),
+		IsSingleton: &isSingleton,
 	}
 
 	if category, ok := data.GetOk("category"); ok {
@@ -844,7 +848,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		}
 		if p, ok := properties["tags"]; ok {
 			tags := interfaceSliceToStringSlice(p.([]interface{}))
-			squidexschema.Properties.Tags = *&tags
+			squidexschema.Properties.Tags = tags
 		}
 	}
 
@@ -874,15 +878,15 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	}
 	if v, ok := data.GetOk("fields_in_references"); ok {
 		fieldsInReferences := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInReferences = *&fieldsInReferences
+		squidexschema.FieldsInReferences = fieldsInReferences
 	}
 	if v, ok := data.GetOk("fields_in_list"); ok {
 		fieldsInLists := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInLists = *&fieldsInLists
+		squidexschema.FieldsInLists = fieldsInLists
 	}
 	if v, ok := data.GetOk("preview_urls"); ok {
 		previewUrls := interfaceMapToStringMap(v.(map[string]interface{}))
-		squidexschema.PreviewUrls = *&previewUrls
+		squidexschema.PreviewUrls = previewUrls
 	}
 	if v, ok := data.GetOk("fields"); ok {
 		fields := v.([]interface{})
@@ -899,13 +903,16 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 				squidexfields[i].Name = field["name"].(string)
 			}
 			if field["hidden"] != nil {
-				squidexfields[i].IsHidden = field["hidden"].(*bool)
+				hidden := field["hidden"].(bool)
+				squidexfields[i].IsHidden = &hidden
 			}
 			if field["locked"] != nil {
-				squidexfields[i].IsLocked = field["locked"].(*bool)
+				locked := field["locked"].(bool)
+				squidexfields[i].IsLocked = &locked
 			}
 			if field["disabled"] != nil {
-				squidexfields[i].IsDisabled = field["disabled"].(*bool)
+				disabled := field["disabled"].(bool)
+				squidexfields[i].IsDisabled = &disabled
 			}
 			if field["self_reference"] != nil {
 				squidexfields[i].IsSelfReference = field["self_reference"].(bool)
@@ -933,10 +940,12 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
 					}
 					if properties["required"] != nil {
-						squidexProperties.IsRequired = properties["required"].(*bool)
+						required := properties["required"].(bool)
+						squidexProperties.IsRequired = &required
 					}
 					if properties["half_width"] != nil {
-						squidexProperties.IsHalfWidth = properties["half_width"].(*bool)
+						half_width := properties["half_width"].(bool)
+						squidexProperties.IsHalfWidth = &half_width
 					}
 					if properties["editor_url"] != nil {
 						editorURL := properties["editor_url"].(string)
@@ -1103,13 +1112,16 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						squidexNested[i].Name = nested["name"].(string)
 					}
 					if nested["hidden"] != nil {
-						squidexNested[i].IsHidden = nested["hidden"].(*bool)
+						hidden := nested["hidden"].(bool)
+						squidexNested[i].IsHidden = &hidden
 					}
 					if nested["locked"] != nil {
-						squidexNested[i].IsLocked = nested["locked"].(*bool)
+						locked := nested["locked"].(bool)
+						squidexNested[i].IsLocked = &locked
 					}
 					if nested["disabled"] != nil {
-						squidexNested[i].IsDisabled = nested["disabled"].(*bool)
+						disabled := nested["disabled"].(bool)
+						squidexNested[i].IsDisabled = &disabled
 					}
 					if nested["properties"] != nil {
 						properties := nested["properties"].([]interface{})
@@ -1134,10 +1146,12 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 								squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
 							}
 							if properties["required"] != nil {
-								squidexProperties.IsRequired = properties["required"].(*bool)
+								required := properties["required"].(bool)
+								squidexProperties.IsRequired = &required
 							}
 							if properties["half_width"] != nil {
-								squidexProperties.IsHalfWidth = properties["half_width"].(*bool)
+								half_width := properties["half_width"].(bool)
+								squidexProperties.IsHalfWidth = &half_width
 							}
 							if properties["editor_url"] != nil {
 								editorURL := properties["editor_url"].(string)
@@ -1214,16 +1228,16 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							}
 							if properties["tags"] != nil {
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
-								squidexProperties.Tags = *&tags
+								squidexProperties.Tags = tags
 							}
 							squidexNested[i].Properties = squidexProperties
 						}
 					}
 				}
-				squidexfields[i].Nested = *&squidexNested
+				squidexfields[i].Nested = squidexNested
 			}
 		}
-		squidexschema.Fields = *&squidexfields
+		squidexschema.Fields = squidexfields
 	}
 	return squidexschema, nil
 }
@@ -1240,7 +1254,7 @@ func emptyStringToNil(fieldType string, source interface{}) interface{} {
 	return source
 }
 
-func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) map[string]interface{} {
+func defaultValuesToInterface(fieldType string, partitioning string, defaultValue interface{}) interface{} {
 	if partitioning != "language" ||
 		defaultValue == nil ||
 		fieldType == "Array" ||
@@ -1250,48 +1264,47 @@ func defaultValuesToInterface(fieldType string, partitioning string, defaultValu
 		return nil
 	}
 
-	return defaultValue.(map[string]interface{})
 	// defaultValues is always a map[string]string in the schema
-	//v := interfaceMapToStringMap(defaultValue.(map[string]interface{}))
+	v := interfaceMapToStringMap(defaultValue.(map[string]interface{}))
 	// where map key is the language as 'nl-NL'
-	// switch fieldType {
-	// case "Assets", "References", "Tags":
-	// 	target := make(map[string][]string)
-	// 	for key, value := range v {
-	// 		value = strings.TrimLeft(value, "[")
-	// 		value = strings.TrimRight(value, "]")
-	// 		value := strings.Replace(value, "\", \"", "\",\"", -1)
-	// 		valueSlice := strings.Split(value, "\",\"")
-	// 		// message := ("Error converting default_values to []string. Expected {\"nl-NL\" = \"[\"string1\", \"string2\"]\"], got %s", value)
-	// 		target[key] = valueSlice
-	// 	}
-	// 	return target
-	// case "Boolean":
-	// 	target := make(map[string]bool)
-	// 	for key, value := range v {
-	// 		result, err := strconv.ParseBool(value)
-	// 		if err != nil {
-	// 			log.Panicf("Error converting default_values to boolean. Expected {\"nl-NL\" = \"true\"], got %s %s", key, value)
-	// 		}
-	// 		target[key] = result
-	// 	}
-	// 	return target
-	// case "DateTime", "String":
-	// 	return v
-	// case "Number":
-	// 	target := make(map[string]float64)
-	// 	for key, value := range v {
-	// 		result, err := strconv.ParseFloat(value, 64)
-	// 		if err != nil {
-	// 			log.Panicf("Error converting default_values to float32. Expected {\"nl-NL\" = \"1234.5678\"], got %s %s", key, value)
-	// 		}
-	// 		target[key] = result
-	// 	}
-	// 	return target
-	// default:
-	// 	// Any unknown field_type is ignored
-	// 	return nil
-	// }
+	switch fieldType {
+	case "Assets", "References", "Tags":
+		target := make(map[string][]string)
+		for key, value := range v {
+			value = strings.TrimLeft(value, "[")
+			value = strings.TrimRight(value, "]")
+			value := strings.Replace(value, "\", \"", "\",\"", -1)
+			valueSlice := strings.Split(value, "\",\"")
+			// message := ("Error converting default_values to []string. Expected {\"nl-NL\" = \"[\"string1\", \"string2\"]\"], got %s", value)
+			target[key] = valueSlice
+		}
+		return target
+	case "Boolean":
+		target := make(map[string]bool)
+		for key, value := range v {
+			result, err := strconv.ParseBool(value)
+			if err != nil {
+				log.Panicf("Error converting default_values to boolean. Expected {\"nl-NL\" = \"true\"], got %s %s", key, value)
+			}
+			target[key] = result
+		}
+		return target
+	case "DateTime", "String":
+		return v
+	case "Number":
+		target := make(map[string]float64)
+		for key, value := range v {
+			result, err := strconv.ParseFloat(value, 64)
+			if err != nil {
+				log.Panicf("Error converting default_values to float32. Expected {\"nl-NL\" = \"1234.5678\"], got %s %s", key, value)
+			}
+			target[key] = result
+		}
+		return target
+	default:
+		// Any unknown field_type is ignored
+		return nil
+	}
 }
 func defaultValueToInterface(fieldType string, defaultValue interface{}) interface{} {
 	if defaultValue == nil ||

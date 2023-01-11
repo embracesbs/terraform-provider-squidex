@@ -2,6 +2,7 @@ package common
 
 import (
 	// "github.com/hashicorp/errwrap"
+
 	"encoding/json"
 	"fmt"
 	"log"
@@ -55,7 +56,7 @@ func HandleAPIError(response *http.Response, err interface{}, deleteFunction boo
 		response.Status)
 
 	if err != nil {
-		apiError := err.(squidexclient.GenericOpenAPIError)
+		apiError := err.(*squidexclient.GenericOpenAPIError)
 
 		responseBody := apiError.Body()
 

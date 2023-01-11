@@ -82,7 +82,7 @@ func resourceContributorRead(ctx context.Context, data *schema.ResourceData, met
 		return diag.Errorf("Not Found: Contributor with Id %s", contributorID)
 	}
 
-	if err := data.Set("role", resultItem.Role); err != nil {
+	if err := data.Set("role", resultItem.Role.Get()); err != nil {
 		return diag.FromErr(err)
 	}
 

@@ -102,7 +102,7 @@ func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
 		UserAgent:        "OpenAPI-Generator/1.0.0/go",
-		Debug:            false,
+		Debug:            true,
 		Servers:          ServerConfigurations{
 			{
 				URL: "http://squidex.localhost:8081",
