@@ -80,16 +80,13 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	label := data.Get("label").(string)
 	description := data.Get("description").(string)
 
+	labelnullable := squidexclient.NewNullableString(&label)
+	descriptionnullable := squidexclient.NewNullableString((&description))
 	_, _, err := client.AppsApi.AppsPutApp(ctx, name).UpdateAppDto(
 		squidexclient.UpdateAppDto{
-			Label:       *squidexclient.NewNullableString(&label),
-			Description: *squidexclient.NewNullableString(&description),
+			Label:       *labelnullable,
+			Description: *descriptionnullable,
 		}).Execute()
-
-	// client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
-	// 	Label:       &label,
-	// 	Description: &description,
-	// })
 
 	if err != nil {
 		data.Set("invalidated_state", true)

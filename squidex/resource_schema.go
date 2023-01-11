@@ -614,16 +614,16 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema *squidexclien
 	data.Set("name", schema.Name)
 	data.Set("published", schema.IsPublished)
 	data.Set("singleton", schema.IsSingleton)
-	data.Set("category", schema.Category)
+	data.Set("category", schema.Category.Get())
 
 	if reflect.DeepEqual(schema.Properties, squidexclient.SchemaPropertiesDto{}) {
 		data.Set("properties", nil)
 	} else {
 		properties := make(map[string]interface{})
-		properties["label"] = schema.Properties.Label
-		properties["hints"] = schema.Properties.Hints
-		properties["contents_sidebar_url"] = schema.Properties.ContentsSidebarUrl
-		properties["content_sidebar_url"] = schema.Properties.ContentSidebarUrl
+		properties["label"] = schema.Properties.Label.Get()
+		properties["hints"] = schema.Properties.Hints.Get()
+		properties["contents_sidebar_url"] = schema.Properties.ContentsSidebarUrl.Get()
+		properties["content_sidebar_url"] = schema.Properties.ContentSidebarUrl.Get()
 		// TODO: properties - tags -> how to set array?
 		properties["tags"] = schema.Properties.Tags
 		data.Set("properties", []interface{}{properties})
@@ -821,7 +821,8 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 	if category, ok := data.GetOk("category"); ok {
 		x := category.(string)
-		squidexschema.Category = *squidexclient.NewNullableString(&x)
+		xnullable := squidexclient.NewNullableString(&x)
+		squidexschema.Category = *xnullable
 	}
 
 	if v, ok := data.GetOk("properties"); ok {
@@ -832,19 +833,23 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexschema.Properties = new(squidexclient.SchemaPropertiesDto)
 		if p, ok := properties["label"]; ok {
 			x := p.(string)
-			squidexschema.Properties.Label = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Properties.Label = *xnullable
 		}
 		if p, ok := properties["hints"]; ok {
 			x := p.(string)
-			squidexschema.Properties.Hints = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Properties.Hints = *xnullable
 		}
 		if p, ok := properties["contents_sidebar_url"]; ok {
 			x := p.(string)
-			squidexschema.Properties.ContentsSidebarUrl = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Properties.ContentsSidebarUrl = *xnullable
 		}
 		if p, ok := properties["content_sidebar_url"]; ok {
 			x := p.(string)
-			squidexschema.Properties.ContentSidebarUrl = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Properties.ContentSidebarUrl = *xnullable
 		}
 		if p, ok := properties["tags"]; ok {
 			tags := interfaceSliceToStringSlice(p.([]interface{}))
@@ -857,23 +862,28 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 		squidexschema.Scripts = new(squidexclient.SchemaScriptsDto)
 		if p, ok := scripts["query"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Query = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Scripts.Query = *xnullable
 		}
 		if p, ok := scripts["create"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Create = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Scripts.Create = *xnullable
 		}
 		if p, ok := scripts["update"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Update = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Scripts.Update = *xnullable
 		}
 		if p, ok := scripts["delete"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Delete = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Scripts.Delete = *xnullable
 		}
 		if p, ok := scripts["change"]; ok {
 			x := p.(string)
-			squidexschema.Scripts.Change = *squidexclient.NewNullableString(&x)
+			xnullable := squidexclient.NewNullableString(&x)
+			squidexschema.Scripts.Change = *xnullable
 		}
 	}
 	if v, ok := data.GetOk("fields_in_references"); ok {
@@ -896,7 +906,8 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 			// required field:
 			partitioning := field["partitioning"].(string)
-			squidexfields[i].Partitioning = *squidexclient.NewNullableString(&partitioning)
+			partitioningNullable := squidexclient.NewNullableString(&partitioning)
+			squidexfields[i].Partitioning = *partitioningNullable
 
 			if field["name"] != nil {
 				// name is a required field
@@ -929,15 +940,18 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 					if properties["label"] != nil {
 						label := properties["label"].(string)
-						squidexProperties.Label = *squidexclient.NewNullableString(&label)
+						labelnullable := squidexclient.NewNullableString(&label)
+						squidexProperties.Label = *labelnullable
 					}
 					if properties["hints"] != nil {
 						hints := properties["hints"].(string)
-						squidexProperties.Hints = *squidexclient.NewNullableString(&hints)
+						hintsnullable := squidexclient.NewNullableString(&hints)
+						squidexProperties.Hints = *hintsnullable
 					}
 					if properties["placeholder"] != nil {
 						placeholder := properties["placeholder"].(string)
-						squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
+						placeholdernullable := squidexclient.NewNullableString(&placeholder)
+						squidexProperties.Placeholder = *placeholdernullable
 					}
 					if properties["required"] != nil {
 						required := properties["required"].(bool)
@@ -949,7 +963,8 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					}
 					if properties["editor_url"] != nil {
 						editorURL := properties["editor_url"].(string)
-						squidexProperties.EditorUrl = *squidexclient.NewNullableString(&editorURL)
+						editorURLnullable := squidexclient.NewNullableString(&editorURL)
+						squidexProperties.EditorUrl = *editorURLnullable
 					}
 					if properties["min_items"] != nil {
 						minitems := properties["min_items"].(int)
@@ -1097,7 +1112,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					}
 					if properties["tags"] != nil {
 						tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
-						squidexProperties.Tags = *&tags
+						squidexProperties.Tags = tags
 					}
 					squidexfields[i].Properties = squidexProperties
 				}
@@ -1135,15 +1150,18 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 
 							if properties["label"] != nil {
 								label := properties["label"].(string)
-								squidexProperties.Label = *squidexclient.NewNullableString(&label)
+								labelnullable := squidexclient.NewNullableString(&label)
+								squidexProperties.Label = *labelnullable
 							}
 							if properties["hints"] != nil {
 								hints := properties["hints"].(string)
-								squidexProperties.Hints = *squidexclient.NewNullableString(&hints)
+								hintsnullable := squidexclient.NewNullableString(&hints)
+								squidexProperties.Hints = *hintsnullable
 							}
 							if properties["placeholder"] != nil {
 								placeholder := properties["placeholder"].(string)
-								squidexProperties.Placeholder = *squidexclient.NewNullableString(&placeholder)
+								placeholdernullable := squidexclient.NewNullableString(&placeholder)
+								squidexProperties.Placeholder = *placeholdernullable
 							}
 							if properties["required"] != nil {
 								required := properties["required"].(bool)
@@ -1155,7 +1173,8 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							}
 							if properties["editor_url"] != nil {
 								editorURL := properties["editor_url"].(string)
-								squidexProperties.EditorUrl = *squidexclient.NewNullableString(&editorURL)
+								editorURLnullable := squidexclient.NewNullableString(&editorURL)
+								squidexProperties.EditorUrl = *editorURLnullable
 							}
 
 							if properties["min_items"] != nil {
