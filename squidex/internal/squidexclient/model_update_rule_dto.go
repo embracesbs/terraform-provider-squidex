@@ -16,5 +16,6 @@ type UpdateRuleDto struct {
 	// The trigger properties.
 	Trigger RuleTriggerDto `json:"trigger,omitempty"`
 	// The action properties.
-	Action RuleAction `json:"action,omitempty"`
+	Action    RuleAction `json:"action,omitempty"`
+	IsEnabled bool       `json:"isEnabled"`
 }
