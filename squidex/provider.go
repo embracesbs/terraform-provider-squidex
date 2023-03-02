@@ -72,16 +72,8 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	var diags diag.Diagnostics
 
 	config := &squidexclient.Configuration{
-		Host:  url,
-		Debug: true,
-		Servers: squidexclient.ServerConfigurations{
-			{
-				URL:         "http://" + url,
-				Description: "main server",
-			},
-		},
-		OperationServers: map[string]squidexclient.ServerConfigurations{},
-		HTTPClient:       common.NewClient(clientID, clientSecret, tokenEndpoint, "squidex-api"),
+		BasePath:   url,
+		HTTPClient: common.NewClient(clientID, clientSecret, tokenEndpoint, "squidex-api"),
 	}
 
 	return providerConfig{

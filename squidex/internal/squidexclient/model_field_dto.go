@@ -23,6 +23,8 @@ type FieldDto struct {
 	IsLocked bool `json:"isLocked,omitempty"`
 	// Defines if the field is disabled.
 	IsDisabled bool `json:"isDisabled,omitempty"`
+	// Defines if the field is self referencial
+	IsSelfReference bool `json:"isSelfReference,omitempty"`
 	// Defines the partitioning of the field.
 	Partitioning string             `json:"partitioning"`
 	Properties   FieldPropertiesDto `json:"properties"`
