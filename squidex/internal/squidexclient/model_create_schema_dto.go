@@ -11,10 +11,10 @@ package squidexclient
 
 // CreateSchemaDto struct for CreateSchemaDto
 type CreateSchemaDto struct {
-	Properties         SchemaPropertiesDto `json:"properties,omitempty"`
-	Scripts            SchemaScriptsDto    `json:"scripts,omitempty"`
-	FieldsInReferences []string            `json:"fieldsInReferences,omitempty"`
-	FieldsInLists      []string            `json:"fieldsInLists,omitempty"`
+	Properties         *SchemaPropertiesDto `json:"properties,omitempty"`
+	Scripts            *SchemaScriptsDto    `json:"scripts,omitempty"`
+	FieldsInReferences *[]string            `json:"fieldsInReferences,omitempty"`
+	FieldsInLists      *[]string            `json:"fieldsInLists,omitempty"`
 	// Optional fields.
 	Fields *[]UpsertSchemaFieldDto `json:"fields,omitempty"`
 	// The optional preview urls.

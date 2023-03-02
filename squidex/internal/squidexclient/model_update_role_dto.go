@@ -14,5 +14,5 @@ type UpdateRoleDto struct {
 	// Associated list of permissions.
 	Permissions []string `json:"permissions"`
 	// Associated list of UI properties.
-	Properties map[string]interface{} `json:"properties,omitempty"`
+	Properties *map[string]interface{} `json:"properties,omitempty"`
 }

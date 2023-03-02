@@ -874,11 +874,11 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	}
 	if v, ok := data.GetOk("fields_in_references"); ok {
 		fieldsInReferences := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInReferences = fieldsInReferences
+		squidexschema.FieldsInReferences = &fieldsInReferences
 	}
 	if v, ok := data.GetOk("fields_in_list"); ok {
 		fieldsInLists := interfaceSliceToStringSlice(v.([]interface{}))
-		squidexschema.FieldsInLists = fieldsInLists
+		squidexschema.FieldsInLists = &fieldsInLists
 	}
 	if v, ok := data.GetOk("preview_urls"); ok {
 		previewUrls := interfaceMapToStringMap(v.(map[string]interface{}))
@@ -1337,12 +1337,12 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(
 		NoFieldRecreation:  !schemaFieldRecreateAllowed,
 		Category:           createSchema.Category,
 		Fields:             createSchema.Fields,
-		FieldsInLists:      createSchema.FieldsInLists,
-		FieldsInReferences: createSchema.FieldsInReferences,
+		FieldsInLists:      *createSchema.FieldsInLists,
+		FieldsInReferences: *createSchema.FieldsInReferences,
 		IsPublished:        createSchema.IsPublished,
 		PreviewUrls:        createSchema.PreviewUrls,
-		Properties:         createSchema.Properties,
-		Scripts:            createSchema.Scripts,
+		Properties:         *createSchema.Properties,
+		Scripts:            *createSchema.Scripts,
 	}
 	return dto
 }
@@ -1570,7 +1570,7 @@ func resourceSchemaDelete(ctx context.Context, data *schema.ResourceData, meta i
 }
 
 // Updates the fields in the created schema for self reference fields if this is specified with the IsSelfReference field.
-func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, appName string, schemaName string, createDto squidexclient.CreateSchemaDto, result squidexclient.SchemaDetailsDto) diag.Diagnostics {
+func updateSelfReferences(ctx context.Context, client squidexclient.APIClient, appName string, schemaName string, createDto squidexclient.CreateSchemaDto, result squidexclient.SchemaDto) diag.Diagnostics {
 
 	var diags diag.Diagnostics
 
