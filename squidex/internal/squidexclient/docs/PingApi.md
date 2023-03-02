@@ -12,53 +12,19 @@ Method | HTTP request | Description
 
 ## PingGetAppPing
 
-> PingGetAppPing(ctx, app).Execute()
+> PingGetAppPing(ctx, app)
 
 Get ping status.
 
+Can be used to test, if the Squidex API is alive and responding.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PingApi.PingGetAppPing(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PingApi.PingGetAppPing``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPingGetAppPingRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -80,44 +46,13 @@ Name | Type | Description  | Notes
 
 ## PingGetInfo
 
-> map[string]string PingGetInfo(ctx).Execute()
+> map[string]string PingGetInfo(ctx, )
 
 Get API information.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PingApi.PingGetInfo(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PingApi.PingGetInfo``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PingGetInfo`: map[string]string
-    fmt.Fprintf(os.Stdout, "Response from `PingApi.PingGetInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPingGetInfoRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -139,44 +74,15 @@ Other parameters are passed through a pointer to a apiPingGetInfoRequest struct 
 
 ## PingGetPing
 
-> PingGetPing(ctx).Execute()
+> PingGetPing(ctx, )
 
 Get ping status of the API.
 
+Can be used to test, if the Squidex API is alive and responding.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PingApi.PingGetPing(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PingApi.PingGetPing``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPingGetPingRequest struct via the builder pattern
-
 
 ### Return type
 

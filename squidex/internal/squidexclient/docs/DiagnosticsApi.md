@@ -11,42 +11,13 @@ Method | HTTP request | Description
 
 ## DiagnosticsGetDump
 
-> DiagnosticsGetDump(ctx).Execute()
+> DiagnosticsGetDump(ctx, )
 
 Creates a dump and writes it into storage..
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DiagnosticsApi.DiagnosticsGetDump(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DiagnosticsApi.DiagnosticsGetDump``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDiagnosticsGetDumpRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -68,42 +39,13 @@ Other parameters are passed through a pointer to a apiDiagnosticsGetDumpRequest 
 
 ## DiagnosticsGetGCDump
 
-> DiagnosticsGetGCDump(ctx).Execute()
+> DiagnosticsGetGCDump(ctx, )
 
 Creates a gc dump and writes it into storage.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DiagnosticsApi.DiagnosticsGetGCDump(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DiagnosticsApi.DiagnosticsGetGCDump``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDiagnosticsGetGCDumpRequest struct via the builder pattern
-
 
 ### Return type
 

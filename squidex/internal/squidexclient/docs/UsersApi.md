@@ -13,53 +13,17 @@ Method | HTTP request | Description
 
 ## UsersGetUser
 
-> UserDto UsersGetUser(ctx, id).Execute()
+> UserDto UsersGetUser(ctx, id)
 
 Get user by id.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | The id of the user (GUID).
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersApi.UsersGetUser(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersGetUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsersGetUser`: UserDto
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersGetUser`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The id of the user (GUID). | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsersGetUserRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**id** | **string**| The id of the user (GUID). | 
 
 ### Return type
 
@@ -81,53 +45,17 @@ Name | Type | Description  | Notes
 
 ## UsersGetUserPicture
 
-> *os.File UsersGetUserPicture(ctx, id).Execute()
+> *os.File UsersGetUserPicture(ctx, id)
 
 Get user picture by id.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | The id of the user (GUID).
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersApi.UsersGetUserPicture(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersGetUserPicture``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsersGetUserPicture`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersGetUserPicture`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The id of the user (GUID). | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsersGetUserPictureRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**id** | **string**| The id of the user (GUID). | 
 
 ### Return type
 
@@ -149,44 +77,13 @@ Name | Type | Description  | Notes
 
 ## UsersGetUserResources
 
-> ResourcesDto UsersGetUserResources(ctx).Execute()
+> ResourcesDto UsersGetUserResources(ctx, )
 
 Get the user resources.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersApi.UsersGetUserResources(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersGetUserResources``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsersGetUserResources`: ResourcesDto
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersGetUserResources`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsersGetUserResourcesRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -208,51 +105,28 @@ Other parameters are passed through a pointer to a apiUsersGetUserResourcesReque
 
 ## UsersGetUsers
 
-> []UserDto UsersGetUsers(ctx).Query(query).Execute()
+> []UserDto UsersGetUsers(ctx, optional)
 
 Get users by query.
 
+Search the user by query that contains the email address or the part of the email address.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    query := "query_example" // string | The query to search the user by email address. Case invariant. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersApi.UsersGetUsers(context.Background()).Query(query).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersGetUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsersGetUsers`: []UserDto
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersGetUsers`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsersGetUsersRequest struct via the builder pattern
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **string** | The query to search the user by email address. Case invariant. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***UsersGetUsersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UsersGetUsersOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **query** | **optional.String**| The query to search the user by email address. Case invariant. | 
 
 ### Return type
 

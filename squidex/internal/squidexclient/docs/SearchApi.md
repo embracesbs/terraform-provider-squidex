@@ -10,55 +10,28 @@ Method | HTTP request | Description
 
 ## SearchGetSearchResults
 
-> []SearchResultDto SearchGetSearchResults(ctx, app).Query(query).Execute()
+> []SearchResultDto SearchGetSearchResults(ctx, app, optional)
 
 Get search results.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    query := "query_example" // string | The search query. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SearchApi.SearchGetSearchResults(context.Background(), app).Query(query).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchApi.SearchGetSearchResults``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SearchGetSearchResults`: []SearchResultDto
-    fmt.Fprintf(os.Stdout, "Response from `SearchApi.SearchGetSearchResults`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
+**app** | **string**| The name of the app. | 
+ **optional** | ***SearchGetSearchResultsOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiSearchGetSearchResultsRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a SearchGetSearchResultsOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **query** | **string** | The search query. | 
+ **query** | **optional.String**| The search query. | 
 
 ### Return type
 

@@ -28,54 +28,18 @@ Method | HTTP request | Description
 
 ## RulesDeleteEvent
 
-> RulesDeleteEvent(ctx, app, id).Execute()
+> RulesDeleteEvent(ctx, app, id)
 
 Cancels an event.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The event to enqueue.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDeleteEvent(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDeleteEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The event to enqueue. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDeleteEventRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The event to enqueue. | 
 
 ### Return type
 
@@ -97,51 +61,17 @@ Name | Type | Description  | Notes
 
 ## RulesDeleteEvents
 
-> RulesDeleteEvents(ctx, app).Execute()
+> RulesDeleteEvents(ctx, app)
 
 Cancels all events.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDeleteEvents(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDeleteEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDeleteEventsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -163,54 +93,18 @@ Name | Type | Description  | Notes
 
 ## RulesDeleteRule
 
-> RulesDeleteRule(ctx, app, id).Execute()
+> RulesDeleteRule(ctx, app, id)
 
 Delete a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to delete.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDeleteRule(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDeleteRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to delete. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDeleteRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to delete. | 
 
 ### Return type
 
@@ -232,54 +126,18 @@ Name | Type | Description  | Notes
 
 ## RulesDeleteRuleEvents
 
-> RulesDeleteRuleEvents(ctx, app, id).Execute()
+> RulesDeleteRuleEvents(ctx, app, id)
 
 Cancels all rule events.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to cancel.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDeleteRuleEvents(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDeleteRuleEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to cancel. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDeleteRuleEventsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to cancel. | 
 
 ### Return type
 
@@ -301,51 +159,17 @@ Name | Type | Description  | Notes
 
 ## RulesDeleteRuleRun
 
-> RulesDeleteRuleRun(ctx, app).Execute()
+> RulesDeleteRuleRun(ctx, app)
 
 Cancel the current run.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDeleteRuleRun(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDeleteRuleRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDeleteRuleRunRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -367,56 +191,18 @@ Name | Type | Description  | Notes
 
 ## RulesDisableRule
 
-> RuleDto RulesDisableRule(ctx, app, id).Execute()
+> RuleDto RulesDisableRule(ctx, app, id)
 
 Disable a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesDisableRule(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesDisableRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesDisableRule`: RuleDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesDisableRule`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesDisableRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to disable. | 
 
 ### Return type
 
@@ -438,56 +224,18 @@ Name | Type | Description  | Notes
 
 ## RulesEnableRule
 
-> RuleDto RulesEnableRule(ctx, app, id).Execute()
+> RuleDto RulesEnableRule(ctx, app, id)
 
 Enable a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to enable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesEnableRule(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesEnableRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesEnableRule`: RuleDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesEnableRule`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to enable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesEnableRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to enable. | 
 
 ### Return type
 
@@ -509,44 +257,13 @@ Name | Type | Description  | Notes
 
 ## RulesGetActions
 
-> map[string]RuleElementDto RulesGetActions(ctx).Execute()
+> map[string]RuleElementDto RulesGetActions(ctx, )
 
 Get supported rule actions.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesGetActions(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesGetActions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesGetActions`: map[string]RuleElementDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesGetActions`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesGetActionsRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -568,53 +285,17 @@ Other parameters are passed through a pointer to a apiRulesGetActionsRequest str
 
 ## RulesGetEventSchema
 
-> interface{} RulesGetEventSchema(ctx, type_).Execute()
+> interface{} RulesGetEventSchema(ctx, type_)
 
 Provide the json schema for the event with the specified name.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    type_ := "type__example" // string | The type name of the event.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesGetEventSchema(context.Background(), type_).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesGetEventSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesGetEventSchema`: interface{}
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesGetEventSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**type_** | **string** | The type name of the event. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesGetEventSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**type_** | **string**| The type name of the event. | 
 
 ### Return type
 
@@ -636,44 +317,13 @@ Name | Type | Description  | Notes
 
 ## RulesGetEventTypes
 
-> []string RulesGetEventTypes(ctx).Execute()
+> []string RulesGetEventTypes(ctx, )
 
 Provide a list of all event types that are used in rules.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesGetEventTypes(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesGetEventTypes``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesGetEventTypes`: []string
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesGetEventTypes`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesGetEventTypesRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -695,59 +345,30 @@ Other parameters are passed through a pointer to a apiRulesGetEventTypesRequest 
 
 ## RulesGetEvents
 
-> RuleEventsDto RulesGetEvents(ctx, app).RuleId(ruleId).Skip(skip).Take(take).Execute()
+> RuleEventsDto RulesGetEvents(ctx, app, optional)
 
 Get rule events.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    ruleId := "ruleId_example" // string | The optional rule id to filter to events. (optional)
-    skip := int32(56) // int32 | The number of events to skip. (optional) (default to 0)
-    take := int32(56) // int32 | The number of events to take. (optional) (default to 20)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesGetEvents(context.Background(), app).RuleId(ruleId).Skip(skip).Take(take).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesGetEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesGetEvents`: RuleEventsDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesGetEvents`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
+**app** | **string**| The name of the app. | 
+ **optional** | ***RulesGetEventsOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiRulesGetEventsRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a RulesGetEventsOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **ruleId** | **string** | The optional rule id to filter to events. | 
- **skip** | **int32** | The number of events to skip. | [default to 0]
- **take** | **int32** | The number of events to take. | [default to 20]
+ **ruleId** | **optional.String**| The optional rule id to filter to events. | 
+ **skip** | **optional.Int32**| The number of events to skip. | [default to 0]
+ **take** | **optional.Int32**| The number of events to take. | [default to 20]
 
 ### Return type
 
@@ -769,53 +390,17 @@ Name | Type | Description  | Notes
 
 ## RulesGetRules
 
-> RulesDto RulesGetRules(ctx, app).Execute()
+> RulesDto RulesGetRules(ctx, app)
 
 Get rules.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesGetRules(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesGetRules``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesGetRules`: RulesDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesGetRules`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesGetRulesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -837,55 +422,18 @@ Name | Type | Description  | Notes
 
 ## RulesPostRule
 
-> RuleDto RulesPostRule(ctx, app).CreateRuleDto(createRuleDto).Execute()
+> RuleDto RulesPostRule(ctx, app, createRuleDto)
 
 Create a new rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    createRuleDto := *openapiclient.NewCreateRuleDto(*openapiclient.NewRuleTriggerDto("TriggerType_example"), *openapiclient.NewRuleAction("ActionType_example")) // CreateRuleDto | The rule object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesPostRule(context.Background(), app).CreateRuleDto(createRuleDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesPostRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesPostRule`: RuleDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesPostRule`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesPostRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **createRuleDto** | [**CreateRuleDto**](CreateRuleDto.md) | The rule object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**createRuleDto** | [**CreateRuleDto**](CreateRuleDto.md)| The rule object that needs to be added to the app. | 
 
 ### Return type
 
@@ -907,54 +455,18 @@ Name | Type | Description  | Notes
 
 ## RulesPutEvent
 
-> RulesPutEvent(ctx, app, id).Execute()
+> RulesPutEvent(ctx, app, id)
 
 Retry the event immediately.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The event to enqueue.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesPutEvent(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesPutEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The event to enqueue. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesPutEventRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The event to enqueue. | 
 
 ### Return type
 
@@ -976,58 +488,19 @@ Name | Type | Description  | Notes
 
 ## RulesPutRule
 
-> RuleDto RulesPutRule(ctx, app, id).UpdateRuleDto(updateRuleDto).Execute()
+> RuleDto RulesPutRule(ctx, app, id, updateRuleDto)
 
 Update a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to update.
-    updateRuleDto := *openapiclient.NewUpdateRuleDto() // UpdateRuleDto | The rule object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesPutRule(context.Background(), app, id).UpdateRuleDto(updateRuleDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesPutRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesPutRule`: RuleDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesPutRule`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesPutRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateRuleDto** | [**UpdateRuleDto**](UpdateRuleDto.md) | The rule object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to update. | 
+**updateRuleDto** | [**UpdateRuleDto**](UpdateRuleDto.md)| The rule object that needs to be added to the app. | 
 
 ### Return type
 
@@ -1049,56 +522,30 @@ Name | Type | Description  | Notes
 
 ## RulesPutRuleRun
 
-> RulesPutRuleRun(ctx, app, id).FromSnapshots(fromSnapshots).Execute()
+> RulesPutRuleRun(ctx, app, id, optional)
 
 Run a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to run.
-    fromSnapshots := true // bool | Runs the rule from snapeshots if possible. (optional) (default to false)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesPutRuleRun(context.Background(), app, id).FromSnapshots(fromSnapshots).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesPutRuleRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to run. | 
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to run. | 
+ **optional** | ***RulesPutRuleRunOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiRulesPutRuleRunRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a RulesPutRuleRunOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **fromSnapshots** | **bool** | Runs the rule from snapeshots if possible. | [default to false]
+ **fromSnapshots** | **optional.Bool**| Runs the rule from snapeshots if possible. | [default to false]
 
 ### Return type
 
@@ -1120,56 +567,18 @@ Name | Type | Description  | Notes
 
 ## RulesSimulateGET
 
-> SimulatedRuleEventsDto RulesSimulateGET(ctx, app, id).Execute()
+> SimulatedRuleEventsDto RulesSimulateGET(ctx, app, id)
 
 Simulate a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to simulate.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesSimulateGET(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesSimulateGET``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesSimulateGET`: SimulatedRuleEventsDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesSimulateGET`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to simulate. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesSimulateGETRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to simulate. | 
 
 ### Return type
 
@@ -1191,55 +600,18 @@ Name | Type | Description  | Notes
 
 ## RulesSimulatePOST
 
-> SimulatedRuleEventsDto RulesSimulatePOST(ctx, app).CreateRuleDto(createRuleDto).Execute()
+> SimulatedRuleEventsDto RulesSimulatePOST(ctx, app, createRuleDto)
 
 Simulate a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    createRuleDto := *openapiclient.NewCreateRuleDto(*openapiclient.NewRuleTriggerDto("TriggerType_example"), *openapiclient.NewRuleAction("ActionType_example")) // CreateRuleDto | The rule to simulate.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesSimulatePOST(context.Background(), app).CreateRuleDto(createRuleDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesSimulatePOST``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RulesSimulatePOST`: SimulatedRuleEventsDto
-    fmt.Fprintf(os.Stdout, "Response from `RulesApi.RulesSimulatePOST`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesSimulatePOSTRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **createRuleDto** | [**CreateRuleDto**](CreateRuleDto.md) | The rule to simulate. | 
+**app** | **string**| The name of the app. | 
+**createRuleDto** | [**CreateRuleDto**](CreateRuleDto.md)| The rule to simulate. | 
 
 ### Return type
 
@@ -1261,54 +633,18 @@ Name | Type | Description  | Notes
 
 ## RulesTriggerRule
 
-> RulesTriggerRule(ctx, app, id).Execute()
+> RulesTriggerRule(ctx, app, id)
 
 Trigger a rule.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the rule to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesApi.RulesTriggerRule(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesApi.RulesTriggerRule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the rule to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRulesTriggerRuleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the rule to disable. | 
 
 ### Return type
 

@@ -40,59 +40,19 @@ Method | HTTP request | Description
 
 ## SchemaFieldsDeleteField
 
-> SchemaDto SchemaFieldsDeleteField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsDeleteField(ctx, app, schema, id)
 
 Delete a schema field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsDeleteField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsDeleteField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsDeleteField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsDeleteField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsDeleteFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
@@ -114,62 +74,20 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDeleteNestedField
 
-> SchemaDto SchemaFieldsDeleteNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsDeleteNestedField(ctx, app, schema, parentId, id)
 
 Delete a nested field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsDeleteNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsDeleteNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsDeleteNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsDeleteNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsDeleteNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
@@ -191,61 +109,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDisableField
 
-> SchemaDto SchemaFieldsDisableField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsDisableField(ctx, app, schema, id)
 
 Disable a schema field.
 
+A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsDisableField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsDisableField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsDisableField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsDisableField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsDisableFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
@@ -267,64 +145,22 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDisableNestedField
 
-> SchemaDto SchemaFieldsDisableNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsDisableNestedField(ctx, app, schema, parentId, id)
 
 Disable a nested field.
 
+A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to disable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsDisableNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsDisableNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsDisableNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsDisableNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to disable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsDisableNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
@@ -346,61 +182,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsEnableField
 
-> SchemaDto SchemaFieldsEnableField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsEnableField(ctx, app, schema, id)
 
 Enable a schema field.
 
+A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to enable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsEnableField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsEnableField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsEnableField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsEnableField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to enable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsEnableFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to enable. | 
 
 ### Return type
 
@@ -422,64 +218,22 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsEnableNestedField
 
-> SchemaDto SchemaFieldsEnableNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsEnableNestedField(ctx, app, schema, parentId, id)
 
 Enable a nested field.
 
+A disabled field cannot not be edited in the squidex portal anymore, but will be part of the API response.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to enable.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsEnableNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsEnableNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsEnableNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsEnableNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to enable. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsEnableNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to enable. | 
 
 ### Return type
 
@@ -501,61 +255,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsHideField
 
-> SchemaDto SchemaFieldsHideField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsHideField(ctx, app, schema, id)
 
 Hide a schema field.
 
+A hidden field is not part of the API response, but can still be edited in the portal.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to hide.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsHideField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsHideField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsHideField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsHideField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to hide. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsHideFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to hide. | 
 
 ### Return type
 
@@ -577,64 +291,22 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsHideNestedField
 
-> SchemaDto SchemaFieldsHideNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsHideNestedField(ctx, app, schema, parentId, id)
 
 Hide a nested field.
 
+A hidden field is not part of the API response, but can still be edited in the portal.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to hide.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsHideNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsHideNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsHideNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsHideNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to hide. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsHideNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to hide. | 
 
 ### Return type
 
@@ -656,61 +328,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsLockField
 
-> SchemaDto SchemaFieldsLockField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsLockField(ctx, app, schema, id)
 
 Lock a schema field.
 
+A locked field cannot be updated or deleted.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to lock.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsLockField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsLockField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsLockField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsLockField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to lock. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsLockFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to lock. | 
 
 ### Return type
 
@@ -732,64 +364,22 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsLockNestedField
 
-> SchemaDto SchemaFieldsLockNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsLockNestedField(ctx, app, schema, parentId, id)
 
 Lock a nested field.
 
+A locked field cannot be edited or deleted.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to lock.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsLockNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsLockNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsLockNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsLockNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to lock. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsLockNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to lock. | 
 
 ### Return type
 
@@ -811,58 +401,19 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPostField
 
-> SchemaDto SchemaFieldsPostField(ctx, app, schema).AddFieldDto(addFieldDto).Execute()
+> SchemaDto SchemaFieldsPostField(ctx, app, schema, addFieldDto)
 
 Add a schema field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    addFieldDto := *openapiclient.NewAddFieldDto("Name_example", *openapiclient.NewFieldPropertiesDto("FieldType_example")) // AddFieldDto | The field object that needs to be added to the schema.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPostField(context.Background(), app, schema).AddFieldDto(addFieldDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPostField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPostField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPostField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPostFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **addFieldDto** | [**AddFieldDto**](AddFieldDto.md) | The field object that needs to be added to the schema. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**addFieldDto** | [**AddFieldDto**](AddFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
@@ -884,61 +435,20 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPostNestedField
 
-> SchemaDto SchemaFieldsPostNestedField(ctx, app, schema, parentId).AddFieldDto(addFieldDto).Execute()
+> SchemaDto SchemaFieldsPostNestedField(ctx, app, schema, parentId, addFieldDto)
 
 Add a nested field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    addFieldDto := *openapiclient.NewAddFieldDto("Name_example", *openapiclient.NewFieldPropertiesDto("FieldType_example")) // AddFieldDto | The field object that needs to be added to the schema.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPostNestedField(context.Background(), app, schema, parentId).AddFieldDto(addFieldDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPostNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPostNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPostNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPostNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **addFieldDto** | [**AddFieldDto**](AddFieldDto.md) | The field object that needs to be added to the schema. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**addFieldDto** | [**AddFieldDto**](AddFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
@@ -960,61 +470,20 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutField
 
-> SchemaDto SchemaFieldsPutField(ctx, app, schema, id).UpdateFieldDto(updateFieldDto).Execute()
+> SchemaDto SchemaFieldsPutField(ctx, app, schema, id, updateFieldDto)
 
 Update a schema field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to update.
-    updateFieldDto := *openapiclient.NewUpdateFieldDto(*openapiclient.NewFieldPropertiesDto("FieldType_example")) // UpdateFieldDto | The field object that needs to be added to the schema.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPutField(context.Background(), app, schema, id).UpdateFieldDto(updateFieldDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPutField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPutField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPutField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPutFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md) | The field object that needs to be added to the schema. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to update. | 
+**updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
@@ -1036,64 +505,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutNestedField
 
-> SchemaDto SchemaFieldsPutNestedField(ctx, app, schema, parentId, id).UpdateFieldDto(updateFieldDto).Execute()
+> SchemaDto SchemaFieldsPutNestedField(ctx, app, schema, parentId, id, updateFieldDto)
 
 Update a nested field.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to update.
-    updateFieldDto := *openapiclient.NewUpdateFieldDto(*openapiclient.NewFieldPropertiesDto("FieldType_example")) // UpdateFieldDto | The field object that needs to be added to the schema.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPutNestedField(context.Background(), app, schema, parentId, id).UpdateFieldDto(updateFieldDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPutNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPutNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPutNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPutNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
- **updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md) | The field object that needs to be added to the schema. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to update. | 
+**updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
@@ -1115,61 +541,20 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutNestedFieldOrdering
 
-> SchemaDto SchemaFieldsPutNestedFieldOrdering(ctx, app, schema, parentId).ReorderFieldsDto(reorderFieldsDto).Execute()
+> SchemaDto SchemaFieldsPutNestedFieldOrdering(ctx, app, schema, parentId, reorderFieldsDto)
 
 Reorder all nested fields.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    reorderFieldsDto := *openapiclient.NewReorderFieldsDto([]int64{int64(123)}) // ReorderFieldsDto | The request that contains the field ids.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPutNestedFieldOrdering(context.Background(), app, schema, parentId).ReorderFieldsDto(reorderFieldsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPutNestedFieldOrdering``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPutNestedFieldOrdering`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPutNestedFieldOrdering`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPutNestedFieldOrderingRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md) | The request that contains the field ids. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md)| The request that contains the field ids. | 
 
 ### Return type
 
@@ -1191,58 +576,19 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutSchemaFieldOrdering
 
-> SchemaDto SchemaFieldsPutSchemaFieldOrdering(ctx, app, schema).ReorderFieldsDto(reorderFieldsDto).Execute()
+> SchemaDto SchemaFieldsPutSchemaFieldOrdering(ctx, app, schema, reorderFieldsDto)
 
 Reorder all fields.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    reorderFieldsDto := *openapiclient.NewReorderFieldsDto([]int64{int64(123)}) // ReorderFieldsDto | The request that contains the field ids.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPutSchemaFieldOrdering(context.Background(), app, schema).ReorderFieldsDto(reorderFieldsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPutSchemaFieldOrdering``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPutSchemaFieldOrdering`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPutSchemaFieldOrdering`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPutSchemaFieldOrderingRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md) | The request that contains the field ids. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md)| The request that contains the field ids. | 
 
 ### Return type
 
@@ -1264,58 +610,19 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutSchemaUIFields
 
-> SchemaDto SchemaFieldsPutSchemaUIFields(ctx, app, schema).ConfigureUIFieldsDto(configureUIFieldsDto).Execute()
+> SchemaDto SchemaFieldsPutSchemaUIFields(ctx, app, schema, configureUiFieldsDto)
 
 Configure UI fields.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    configureUIFieldsDto := *openapiclient.NewConfigureUIFieldsDto() // ConfigureUIFieldsDto | The request that contains the field names.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsPutSchemaUIFields(context.Background(), app, schema).ConfigureUIFieldsDto(configureUIFieldsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsPutSchemaUIFields``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsPutSchemaUIFields`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsPutSchemaUIFields`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsPutSchemaUIFieldsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **configureUIFieldsDto** | [**ConfigureUIFieldsDto**](ConfigureUIFieldsDto.md) | The request that contains the field names. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**configureUiFieldsDto** | [**ConfigureUiFieldsDto**](ConfigureUiFieldsDto.md)| The request that contains the field names. | 
 
 ### Return type
 
@@ -1337,61 +644,21 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsShowField
 
-> SchemaDto SchemaFieldsShowField(ctx, app, schema, id).Execute()
+> SchemaDto SchemaFieldsShowField(ctx, app, schema, id)
 
 Show a schema field.
 
+A hidden field is not part of the API response, but can still be edited in the portal.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    id := int64(789) // int64 | The id of the field to show.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsShowField(context.Background(), app, schema, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsShowField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsShowField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsShowField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**id** | **int64** | The id of the field to show. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsShowFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**id** | **int64**| The id of the field to show. | 
 
 ### Return type
 
@@ -1413,64 +680,22 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsShowNestedField
 
-> SchemaDto SchemaFieldsShowNestedField(ctx, app, schema, parentId, id).Execute()
+> SchemaDto SchemaFieldsShowNestedField(ctx, app, schema, parentId, id)
 
 Show a nested field.
 
+A hidden field is not part of the API response, but can still be edited in the portal.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    parentId := int64(789) // int64 | The parent field id.
-    id := int64(789) // int64 | The id of the field to show.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemaFieldsShowNestedField(context.Background(), app, schema, parentId, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemaFieldsShowNestedField``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemaFieldsShowNestedField`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemaFieldsShowNestedField`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-**parentId** | **int64** | The parent field id. | 
-**id** | **int64** | The id of the field to show. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemaFieldsShowNestedFieldRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**parentId** | **int64**| The parent field id. | 
+**id** | **int64**| The id of the field to show. | 
 
 ### Return type
 
@@ -1492,54 +717,18 @@ Name | Type | Description  | Notes
 
 ## SchemasDeleteSchema
 
-> SchemasDeleteSchema(ctx, app, schema).Execute()
+> SchemasDeleteSchema(ctx, app, schema)
 
 Delete a schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema to delete.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasDeleteSchema(context.Background(), app, schema).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasDeleteSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema to delete. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasDeleteSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema to delete. | 
 
 ### Return type
 
@@ -1561,56 +750,18 @@ Name | Type | Description  | Notes
 
 ## SchemasGetSchema
 
-> SchemaDto SchemasGetSchema(ctx, app, schema).Execute()
+> SchemaDto SchemasGetSchema(ctx, app, schema)
 
 Get a schema by name.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema to retrieve.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasGetSchema(context.Background(), app, schema).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasGetSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasGetSchema`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasGetSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema to retrieve. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasGetSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema to retrieve. | 
 
 ### Return type
 
@@ -1632,53 +783,17 @@ Name | Type | Description  | Notes
 
 ## SchemasGetSchemas
 
-> SchemasDto SchemasGetSchemas(ctx, app).Execute()
+> SchemasDto SchemasGetSchemas(ctx, app)
 
 Get schemas.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasGetSchemas(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasGetSchemas``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasGetSchemas`: SchemasDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasGetSchemas`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasGetSchemasRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -1700,55 +815,18 @@ Name | Type | Description  | Notes
 
 ## SchemasPostSchema
 
-> SchemaDto SchemasPostSchema(ctx, app).CreateSchemaDto(createSchemaDto).Execute()
+> SchemaDto SchemasPostSchema(ctx, app, createSchemaDto)
 
 Create a new schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    createSchemaDto := *openapiclient.NewCreateSchemaDto("Name_example") // CreateSchemaDto | The schema object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPostSchema(context.Background(), app).CreateSchemaDto(createSchemaDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPostSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPostSchema`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPostSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPostSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **createSchemaDto** | [**CreateSchemaDto**](CreateSchemaDto.md) | The schema object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**createSchemaDto** | [**CreateSchemaDto**](CreateSchemaDto.md)| The schema object that needs to be added to the app. | 
 
 ### Return type
 
@@ -1770,56 +848,18 @@ Name | Type | Description  | Notes
 
 ## SchemasPublishSchema
 
-> SchemaDto SchemasPublishSchema(ctx, app, schema).Execute()
+> SchemaDto SchemasPublishSchema(ctx, app, schema)
 
 Publish a schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema to publish.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPublishSchema(context.Background(), app, schema).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPublishSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPublishSchema`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPublishSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema to publish. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPublishSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema to publish. | 
 
 ### Return type
 
@@ -1841,58 +881,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutCategory
 
-> SchemaDto SchemasPutCategory(ctx, app, schema).ChangeCategoryDto(changeCategoryDto).Execute()
+> SchemaDto SchemasPutCategory(ctx, app, schema, changeCategoryDto)
 
 Update a schema category.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    changeCategoryDto := *openapiclient.NewChangeCategoryDto() // ChangeCategoryDto | The schema object that needs to updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutCategory(context.Background(), app, schema).ChangeCategoryDto(changeCategoryDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutCategory``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutCategory`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutCategory`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutCategoryRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **changeCategoryDto** | [**ChangeCategoryDto**](ChangeCategoryDto.md) | The schema object that needs to updated. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**changeCategoryDto** | [**ChangeCategoryDto**](ChangeCategoryDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
@@ -1914,58 +915,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutPreviewUrls
 
-> SchemaDto SchemasPutPreviewUrls(ctx, app, schema).RequestBody(requestBody).Execute()
+> SchemaDto SchemasPutPreviewUrls(ctx, app, schema, requestBody)
 
 Update the preview urls.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    requestBody := map[string]string{"key": "Inner_example"} // map[string]string | The preview urls for the schema.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutPreviewUrls(context.Background(), app, schema).RequestBody(requestBody).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutPreviewUrls``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutPreviewUrls`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutPreviewUrls`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutPreviewUrlsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **requestBody** | **map[string]string** | The preview urls for the schema. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**requestBody** | [**map[string]string**](string.md)| The preview urls for the schema. | 
 
 ### Return type
 
@@ -1987,58 +949,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutRules
 
-> SchemaDto SchemasPutRules(ctx, app, schema).ConfigureFieldRulesDto(configureFieldRulesDto).Execute()
+> SchemaDto SchemasPutRules(ctx, app, schema, configureFieldRulesDto)
 
 Update the rules.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    configureFieldRulesDto := *openapiclient.NewConfigureFieldRulesDto() // ConfigureFieldRulesDto | The schema rules object that needs to updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutRules(context.Background(), app, schema).ConfigureFieldRulesDto(configureFieldRulesDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutRules``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutRules`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutRules`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutRulesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **configureFieldRulesDto** | [**ConfigureFieldRulesDto**](ConfigureFieldRulesDto.md) | The schema rules object that needs to updated. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**configureFieldRulesDto** | [**ConfigureFieldRulesDto**](ConfigureFieldRulesDto.md)| The schema rules object that needs to updated. | 
 
 ### Return type
 
@@ -2060,58 +983,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutSchema
 
-> SchemaDto SchemasPutSchema(ctx, app, schema).UpdateSchemaDto(updateSchemaDto).Execute()
+> SchemaDto SchemasPutSchema(ctx, app, schema, updateSchemaDto)
 
 Update a schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    updateSchemaDto := *openapiclient.NewUpdateSchemaDto() // UpdateSchemaDto | The schema object that needs to updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutSchema(context.Background(), app, schema).UpdateSchemaDto(updateSchemaDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutSchema`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateSchemaDto** | [**UpdateSchemaDto**](UpdateSchemaDto.md) | The schema object that needs to updated. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**updateSchemaDto** | [**UpdateSchemaDto**](UpdateSchemaDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
@@ -2133,58 +1017,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutSchemaSync
 
-> SchemaDto SchemasPutSchemaSync(ctx, app, schema).SynchronizeSchemaDto(synchronizeSchemaDto).Execute()
+> SchemaDto SchemasPutSchemaSync(ctx, app, schema, synchronizeSchemaDto)
 
 Synchronize a schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    synchronizeSchemaDto := *openapiclient.NewSynchronizeSchemaDto() // SynchronizeSchemaDto | The schema object that needs to updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutSchemaSync(context.Background(), app, schema).SynchronizeSchemaDto(synchronizeSchemaDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutSchemaSync``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutSchemaSync`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutSchemaSync`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutSchemaSyncRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **synchronizeSchemaDto** | [**SynchronizeSchemaDto**](SynchronizeSchemaDto.md) | The schema object that needs to updated. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**synchronizeSchemaDto** | [**SynchronizeSchemaDto**](SynchronizeSchemaDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
@@ -2206,58 +1051,19 @@ Name | Type | Description  | Notes
 
 ## SchemasPutScripts
 
-> SchemaDto SchemasPutScripts(ctx, app, schema).SchemaScriptsDto(schemaScriptsDto).Execute()
+> SchemaDto SchemasPutScripts(ctx, app, schema, schemaScriptsDto)
 
 Update the scripts.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema.
-    schemaScriptsDto := *openapiclient.NewSchemaScriptsDto() // SchemaScriptsDto | The schema scripts object that needs to updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasPutScripts(context.Background(), app, schema).SchemaScriptsDto(schemaScriptsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasPutScripts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasPutScripts`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasPutScripts`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasPutScriptsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **schemaScriptsDto** | [**SchemaScriptsDto**](SchemaScriptsDto.md) | The schema scripts object that needs to updated. | 
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema. | 
+**schemaScriptsDto** | [**SchemaScriptsDto**](SchemaScriptsDto.md)| The schema scripts object that needs to updated. | 
 
 ### Return type
 
@@ -2279,56 +1085,18 @@ Name | Type | Description  | Notes
 
 ## SchemasUnpublishSchema
 
-> SchemaDto SchemasUnpublishSchema(ctx, app, schema).Execute()
+> SchemaDto SchemasUnpublishSchema(ctx, app, schema)
 
 Unpublish a schema.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    schema := "schema_example" // string | The name of the schema to unpublish.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SchemasApi.SchemasUnpublishSchema(context.Background(), app, schema).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SchemasApi.SchemasUnpublishSchema``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SchemasUnpublishSchema`: SchemaDto
-    fmt.Fprintf(os.Stdout, "Response from `SchemasApi.SchemasUnpublishSchema`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**schema** | **string** | The name of the schema to unpublish. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSchemasUnpublishSchemaRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**schema** | **string**| The name of the schema to unpublish. | 
 
 ### Return type
 

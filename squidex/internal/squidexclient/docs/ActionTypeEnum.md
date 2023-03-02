@@ -1,14 +1,9 @@
 # ActionTypeEnum
 
-## Enum
+## Properties
 
-
-* `BROADCAST` (value: `"Broadcast"`)
-
-* `USER` (value: `"User"`)
-
-* `GROUP` (value: `"Group"`)
-
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

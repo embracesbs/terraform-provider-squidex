@@ -16,56 +16,18 @@ Method | HTTP request | Description
 
 ## BackupContentGetBackupContent
 
-> *os.File BackupContentGetBackupContent(ctx, app, id).Execute()
+> *os.File BackupContentGetBackupContent(ctx, app, id)
 
 Get the backup content.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the backup.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.BackupContentGetBackupContent(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.BackupContentGetBackupContent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `BackupContentGetBackupContent`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.BackupContentGetBackupContent`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the backup. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiBackupContentGetBackupContentRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the backup. | 
 
 ### Return type
 
@@ -87,57 +49,29 @@ Name | Type | Description  | Notes
 
 ## BackupContentGetBackupContentV2
 
-> *os.File BackupContentGetBackupContentV2(ctx, id).AppId(appId).App(app).Execute()
+> *os.File BackupContentGetBackupContentV2(ctx, id, optional)
 
 Get the backup content.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | The id of the backup.
-    appId := "appId_example" // string | The id of the app. (optional)
-    app := "app_example" // string | The name of the app. (optional) (default to "")
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.BackupContentGetBackupContentV2(context.Background(), id).AppId(appId).App(app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.BackupContentGetBackupContentV2``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `BackupContentGetBackupContentV2`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.BackupContentGetBackupContentV2`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | The id of the backup. | 
+**id** | **string**| The id of the backup. | 
+ **optional** | ***BackupContentGetBackupContentV2Opts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiBackupContentGetBackupContentV2Request struct via the builder pattern
+Optional parameters are passed through a pointer to a BackupContentGetBackupContentV2Opts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **appId** | **string** | The id of the app. | 
- **app** | **string** | The name of the app. | [default to &quot;&quot;]
+ **appId** | **optional.String**| The id of the app. | 
+ **app** | **optional.String**| The name of the app. | [default to ]
 
 ### Return type
 
@@ -159,54 +93,18 @@ Name | Type | Description  | Notes
 
 ## BackupsDeleteBackup
 
-> BackupsDeleteBackup(ctx, app, id).Execute()
+> BackupsDeleteBackup(ctx, app, id)
 
 Delete a backup.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the backup to delete.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.BackupsDeleteBackup(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.BackupsDeleteBackup``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the backup to delete. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiBackupsDeleteBackupRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the backup to delete. | 
 
 ### Return type
 
@@ -228,53 +126,17 @@ Name | Type | Description  | Notes
 
 ## BackupsGetBackups
 
-> BackupJobsDto BackupsGetBackups(ctx, app).Execute()
+> BackupJobsDto BackupsGetBackups(ctx, app)
 
 Get all backup jobs.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.BackupsGetBackups(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.BackupsGetBackups``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `BackupsGetBackups`: BackupJobsDto
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.BackupsGetBackups`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiBackupsGetBackupsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -296,51 +158,17 @@ Name | Type | Description  | Notes
 
 ## BackupsPostBackup
 
-> BackupsPostBackup(ctx, app).Execute()
+> BackupsPostBackup(ctx, app)
 
 Start a new backup.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.BackupsPostBackup(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.BackupsPostBackup``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiBackupsPostBackupRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -362,44 +190,13 @@ Name | Type | Description  | Notes
 
 ## RestoreGetRestoreJob
 
-> RestoreJobDto RestoreGetRestoreJob(ctx).Execute()
+> RestoreJobDto RestoreGetRestoreJob(ctx, )
 
 Get current restore status.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.RestoreGetRestoreJob(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.RestoreGetRestoreJob``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RestoreGetRestoreJob`: RestoreJobDto
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.RestoreGetRestoreJob`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRestoreGetRestoreJobRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -421,47 +218,17 @@ Other parameters are passed through a pointer to a apiRestoreGetRestoreJobReques
 
 ## RestorePostRestoreJob
 
-> RestorePostRestoreJob(ctx).RestoreRequestDto(restoreRequestDto).Execute()
+> RestorePostRestoreJob(ctx, restoreRequestDto)
 
 Restore a backup.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    restoreRequestDto := *openapiclient.NewRestoreRequestDto("Url_example") // RestoreRequestDto | The backup to restore.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupsApi.RestorePostRestoreJob(context.Background()).RestoreRequestDto(restoreRequestDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.RestorePostRestoreJob``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRestorePostRestoreJobRequest struct via the builder pattern
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **restoreRequestDto** | [**RestoreRequestDto**](RestoreRequestDto.md) | The backup to restore. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**restoreRequestDto** | [**RestoreRequestDto**](RestoreRequestDto.md)| The backup to restore. | 
 
 ### Return type
 

@@ -11,54 +11,18 @@ Method | HTTP request | Description
 
 ## UserNotificationsDeleteComment
 
-> UserNotificationsDeleteComment(ctx, userId, commentId).Execute()
+> UserNotificationsDeleteComment(ctx, userId, commentId)
 
 Delete a notification.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    userId := "userId_example" // string | The user id.
-    commentId := "commentId_example" // string | The id of the comment.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NotificationsApi.UserNotificationsDeleteComment(context.Background(), userId, commentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NotificationsApi.UserNotificationsDeleteComment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **string** | The user id. | 
-**commentId** | **string** | The id of the comment. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUserNotificationsDeleteCommentRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**userId** | **string**| The user id. | 
+**commentId** | **string**| The id of the comment. | 
 
 ### Return type
 
@@ -80,57 +44,30 @@ Name | Type | Description  | Notes
 
 ## UserNotificationsGetNotifications
 
-> CommentsDto UserNotificationsGetNotifications(ctx, userId).Version(version).Execute()
+> CommentsDto UserNotificationsGetNotifications(ctx, userId, optional)
 
 Get all notifications.
 
+When passing in a version you can retrieve all updates since then.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    userId := "userId_example" // string | The user id.
-    version := int64(789) // int64 | The current version. (optional) (default to -2)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NotificationsApi.UserNotificationsGetNotifications(context.Background(), userId).Version(version).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NotificationsApi.UserNotificationsGetNotifications``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UserNotificationsGetNotifications`: CommentsDto
-    fmt.Fprintf(os.Stdout, "Response from `NotificationsApi.UserNotificationsGetNotifications`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **string** | The user id. | 
+**userId** | **string**| The user id. | 
+ **optional** | ***UserNotificationsGetNotificationsOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiUserNotificationsGetNotificationsRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a UserNotificationsGetNotificationsOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **version** | **int64** | The current version. | [default to -2]
+ **version** | **optional.Int64**| The current version. | [default to -2]
 
 ### Return type
 

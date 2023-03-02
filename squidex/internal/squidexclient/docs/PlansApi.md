@@ -11,53 +11,17 @@ Method | HTTP request | Description
 
 ## AppPlansGetPlans
 
-> AppPlansDto AppPlansGetPlans(ctx, app).Execute()
+> AppPlansDto AppPlansGetPlans(ctx, app)
 
 Get app plan information.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PlansApi.AppPlansGetPlans(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlansApi.AppPlansGetPlans``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppPlansGetPlans`: AppPlansDto
-    fmt.Fprintf(os.Stdout, "Response from `PlansApi.AppPlansGetPlans`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppPlansGetPlansRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -79,55 +43,18 @@ Name | Type | Description  | Notes
 
 ## AppPlansPutPlan
 
-> PlanChangedDto AppPlansPutPlan(ctx, app).ChangePlanDto(changePlanDto).Execute()
+> PlanChangedDto AppPlansPutPlan(ctx, app, changePlanDto)
 
 Change the app plan.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    changePlanDto := *openapiclient.NewChangePlanDto("PlanId_example") // ChangePlanDto | Plan object that needs to be changed.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PlansApi.AppPlansPutPlan(context.Background(), app).ChangePlanDto(changePlanDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlansApi.AppPlansPutPlan``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppPlansPutPlan`: PlanChangedDto
-    fmt.Fprintf(os.Stdout, "Response from `PlansApi.AppPlansPutPlan`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppPlansPutPlanRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **changePlanDto** | [**ChangePlanDto**](ChangePlanDto.md) | Plan object that needs to be changed. | 
+**app** | **string**| The name of the app. | 
+**changePlanDto** | [**ChangePlanDto**](ChangePlanDto.md)| Plan object that needs to be changed. | 
 
 ### Return type
 

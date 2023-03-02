@@ -172,7 +172,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.translate"
+        - squidex.apps.{app}.translate
       summary: Translate a text.
       tags:
       - Translations
@@ -260,7 +260,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.usage"
+        - squidex.apps.{app}.usage
       summary: Get api calls as log file.
       tags:
       - Statistics
@@ -319,7 +319,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.usage"
+        - squidex.apps.{app}.usage
       summary: Get api calls in date range.
       tags:
       - Statistics
@@ -353,7 +353,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.usage"
+        - squidex.apps.{app}.usage
       summary: Get total asset size.
       tags:
       - Statistics
@@ -414,7 +414,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.usage"
+        - squidex.apps.{app}.usage
       summary: Get asset usage by date.
       tags:
       - Statistics
@@ -460,7 +460,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.search"
+        - squidex.apps.{app}.search
       summary: Get search results.
       tags:
       - Search
@@ -524,7 +524,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Add a schema field.
       tags:
       - Schemas
@@ -589,7 +589,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field name already in use.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -598,7 +598,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Add a nested field.
       tags:
       - Schemas
@@ -656,7 +656,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Configure UI fields.
       tags:
       - Schemas
@@ -714,7 +714,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Reorder all fields.
       tags:
       - Schemas
@@ -773,7 +773,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -782,7 +782,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Reorder all nested fields.
       tags:
       - Schemas
@@ -832,7 +832,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -841,7 +841,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Delete a schema field.
       tags:
       - Schemas
@@ -899,7 +899,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -908,7 +908,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update a schema field.
       tags:
       - Schemas
@@ -968,7 +968,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -977,7 +977,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Delete a nested field.
       tags:
       - Schemas
@@ -1045,7 +1045,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1054,7 +1054,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update a nested field.
       tags:
       - Schemas
@@ -1105,7 +1105,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1114,7 +1114,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Lock a schema field.
       tags:
       - Schemas
@@ -1175,7 +1175,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Field, schema, or app not found."
+          description: Field, schema, or app not found.
         "500":
           content:
             application/json:
@@ -1184,14 +1184,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Lock a nested field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{id}/hide:
     put:
-      description: "A hidden field is not part of the API response, but can still\
-        \ be edited in the portal."
+      description: A hidden field is not part of the API response, but can still be
+        edited in the portal.
       operationId: SchemaFields_HideField
       parameters:
       - description: The name of the app.
@@ -1236,7 +1236,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1245,14 +1245,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Hide a schema field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/hide:
     put:
-      description: "A hidden field is not part of the API response, but can still\
-        \ be edited in the portal."
+      description: A hidden field is not part of the API response, but can still be
+        edited in the portal.
       operationId: SchemaFields_HideNestedField
       parameters:
       - description: The name of the app.
@@ -1307,7 +1307,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Field, schema, or app not found."
+          description: Field, schema, or app not found.
         "500":
           content:
             application/json:
@@ -1316,14 +1316,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Hide a nested field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{id}/show:
     put:
-      description: "A hidden field is not part of the API response, but can still\
-        \ be edited in the portal."
+      description: A hidden field is not part of the API response, but can still be
+        edited in the portal.
       operationId: SchemaFields_ShowField
       parameters:
       - description: The name of the app.
@@ -1368,7 +1368,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1377,14 +1377,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Show a schema field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/show:
     put:
-      description: "A hidden field is not part of the API response, but can still\
-        \ be edited in the portal."
+      description: A hidden field is not part of the API response, but can still be
+        edited in the portal.
       operationId: SchemaFields_ShowNestedField
       parameters:
       - description: The name of the app.
@@ -1439,7 +1439,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1448,14 +1448,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Show a nested field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{id}/enable:
     put:
-      description: "A disabled field cannot not be edited in the squidex portal anymore,\
-        \ but will be part of the API response."
+      description: A disabled field cannot not be edited in the squidex portal anymore,
+        but will be part of the API response.
       operationId: SchemaFields_EnableField
       parameters:
       - description: The name of the app.
@@ -1500,7 +1500,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1509,14 +1509,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Enable a schema field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/enable:
     put:
-      description: "A disabled field cannot not be edited in the squidex portal anymore,\
-        \ but will be part of the API response."
+      description: A disabled field cannot not be edited in the squidex portal anymore,
+        but will be part of the API response.
       operationId: SchemaFields_EnableNestedField
       parameters:
       - description: The name of the app.
@@ -1571,7 +1571,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1580,14 +1580,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Enable a nested field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{id}/disable:
     put:
-      description: "A disabled field cannot not be edited in the squidex portal anymore,\
-        \ but will be part of the API response."
+      description: A disabled field cannot not be edited in the squidex portal anymore,
+        but will be part of the API response.
       operationId: SchemaFields_DisableField
       parameters:
       - description: The name of the app.
@@ -1632,7 +1632,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1641,14 +1641,14 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Disable a schema field.
       tags:
       - Schemas
   /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/disable:
     put:
-      description: "A disabled field cannot not be edited in the squidex portal anymore,\
-        \ but will be part of the API response."
+      description: A disabled field cannot not be edited in the squidex portal anymore,
+        but will be part of the API response.
       operationId: SchemaFields_DisableNestedField
       parameters:
       - description: The name of the app.
@@ -1703,7 +1703,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDto'
           description: Schema field request not valid or field locked.
         "404":
-          description: "Schema, field or app not found."
+          description: Schema, field or app not found.
         "500":
           content:
             application/json:
@@ -1712,7 +1712,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Disable a nested field.
       tags:
       - Schemas
@@ -1746,7 +1746,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.read"
+        - squidex.apps.{app}.schemas.read
       summary: Get schemas.
       tags:
       - Schemas
@@ -1798,7 +1798,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.create"
+        - squidex.apps.{app}.schemas.create
       summary: Create a new schema.
       tags:
       - Schemas
@@ -1837,7 +1837,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.delete"
+        - squidex.apps.{app}.schemas.{schema}.delete
       summary: Delete a schema.
       tags:
       - Schemas
@@ -1879,7 +1879,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.read"
+        - squidex.apps.{app}.schemas.read
       summary: Get a schema by name.
       tags:
       - Schemas
@@ -1936,7 +1936,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update a schema.
       tags:
       - Schemas
@@ -1994,7 +1994,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Synchronize a schema.
       tags:
       - Schemas
@@ -2052,7 +2052,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update a schema category.
       tags:
       - Schemas
@@ -2110,7 +2110,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update the preview urls.
       tags:
       - Schemas
@@ -2168,7 +2168,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.scripts"
+        - squidex.apps.{app}.schemas.{schema}.scripts
       summary: Update the scripts.
       tags:
       - Schemas
@@ -2226,7 +2226,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.update"
+        - squidex.apps.{app}.schemas.{schema}.update
       summary: Update the rules.
       tags:
       - Schemas
@@ -2269,7 +2269,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.publish"
+        - squidex.apps.{app}.schemas.{schema}.publish
       summary: Publish a schema.
       tags:
       - Schemas
@@ -2312,7 +2312,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.schemas.{schema}.publish"
+        - squidex.apps.{app}.schemas.{schema}.publish
       summary: Unpublish a schema.
       tags:
       - Schemas
@@ -2369,7 +2369,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.read"
+        - squidex.apps.{app}.rules.read
       summary: Get rules.
       tags:
       - Rules
@@ -2417,7 +2417,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.create"
+        - squidex.apps.{app}.rules.create
       summary: Create a new rule.
       tags:
       - Rules
@@ -2445,7 +2445,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.update"
+        - squidex.apps.{app}.rules.events.update
       summary: Cancel the current run.
       tags:
       - Rules
@@ -2484,7 +2484,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.delete"
+        - squidex.apps.{app}.rules.delete
       summary: Delete a rule.
       tags:
       - Rules
@@ -2541,7 +2541,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.update"
+        - squidex.apps.{app}.rules.update
       summary: Update a rule.
       tags:
       - Rules
@@ -2584,7 +2584,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.disable"
+        - squidex.apps.{app}.rules.disable
       summary: Enable a rule.
       tags:
       - Rules
@@ -2627,7 +2627,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.disable"
+        - squidex.apps.{app}.rules.disable
       summary: Disable a rule.
       tags:
       - Rules
@@ -2666,7 +2666,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.run"
+        - squidex.apps.{app}.rules.events.run
       summary: Trigger a rule.
       tags:
       - Rules
@@ -2713,7 +2713,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.run"
+        - squidex.apps.{app}.rules.events.run
       summary: Run a rule.
       tags:
       - Rules
@@ -2750,7 +2750,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.delete"
+        - squidex.apps.{app}.rules.events.delete
       summary: Cancels all rule events.
       tags:
       - Rules
@@ -2793,7 +2793,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.read"
+        - squidex.apps.{app}.rules.events.read
       summary: Simulate a rule.
       tags:
       - Rules
@@ -2836,7 +2836,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.read"
+        - squidex.apps.{app}.rules.events.read
       summary: Simulate a rule.
       tags:
       - Rules
@@ -2864,7 +2864,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.delete"
+        - squidex.apps.{app}.rules.events.delete
       summary: Cancels all events.
       tags:
       - Rules
@@ -2929,7 +2929,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.read"
+        - squidex.apps.{app}.rules.events.read
       summary: Get rule events.
       tags:
       - Rules
@@ -2968,7 +2968,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.delete"
+        - squidex.apps.{app}.rules.events.delete
       summary: Cancels an event.
       tags:
       - Rules
@@ -3006,7 +3006,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.rules.events.update"
+        - squidex.apps.{app}.rules.events.update
       summary: Retry the event immediately.
       tags:
       - Rules
@@ -3091,7 +3091,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.plans.read"
+        - squidex.apps.{app}.plans.read
       summary: Get app plan information.
       tags:
       - Plans
@@ -3140,7 +3140,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.plans.change"
+        - squidex.apps.{app}.plans.change
       summary: Change the app plan.
       tags:
       - Plans
@@ -3165,7 +3165,7 @@ paths:
       - Ping
   /api/ping:
     get:
-      description: "Can be used to test, if the Squidex API is alive and responding."
+      description: Can be used to test, if the Squidex API is alive and responding.
       operationId: Ping_GetPing
       responses:
         "204":
@@ -3181,7 +3181,7 @@ paths:
       - Ping
   /api/ping/{app}:
     get:
-      description: "Can be used to test, if the Squidex API is alive and responding."
+      description: Can be used to test, if the Squidex API is alive and responding.
       operationId: Ping_GetAppPing
       parameters:
       - description: The name of the app.
@@ -3204,7 +3204,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.ping"
+        - squidex.apps.{app}.ping
       summary: Get ping status.
       tags:
       - Ping
@@ -3243,8 +3243,8 @@ paths:
       - News
   /api/languages:
     get:
-      description: "Provide a list of supported language codes, following the ISO2Code\
-        \ standard."
+      description: Provide a list of supported language codes, following the ISO2Code
+        standard.
       operationId: Languages_GetLanguages
       responses:
         "200":
@@ -3308,7 +3308,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.history"
+        - squidex.apps.{app}.history
       summary: Get historical events.
       tags:
       - History
@@ -3447,7 +3447,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.comments.read"
+        - squidex.apps.{app}.comments.read
       summary: Get all comments.
       tags:
       - Comments
@@ -3504,7 +3504,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.comments.create"
+        - squidex.apps.{app}.comments.create
       summary: Create a new comment.
       tags:
       - Comments
@@ -3552,7 +3552,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.comments.delete"
+        - squidex.apps.{app}.comments.delete
       summary: Delete a comment.
       tags:
       - Comments
@@ -3614,7 +3614,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.comments.update"
+        - squidex.apps.{app}.comments.update
       summary: Update a comment.
       tags:
       - Comments
@@ -3734,7 +3734,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.backups.delete"
+        - squidex.apps.{app}.backups.delete
       summary: Delete a backup.
       tags:
       - Backups
@@ -3860,7 +3860,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.backups.read"
+        - squidex.apps.{app}.backups.read
       summary: Get all backup jobs.
       tags:
       - Backups
@@ -3895,7 +3895,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.backups.create"
+        - squidex.apps.{app}.backups.create
       summary: Start a new backup.
       tags:
       - Backups
@@ -3999,7 +3999,7 @@ paths:
           type: integer
         style: form
         x-position: 5
-      - description: "The target width of the asset, if it is an image."
+      - description: The target width of the asset, if it is an image.
         explode: true
         in: query
         name: width
@@ -4010,7 +4010,7 @@ paths:
           type: integer
         style: form
         x-position: 6
-      - description: "The target height of the asset, if it is an image."
+      - description: The target height of the asset, if it is an image.
         explode: true
         in: query
         name: height
@@ -4021,7 +4021,7 @@ paths:
           type: integer
         style: form
         x-position: 7
-      - description: "Optional image quality, it is is an jpeg image."
+      - description: Optional image quality, it is is an jpeg image.
         explode: true
         in: query
         name: quality
@@ -4184,7 +4184,7 @@ paths:
           type: integer
         style: form
         x-position: 4
-      - description: "The target width of the asset, if it is an image."
+      - description: The target width of the asset, if it is an image.
         explode: true
         in: query
         name: width
@@ -4195,7 +4195,7 @@ paths:
           type: integer
         style: form
         x-position: 5
-      - description: "The target height of the asset, if it is an image."
+      - description: The target height of the asset, if it is an image.
         explode: true
         in: query
         name: height
@@ -4206,7 +4206,7 @@ paths:
           type: integer
         style: form
         x-position: 6
-      - description: "Optional image quality, it is is an jpeg image."
+      - description: Optional image quality, it is is an jpeg image.
         explode: true
         in: query
         name: quality
@@ -4364,7 +4364,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Get asset folders.
       tags:
       - Assets
@@ -4412,7 +4412,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Create an asset folder.
       tags:
       - Assets
@@ -4451,7 +4451,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Delete an asset folder.
       tags:
       - Assets
@@ -4508,7 +4508,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Update an asset folder.
       tags:
       - Assets
@@ -4566,7 +4566,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Move an asset folder.
       tags:
       - Assets
@@ -4604,7 +4604,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Get assets tags.
       tags:
       - Assets
@@ -4659,7 +4659,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Rename an asset tag.
       tags:
       - Assets
@@ -4756,7 +4756,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Get assets.
       tags:
       - Assets
@@ -4793,7 +4793,7 @@ paths:
           type: string
         style: form
         x-position: 3
-      - description: "True to duplicate the asset, event if the file has been uploaded."
+      - description: True to duplicate the asset, event if the file has been uploaded.
         explode: true
         in: query
         name: Duplicate
@@ -4803,10 +4803,16 @@ paths:
         style: form
         x-position: 4
       requestBody:
+        $ref: '#/components/requestBodies/inline_object'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Assets_PostAsset_request'
+              properties:
+                File:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
       responses:
         "201":
           content:
@@ -4836,7 +4842,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.create"
+        - squidex.apps.{app}.assets.create
       summary: Upload a new asset.
       tags:
       - Assets
@@ -4880,7 +4886,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Get assets.
       tags:
       - Assets
@@ -4937,7 +4943,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.delete"
+        - squidex.apps.{app}.assets.delete
       summary: Delete an asset.
       tags:
       - Assets
@@ -4979,7 +4985,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Get an asset by id.
       tags:
       - Assets
@@ -5015,7 +5021,7 @@ paths:
           type: string
         style: form
         x-position: 3
-      - description: "True to duplicate the asset, event if the file has been uploaded."
+      - description: True to duplicate the asset, event if the file has been uploaded.
         explode: true
         in: query
         name: Duplicate
@@ -5025,10 +5031,16 @@ paths:
         style: form
         x-position: 4
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Assets_PostAsset_request'
+              properties:
+                File:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
       responses:
         "200":
           content:
@@ -5058,7 +5070,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.create"
+        - squidex.apps.{app}.assets.create
       summary: Upsert an asset.
       tags:
       - Assets
@@ -5115,7 +5127,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Update an asset.
       tags:
       - Assets
@@ -5149,7 +5161,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/BulkResultDto'
                 type: array
-          description: "Assets created, update or delete."
+          description: Assets created, update or delete.
         "400":
           content:
             application/json:
@@ -5166,7 +5178,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.read"
+        - squidex.apps.{app}.assets.read
       summary: Bulk update assets.
       tags:
       - Assets
@@ -5194,10 +5206,16 @@ paths:
         style: simple
         x-position: 2
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Assets_PutAssetContent_request'
+              properties:
+                file:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
       responses:
         "200":
           content:
@@ -5227,7 +5245,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.upload"
+        - squidex.apps.{app}.assets.upload
       summary: Replace asset content.
       tags:
       - Assets
@@ -5285,7 +5303,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.assets.update"
+        - squidex.apps.{app}.assets.update
       summary: Moves the asset.
       tags:
       - Assets
@@ -5319,7 +5337,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.asset-scripts.read"
+        - squidex.apps.{app}.asset-scripts.read
       summary: Get the app asset scripts.
       tags:
       - Apps
@@ -5367,7 +5385,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.asset-scripts.update"
+        - squidex.apps.{app}.asset-scripts.update
       summary: Update the app asset scripts.
       tags:
       - Apps
@@ -5402,7 +5420,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.clients.read"
+        - squidex.apps.{app}.clients.read
       summary: Get app clients.
       tags:
       - Apps
@@ -5453,7 +5471,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.clients.create"
+        - squidex.apps.{app}.clients.create
       summary: Create a new app client.
       tags:
       - Apps
@@ -5498,12 +5516,12 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.clients.delete"
+        - squidex.apps.{app}.clients.delete
       summary: Revoke an app client.
       tags:
       - Apps
     put:
-      description: "Only the display name can be changed, create a new client if necessary."
+      description: Only the display name can be changed, create a new client if necessary.
       operationId: AppClients_PutClient
       parameters:
       - description: The name of the app.
@@ -5556,7 +5574,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.clients.update"
+        - squidex.apps.{app}.clients.update
       summary: Updates an app client.
       tags:
       - Apps
@@ -5590,7 +5608,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.contributors.read"
+        - squidex.apps.{app}.contributors.read
       summary: Get app contributors.
       tags:
       - Apps
@@ -5638,7 +5656,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.contributors.assign"
+        - squidex.apps.{app}.contributors.assign
       summary: Assign contributor to app.
       tags:
       - Apps
@@ -5714,7 +5732,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.contributors.revoke"
+        - squidex.apps.{app}.contributors.revoke
       summary: Remove contributor.
       tags:
       - Apps
@@ -5748,7 +5766,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.image"
+        - squidex.apps.{app}.image
       summary: Remove the app image.
       tags:
       - Apps
@@ -5796,10 +5814,16 @@ paths:
         style: simple
         x-position: 1
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Assets_PutAssetContent_request'
+              properties:
+                file:
+                  format: binary
+                  nullable: true
+                  type: string
+              type: object
       responses:
         "200":
           content:
@@ -5823,7 +5847,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.image"
+        - squidex.apps.{app}.image
       summary: Upload the app image.
       tags:
       - Apps
@@ -5857,7 +5881,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.languages.read"
+        - squidex.apps.{app}.languages.read
       summary: Get app languages.
       tags:
       - Apps
@@ -5905,7 +5929,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.languages.create"
+        - squidex.apps.{app}.languages.create
       summary: Attaches an app language.
       tags:
       - Apps
@@ -5954,7 +5978,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.languages.delete"
+        - squidex.apps.{app}.languages.delete
       summary: Deletes an app language.
       tags:
       - Apps
@@ -6011,7 +6035,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.languages.update"
+        - squidex.apps.{app}.languages.update
       summary: Updates an app language.
       tags:
       - Apps
@@ -6045,7 +6069,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.roles.read"
+        - squidex.apps.{app}.roles.read
       summary: Get app roles.
       tags:
       - Apps
@@ -6093,7 +6117,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.roles.create"
+        - squidex.apps.{app}.roles.create
       summary: Add role to app.
       tags:
       - Apps
@@ -6129,7 +6153,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.roles.read"
+        - squidex.apps.{app}.roles.read
       summary: Get app permissions.
       tags:
       - Apps
@@ -6178,7 +6202,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.roles.delete"
+        - squidex.apps.{app}.roles.delete
       summary: Remove role from app.
       tags:
       - Apps
@@ -6235,7 +6259,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.roles.update"
+        - squidex.apps.{app}.roles.update
       summary: Update an app role.
       tags:
       - Apps
@@ -6335,7 +6359,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.delete"
+        - squidex.apps.{app}.delete
       summary: Delete the app.
       tags:
       - Apps
@@ -6415,7 +6439,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.update"
+        - squidex.apps.{app}.update
       summary: Update the app.
       tags:
       - Apps
@@ -6496,7 +6520,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.settings"
+        - squidex.apps.{app}.settings
       summary: Update the app settings.
       tags:
       - Apps
@@ -6530,7 +6554,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.workflows.read"
+        - squidex.apps.{app}.workflows.read
       summary: Get app workflow.
       tags:
       - Apps
@@ -6578,7 +6602,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.workflows.update"
+        - squidex.apps.{app}.workflows.update
       summary: Create a workflow.
       tags:
       - Apps
@@ -6621,7 +6645,7 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.workflows.update"
+        - squidex.apps.{app}.workflows.update
       summary: Delete a workflow.
       tags:
       - Apps
@@ -6678,11 +6702,32 @@ paths:
           description: Operation failed.
       security:
       - squidex-oauth-auth:
-        - "squidex.apps.{app}.workflows.update"
+        - squidex.apps.{app}.workflows.update
       summary: Update a workflow.
       tags:
       - Apps
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_3:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
   schemas:
     UserProperty:
       additionalProperties: false
@@ -6935,7 +6980,6 @@ components:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/AssetsFieldPropertiesDto_allOf'
     AssetPreviewMode:
-      description: ""
       enum:
       - ImageAndFileName
       - Image
@@ -6952,7 +6996,6 @@ components:
         type: array
       type: object
     AssetType:
-      description: ""
       enum:
       - Unknown
       - Image
@@ -6974,7 +7017,6 @@ components:
         type: boolean
       type: object
     BooleanFieldEditor:
-      description: ""
       enum:
       - Checkbox
       - Toggle
@@ -7001,7 +7043,6 @@ components:
         type: string
       type: object
     DateTimeFieldEditor:
-      description: ""
       enum:
       - Date
       - DateTime
@@ -7010,7 +7051,6 @@ components:
       - Date
       - DateTime
     DateTimeCalculatedDefaultValue:
-      description: ""
       enum:
       - Now
       - Today
@@ -7023,7 +7063,6 @@ components:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/GeolocationFieldPropertiesDto_allOf'
     GeolocationFieldEditor:
-      description: ""
       enum:
       - Map
       type: string
@@ -7045,7 +7084,6 @@ components:
         type: number
       type: object
     NumberFieldEditor:
-      description: ""
       enum:
       - Input
       - Radio
@@ -7062,7 +7100,6 @@ components:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/ReferencesFieldPropertiesDto_allOf'
     ReferencesFieldEditor:
-      description: ""
       enum:
       - List
       - Dropdown
@@ -7085,7 +7122,6 @@ components:
         type: string
       type: object
     StringContentType:
-      description: ""
       enum:
       - Unspecified
       - Html
@@ -7096,7 +7132,6 @@ components:
       - Html
       - Markdown
     StringFieldEditor:
-      description: ""
       enum:
       - Input
       - Color
@@ -7125,7 +7160,6 @@ components:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/TagsFieldPropertiesDto_allOf'
     TagsFieldEditor:
-      description: ""
       enum:
       - Tags
       - Checkboxes
@@ -7140,7 +7174,6 @@ components:
       - $ref: '#/components/schemas/FieldPropertiesDto'
       - $ref: '#/components/schemas/UIFieldPropertiesDto_allOf'
     UIFieldEditor:
-      description: ""
       enum:
       - Separator
       type: string
@@ -7304,11 +7337,11 @@ components:
           type: boolean
           x-deprecatedMessage: Use bulk endpoint now.
         doNotScript:
-          description: "True to turn off scripting for faster inserts. Default: true."
+          description: 'True to turn off scripting for faster inserts. Default: true.'
           type: boolean
         optimizeValidation:
-          description: "True to turn off costly validation: Unique checks, asset checks\
-            \ and reference checks. Default: true."
+          description: 'True to turn off costly validation: Unique checks, asset checks
+            and reference checks. Default: true.'
           type: boolean
       required:
       - datas
@@ -7327,20 +7360,20 @@ components:
           type: boolean
           x-deprecatedMessage: Use 'jobs.status' fields now.
         doNotScript:
-          description: "True to turn off scripting for faster inserts. Default: true."
+          description: 'True to turn off scripting for faster inserts. Default: true.'
           type: boolean
         doNotValidate:
-          description: "True to turn off validation for faster inserts. Default: false."
+          description: 'True to turn off validation for faster inserts. Default: false.'
           type: boolean
         doNotValidateWorkflow:
-          description: "True to turn off validation of workflow rules. Default: false."
+          description: 'True to turn off validation of workflow rules. Default: false.'
           type: boolean
         checkReferrers:
           description: True to check referrers of deleted contents.
           type: boolean
         optimizeValidation:
-          description: "True to turn off costly validation: Unique checks, asset checks\
-            \ and reference checks. Default: true."
+          description: 'True to turn off costly validation: Unique checks, asset checks
+            and reference checks. Default: true.'
           type: boolean
       required:
       - jobs
@@ -7426,7 +7459,6 @@ components:
         type: string
       type: array
     SortOrder:
-      description: ""
       enum:
       - Ascending
       - Descending
@@ -7435,7 +7467,6 @@ components:
       - Ascending
       - Descending
     BulkUpdateContentType:
-      description: ""
       enum:
       - Upsert
       - ChangeStatus
@@ -7479,7 +7510,6 @@ components:
     TranslationDto:
       additionalProperties: false
       example:
-        result: null
         text: text
       properties:
         result:
@@ -7490,7 +7520,6 @@ components:
           type: string
       type: object
     TranslationResultCode:
-      description: ""
       enum:
       - Translated
       - LanguageNotSupported
@@ -7679,7 +7708,6 @@ components:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/SearchResultDto_allOf'
     SearchResultType:
-      description: ""
       enum:
       - Asset
       - Content
@@ -7700,7 +7728,6 @@ components:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/SchemaDto_allOf'
     SchemaType:
-      description: ""
       enum:
       - Default
       - Singleton
@@ -7793,7 +7820,6 @@ components:
       example:
         condition: condition
         field: field
-        action: null
       properties:
         action:
           $ref: '#/components/schemas/FieldRuleAction'
@@ -7810,7 +7836,6 @@ components:
       - field
       type: object
     FieldRuleAction:
-      description: ""
       enum:
       - Disable
       - Hide
@@ -7841,7 +7866,7 @@ components:
         name:
           description: The name of the field. Must be unique within the schema.
           minLength: 1
-          pattern: "^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*$"
+          pattern: ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
           type: string
         partitioning:
           description: Determines the optional partitioning of the field.
@@ -7855,13 +7880,6 @@ components:
       type: object
     ConfigureUIFieldsDto:
       additionalProperties: false
-      example:
-        fieldsInLists:
-        - fieldsInLists
-        - fieldsInLists
-        fieldsInReferences:
-        - fieldsInReferences
-        - fieldsInReferences
       properties:
         fieldsInLists:
           items:
@@ -7965,7 +7983,7 @@ components:
         name:
           description: The name of the field. Must be unique within the schema.
           minLength: 1
-          pattern: "^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*$"
+          pattern: ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
           type: string
         isHidden:
           description: Defines if the field is hidden.
@@ -7998,7 +8016,7 @@ components:
         name:
           description: The name of the field. Must be unique within the schema.
           minLength: 1
-          pattern: "^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*$"
+          pattern: ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
           type: string
         isHidden:
           description: Defines if the field is hidden.
@@ -8086,10 +8104,8 @@ components:
         fieldRules:
         - condition: condition
           field: field
-          action: null
         - condition: condition
           field: field
-          action: null
       properties:
         fieldRules:
           description: The field rules to configure.
@@ -8149,7 +8165,7 @@ components:
           minLength: 1
           type: string
         options:
-          description: "The options, if the editor is a dropdown."
+          description: The options, if the editor is a dropdown.
           items:
             type: string
           nullable: true
@@ -8170,7 +8186,6 @@ components:
       - name
       type: object
     RuleFieldEditor:
-      description: ""
       enum:
       - Checkbox
       - Dropdown
@@ -8371,7 +8386,6 @@ components:
       - skipReasons
       type: object
     SkipReason:
-      description: ""
       enum:
       - None
       - ConditionDoesNotMatch
@@ -8407,7 +8421,6 @@ components:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/RuleEventDto_allOf'
     RuleResult:
-      description: ""
       enum:
       - Pending
       - Success
@@ -8420,7 +8433,6 @@ components:
       - Failed
       - Timeout
     RuleJobResult:
-      description: ""
       enum:
       - Pending
       - Success
@@ -8790,7 +8802,6 @@ components:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/BackupJobDto_allOf'
     JobStatus:
-      description: ""
       enum:
       - Created
       - Started
@@ -8811,7 +8822,6 @@ components:
         - log
         started: 2000-01-23T04:56:07.000+00:00
         url: https://openapi-generator.tech
-        status: null
       properties:
         url:
           description: The uri to load from.
@@ -8847,7 +8857,7 @@ components:
         name:
           description: The name of the app.
           nullable: true
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         url:
           description: The url to the restore file.
@@ -8858,7 +8868,6 @@ components:
       - url
       type: object
     ResizeMode:
-      description: ""
       enum:
       - Crop
       - CropUpsize
@@ -8877,7 +8886,6 @@ components:
       - Min
       - Stretch
     ImageFormat:
-      description: ""
       enum:
       - AVIF
       - BMP
@@ -8906,7 +8914,6 @@ components:
       - $ref: '#/components/schemas/Resource'
       - $ref: '#/components/schemas/AssetFolderDto_allOf'
     AssetFolderScope:
-      description: ""
       enum:
       - PathAndItems
       - Path
@@ -8994,7 +9001,6 @@ components:
           permanent: true
           id: id
           expectedVersion: 0
-          type: null
           parentId: parentId
           slug: slug
           tags:
@@ -9007,7 +9013,6 @@ components:
           permanent: true
           id: id
           expectedVersion: 0
-          type: null
           parentId: parentId
           slug: slug
           tags:
@@ -9023,11 +9028,11 @@ components:
           description: True to check referrers of deleted assets.
           type: boolean
         optimizeValidation:
-          description: "True to turn off costly validation: Folder checks. Default:\
-            \ true."
+          description: 'True to turn off costly validation: Folder checks. Default:
+            true.'
           type: boolean
         doNotScript:
-          description: "True to turn off scripting for faster inserts. Default: true."
+          description: 'True to turn off scripting for faster inserts. Default: true.'
           type: boolean
       required:
       - jobs
@@ -9042,7 +9047,6 @@ components:
         permanent: true
         id: id
         expectedVersion: 0
-        type: null
         parentId: parentId
         slug: slug
         tags:
@@ -9066,7 +9070,7 @@ components:
           nullable: true
           type: string
         isProtected:
-          description: "True, when the asset is not public."
+          description: True, when the asset is not public.
           nullable: true
           type: boolean
         tags:
@@ -9090,7 +9094,6 @@ components:
           type: integer
       type: object
     BulkUpdateAssetType:
-      description: ""
       enum:
       - Annotate
       - Move
@@ -9121,7 +9124,7 @@ components:
           nullable: true
           type: string
         isProtected:
-          description: "True, when the asset is not public."
+          description: True, when the asset is not public.
           nullable: true
           type: boolean
         tags:
@@ -9196,7 +9199,7 @@ components:
         id:
           description: The id of the client.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
       required:
       - id
@@ -9371,7 +9374,7 @@ components:
         name:
           description: The name of the app.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         template:
           description: Initialize the app with the inbuilt template.
@@ -9617,7 +9620,6 @@ components:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/WebhookRuleActionDto_allOf'
     WebhookMethod:
-      description: ""
       enum:
       - POST
       - PUT
@@ -9644,7 +9646,6 @@ components:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/SignalRRuleActionDto_allOf'
     ActionTypeEnum:
-      description: ""
       enum:
       - Broadcast
       - User
@@ -9702,14 +9703,28 @@ components:
       allOf:
       - $ref: '#/components/schemas/RuleAction'
       - $ref: '#/components/schemas/AlgoliaRuleActionDto_allOf'
-    Assets_PostAsset_request:
+    inline_object:
       properties:
         File:
           format: binary
           nullable: true
           type: string
       type: object
-    Assets_PutAssetContent_request:
+    inline_object_1:
+      properties:
+        File:
+          format: binary
+          nullable: true
+          type: string
+      type: object
+    inline_object_2:
+      properties:
+        file:
+          format: binary
+          nullable: true
+          type: string
+      type: object
+    inline_object_3:
       properties:
         file:
           format: binary
@@ -9729,8 +9744,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     UserDto_allOf:
       properties:
         id:
@@ -9760,8 +9773,6 @@ components:
       - id
       - isLocked
       - permissions
-      type: object
-      example: null
     EventConsumersDto_allOf:
       properties:
         items:
@@ -9769,8 +9780,6 @@ components:
           items:
             $ref: '#/components/schemas/EventConsumerDto'
           type: array
-      type: object
-      example: null
     EventConsumerDto_allOf:
       properties:
         isStopped:
@@ -9788,8 +9797,6 @@ components:
         position:
           nullable: true
           type: string
-      type: object
-      example: null
     ContentsDto_allOf:
       properties:
         total:
@@ -9809,8 +9816,6 @@ components:
       required:
       - items
       - statuses
-      type: object
-      example: null
     ContentDto_allOf:
       properties:
         id:
@@ -9886,8 +9891,6 @@ components:
       - createdBy
       - data
       - lastModifiedBy
-      type: object
-      example: null
     FieldDto_allOf:
       properties:
         fieldId:
@@ -9897,7 +9900,7 @@ components:
         name:
           description: The name of the field. Must be unique within the schema.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         isHidden:
           description: Defines if the field is hidden.
@@ -9924,8 +9927,6 @@ components:
       - name
       - partitioning
       - properties
-      type: object
-      example: null
     ArrayFieldPropertiesDto_allOf:
       properties:
         minItems:
@@ -9944,8 +9945,6 @@ components:
             type: string
           nullable: true
           type: array
-      type: object
-      example: null
     AssetsFieldPropertiesDto_allOf:
       properties:
         previewMode:
@@ -10038,10 +10037,8 @@ components:
           nullable: true
           type: array
         allowDuplicates:
-          description: "True, if duplicate values are allowed."
+          description: True, if duplicate values are allowed.
           type: boolean
-      type: object
-      example: null
     BooleanFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10058,8 +10055,6 @@ components:
           type: boolean
         editor:
           $ref: '#/components/schemas/BooleanFieldEditor'
-      type: object
-      example: null
     ComponentFieldPropertiesDto_allOf:
       properties:
         schemaIds:
@@ -10068,8 +10063,6 @@ components:
             type: string
           nullable: true
           type: array
-      type: object
-      example: null
     ComponentsFieldPropertiesDto_allOf:
       properties:
         minItems:
@@ -10094,8 +10087,6 @@ components:
             type: string
           nullable: true
           type: array
-      type: object
-      example: null
     DateTimeFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10127,14 +10118,10 @@ components:
           $ref: '#/components/schemas/DateTimeFieldEditor'
         calculatedDefaultValue:
           $ref: '#/components/schemas/DateTimeCalculatedDefaultValue'
-      type: object
-      example: null
     GeolocationFieldPropertiesDto_allOf:
       properties:
         editor:
           $ref: '#/components/schemas/GeolocationFieldEditor'
-      type: object
-      example: null
     NumberFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10174,8 +10161,6 @@ components:
           type: boolean
         editor:
           $ref: '#/components/schemas/NumberFieldEditor'
-      type: object
-      example: null
     ReferencesFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10201,7 +10186,7 @@ components:
           nullable: true
           type: integer
         allowDuplicates:
-          description: "True, if duplicate values are allowed."
+          description: True, if duplicate values are allowed.
           type: boolean
         resolveReference:
           description: True to resolve references in the content list.
@@ -10217,8 +10202,6 @@ components:
             type: string
           nullable: true
           type: array
-      type: object
-      example: null
     StringFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10301,8 +10284,6 @@ components:
           $ref: '#/components/schemas/StringContentType'
         editor:
           $ref: '#/components/schemas/StringFieldEditor'
-      type: object
-      example: null
     TagsFieldPropertiesDto_allOf:
       properties:
         defaultValues:
@@ -10338,14 +10319,10 @@ components:
           type: boolean
         editor:
           $ref: '#/components/schemas/TagsFieldEditor'
-      type: object
-      example: null
     UIFieldPropertiesDto_allOf:
       properties:
         editor:
           $ref: '#/components/schemas/UIFieldEditor'
-      type: object
-      example: null
     NestedFieldDto_allOf:
       properties:
         fieldId:
@@ -10355,7 +10332,7 @@ components:
         name:
           description: The name of the field. Must be unique within the schema.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         isHidden:
           description: Defines if the field is hidden.
@@ -10371,8 +10348,6 @@ components:
       required:
       - name
       - properties
-      type: object
-      example: null
     TemplatesDto_allOf:
       properties:
         items:
@@ -10380,8 +10355,6 @@ components:
           items:
             $ref: '#/components/schemas/TemplateDto'
           type: array
-      type: object
-      example: null
     TemplateDto_allOf:
       properties:
         name:
@@ -10397,14 +10370,12 @@ components:
           minLength: 1
           type: string
         isStarter:
-          description: "True, if the template is a starter."
+          description: True, if the template is a starter.
           type: boolean
       required:
       - description
       - name
       - title
-      type: object
-      example: null
     TemplateDetailsDto_allOf:
       properties:
         details:
@@ -10413,8 +10384,6 @@ components:
           type: string
       required:
       - details
-      type: object
-      example: null
     SearchResultDto_allOf:
       properties:
         name:
@@ -10430,8 +10399,6 @@ components:
       required:
       - name
       - type
-      type: object
-      example: null
     SchemaDto_allOf:
       properties:
         id:
@@ -10448,7 +10415,7 @@ components:
         name:
           description: The name of the schema. Unique within the app.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         type:
           $ref: '#/components/schemas/SchemaType'
@@ -10513,8 +10480,6 @@ components:
       - previewUrls
       - properties
       - scripts
-      type: object
-      example: null
     SchemasDto_allOf:
       properties:
         items:
@@ -10522,14 +10487,12 @@ components:
           items:
             $ref: '#/components/schemas/SchemaDto'
           type: array
-      type: object
-      example: null
     CreateSchemaDto_allOf:
       properties:
         name:
           description: The name of the schema.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         type:
           $ref: '#/components/schemas/SchemaType'
@@ -10540,18 +10503,14 @@ components:
           x-deprecatedMessage: Use 'type' field now.
       required:
       - name
-      type: object
-      example: null
     SynchronizeSchemaDto_allOf:
       properties:
         noFieldDeletion:
-          description: "True, when fields should not be deleted."
+          description: True, when fields should not be deleted.
           type: boolean
         noFieldRecreation:
-          description: "True, when fields with different types should not be recreated."
+          description: True, when fields with different types should not be recreated.
           type: boolean
-      type: object
-      example: null
     RulesDto_allOf:
       properties:
         items:
@@ -10565,8 +10524,6 @@ components:
           type: string
       required:
       - items
-      type: object
-      example: null
     RuleDto_allOf:
       properties:
         id:
@@ -10621,16 +10578,12 @@ components:
       - createdBy
       - lastModifiedBy
       - trigger
-      type: object
-      example: null
     AssetChangedRuleTriggerDto_allOf:
       properties:
         condition:
           description: Javascript condition when to trigger.
           nullable: true
           type: string
-      type: object
-      example: null
     ContentChangedRuleTriggerDto_allOf:
       properties:
         schemas:
@@ -10643,8 +10596,6 @@ components:
           description: Determines whether the trigger should handle all content changes
             events.
           type: boolean
-      type: object
-      example: null
     UsageRuleTriggerDto_allOf:
       properties:
         limit:
@@ -10658,8 +10609,6 @@ components:
           minimum: 1.0
           nullable: true
           type: integer
-      type: object
-      example: null
     SimulatedRuleEventsDto_allOf:
       properties:
         items:
@@ -10673,8 +10622,6 @@ components:
           type: integer
       required:
       - items
-      type: object
-      example: null
     RuleEventsDto_allOf:
       properties:
         items:
@@ -10688,8 +10635,6 @@ components:
           type: integer
       required:
       - items
-      type: object
-      example: null
     RuleEventDto_allOf:
       properties:
         id:
@@ -10727,8 +10672,6 @@ components:
       required:
       - description
       - eventName
-      type: object
-      example: null
     BackupJobsDto_allOf:
       properties:
         items:
@@ -10738,8 +10681,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     BackupJobDto_allOf:
       properties:
         id:
@@ -10764,8 +10705,6 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/JobStatus'
-      type: object
-      example: null
     AssetFoldersDto_allOf:
       properties:
         total:
@@ -10785,8 +10724,6 @@ components:
       required:
       - items
       - path
-      type: object
-      example: null
     AssetFolderDto_allOf:
       properties:
         id:
@@ -10805,8 +10742,6 @@ components:
           type: integer
       required:
       - folderName
-      type: object
-      example: null
     AssetsDto_allOf:
       properties:
         total:
@@ -10820,8 +10755,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     AssetDto_allOf:
       properties:
         id:
@@ -10839,7 +10772,7 @@ components:
           nullable: true
           type: string
         isProtected:
-          description: "True, when the asset is not public."
+          description: True, when the asset is not public.
           type: boolean
         slug:
           description: The slug.
@@ -10932,8 +10865,6 @@ components:
       - mimeType
       - slug
       - tags
-      type: object
-      example: null
     AssetScriptsDto_allOf:
       properties:
         create:
@@ -10960,8 +10891,6 @@ components:
           description: The version of the app.
           format: int64
           type: integer
-      type: object
-      example: null
     ClientsDto_allOf:
       properties:
         items:
@@ -10971,8 +10900,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     ClientDto_allOf:
       properties:
         id:
@@ -11008,8 +10935,6 @@ components:
       - id
       - name
       - secret
-      type: object
-      example: null
     ContributorsDto_allOf:
       properties:
         items:
@@ -11025,8 +10950,6 @@ components:
           $ref: '#/components/schemas/ContributorsMetadata'
       required:
       - items
-      type: object
-      example: null
     ContributorDto_allOf:
       properties:
         contributorId:
@@ -11049,8 +10972,6 @@ components:
       - contributorEmail
       - contributorId
       - contributorName
-      type: object
-      example: null
     AppLanguagesDto_allOf:
       properties:
         items:
@@ -11060,8 +10981,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     AppLanguageDto_allOf:
       properties:
         iso2Code:
@@ -11087,8 +11006,6 @@ components:
       - englishName
       - fallback
       - iso2Code
-      type: object
-      example: null
     RolesDto_allOf:
       properties:
         items:
@@ -11098,8 +11015,6 @@ components:
           type: array
       required:
       - items
-      type: object
-      example: null
     RoleDto_allOf:
       properties:
         name:
@@ -11131,14 +11046,12 @@ components:
       - name
       - permissions
       - properties
-      type: object
-      example: null
     AppDto_allOf:
       properties:
         name:
           description: The name of the app.
           minLength: 1
-          pattern: "^[a-z0-9]+(\\-[a-z0-9]+)*$"
+          pattern: ^[a-z0-9]+(\-[a-z0-9]+)*$
           type: string
         label:
           description: The optional label of the app.
@@ -11185,8 +11098,6 @@ components:
       required:
       - name
       - roleProperties
-      type: object
-      example: null
     AppSettingsDto_allOf:
       properties:
         patterns:
@@ -11212,8 +11123,6 @@ components:
       required:
       - editors
       - patterns
-      type: object
-      example: null
     WorkflowsDto_allOf:
       properties:
         items:
@@ -11229,8 +11138,6 @@ components:
       required:
       - errors
       - items
-      type: object
-      example: null
     WorkflowDto_allOf:
       properties:
         id:
@@ -11256,8 +11163,6 @@ components:
           type: string
       required:
       - steps
-      type: object
-      example: null
     WebhookRuleActionDto_allOf:
       properties:
         url:
@@ -11279,8 +11184,8 @@ components:
           title: Payload Type
           type: string
         headers:
-          description: "The message headers in the format '[Key]=[Value]', one entry\
-            \ per line."
+          description: The message headers in the format '[Key]=[Value]', one entry
+            per line.
           nullable: true
           title: Headers (Optional)
           type: string
@@ -11292,8 +11197,6 @@ components:
       required:
       - method
       - url
-      type: object
-      example: null
     TweetRuleActionDto_allOf:
       properties:
         accessToken:
@@ -11315,8 +11218,6 @@ components:
       - accessSecret
       - accessToken
       - text
-      type: object
-      example: null
     SlackRuleActionDto_allOf:
       properties:
         webhookUrl:
@@ -11333,8 +11234,6 @@ components:
       required:
       - text
       - webhookUrl
-      type: object
-      example: null
     SignalRRuleActionDto_allOf:
       properties:
         connectionString:
@@ -11369,8 +11268,6 @@ components:
       - action
       - connectionString
       - hubName
-      type: object
-      example: null
     ScriptRuleActionDto_allOf:
       properties:
         script:
@@ -11380,8 +11277,6 @@ components:
           type: string
       required:
       - script
-      type: object
-      example: null
     PrerenderRuleActionDto_allOf:
       properties:
         token:
@@ -11397,8 +11292,6 @@ components:
       required:
       - token
       - url
-      type: object
-      example: null
     NotificationRuleActionDto_allOf:
       properties:
         user:
@@ -11424,8 +11317,6 @@ components:
       required:
       - text
       - user
-      type: object
-      example: null
     MediumRuleActionDto_allOf:
       properties:
         accessToken:
@@ -11434,18 +11325,18 @@ components:
           title: Access Token
           type: string
         title:
-          description: "The title, used for the url."
+          description: The title, used for the url.
           minLength: 1
           title: Title
           type: string
         content:
-          description: "The content, either html or markdown."
+          description: The content, either html or markdown.
           minLength: 1
           title: Content
           type: string
         canonicalUrl:
-          description: "The original home of this content, if it was originally published\
-            \ elsewhere."
+          description: The original home of this content, if it was originally published
+            elsewhere.
           nullable: true
           title: Canonical Url
           type: string
@@ -11467,8 +11358,6 @@ components:
       - accessToken
       - content
       - title
-      type: object
-      example: null
     FastlyRuleActionDto_allOf:
       properties:
         apiKey:
@@ -11484,8 +11373,6 @@ components:
       required:
       - apiKey
       - serviceId
-      type: object
-      example: null
     EmailRuleActionDto_allOf:
       properties:
         serverHost:
@@ -11537,8 +11424,6 @@ components:
       - serverPassword
       - serverPort
       - serverUsername
-      type: object
-      example: null
     ElasticSearchRuleActionDto_allOf:
       properties:
         host:
@@ -11575,8 +11460,6 @@ components:
       required:
       - host
       - indexName
-      type: object
-      example: null
     DiscourseRuleActionDto_allOf:
       properties:
         url:
@@ -11622,8 +11505,6 @@ components:
       - apiUsername
       - text
       - url
-      type: object
-      example: null
     CreateContentRuleActionDto_allOf:
       properties:
         data:
@@ -11648,8 +11529,6 @@ components:
       required:
       - data
       - schema
-      type: object
-      example: null
     CommentRuleActionDto_allOf:
       properties:
         text:
@@ -11664,8 +11543,6 @@ components:
           type: string
       required:
       - text
-      type: object
-      example: null
     AzureQueueRuleActionDto_allOf:
       properties:
         connectionString:
@@ -11686,8 +11563,6 @@ components:
       required:
       - connectionString
       - queue
-      type: object
-      example: null
     AlgoliaRuleActionDto_allOf:
       properties:
         appId:
@@ -11719,8 +11594,6 @@ components:
       - apiKey
       - appId
       - indexName
-      type: object
-      example: null
   securitySchemes:
     squidex-oauth-auth:
       description: "Squidex uses oauth2 client authentication. Read more about it\

@@ -10,46 +10,15 @@ Method | HTTP request | Description
 
 ## LanguagesGetLanguages
 
-> []LanguageDto LanguagesGetLanguages(ctx).Execute()
+> []LanguageDto LanguagesGetLanguages(ctx, )
 
 Get supported languages.
 
+Provide a list of supported language codes, following the ISO2Code standard.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.LanguagesApi.LanguagesGetLanguages(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LanguagesApi.LanguagesGetLanguages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `LanguagesGetLanguages`: []LanguageDto
-    fmt.Fprintf(os.Stdout, "Response from `LanguagesApi.LanguagesGetLanguages`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiLanguagesGetLanguagesRequest struct via the builder pattern
-
 
 ### Return type
 

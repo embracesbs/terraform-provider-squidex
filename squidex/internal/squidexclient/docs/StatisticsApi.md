@@ -13,53 +13,17 @@ Method | HTTP request | Description
 
 ## UsagesGetCurrentStorageSize
 
-> CurrentStorageDto UsagesGetCurrentStorageSize(ctx, app).Execute()
+> CurrentStorageDto UsagesGetCurrentStorageSize(ctx, app)
 
 Get total asset size.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StatisticsApi.UsagesGetCurrentStorageSize(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatisticsApi.UsagesGetCurrentStorageSize``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsagesGetCurrentStorageSize`: CurrentStorageDto
-    fmt.Fprintf(os.Stdout, "Response from `StatisticsApi.UsagesGetCurrentStorageSize`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsagesGetCurrentStorageSizeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -81,53 +45,17 @@ Name | Type | Description  | Notes
 
 ## UsagesGetLog
 
-> LogDownloadDto UsagesGetLog(ctx, app).Execute()
+> LogDownloadDto UsagesGetLog(ctx, app)
 
 Get api calls as log file.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StatisticsApi.UsagesGetLog(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatisticsApi.UsagesGetLog``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsagesGetLog`: LogDownloadDto
-    fmt.Fprintf(os.Stdout, "Response from `StatisticsApi.UsagesGetLog`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsagesGetLogRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -149,59 +77,19 @@ Name | Type | Description  | Notes
 
 ## UsagesGetStorageSizes
 
-> []StorageUsagePerDateDto UsagesGetStorageSizes(ctx, app, fromDate, toDate).Execute()
+> []StorageUsagePerDateDto UsagesGetStorageSizes(ctx, app, fromDate, toDate)
 
 Get asset usage by date.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    fromDate := "fromDate_example" // string | The from date.
-    toDate := "toDate_example" // string | The to date.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StatisticsApi.UsagesGetStorageSizes(context.Background(), app, fromDate, toDate).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatisticsApi.UsagesGetStorageSizes``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsagesGetStorageSizes`: []StorageUsagePerDateDto
-    fmt.Fprintf(os.Stdout, "Response from `StatisticsApi.UsagesGetStorageSizes`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**fromDate** | **string** | The from date. | 
-**toDate** | **string** | The to date. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsagesGetStorageSizesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**fromDate** | **string**| The from date. | 
+**toDate** | **string**| The to date. | 
 
 ### Return type
 
@@ -223,59 +111,19 @@ Name | Type | Description  | Notes
 
 ## UsagesGetUsages
 
-> CallsUsageDtoDto UsagesGetUsages(ctx, app, fromDate, toDate).Execute()
+> CallsUsageDtoDto UsagesGetUsages(ctx, app, fromDate, toDate)
 
 Get api calls in date range.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    fromDate := "fromDate_example" // string | The from date.
-    toDate := "toDate_example" // string | The to date.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StatisticsApi.UsagesGetUsages(context.Background(), app, fromDate, toDate).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatisticsApi.UsagesGetUsages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsagesGetUsages`: CallsUsageDtoDto
-    fmt.Fprintf(os.Stdout, "Response from `StatisticsApi.UsagesGetUsages`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**fromDate** | **string** | The from date. | 
-**toDate** | **string** | The to date. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUsagesGetUsagesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
+**app** | **string**| The name of the app. | 
+**fromDate** | **string**| The from date. | 
+**toDate** | **string**| The to date. | 
 
 ### Return type
 

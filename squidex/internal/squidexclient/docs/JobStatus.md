@@ -1,16 +1,9 @@
 # JobStatus
 
-## Enum
+## Properties
 
-
-* `CREATED` (value: `"Created"`)
-
-* `STARTED` (value: `"Started"`)
-
-* `COMPLETED` (value: `"Completed"`)
-
-* `FAILED` (value: `"Failed"`)
-
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

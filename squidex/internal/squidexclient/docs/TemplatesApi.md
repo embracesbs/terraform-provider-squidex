@@ -11,53 +11,17 @@ Method | HTTP request | Description
 
 ## TemplatesGetTemplate
 
-> TemplateDetailsDto TemplatesGetTemplate(ctx, name).Execute()
+> TemplateDetailsDto TemplatesGetTemplate(ctx, name)
 
 Get template details.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    name := "name_example" // string | The name of the template.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TemplatesApi.TemplatesGetTemplate(context.Background(), name).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TemplatesApi.TemplatesGetTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TemplatesGetTemplate`: TemplateDetailsDto
-    fmt.Fprintf(os.Stdout, "Response from `TemplatesApi.TemplatesGetTemplate`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**name** | **string** | The name of the template. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiTemplatesGetTemplateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**name** | **string**| The name of the template. | 
 
 ### Return type
 
@@ -79,44 +43,13 @@ Name | Type | Description  | Notes
 
 ## TemplatesGetTemplates
 
-> TemplatesDto TemplatesGetTemplates(ctx).Execute()
+> TemplatesDto TemplatesGetTemplates(ctx, )
 
 Get all templates.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TemplatesApi.TemplatesGetTemplates(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TemplatesApi.TemplatesGetTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TemplatesGetTemplates`: TemplatesDto
-    fmt.Fprintf(os.Stdout, "Response from `TemplatesApi.TemplatesGetTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiTemplatesGetTemplatesRequest struct via the builder pattern
-
 
 ### Return type
 

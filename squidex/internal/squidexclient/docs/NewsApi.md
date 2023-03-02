@@ -10,49 +10,26 @@ Method | HTTP request | Description
 
 ## NewsGetNews
 
-> FeaturesDto NewsGetNews(ctx).Version(version).Execute()
+> FeaturesDto NewsGetNews(ctx, optional)
 
 Get features since version.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    version := int32(56) // int32 | The latest received version. (optional) (default to 0)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NewsApi.NewsGetNews(context.Background()).Version(version).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NewsApi.NewsGetNews``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `NewsGetNews`: FeaturesDto
-    fmt.Fprintf(os.Stdout, "Response from `NewsApi.NewsGetNews`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiNewsGetNewsRequest struct via the builder pattern
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **version** | **int32** | The latest received version. | [default to 0]
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***NewsGetNewsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a NewsGetNewsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **version** | **optional.Int32**| The latest received version. | [default to 0]
 
 ### Return type
 

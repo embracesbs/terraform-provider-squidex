@@ -10,55 +10,28 @@ Method | HTTP request | Description
 
 ## HistoryGetHistory
 
-> []HistoryEventDto HistoryGetHistory(ctx, app).Channel(channel).Execute()
+> []HistoryEventDto HistoryGetHistory(ctx, app, optional)
 
 Get historical events.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    channel := "channel_example" // string | The name of the channel. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HistoryApi.HistoryGetHistory(context.Background(), app).Channel(channel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `HistoryApi.HistoryGetHistory``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `HistoryGetHistory`: []HistoryEventDto
-    fmt.Fprintf(os.Stdout, "Response from `HistoryApi.HistoryGetHistory`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
+**app** | **string**| The name of the app. | 
+ **optional** | ***HistoryGetHistoryOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiHistoryGetHistoryRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a HistoryGetHistoryOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **channel** | **string** | The name of the channel. | 
+ **channel** | **optional.String**| The name of the channel. | 
 
 ### Return type
 

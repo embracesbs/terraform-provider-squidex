@@ -42,53 +42,17 @@ Method | HTTP request | Description
 
 ## AppAssetsGetAssetScripts
 
-> AssetScriptsDto AppAssetsGetAssetScripts(ctx, app).Execute()
+> AssetScriptsDto AppAssetsGetAssetScripts(ctx, app)
 
 Get the app asset scripts.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to get the asset scripts for.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppAssetsGetAssetScripts(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppAssetsGetAssetScripts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppAssetsGetAssetScripts`: AssetScriptsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppAssetsGetAssetScripts`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to get the asset scripts for. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppAssetsGetAssetScriptsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app to get the asset scripts for. | 
 
 ### Return type
 
@@ -110,55 +74,18 @@ Name | Type | Description  | Notes
 
 ## AppAssetsPutAssetScripts
 
-> AssetScriptsDto AppAssetsPutAssetScripts(ctx, app).UpdateAssetScriptsDto(updateAssetScriptsDto).Execute()
+> AssetScriptsDto AppAssetsPutAssetScripts(ctx, app, updateAssetScriptsDto)
 
 Update the app asset scripts.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to update.
-    updateAssetScriptsDto := *openapiclient.NewUpdateAssetScriptsDto() // UpdateAssetScriptsDto | The values to update.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppAssetsPutAssetScripts(context.Background(), app).UpdateAssetScriptsDto(updateAssetScriptsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppAssetsPutAssetScripts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppAssetsPutAssetScripts`: AssetScriptsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppAssetsPutAssetScripts`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppAssetsPutAssetScriptsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateAssetScriptsDto** | [**UpdateAssetScriptsDto**](UpdateAssetScriptsDto.md) | The values to update. | 
+**app** | **string**| The name of the app to update. | 
+**updateAssetScriptsDto** | [**UpdateAssetScriptsDto**](UpdateAssetScriptsDto.md)| The values to update. | 
 
 ### Return type
 
@@ -180,58 +107,20 @@ Name | Type | Description  | Notes
 
 ## AppClientsDeleteClient
 
-> ClientsDto AppClientsDeleteClient(ctx, app, id).Execute()
+> ClientsDto AppClientsDeleteClient(ctx, app, id)
 
 Revoke an app client.
 
+The application that uses this client credentials cannot access the API after it has been revoked.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the client that must be deleted.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppClientsDeleteClient(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppClientsDeleteClient``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppClientsDeleteClient`: ClientsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppClientsDeleteClient`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the client that must be deleted. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppClientsDeleteClientRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the client that must be deleted. | 
 
 ### Return type
 
@@ -253,55 +142,19 @@ Name | Type | Description  | Notes
 
 ## AppClientsGetClients
 
-> ClientsDto AppClientsGetClients(ctx, app).Execute()
+> ClientsDto AppClientsGetClients(ctx, app)
 
 Get app clients.
 
+Gets all configured clients for the app with the specified name.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppClientsGetClients(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppClientsGetClients``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppClientsGetClients`: ClientsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppClientsGetClients`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppClientsGetClientsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -323,57 +176,20 @@ Name | Type | Description  | Notes
 
 ## AppClientsPostClient
 
-> ClientsDto AppClientsPostClient(ctx, app).CreateClientDto(createClientDto).Execute()
+> ClientsDto AppClientsPostClient(ctx, app, createClientDto)
 
 Create a new app client.
 
+Create a new client for the app with the specified name. The client secret is auto generated on the server and returned. The client does not expire, the access token is valid for 30 days.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    createClientDto := *openapiclient.NewCreateClientDto("Id_example") // CreateClientDto | Client object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppClientsPostClient(context.Background(), app).CreateClientDto(createClientDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppClientsPostClient``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppClientsPostClient`: ClientsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppClientsPostClient`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppClientsPostClientRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **createClientDto** | [**CreateClientDto**](CreateClientDto.md) | Client object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**createClientDto** | [**CreateClientDto**](CreateClientDto.md)| Client object that needs to be added to the app. | 
 
 ### Return type
 
@@ -395,60 +211,21 @@ Name | Type | Description  | Notes
 
 ## AppClientsPutClient
 
-> ClientsDto AppClientsPutClient(ctx, app, id).UpdateClientDto(updateClientDto).Execute()
+> ClientsDto AppClientsPutClient(ctx, app, id, updateClientDto)
 
 Updates an app client.
 
+Only the display name can be changed, create a new client if necessary.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the client that must be updated.
-    updateClientDto := *openapiclient.NewUpdateClientDto() // UpdateClientDto | Client object that needs to be updated.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppClientsPutClient(context.Background(), app, id).UpdateClientDto(updateClientDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppClientsPutClient``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppClientsPutClient`: ClientsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppClientsPutClient`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the client that must be updated. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppClientsPutClientRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateClientDto** | [**UpdateClientDto**](UpdateClientDto.md) | Client object that needs to be updated. | 
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the client that must be updated. | 
+**updateClientDto** | [**UpdateClientDto**](UpdateClientDto.md)| Client object that needs to be updated. | 
 
 ### Return type
 
@@ -470,56 +247,18 @@ Name | Type | Description  | Notes
 
 ## AppContributorsDeleteContributor
 
-> ContributorsDto AppContributorsDeleteContributor(ctx, app, id).Execute()
+> ContributorsDto AppContributorsDeleteContributor(ctx, app, id)
 
 Remove contributor.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the contributor.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppContributorsDeleteContributor(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppContributorsDeleteContributor``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppContributorsDeleteContributor`: ContributorsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppContributorsDeleteContributor`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the contributor. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppContributorsDeleteContributorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the contributor. | 
 
 ### Return type
 
@@ -541,53 +280,17 @@ Name | Type | Description  | Notes
 
 ## AppContributorsDeleteMyself
 
-> ContributorsDto AppContributorsDeleteMyself(ctx, app).Execute()
+> ContributorsDto AppContributorsDeleteMyself(ctx, app)
 
 Remove yourself.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppContributorsDeleteMyself(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppContributorsDeleteMyself``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppContributorsDeleteMyself`: ContributorsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppContributorsDeleteMyself`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppContributorsDeleteMyselfRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -609,53 +312,17 @@ Name | Type | Description  | Notes
 
 ## AppContributorsGetContributors
 
-> ContributorsDto AppContributorsGetContributors(ctx, app).Execute()
+> ContributorsDto AppContributorsGetContributors(ctx, app)
 
 Get app contributors.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppContributorsGetContributors(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppContributorsGetContributors``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppContributorsGetContributors`: ContributorsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppContributorsGetContributors`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppContributorsGetContributorsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -677,55 +344,18 @@ Name | Type | Description  | Notes
 
 ## AppContributorsPostContributor
 
-> ContributorsDto AppContributorsPostContributor(ctx, app).AssignContributorDto(assignContributorDto).Execute()
+> ContributorsDto AppContributorsPostContributor(ctx, app, assignContributorDto)
 
 Assign contributor to app.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    assignContributorDto := *openapiclient.NewAssignContributorDto("ContributorId_example") // AssignContributorDto | Contributor object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppContributorsPostContributor(context.Background(), app).AssignContributorDto(assignContributorDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppContributorsPostContributor``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppContributorsPostContributor`: ContributorsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppContributorsPostContributor`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppContributorsPostContributorRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **assignContributorDto** | [**AssignContributorDto**](AssignContributorDto.md) | Contributor object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**assignContributorDto** | [**AssignContributorDto**](AssignContributorDto.md)| Contributor object that needs to be added to the app. | 
 
 ### Return type
 
@@ -747,53 +377,17 @@ Name | Type | Description  | Notes
 
 ## AppImageGetImage
 
-> *os.File AppImageGetImage(ctx, app).Execute()
+> *os.File AppImageGetImage(ctx, app)
 
 Get the app image.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppImageGetImage(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppImageGetImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppImageGetImage`: *os.File
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppImageGetImage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppImageGetImageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -815,56 +409,18 @@ Name | Type | Description  | Notes
 
 ## AppLanguagesDeleteLanguage
 
-> AppLanguagesDto AppLanguagesDeleteLanguage(ctx, app, language).Execute()
+> AppLanguagesDto AppLanguagesDeleteLanguage(ctx, app, language)
 
 Deletes an app language.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    language := "language_example" // string | The language to delete from the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppLanguagesDeleteLanguage(context.Background(), app, language).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppLanguagesDeleteLanguage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppLanguagesDeleteLanguage`: AppLanguagesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppLanguagesDeleteLanguage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**language** | **string** | The language to delete from the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppLanguagesDeleteLanguageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**language** | **string**| The language to delete from the app. | 
 
 ### Return type
 
@@ -886,53 +442,17 @@ Name | Type | Description  | Notes
 
 ## AppLanguagesGetLanguages
 
-> AppLanguagesDto AppLanguagesGetLanguages(ctx, app).Execute()
+> AppLanguagesDto AppLanguagesGetLanguages(ctx, app)
 
 Get app languages.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppLanguagesGetLanguages(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppLanguagesGetLanguages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppLanguagesGetLanguages`: AppLanguagesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppLanguagesGetLanguages`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppLanguagesGetLanguagesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -954,55 +474,18 @@ Name | Type | Description  | Notes
 
 ## AppLanguagesPostLanguage
 
-> AppLanguagesDto AppLanguagesPostLanguage(ctx, app).AddLanguageDto(addLanguageDto).Execute()
+> AppLanguagesDto AppLanguagesPostLanguage(ctx, app, addLanguageDto)
 
 Attaches an app language.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    addLanguageDto := *openapiclient.NewAddLanguageDto("Language_example") // AddLanguageDto | The language to add to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppLanguagesPostLanguage(context.Background(), app).AddLanguageDto(addLanguageDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppLanguagesPostLanguage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppLanguagesPostLanguage`: AppLanguagesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppLanguagesPostLanguage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppLanguagesPostLanguageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **addLanguageDto** | [**AddLanguageDto**](AddLanguageDto.md) | The language to add to the app. | 
+**app** | **string**| The name of the app. | 
+**addLanguageDto** | [**AddLanguageDto**](AddLanguageDto.md)| The language to add to the app. | 
 
 ### Return type
 
@@ -1024,58 +507,19 @@ Name | Type | Description  | Notes
 
 ## AppLanguagesPutLanguage
 
-> AppLanguagesDto AppLanguagesPutLanguage(ctx, app, language).UpdateLanguageDto(updateLanguageDto).Execute()
+> AppLanguagesDto AppLanguagesPutLanguage(ctx, app, language, updateLanguageDto)
 
 Updates an app language.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    language := "language_example" // string | The language to update.
-    updateLanguageDto := *openapiclient.NewUpdateLanguageDto() // UpdateLanguageDto | The language object.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppLanguagesPutLanguage(context.Background(), app, language).UpdateLanguageDto(updateLanguageDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppLanguagesPutLanguage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppLanguagesPutLanguage`: AppLanguagesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppLanguagesPutLanguage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**language** | **string** | The language to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppLanguagesPutLanguageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateLanguageDto** | [**UpdateLanguageDto**](UpdateLanguageDto.md) | The language object. | 
+**app** | **string**| The name of the app. | 
+**language** | **string**| The language to update. | 
+**updateLanguageDto** | [**UpdateLanguageDto**](UpdateLanguageDto.md)| The language object. | 
 
 ### Return type
 
@@ -1097,56 +541,18 @@ Name | Type | Description  | Notes
 
 ## AppRolesDeleteRole
 
-> RolesDto AppRolesDeleteRole(ctx, app, roleName).Execute()
+> RolesDto AppRolesDeleteRole(ctx, app, roleName)
 
 Remove role from app.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    roleName := "roleName_example" // string | The name of the role.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppRolesDeleteRole(context.Background(), app, roleName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppRolesDeleteRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppRolesDeleteRole`: RolesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppRolesDeleteRole`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**roleName** | **string** | The name of the role. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppRolesDeleteRoleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**roleName** | **string**| The name of the role. | 
 
 ### Return type
 
@@ -1168,53 +574,17 @@ Name | Type | Description  | Notes
 
 ## AppRolesGetPermissions
 
-> []string AppRolesGetPermissions(ctx, app).Execute()
+> []string AppRolesGetPermissions(ctx, app)
 
 Get app permissions.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppRolesGetPermissions(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppRolesGetPermissions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppRolesGetPermissions`: []string
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppRolesGetPermissions`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppRolesGetPermissionsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -1236,53 +606,17 @@ Name | Type | Description  | Notes
 
 ## AppRolesGetRoles
 
-> RolesDto AppRolesGetRoles(ctx, app).Execute()
+> RolesDto AppRolesGetRoles(ctx, app)
 
 Get app roles.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppRolesGetRoles(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppRolesGetRoles``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppRolesGetRoles`: RolesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppRolesGetRoles`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppRolesGetRolesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -1304,55 +638,18 @@ Name | Type | Description  | Notes
 
 ## AppRolesPostRole
 
-> RolesDto AppRolesPostRole(ctx, app).AddRoleDto(addRoleDto).Execute()
+> RolesDto AppRolesPostRole(ctx, app, addRoleDto)
 
 Add role to app.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    addRoleDto := *openapiclient.NewAddRoleDto("Name_example") // AddRoleDto | Role object that needs to be added to the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppRolesPostRole(context.Background(), app).AddRoleDto(addRoleDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppRolesPostRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppRolesPostRole`: RolesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppRolesPostRole`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppRolesPostRoleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **addRoleDto** | [**AddRoleDto**](AddRoleDto.md) | Role object that needs to be added to the app. | 
+**app** | **string**| The name of the app. | 
+**addRoleDto** | [**AddRoleDto**](AddRoleDto.md)| Role object that needs to be added to the app. | 
 
 ### Return type
 
@@ -1374,58 +671,19 @@ Name | Type | Description  | Notes
 
 ## AppRolesPutRole
 
-> RolesDto AppRolesPutRole(ctx, app, roleName).UpdateRoleDto(updateRoleDto).Execute()
+> RolesDto AppRolesPutRole(ctx, app, roleName, updateRoleDto)
 
 Update an app role.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    roleName := "roleName_example" // string | The name of the role to be updated.
-    updateRoleDto := *openapiclient.NewUpdateRoleDto([]string{"Permissions_example"}) // UpdateRoleDto | Role to be updated for the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppRolesPutRole(context.Background(), app, roleName).UpdateRoleDto(updateRoleDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppRolesPutRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppRolesPutRole`: RolesDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppRolesPutRole`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**roleName** | **string** | The name of the role to be updated. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppRolesPutRoleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateRoleDto** | [**UpdateRoleDto**](UpdateRoleDto.md) | Role to be updated for the app. | 
+**app** | **string**| The name of the app. | 
+**roleName** | **string**| The name of the role to be updated. | 
+**updateRoleDto** | [**UpdateRoleDto**](UpdateRoleDto.md)| Role to be updated for the app. | 
 
 ### Return type
 
@@ -1447,53 +705,17 @@ Name | Type | Description  | Notes
 
 ## AppSettingsGetSettings
 
-> AppSettingsDto AppSettingsGetSettings(ctx, app).Execute()
+> AppSettingsDto AppSettingsGetSettings(ctx, app)
 
 Get the app settings.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to get the settings for.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppSettingsGetSettings(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppSettingsGetSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppSettingsGetSettings`: AppSettingsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppSettingsGetSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to get the settings for. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppSettingsGetSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app to get the settings for. | 
 
 ### Return type
 
@@ -1515,55 +737,18 @@ Name | Type | Description  | Notes
 
 ## AppSettingsPutSettings
 
-> AppSettingsDto AppSettingsPutSettings(ctx, app).UpdateAppSettingsDto(updateAppSettingsDto).Execute()
+> AppSettingsDto AppSettingsPutSettings(ctx, app, updateAppSettingsDto)
 
 Update the app settings.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to update.
-    updateAppSettingsDto := *openapiclient.NewUpdateAppSettingsDto([]openapiclient.PatternDto{*openapiclient.NewPatternDto("Name_example", "Regex_example")}, []openapiclient.EditorDto{*openapiclient.NewEditorDto("Name_example", "Url_example")}) // UpdateAppSettingsDto | The values to update.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppSettingsPutSettings(context.Background(), app).UpdateAppSettingsDto(updateAppSettingsDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppSettingsPutSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppSettingsPutSettings`: AppSettingsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppSettingsPutSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppSettingsPutSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateAppSettingsDto** | [**UpdateAppSettingsDto**](UpdateAppSettingsDto.md) | The values to update. | 
+**app** | **string**| The name of the app to update. | 
+**updateAppSettingsDto** | [**UpdateAppSettingsDto**](UpdateAppSettingsDto.md)| The values to update. | 
 
 ### Return type
 
@@ -1585,56 +770,18 @@ Name | Type | Description  | Notes
 
 ## AppWorkflowsDeleteWorkflow
 
-> WorkflowsDto AppWorkflowsDeleteWorkflow(ctx, app, id).Execute()
+> WorkflowsDto AppWorkflowsDeleteWorkflow(ctx, app, id)
 
 Delete a workflow.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the workflow to update.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppWorkflowsDeleteWorkflow(context.Background(), app, id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppWorkflowsDeleteWorkflow``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppWorkflowsDeleteWorkflow`: WorkflowsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppWorkflowsDeleteWorkflow`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the workflow to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppWorkflowsDeleteWorkflowRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the workflow to update. | 
 
 ### Return type
 
@@ -1656,53 +803,17 @@ Name | Type | Description  | Notes
 
 ## AppWorkflowsGetWorkflows
 
-> WorkflowsDto AppWorkflowsGetWorkflows(ctx, app).Execute()
+> WorkflowsDto AppWorkflowsGetWorkflows(ctx, app)
 
 Get app workflow.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppWorkflowsGetWorkflows(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppWorkflowsGetWorkflows``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppWorkflowsGetWorkflows`: WorkflowsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppWorkflowsGetWorkflows`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppWorkflowsGetWorkflowsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -1724,55 +835,18 @@ Name | Type | Description  | Notes
 
 ## AppWorkflowsPostWorkflow
 
-> WorkflowsDto AppWorkflowsPostWorkflow(ctx, app).AddWorkflowDto(addWorkflowDto).Execute()
+> WorkflowsDto AppWorkflowsPostWorkflow(ctx, app, addWorkflowDto)
 
 Create a workflow.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    addWorkflowDto := *openapiclient.NewAddWorkflowDto("Name_example") // AddWorkflowDto | The new workflow.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppWorkflowsPostWorkflow(context.Background(), app).AddWorkflowDto(addWorkflowDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppWorkflowsPostWorkflow``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppWorkflowsPostWorkflow`: WorkflowsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppWorkflowsPostWorkflow`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppWorkflowsPostWorkflowRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **addWorkflowDto** | [**AddWorkflowDto**](AddWorkflowDto.md) | The new workflow. | 
+**app** | **string**| The name of the app. | 
+**addWorkflowDto** | [**AddWorkflowDto**](AddWorkflowDto.md)| The new workflow. | 
 
 ### Return type
 
@@ -1794,58 +868,19 @@ Name | Type | Description  | Notes
 
 ## AppWorkflowsPutWorkflow
 
-> WorkflowsDto AppWorkflowsPutWorkflow(ctx, app, id).UpdateWorkflowDto(updateWorkflowDto).Execute()
+> WorkflowsDto AppWorkflowsPutWorkflow(ctx, app, id, updateWorkflowDto)
 
 Update a workflow.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-    id := "id_example" // string | The id of the workflow to update.
-    updateWorkflowDto := *openapiclient.NewUpdateWorkflowDto(map[string]WorkflowStepDto{"key": *openapiclient.NewWorkflowStepDto(map[string]WorkflowTransitionDto{"key": *openapiclient.NewWorkflowTransitionDto()})}, "Initial_example") // UpdateWorkflowDto | The new workflow.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppWorkflowsPutWorkflow(context.Background(), app, id).UpdateWorkflowDto(updateWorkflowDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppWorkflowsPutWorkflow``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppWorkflowsPutWorkflow`: WorkflowsDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppWorkflowsPutWorkflow`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-**id** | **string** | The id of the workflow to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppWorkflowsPutWorkflowRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateWorkflowDto** | [**UpdateWorkflowDto**](UpdateWorkflowDto.md) | The new workflow. | 
+**app** | **string**| The name of the app. | 
+**id** | **string**| The id of the workflow to update. | 
+**updateWorkflowDto** | [**UpdateWorkflowDto**](UpdateWorkflowDto.md)| The new workflow. | 
 
 ### Return type
 
@@ -1867,51 +902,17 @@ Name | Type | Description  | Notes
 
 ## AppsDeleteApp
 
-> AppsDeleteApp(ctx, app).Execute()
+> AppsDeleteApp(ctx, app)
 
 Delete the app.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to delete.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsDeleteApp(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsDeleteApp``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to delete. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsDeleteAppRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app to delete. | 
 
 ### Return type
 
@@ -1933,53 +934,17 @@ Name | Type | Description  | Notes
 
 ## AppsDeleteImage
 
-> AppDto AppsDeleteImage(ctx, app).Execute()
+> AppDto AppsDeleteImage(ctx, app)
 
 Remove the app image.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to update.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsDeleteImage(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsDeleteImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsDeleteImage`: AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsDeleteImage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsDeleteImageRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app to update. | 
 
 ### Return type
 
@@ -2001,53 +966,17 @@ Name | Type | Description  | Notes
 
 ## AppsGetApp
 
-> AppDto AppsGetApp(ctx, app).Execute()
+> AppDto AppsGetApp(ctx, app)
 
 Get an app by name.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsGetApp(context.Background(), app).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsGetApp``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsGetApp`: AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsGetApp`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsGetAppRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+**app** | **string**| The name of the app. | 
 
 ### Return type
 
@@ -2069,46 +998,15 @@ Name | Type | Description  | Notes
 
 ## AppsGetApps
 
-> []AppDto AppsGetApps(ctx).Execute()
+> []AppDto AppsGetApps(ctx, )
 
 Get your apps.
 
+You can only retrieve the list of apps when you are authenticated as a user (OpenID implicit flow). You will retrieve all apps, where you are assigned as a contributor.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsGetApps(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsGetApps``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsGetApps`: []AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsGetApps`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsGetAppsRequest struct via the builder pattern
-
 
 ### Return type
 
@@ -2130,51 +1028,19 @@ Other parameters are passed through a pointer to a apiAppsGetAppsRequest struct 
 
 ## AppsPostApp
 
-> AppDto AppsPostApp(ctx).CreateAppDto(createAppDto).Execute()
+> AppDto AppsPostApp(ctx, createAppDto)
 
 Create a new app.
 
+You can only create an app when you are authenticated as a user (OpenID implicit flow). You will be assigned as owner of the new app automatically.
 
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    createAppDto := *openapiclient.NewCreateAppDto("Name_example") // CreateAppDto | The app object that needs to be added to Squidex.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsPostApp(context.Background()).CreateAppDto(createAppDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsPostApp``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsPostApp`: AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsPostApp`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsPostAppRequest struct via the builder pattern
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createAppDto** | [**CreateAppDto**](CreateAppDto.md) | The app object that needs to be added to Squidex. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**createAppDto** | [**CreateAppDto**](CreateAppDto.md)| The app object that needs to be added to Squidex. | 
 
 ### Return type
 
@@ -2196,55 +1062,18 @@ Name | Type | Description  | Notes
 
 ## AppsPutApp
 
-> AppDto AppsPutApp(ctx, app).UpdateAppDto(updateAppDto).Execute()
+> AppDto AppsPutApp(ctx, app, updateAppDto)
 
 Update the app.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to update.
-    updateAppDto := *openapiclient.NewUpdateAppDto() // UpdateAppDto | The values to update.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsPutApp(context.Background(), app).UpdateAppDto(updateAppDto).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsPutApp``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsPutApp`: AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsPutApp`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to update. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAppsPutAppRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **updateAppDto** | [**UpdateAppDto**](UpdateAppDto.md) | The values to update. | 
+**app** | **string**| The name of the app to update. | 
+**updateAppDto** | [**UpdateAppDto**](UpdateAppDto.md)| The values to update. | 
 
 ### Return type
 
@@ -2266,55 +1095,28 @@ Name | Type | Description  | Notes
 
 ## AppsUploadImage
 
-> AppDto AppsUploadImage(ctx, app).File(file).Execute()
+> AppDto AppsUploadImage(ctx, app, optional)
 
 Upload the app image.
 
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    app := "app_example" // string | The name of the app to update.
-    file := os.NewFile(1234, "some_file") // *os.File |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AppsApi.AppsUploadImage(context.Background(), app).File(file).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AppsApi.AppsUploadImage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AppsUploadImage`: AppDto
-    fmt.Fprintf(os.Stdout, "Response from `AppsApi.AppsUploadImage`: %v\n", resp)
-}
-```
-
-### Path Parameters
+### Required Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**app** | **string** | The name of the app to update. | 
+**app** | **string**| The name of the app to update. | 
+ **optional** | ***AppsUploadImageOpts** | optional parameters | nil if no parameters
 
-### Other Parameters
+### Optional Parameters
 
-Other parameters are passed through a pointer to a apiAppsUploadImageRequest struct via the builder pattern
+Optional parameters are passed through a pointer to a AppsUploadImageOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **file** | ***os.File** |  | 
+ **file** | **optional.Interface of *os.File****optional.*os.File**|  | 
 
 ### Return type
 

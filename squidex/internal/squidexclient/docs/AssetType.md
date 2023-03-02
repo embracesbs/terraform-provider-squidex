@@ -1,16 +1,9 @@
 # AssetType
 
-## Enum
+## Properties
 
-
-* `UNKNOWN` (value: `"Unknown"`)
-
-* `IMAGE` (value: `"Image"`)
-
-* `AUDIO` (value: `"Audio"`)
-
-* `VIDEO` (value: `"Video"`)
-
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
