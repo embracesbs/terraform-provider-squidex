@@ -14,15 +14,15 @@ type SkipReason string
 
 // List of SkipReason
 const (
-	NONE                              SkipReason = "None"
-	CONDITION_DOES_NOT_MATCH          SkipReason = "ConditionDoesNotMatch"
-	CONDITION_PRECHECK_DOES_NOT_MATCH SkipReason = "ConditionPrecheckDoesNotMatch"
-	DISABLED                          SkipReason = "Disabled"
-	FAILED                            SkipReason = "Failed"
-	FROM_RULE                         SkipReason = "FromRule"
-	NO_ACTION                         SkipReason = "NoAction"
-	NO_TRIGGER                        SkipReason = "NoTrigger"
-	TOO_OLD                           SkipReason = "TooOld"
-	WRONG_EVENT                       SkipReason = "WrongEvent"
-	WRONG_EVENT_FOR_TRIGGER           SkipReason = "WrongEventForTrigger"
+	SkipReasonNONE                              SkipReason = "None"
+	SkipReasonCONDITION_DOES_NOT_MATCH          SkipReason = "ConditionDoesNotMatch"
+	SkipReasonCONDITION_PRECHECK_DOES_NOT_MATCH SkipReason = "ConditionPrecheckDoesNotMatch"
+	SkipReasonDISABLED                          SkipReason = "Disabled"
+	SkipReasonFAILED                            SkipReason = "Failed"
+	SkipReasonFROM_RULE                         SkipReason = "FromRule"
+	SkipReasonNO_ACTION                         SkipReason = "NoAction"
+	SkipReasonNO_TRIGGER                        SkipReason = "NoTrigger"
+	SkipReasonTOO_OLD                           SkipReason = "TooOld"
+	SkipReasonWRONG_EVENT                       SkipReason = "WrongEvent"
+	SkipReasonWRONG_EVENT_FOR_TRIGGER           SkipReason = "WrongEventForTrigger"
 )

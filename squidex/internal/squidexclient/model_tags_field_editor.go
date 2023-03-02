@@ -14,7 +14,7 @@ type TagsFieldEditor string
 
 // List of TagsFieldEditor
 const (
-	TAGS       TagsFieldEditor = "Tags"
-	CHECKBOXES TagsFieldEditor = "Checkboxes"
-	DROPDOWN   TagsFieldEditor = "Dropdown"
+	TagsFieldEditorTAGS       TagsFieldEditor = "Tags"
+	TagsFieldEditorCHECKBOXES TagsFieldEditor = "Checkboxes"
+	TagsFieldEditorDROPDOWN   TagsFieldEditor = "Dropdown"
 )

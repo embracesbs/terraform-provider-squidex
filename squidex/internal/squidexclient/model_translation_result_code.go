@@ -14,10 +14,10 @@ type TranslationResultCode string
 
 // List of TranslationResultCode
 const (
-	TRANSLATED             TranslationResultCode = "Translated"
-	LANGUAGE_NOT_SUPPORTED TranslationResultCode = "LanguageNotSupported"
-	NOT_TRANSLATED         TranslationResultCode = "NotTranslated"
-	NOT_CONFIGURED         TranslationResultCode = "NotConfigured"
-	UNAUTHORIZED           TranslationResultCode = "Unauthorized"
-	FAILED                 TranslationResultCode = "Failed"
+	TranslationResultTRANSLATED             TranslationResultCode = "Translated"
+	TranslationResultLANGUAGE_NOT_SUPPORTED TranslationResultCode = "LanguageNotSupported"
+	TranslationResultNOT_TRANSLATED         TranslationResultCode = "NotTranslated"
+	TranslationResultNOT_CONFIGURED         TranslationResultCode = "NotConfigured"
+	TranslationResultUNAUTHORIZED           TranslationResultCode = "Unauthorized"
+	TranslationResultFAILED                 TranslationResultCode = "Failed"
 )

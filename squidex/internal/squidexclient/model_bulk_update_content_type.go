@@ -14,11 +14,11 @@ type BulkUpdateContentType string
 
 // List of BulkUpdateContentType
 const (
-	UPSERT        BulkUpdateContentType = "Upsert"
-	CHANGE_STATUS BulkUpdateContentType = "ChangeStatus"
-	CREATE        BulkUpdateContentType = "Create"
-	DELETE        BulkUpdateContentType = "Delete"
-	PATCH         BulkUpdateContentType = "Patch"
-	UPDATE        BulkUpdateContentType = "Update"
-	VALIDATE      BulkUpdateContentType = "Validate"
+	BulkUpdateContentTypeUPSERT        BulkUpdateContentType = "Upsert"
+	BulkUpdateContentTypeCHANGE_STATUS BulkUpdateContentType = "ChangeStatus"
+	BulkUpdateContentTypeCREATE        BulkUpdateContentType = "Create"
+	BulkUpdateContentTypeDELETE        BulkUpdateContentType = "Delete"
+	BulkUpdateContentTypePATCH         BulkUpdateContentType = "Patch"
+	BulkUpdateContentTypeUPDATE        BulkUpdateContentType = "Update"
+	BulkUpdateContentTypeVALIDATE      BulkUpdateContentType = "Validate"
 )

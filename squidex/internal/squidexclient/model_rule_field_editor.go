@@ -14,13 +14,13 @@ type RuleFieldEditor string
 
 // List of RuleFieldEditor
 const (
-	CHECKBOX   RuleFieldEditor = "Checkbox"
-	DROPDOWN   RuleFieldEditor = "Dropdown"
-	EMAIL      RuleFieldEditor = "Email"
-	JAVASCRIPT RuleFieldEditor = "Javascript"
-	NUMBER     RuleFieldEditor = "Number"
-	PASSWORD   RuleFieldEditor = "Password"
-	TEXT       RuleFieldEditor = "Text"
-	TEXT_AREA  RuleFieldEditor = "TextArea"
-	URL        RuleFieldEditor = "Url"
+	RuleFieldEditorCHECKBOX   RuleFieldEditor = "Checkbox"
+	RuleFieldEditorDROPDOWN   RuleFieldEditor = "Dropdown"
+	RuleFieldEditorEMAIL      RuleFieldEditor = "Email"
+	RuleFieldEditorJAVASCRIPT RuleFieldEditor = "Javascript"
+	RuleFieldEditorNUMBER     RuleFieldEditor = "Number"
+	RuleFieldEditorPASSWORD   RuleFieldEditor = "Password"
+	RuleFieldEditorTEXT       RuleFieldEditor = "Text"
+	RuleFieldEditorTEXT_AREA  RuleFieldEditor = "TextArea"
+	RuleFieldEditorURL        RuleFieldEditor = "Url"
 )
