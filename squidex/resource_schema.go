@@ -1101,7 +1101,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						val := emptyStringToNil(fieldType, properties["min_value"])
 						squidexProperties.MinValue = &val
 					}
-					if properties["calculated_default_value"] != nil {
+					if properties["calculated_default_value"] != nil && squidexProperties.FieldType == "DateTime" {
 						val := properties["calculated_default_value"].(string)
 						squidexProperties.CalculatedDefaultValue = &val
 					}
@@ -1347,12 +1347,18 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 }
 
 func emptyStringToNil(fieldType string, source interface{}) interface{} {
+	if fieldType == "Number" && strings.TrimSpace(source.(string)) == "" {
+		return 0
+	}
+	if fieldType == "Number" && strings.TrimSpace(source.(string)) != "" {
+		return source.(int)
+	}
+
 	if reflect.TypeOf(source) != reflect.TypeOf(reflect.String) {
 		// wil return nil if source is nil, otherwise the value of source
 		return source
 	}
-	if fieldType == "DateTime" &&
-		strings.TrimSpace(source.(string)) == "" {
+	if fieldType == "DateTime" && strings.TrimSpace(source.(string)) == "" {
 		return nil
 	}
 	return source
@@ -1478,10 +1484,14 @@ func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
 		if *properties.MaxItems == 0 {
 			properties.MaxItems = nil
 		}
-		if *properties.MaxValue == 0 {
+		if properties.FieldType == "Number" && *properties.MaxValue == 0 {
+			properties.MaxValue = nil
+		} else if *properties.MaxValue == "" {
 			properties.MaxValue = nil
 		}
-		if *properties.MinValue == 0 {
+		if properties.FieldType == "Number" && *properties.MinValue == 0 {
+			properties.MinValue = nil
+		} else if *properties.MinValue == "" {
 			properties.MinValue = nil
 		}
 		if len(*properties.AllowedValues) == 0 {
@@ -1507,6 +1517,9 @@ func setCreationDefaults(dto *squidexclient.CreateSchemaDto) {
 		}
 		if *properties.MinLength == 0 {
 			properties.MinLength = nil
+		}
+		if properties.FieldType == "DateTime" && *properties.CalculatedDefaultValue == "" {
+			properties.CalculatedDefaultValue = nil
 		}
 		field.Properties = properties
 		(*dto.Fields)[i] = field
