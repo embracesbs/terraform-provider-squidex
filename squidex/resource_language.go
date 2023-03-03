@@ -109,7 +109,6 @@ func resourceLanguageCreate(ctx context.Context, data *schema.ResourceData, meta
 		}
 
 		if rs["is_master"].(bool) == true {
-
 			bl := true
 
 			_, _, err := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, rs["language"].(string), squidexclient.UpdateLanguageDto{
@@ -179,7 +178,6 @@ func resourceLanguageUpdate(ctx context.Context, data *schema.ResourceData, meta
 		}
 
 		if todo == Update {
-
 			_, _, err_update := client.AppsApi.AppLanguagesPutLanguage(ctx, appName, name, squidexclient.UpdateLanguageDto{
 				IsMaster: &isActive,
 			})

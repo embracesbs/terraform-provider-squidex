@@ -24,18 +24,18 @@ func resourceContributor() *schema.Resource {
 				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
-			"app_name": &schema.Schema{
+			"app_name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"contributor_email": &schema.Schema{
+			"contributor_email": {
 				Type:        schema.TypeString,
 				Description: "The emailaddress of the user to add to the app.",
 				Required:    true,
 				ForceNew:    true,
 			},
-			"role": &schema.Schema{
+			"role": {
 				Type:        schema.TypeString,
 				Description: "The role of the contributor.",
 				Required:    true,

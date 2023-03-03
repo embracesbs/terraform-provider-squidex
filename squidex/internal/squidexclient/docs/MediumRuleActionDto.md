@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **AccessToken** | **string** | The self issued access token. | 
 **Title** | **string** | The title, used for the url. | 
 **Content** | **string** | The content, either html or markdown. | 

@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ServerHost** | **string** | The IP address or host to the SMTP server. | 
 **ServerPort** | **int32** | The port to the SMTP server. | 
-**ServerUseSsl** | **bool** | Specify whether the SMPT client uses Secure Sockets Layer (SSL) to encrypt the connection. | 
 **ServerUsername** | **string** | The username for the SMTP server. | 
 **ServerPassword** | **string** | The password for the SMTP server. | 
 **MessageFrom** | **string** | The email sending address. | 

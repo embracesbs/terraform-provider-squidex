@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Editor** | [**OneOfRuleActionPropertyEditor**](oneOf&lt;RuleActionPropertyEditor&gt;.md) | The html editor. | 
+**Editor** | [**RuleFieldEditor**](RuleFieldEditor.md) |  | 
 **Name** | **string** | The name of the editor. | 
 **Display** | **string** | The label to use. | 
 **Options** | Pointer to **[]string** | The options, if the editor is a dropdown. | [optional] 

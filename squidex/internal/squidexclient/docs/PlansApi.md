@@ -1,11 +1,11 @@
 # \PlansApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AppPlansGetPlans**](PlansApi.md#AppPlansGetPlans) | **Get** /apps/{app}/plans | Get app plan information.
-[**AppPlansPutPlan**](PlansApi.md#AppPlansPutPlan) | **Put** /apps/{app}/plan | Change the app plan.
+[**AppPlansGetPlans**](PlansApi.md#AppPlansGetPlans) | **Get** /api/apps/{app}/plans | Get app plan information.
+[**AppPlansPutPlan**](PlansApi.md#AppPlansPutPlan) | **Put** /api/apps/{app}/plan | Change the app plan.
 
 
 

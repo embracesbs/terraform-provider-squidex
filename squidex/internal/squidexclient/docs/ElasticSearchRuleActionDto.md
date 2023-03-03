@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **Host** | **string** | The url to the elastic search instance or cluster. | 
 **IndexName** | **string** | The name of the index. | 
 **Username** | Pointer to **string** | The optional username. | [optional] 

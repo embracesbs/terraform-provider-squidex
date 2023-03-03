@@ -21,24 +21,24 @@ func resourceRole() *schema.Resource {
 				Computed:    true,
 				Description: "Hidden field to invalidate state on response errors.",
 			},
-			"app_name": &schema.Schema{
+			"app_name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"permissions": &schema.Schema{
+			"permissions": {
 				Type:     schema.TypeList,
 				Required: true,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
 			},
-			"properties": &schema.Schema{
+			"properties": {
 				Type:     schema.TypeMap,
 				Optional: true,
 				Elem: &schema.Schema{

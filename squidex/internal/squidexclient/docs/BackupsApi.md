@@ -1,15 +1,16 @@
 # \BackupsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**BackupContentGetBackupContent**](BackupsApi.md#BackupContentGetBackupContent) | **Get** /apps/{app}/backups/{id} | Get the backup content.
-[**BackupsDeleteBackup**](BackupsApi.md#BackupsDeleteBackup) | **Delete** /apps/{app}/backups/{id} | Delete a backup.
-[**BackupsGetBackups**](BackupsApi.md#BackupsGetBackups) | **Get** /apps/{app}/backups | Get all backup jobs.
-[**BackupsPostBackup**](BackupsApi.md#BackupsPostBackup) | **Post** /apps/{app}/backups | Start a new backup.
-[**RestoreGetRestoreJob**](BackupsApi.md#RestoreGetRestoreJob) | **Get** /apps/restore | Get current restore status.
-[**RestorePostRestoreJob**](BackupsApi.md#RestorePostRestoreJob) | **Post** /apps/restore | Restore a backup.
+[**BackupContentGetBackupContent**](BackupsApi.md#BackupContentGetBackupContent) | **Get** /api/apps/{app}/backups/{id} | Get the backup content.
+[**BackupContentGetBackupContentV2**](BackupsApi.md#BackupContentGetBackupContentV2) | **Get** /api/apps/backups/{id} | Get the backup content.
+[**BackupsDeleteBackup**](BackupsApi.md#BackupsDeleteBackup) | **Delete** /api/apps/{app}/backups/{id} | Delete a backup.
+[**BackupsGetBackups**](BackupsApi.md#BackupsGetBackups) | **Get** /api/apps/{app}/backups | Get all backup jobs.
+[**BackupsPostBackup**](BackupsApi.md#BackupsPostBackup) | **Post** /api/apps/{app}/backups | Start a new backup.
+[**RestoreGetRestoreJob**](BackupsApi.md#RestoreGetRestoreJob) | **Get** /api/apps/restore | Get current restore status.
+[**RestorePostRestoreJob**](BackupsApi.md#RestorePostRestoreJob) | **Post** /api/apps/restore | Restore a backup.
 
 
 
@@ -26,7 +27,51 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**id** | **string**| The id of the asset. | 
+**id** | **string**| The id of the backup. | 
+
+### Return type
+
+[***os.File**](*os.File.md)
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## BackupContentGetBackupContentV2
+
+> *os.File BackupContentGetBackupContentV2(ctx, id, optional)
+
+Get the backup content.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string**| The id of the backup. | 
+ **optional** | ***BackupContentGetBackupContentV2Opts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a BackupContentGetBackupContentV2Opts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **appId** | **optional.String**| The id of the app. | 
+ **app** | **optional.String**| The name of the app. | [default to ]
 
 ### Return type
 

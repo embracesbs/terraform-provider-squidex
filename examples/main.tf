@@ -2,7 +2,7 @@ terraform {
   required_providers {
     squidex = {
       source = "terraform.embracecloud.nl/embracecloud/squidex"
-      version = "0.7.1"
+      version = "0.8.1"
     }
   }
 
@@ -12,7 +12,7 @@ provider "squidex" {
   client_id           = var.client_id
   client_secret       = var.client_secret
   token_endpoint      = "${var.host}/identity-server/connect/token"
-  url                 = "${var.host}/api"
+  url                 = "${var.host}"
   schema_delete_allow = true
 }
 
@@ -95,7 +95,7 @@ resource "squidex_role" "app_admin" {
 }
 
 resource "squidex_contributor" "embracecloud_contributors" {
-  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
+  for_each          = toset(["admin@embracecloud.nl"])
   app_name          = squidex_app.test.name
   contributor_email = each.value
   role              = squidex_role.embracecloud_admin.name
@@ -103,7 +103,7 @@ resource "squidex_contributor" "embracecloud_contributors" {
 
 
 resource "squidex_contributor" "app_admin_contributors" {
-  for_each          = toset(["admin@embracecloud.nl", "test1@embracecloud.nl", "test2@embracecloud.nl"])
+  for_each          = toset(["test1@embracecloud.nl", "test2@embracecloud.nl"])
   app_name          = squidex_app.test.name
   contributor_email = each.value
   role              = squidex_role.app_admin.name
@@ -123,7 +123,7 @@ resource "squidex_schema" "test" {
   app_name                    = squidex_app.test.name
   name                        = "blog1"
   published                   = true
-  singleton                   = false
+  type                        = "Default"
   properties {
     label                = "bloglabel"
     content_sidebar_url  = "someuri_1"

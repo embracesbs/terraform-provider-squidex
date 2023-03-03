@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **Text** | **string** | The comment text. | 
 **Client** | Pointer to **string** | An optional client name. | [optional] 
 

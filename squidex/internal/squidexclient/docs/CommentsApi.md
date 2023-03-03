@@ -1,13 +1,14 @@
 # \CommentsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CommentsDeleteComment**](CommentsApi.md#CommentsDeleteComment) | **Delete** /apps/{app}/comments/{commentsId}/{commentId} | Deletes the comment.
-[**CommentsGetComments**](CommentsApi.md#CommentsGetComments) | **Get** /apps/{app}/comments/{commentsId} | Get all comments.
-[**CommentsPostComment**](CommentsApi.md#CommentsPostComment) | **Post** /apps/{app}/comments/{commentsId} | Create a new comment.
-[**CommentsPutComment**](CommentsApi.md#CommentsPutComment) | **Put** /apps/{app}/comments/{commentsId}/{commentId} | Updates the comment.
+[**CommentsDeleteComment**](CommentsApi.md#CommentsDeleteComment) | **Delete** /api/apps/{app}/comments/{commentsId}/{commentId} | Delete a comment.
+[**CommentsGetComments**](CommentsApi.md#CommentsGetComments) | **Get** /api/apps/{app}/comments/{commentsId} | Get all comments.
+[**CommentsGetWatchingUsers**](CommentsApi.md#CommentsGetWatchingUsers) | **Get** /api/apps/{app}/watching/{resource} | Get all watching users..
+[**CommentsPostComment**](CommentsApi.md#CommentsPostComment) | **Post** /api/apps/{app}/comments/{commentsId} | Create a new comment.
+[**CommentsPutComment**](CommentsApi.md#CommentsPutComment) | **Put** /api/apps/{app}/comments/{commentsId}/{commentId} | Update a comment.
 
 
 
@@ -15,7 +16,7 @@ Method | HTTP request | Description
 
 > CommentsDeleteComment(ctx, app, commentsId, commentId)
 
-Deletes the comment.
+Delete a comment.
 
 ### Required Parameters
 
@@ -92,6 +93,39 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CommentsGetWatchingUsers
+
+> []string CommentsGetWatchingUsers(ctx, app, resource)
+
+Get all watching users..
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**app** | **string**| The name of the app. | 
+**resource** | **string**| The path to the resource. | 
+
+### Return type
+
+**[]string**
+
+### Authorization
+
+[squidex-oauth-auth](../README.md#squidex-oauth-auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CommentsPostComment
 
 > CommentDto CommentsPostComment(ctx, app, commentsId, upsertCommentDto)
@@ -130,7 +164,7 @@ Name | Type | Description  | Notes
 
 > CommentsPutComment(ctx, app, commentsId, commentId, upsertCommentDto)
 
-Updates the comment.
+Update a comment.
 
 ### Required Parameters
 

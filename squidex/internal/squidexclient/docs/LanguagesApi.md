@@ -1,10 +1,10 @@
 # \LanguagesApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**LanguagesGetLanguages**](LanguagesApi.md#LanguagesGetLanguages) | **Get** /languages | Get supported languages.
+[**LanguagesGetLanguages**](LanguagesApi.md#LanguagesGetLanguages) | **Get** /api/languages | Get supported languages.
 
 
 

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FieldsInLists** | Pointer to **[]string** | The name of fields that are used in content lists. | [optional] 
-**FieldsInReferences** | Pointer to **[]string** | The name of fields that are used in content references. | [optional] 
+**FieldsInLists** | **[]string** |  | [optional] 
+**FieldsInReferences** | **[]string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

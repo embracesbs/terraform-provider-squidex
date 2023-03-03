@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **IsLocked** | **bool** | Defines if the field is locked. | [optional] 
 **IsDisabled** | **bool** | Defines if the field is disabled. | [optional] 
 **Partitioning** | **string** | Defines the partitioning of the field. | 
-**Properties** | [**OneOfFieldPropertiesDto**](oneOf&lt;FieldPropertiesDto&gt;.md) | The field properties. | 
+**Properties** | [**FieldPropertiesDto**](FieldPropertiesDto.md) |  | 
 **Nested** | Pointer to [**[]NestedFieldDto**](NestedFieldDto.md) | The nested fields. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

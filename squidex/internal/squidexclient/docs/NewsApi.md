@@ -1,10 +1,10 @@
 # \NewsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**NewsGetNews**](NewsApi.md#NewsGetNews) | **Get** /news/features | Get features since version.
+[**NewsGetNews**](NewsApi.md#NewsGetNews) | **Get** /api/news/features | Get features since version.
 
 
 

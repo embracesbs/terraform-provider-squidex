@@ -1,11 +1,11 @@
 # \NotificationsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UserNotificationsDeleteComment**](NotificationsApi.md#UserNotificationsDeleteComment) | **Delete** /users/{userId}/notifications/{commentId} | Deletes the notification.
-[**UserNotificationsGetNotifications**](NotificationsApi.md#UserNotificationsGetNotifications) | **Get** /users/{userId}/notifications | Get all notifications.
+[**UserNotificationsDeleteComment**](NotificationsApi.md#UserNotificationsDeleteComment) | **Delete** /api/users/{userId}/notifications/{commentId} | Delete a notification.
+[**UserNotificationsGetNotifications**](NotificationsApi.md#UserNotificationsGetNotifications) | **Get** /api/users/{userId}/notifications | Get all notifications.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > UserNotificationsDeleteComment(ctx, userId, commentId)
 
-Deletes the notification.
+Delete a notification.
 
 ### Required Parameters
 

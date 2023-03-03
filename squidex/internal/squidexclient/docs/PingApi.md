@@ -1,12 +1,12 @@
 # \PingApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PingGetAppPing**](PingApi.md#PingGetAppPing) | **Get** /ping/{app} | Get ping status.
-[**PingGetInfo**](PingApi.md#PingGetInfo) | **Get** /info | Get API information.
-[**PingGetPing**](PingApi.md#PingGetPing) | **Get** /ping | Get ping status of the API.
+[**PingGetAppPing**](PingApi.md#PingGetAppPing) | **Get** /api/ping/{app} | Get ping status.
+[**PingGetInfo**](PingApi.md#PingGetInfo) | **Get** /api/info | Get API information.
+[**PingGetPing**](PingApi.md#PingGetPing) | **Get** /api/ping | Get ping status of the API.
 
 
 

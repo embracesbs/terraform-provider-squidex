@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Stopped** | Pointer to [**time.Time**](time.Time.md) | The time when the job has been stopped. | [optional] 
 **HandledEvents** | **int32** | The number of handled events. | [optional] 
 **HandledAssets** | **int32** | The number of handled assets. | [optional] 
-**Status** | [**OneOfJobStatus**](oneOf&lt;JobStatus&gt;.md) | The status of the operation. | [optional] 
+**Status** | [**JobStatus**](JobStatus.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

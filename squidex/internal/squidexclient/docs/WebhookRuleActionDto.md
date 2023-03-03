@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **Url** | **string** | The url to the webhook. | 
-**Method** | [**OneOfWebhookMethod**](oneOf&lt;WebhookMethod&gt;.md) | The type of the request. | 
+**Method** | [**WebhookMethod**](WebhookMethod.md) |  | 
 **Payload** | Pointer to **string** | Leave it empty to use the full event as body. | [optional] 
 **PayloadType** | Pointer to **string** | The mime type of the payload. | [optional] 
 **Headers** | Pointer to **string** | The message headers in the format &#39;[Key]&#x3D;[Value]&#39;, one entry per line. | [optional] 

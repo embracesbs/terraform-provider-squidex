@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **AppId** | **string** | The application ID. | 
 **ApiKey** | **string** | The API key to grant access to Squidex. | 
 **IndexName** | **string** | The name of the index. | 

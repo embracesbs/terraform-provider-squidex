@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **ApiKey** | **string** | The API key to grant access to Squidex. | 
 **ServiceId** | **string** | The ID of the fastly service. | 
 

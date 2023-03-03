@@ -1,16 +1,16 @@
 # \HistoryApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HistoryGetHistory**](HistoryApi.md#HistoryGetHistory) | **Get** /apps/{app}/history | Get historical events.
+[**HistoryGetHistory**](HistoryApi.md#HistoryGetHistory) | **Get** /api/apps/{app}/history | Get historical events.
 
 
 
 ## HistoryGetHistory
 
-> HistoryEventDto HistoryGetHistory(ctx, app, optional)
+> []HistoryEventDto HistoryGetHistory(ctx, app, optional)
 
 Get historical events.
 
@@ -35,7 +35,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HistoryEventDto**](HistoryEventDto.md)
+[**[]HistoryEventDto**](HistoryEventDto.md)
 
 ### Authorization
 

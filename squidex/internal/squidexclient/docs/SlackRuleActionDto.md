@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **WebhookUrl** | **string** | The slack webhook url. | 
 **Text** | **string** | The text that is sent as message to slack. | 
 

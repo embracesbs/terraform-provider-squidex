@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Query** | Pointer to **string** | The script that is executed for each query when querying contents. | [optional] 
+**Query** | Pointer to **string** | The script that is executed for each content when querying contents. | [optional] 
+**QueryPre** | Pointer to **string** | The script that is executed for all contents when querying contents. | [optional] 
 **Create** | Pointer to **string** | The script that is executed when creating a content. | [optional] 
 **Update** | Pointer to **string** | The script that is executed when updating a content. | [optional] 
 **Delete** | Pointer to **string** | The script that is executed when deleting a content. | [optional] 

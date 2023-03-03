@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Message** | **string** | Error message. | 
+**ErrorCode** | Pointer to **string** | The error code. | [optional] 
 **TraceId** | Pointer to **string** | The optional trace id. | [optional] 
 **Type** | Pointer to **string** | Link to the error details. | [optional] 
 **Details** | Pointer to **[]string** | Detailed error messages. | [optional] 

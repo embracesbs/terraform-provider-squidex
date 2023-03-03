@@ -1,13 +1,13 @@
 # \StatisticsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UsagesGetCurrentStorageSize**](StatisticsApi.md#UsagesGetCurrentStorageSize) | **Get** /apps/{app}/usages/storage/today | Get total asset size.
-[**UsagesGetLog**](StatisticsApi.md#UsagesGetLog) | **Get** /apps/{app}/usages/log | Get api calls as log file.
-[**UsagesGetStorageSizes**](StatisticsApi.md#UsagesGetStorageSizes) | **Get** /apps/{app}/usages/storage/{fromDate}/{toDate} | Get asset usage by date.
-[**UsagesGetUsages**](StatisticsApi.md#UsagesGetUsages) | **Get** /apps/{app}/usages/calls/{fromDate}/{toDate} | Get api calls in date range.
+[**UsagesGetCurrentStorageSize**](StatisticsApi.md#UsagesGetCurrentStorageSize) | **Get** /api/apps/{app}/usages/storage/today | Get total asset size.
+[**UsagesGetLog**](StatisticsApi.md#UsagesGetLog) | **Get** /api/apps/{app}/usages/log | Get api calls as log file.
+[**UsagesGetStorageSizes**](StatisticsApi.md#UsagesGetStorageSizes) | **Get** /api/apps/{app}/usages/storage/{fromDate}/{toDate} | Get asset usage by date.
+[**UsagesGetUsages**](StatisticsApi.md#UsagesGetUsages) | **Get** /api/apps/{app}/usages/calls/{fromDate}/{toDate} | Get api calls in date range.
 
 
 

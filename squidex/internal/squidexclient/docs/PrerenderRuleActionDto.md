@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **Token** | **string** | The prerender token from your account. | 
 **Url** | **string** | The url to recache. | 
 

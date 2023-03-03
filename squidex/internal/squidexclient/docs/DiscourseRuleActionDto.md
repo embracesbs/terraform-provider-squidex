@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **Url** | **string** | The url to the discourse server. | 
 **ApiKey** | **string** | The api key to authenticate to your discourse server. | 
 **ApiUsername** | **string** | The api username to authenticate to your discourse server. | 

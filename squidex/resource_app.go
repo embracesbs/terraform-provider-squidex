@@ -39,7 +39,6 @@ func resourceApp() *schema.Resource {
 }
 
 func resourceAppRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-
 	var diags diag.Diagnostics
 	// TODO: all read stuff
 	data.Set("invalidated_state", false)
@@ -47,7 +46,6 @@ func resourceAppRead(ctx context.Context, data *schema.ResourceData, meta interf
 }
 
 func resourceAppCreate(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
-
 	client := meta.(providerConfig).Client
 
 	var diags diag.Diagnostics
@@ -79,7 +77,7 @@ func resourceAppUpdate(ctx context.Context, data *schema.ResourceData, meta inte
 	label := data.Get("label").(string)
 	description := data.Get("description").(string)
 
-	_, _, err := client.AppsApi.AppsUpdateApp(ctx, name, squidexclient.UpdateAppDto{
+	_, _, err := client.AppsApi.AppsPutApp(ctx, name, squidexclient.UpdateAppDto{
 		Label:       &label,
 		Description: &description,
 	})

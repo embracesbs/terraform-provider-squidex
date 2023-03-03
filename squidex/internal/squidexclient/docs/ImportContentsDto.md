@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Datas** | [**[]NamedContentData**](NamedContentData.md) | The data to import. | 
+**Datas** | [**[]map[string]map[string]interface{}**](map.md) | The data to import. | 
 **Publish** | **bool** | True to automatically publish the content. | [optional] 
 **DoNotScript** | **bool** | True to turn off scripting for faster inserts. Default: true. | [optional] 
 **OptimizeValidation** | **bool** | True to turn off costly validation: Unique checks, asset checks and reference checks. Default: true. | [optional] 

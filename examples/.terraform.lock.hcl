@@ -2,8 +2,9 @@
 # Manual edits may be lost in future updates.
 
 provider "terraform.embracecloud.nl/embracecloud/squidex" {
-  version = "0.6.1"
+  version     = "0.7.1"
+  constraints = "0.7.1"
   hashes = [
-    "h1:kTILIN2WBaE5F5pogV0CdXfqIzg270AaOY8tnMDelZw=",
+    "h1:cdqK0FXrfSjSRGAZFgRyTMvgcvaK8jRVcOj5qexW7Mc=",
   ]
 }

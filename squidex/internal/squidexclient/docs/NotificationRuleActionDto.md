@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **User** | **string** | The user id or email. | 
 **Text** | **string** | The text to send. | 
 **Url** | Pointer to **string** | The optional url to attach to the notification. | [optional] 

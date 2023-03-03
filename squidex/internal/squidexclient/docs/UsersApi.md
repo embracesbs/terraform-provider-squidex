@@ -1,13 +1,13 @@
 # \UsersApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UsersGetUser**](UsersApi.md#UsersGetUser) | **Get** /users/{id} | Get user by id.
-[**UsersGetUserPicture**](UsersApi.md#UsersGetUserPicture) | **Get** /users/{id}/picture | Get user picture by id.
-[**UsersGetUserResources**](UsersApi.md#UsersGetUserResources) | **Get** / | Get the user resources.
-[**UsersGetUsers**](UsersApi.md#UsersGetUsers) | **Get** /users | Get users by query.
+[**UsersGetUser**](UsersApi.md#UsersGetUser) | **Get** /api/users/{id} | Get user by id.
+[**UsersGetUserPicture**](UsersApi.md#UsersGetUserPicture) | **Get** /api/users/{id}/picture | Get user picture by id.
+[**UsersGetUserResources**](UsersApi.md#UsersGetUserResources) | **Get** /api | Get the user resources.
+[**UsersGetUsers**](UsersApi.md#UsersGetUsers) | **Get** /api/users | Get users by query.
 
 
 

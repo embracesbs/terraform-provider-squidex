@@ -1,46 +1,46 @@
 # \SchemasApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SchemaFieldsDeleteField**](SchemasApi.md#SchemaFieldsDeleteField) | **Delete** /apps/{app}/schemas/{name}/fields/{id} | Delete a schema field.
-[**SchemaFieldsDeleteNestedField**](SchemasApi.md#SchemaFieldsDeleteNestedField) | **Delete** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Delete a nested field.
-[**SchemaFieldsDisableField**](SchemasApi.md#SchemaFieldsDisableField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/disable | Disable a schema field.
-[**SchemaFieldsDisableNestedField**](SchemasApi.md#SchemaFieldsDisableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/disable | Disable a nested field.
-[**SchemaFieldsEnableField**](SchemasApi.md#SchemaFieldsEnableField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/enable | Enable a schema field.
-[**SchemaFieldsEnableNestedField**](SchemasApi.md#SchemaFieldsEnableNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/enable | Enable a nested field.
-[**SchemaFieldsHideField**](SchemasApi.md#SchemaFieldsHideField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/hide | Hide a schema field.
-[**SchemaFieldsHideNestedField**](SchemasApi.md#SchemaFieldsHideNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/hide | Hide a nested field.
-[**SchemaFieldsLockField**](SchemasApi.md#SchemaFieldsLockField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/lock | Lock a schema field.
-[**SchemaFieldsLockNestedField**](SchemasApi.md#SchemaFieldsLockNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/lock | Lock a nested field.
-[**SchemaFieldsPostField**](SchemasApi.md#SchemaFieldsPostField) | **Post** /apps/{app}/schemas/{name}/fields | Add a schema field.
-[**SchemaFieldsPostNestedField**](SchemasApi.md#SchemaFieldsPostNestedField) | **Post** /apps/{app}/schemas/{name}/fields/{parentId}/nested | Add a nested field.
-[**SchemaFieldsPutField**](SchemasApi.md#SchemaFieldsPutField) | **Put** /apps/{app}/schemas/{name}/fields/{id} | Update a schema field.
-[**SchemaFieldsPutNestedField**](SchemasApi.md#SchemaFieldsPutNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id} | Update a nested field.
-[**SchemaFieldsPutNestedFieldOrdering**](SchemasApi.md#SchemaFieldsPutNestedFieldOrdering) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/ordering | Reorders the nested fields.
-[**SchemaFieldsPutSchemaFieldOrdering**](SchemasApi.md#SchemaFieldsPutSchemaFieldOrdering) | **Put** /apps/{app}/schemas/{name}/fields/ordering | Reorders the fields.
-[**SchemaFieldsPutSchemaUIFields**](SchemasApi.md#SchemaFieldsPutSchemaUIFields) | **Put** /apps/{app}/schemas/{name}/fields/ui | Configure UI fields.
-[**SchemaFieldsShowField**](SchemasApi.md#SchemaFieldsShowField) | **Put** /apps/{app}/schemas/{name}/fields/{id}/show | Show a schema field.
-[**SchemaFieldsShowNestedField**](SchemasApi.md#SchemaFieldsShowNestedField) | **Put** /apps/{app}/schemas/{name}/fields/{parentId}/nested/{id}/show | Show a nested field.
-[**SchemasDeleteSchema**](SchemasApi.md#SchemasDeleteSchema) | **Delete** /apps/{app}/schemas/{name} | Delete a schema.
-[**SchemasGetSchema**](SchemasApi.md#SchemasGetSchema) | **Get** /apps/{app}/schemas/{name} | Get a schema by name.
-[**SchemasGetSchemas**](SchemasApi.md#SchemasGetSchemas) | **Get** /apps/{app}/schemas | Get schemas.
-[**SchemasPostSchema**](SchemasApi.md#SchemasPostSchema) | **Post** /apps/{app}/schemas | Create a new schema.
-[**SchemasPublishSchema**](SchemasApi.md#SchemasPublishSchema) | **Put** /apps/{app}/schemas/{name}/publish | Publish a schema.
-[**SchemasPutCategory**](SchemasApi.md#SchemasPutCategory) | **Put** /apps/{app}/schemas/{name}/category | Update a schema category.
-[**SchemasPutPreviewUrls**](SchemasApi.md#SchemasPutPreviewUrls) | **Put** /apps/{app}/schemas/{name}/preview-urls | Update the preview urls.
-[**SchemasPutRules**](SchemasApi.md#SchemasPutRules) | **Put** /apps/{app}/schemas/{name}/rules | Update the rules.
-[**SchemasPutSchema**](SchemasApi.md#SchemasPutSchema) | **Put** /apps/{app}/schemas/{name} | Update a schema.
-[**SchemasPutSchemaSync**](SchemasApi.md#SchemasPutSchemaSync) | **Put** /apps/{app}/schemas/{name}/sync | Synchronize a schema.
-[**SchemasPutScripts**](SchemasApi.md#SchemasPutScripts) | **Put** /apps/{app}/schemas/{name}/scripts | Update the scripts.
-[**SchemasUnpublishSchema**](SchemasApi.md#SchemasUnpublishSchema) | **Put** /apps/{app}/schemas/{name}/unpublish | Unpublish a schema.
+[**SchemaFieldsDeleteField**](SchemasApi.md#SchemaFieldsDeleteField) | **Delete** /api/apps/{app}/schemas/{schema}/fields/{id} | Delete a schema field.
+[**SchemaFieldsDeleteNestedField**](SchemasApi.md#SchemaFieldsDeleteNestedField) | **Delete** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id} | Delete a nested field.
+[**SchemaFieldsDisableField**](SchemasApi.md#SchemaFieldsDisableField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id}/disable | Disable a schema field.
+[**SchemaFieldsDisableNestedField**](SchemasApi.md#SchemaFieldsDisableNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/disable | Disable a nested field.
+[**SchemaFieldsEnableField**](SchemasApi.md#SchemaFieldsEnableField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id}/enable | Enable a schema field.
+[**SchemaFieldsEnableNestedField**](SchemasApi.md#SchemaFieldsEnableNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/enable | Enable a nested field.
+[**SchemaFieldsHideField**](SchemasApi.md#SchemaFieldsHideField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id}/hide | Hide a schema field.
+[**SchemaFieldsHideNestedField**](SchemasApi.md#SchemaFieldsHideNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/hide | Hide a nested field.
+[**SchemaFieldsLockField**](SchemasApi.md#SchemaFieldsLockField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id}/lock | Lock a schema field.
+[**SchemaFieldsLockNestedField**](SchemasApi.md#SchemaFieldsLockNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/lock | Lock a nested field.
+[**SchemaFieldsPostField**](SchemasApi.md#SchemaFieldsPostField) | **Post** /api/apps/{app}/schemas/{schema}/fields | Add a schema field.
+[**SchemaFieldsPostNestedField**](SchemasApi.md#SchemaFieldsPostNestedField) | **Post** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested | Add a nested field.
+[**SchemaFieldsPutField**](SchemasApi.md#SchemaFieldsPutField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id} | Update a schema field.
+[**SchemaFieldsPutNestedField**](SchemasApi.md#SchemaFieldsPutNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id} | Update a nested field.
+[**SchemaFieldsPutNestedFieldOrdering**](SchemasApi.md#SchemaFieldsPutNestedFieldOrdering) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/ordering | Reorder all nested fields.
+[**SchemaFieldsPutSchemaFieldOrdering**](SchemasApi.md#SchemaFieldsPutSchemaFieldOrdering) | **Put** /api/apps/{app}/schemas/{schema}/fields/ordering | Reorder all fields.
+[**SchemaFieldsPutSchemaUIFields**](SchemasApi.md#SchemaFieldsPutSchemaUIFields) | **Put** /api/apps/{app}/schemas/{schema}/fields/ui | Configure UI fields.
+[**SchemaFieldsShowField**](SchemasApi.md#SchemaFieldsShowField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{id}/show | Show a schema field.
+[**SchemaFieldsShowNestedField**](SchemasApi.md#SchemaFieldsShowNestedField) | **Put** /api/apps/{app}/schemas/{schema}/fields/{parentId}/nested/{id}/show | Show a nested field.
+[**SchemasDeleteSchema**](SchemasApi.md#SchemasDeleteSchema) | **Delete** /api/apps/{app}/schemas/{schema} | Delete a schema.
+[**SchemasGetSchema**](SchemasApi.md#SchemasGetSchema) | **Get** /api/apps/{app}/schemas/{schema} | Get a schema by name.
+[**SchemasGetSchemas**](SchemasApi.md#SchemasGetSchemas) | **Get** /api/apps/{app}/schemas | Get schemas.
+[**SchemasPostSchema**](SchemasApi.md#SchemasPostSchema) | **Post** /api/apps/{app}/schemas | Create a new schema.
+[**SchemasPublishSchema**](SchemasApi.md#SchemasPublishSchema) | **Put** /api/apps/{app}/schemas/{schema}/publish | Publish a schema.
+[**SchemasPutCategory**](SchemasApi.md#SchemasPutCategory) | **Put** /api/apps/{app}/schemas/{schema}/category | Update a schema category.
+[**SchemasPutPreviewUrls**](SchemasApi.md#SchemasPutPreviewUrls) | **Put** /api/apps/{app}/schemas/{schema}/preview-urls | Update the preview urls.
+[**SchemasPutRules**](SchemasApi.md#SchemasPutRules) | **Put** /api/apps/{app}/schemas/{schema}/rules | Update the rules.
+[**SchemasPutSchema**](SchemasApi.md#SchemasPutSchema) | **Put** /api/apps/{app}/schemas/{schema} | Update a schema.
+[**SchemasPutSchemaSync**](SchemasApi.md#SchemasPutSchemaSync) | **Put** /api/apps/{app}/schemas/{schema}/sync | Synchronize a schema.
+[**SchemasPutScripts**](SchemasApi.md#SchemasPutScripts) | **Put** /api/apps/{app}/schemas/{schema}/scripts | Update the scripts.
+[**SchemasUnpublishSchema**](SchemasApi.md#SchemasUnpublishSchema) | **Put** /api/apps/{app}/schemas/{schema}/unpublish | Unpublish a schema.
 
 
 
 ## SchemaFieldsDeleteField
 
-> SchemaDetailsDto SchemaFieldsDeleteField(ctx, app, name, id)
+> SchemaDto SchemaFieldsDeleteField(ctx, app, schema, id)
 
 Delete a schema field.
 
@@ -51,12 +51,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDeleteNestedField
 
-> SchemaDetailsDto SchemaFieldsDeleteNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsDeleteNestedField(ctx, app, schema, parentId, id)
 
 Delete a nested field.
 
@@ -85,13 +85,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDisableField
 
-> SchemaDetailsDto SchemaFieldsDisableField(ctx, app, name, id)
+> SchemaDto SchemaFieldsDisableField(ctx, app, schema, id)
 
 Disable a schema field.
 
@@ -122,12 +122,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsDisableNestedField
 
-> SchemaDetailsDto SchemaFieldsDisableNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsDisableNestedField(ctx, app, schema, parentId, id)
 
 Disable a nested field.
 
@@ -158,13 +158,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to disable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsEnableField
 
-> SchemaDetailsDto SchemaFieldsEnableField(ctx, app, name, id)
+> SchemaDto SchemaFieldsEnableField(ctx, app, schema, id)
 
 Enable a schema field.
 
@@ -195,12 +195,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to enable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsEnableNestedField
 
-> SchemaDetailsDto SchemaFieldsEnableNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsEnableNestedField(ctx, app, schema, parentId, id)
 
 Enable a nested field.
 
@@ -231,13 +231,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to enable. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsHideField
 
-> SchemaDetailsDto SchemaFieldsHideField(ctx, app, name, id)
+> SchemaDto SchemaFieldsHideField(ctx, app, schema, id)
 
 Hide a schema field.
 
@@ -268,12 +268,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to hide. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsHideNestedField
 
-> SchemaDetailsDto SchemaFieldsHideNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsHideNestedField(ctx, app, schema, parentId, id)
 
 Hide a nested field.
 
@@ -304,13 +304,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to hide. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -328,7 +328,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsLockField
 
-> SchemaDetailsDto SchemaFieldsLockField(ctx, app, name, id)
+> SchemaDto SchemaFieldsLockField(ctx, app, schema, id)
 
 Lock a schema field.
 
@@ -341,12 +341,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to lock. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsLockNestedField
 
-> SchemaDetailsDto SchemaFieldsLockNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsLockNestedField(ctx, app, schema, parentId, id)
 
 Lock a nested field.
 
@@ -377,13 +377,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to lock. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPostField
 
-> SchemaDetailsDto SchemaFieldsPostField(ctx, app, name, addFieldDto)
+> SchemaDto SchemaFieldsPostField(ctx, app, schema, addFieldDto)
 
 Add a schema field.
 
@@ -412,12 +412,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **addFieldDto** | [**AddFieldDto**](AddFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -435,7 +435,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPostNestedField
 
-> SchemaDetailsDto SchemaFieldsPostNestedField(ctx, app, name, parentId, addFieldDto)
+> SchemaDto SchemaFieldsPostNestedField(ctx, app, schema, parentId, addFieldDto)
 
 Add a nested field.
 
@@ -446,13 +446,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **addFieldDto** | [**AddFieldDto**](AddFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -470,7 +470,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutField
 
-> SchemaDetailsDto SchemaFieldsPutField(ctx, app, name, id, updateFieldDto)
+> SchemaDto SchemaFieldsPutField(ctx, app, schema, id, updateFieldDto)
 
 Update a schema field.
 
@@ -481,13 +481,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to update. | 
 **updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutNestedField
 
-> SchemaDetailsDto SchemaFieldsPutNestedField(ctx, app, name, parentId, id, updateFieldDto)
+> SchemaDto SchemaFieldsPutNestedField(ctx, app, schema, parentId, id, updateFieldDto)
 
 Update a nested field.
 
@@ -516,14 +516,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to update. | 
 **updateFieldDto** | [**UpdateFieldDto**](UpdateFieldDto.md)| The field object that needs to be added to the schema. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -541,9 +541,9 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutNestedFieldOrdering
 
-> SchemaDetailsDto SchemaFieldsPutNestedFieldOrdering(ctx, app, name, parentId, reorderFieldsDto)
+> SchemaDto SchemaFieldsPutNestedFieldOrdering(ctx, app, schema, parentId, reorderFieldsDto)
 
-Reorders the nested fields.
+Reorder all nested fields.
 
 ### Required Parameters
 
@@ -552,13 +552,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md)| The request that contains the field ids. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -576,9 +576,9 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutSchemaFieldOrdering
 
-> SchemaDetailsDto SchemaFieldsPutSchemaFieldOrdering(ctx, app, name, reorderFieldsDto)
+> SchemaDto SchemaFieldsPutSchemaFieldOrdering(ctx, app, schema, reorderFieldsDto)
 
-Reorders the fields.
+Reorder all fields.
 
 ### Required Parameters
 
@@ -587,12 +587,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **reorderFieldsDto** | [**ReorderFieldsDto**](ReorderFieldsDto.md)| The request that contains the field ids. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -610,7 +610,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsPutSchemaUIFields
 
-> SchemaDetailsDto SchemaFieldsPutSchemaUIFields(ctx, app, name, configureUiFieldsDto)
+> SchemaDto SchemaFieldsPutSchemaUIFields(ctx, app, schema, configureUiFieldsDto)
 
 Configure UI fields.
 
@@ -621,12 +621,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **configureUiFieldsDto** | [**ConfigureUiFieldsDto**](ConfigureUiFieldsDto.md)| The request that contains the field names. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -644,7 +644,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsShowField
 
-> SchemaDetailsDto SchemaFieldsShowField(ctx, app, name, id)
+> SchemaDto SchemaFieldsShowField(ctx, app, schema, id)
 
 Show a schema field.
 
@@ -657,12 +657,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **id** | **int64**| The id of the field to show. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -680,7 +680,7 @@ Name | Type | Description  | Notes
 
 ## SchemaFieldsShowNestedField
 
-> SchemaDetailsDto SchemaFieldsShowNestedField(ctx, app, name, parentId, id)
+> SchemaDto SchemaFieldsShowNestedField(ctx, app, schema, parentId, id)
 
 Show a nested field.
 
@@ -693,13 +693,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **parentId** | **int64**| The parent field id. | 
 **id** | **int64**| The id of the field to show. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -717,7 +717,7 @@ Name | Type | Description  | Notes
 
 ## SchemasDeleteSchema
 
-> SchemasDeleteSchema(ctx, app, name)
+> SchemasDeleteSchema(ctx, app, schema)
 
 Delete a schema.
 
@@ -728,7 +728,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema to delete. | 
+**schema** | **string**| The name of the schema to delete. | 
 
 ### Return type
 
@@ -750,7 +750,7 @@ Name | Type | Description  | Notes
 
 ## SchemasGetSchema
 
-> SchemaDetailsDto SchemasGetSchema(ctx, app, name)
+> SchemaDto SchemasGetSchema(ctx, app, schema)
 
 Get a schema by name.
 
@@ -761,11 +761,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema to retrieve. | 
+**schema** | **string**| The name of the schema to retrieve. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -815,7 +815,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPostSchema
 
-> SchemaDetailsDto SchemasPostSchema(ctx, app, createSchemaDto)
+> SchemaDto SchemasPostSchema(ctx, app, createSchemaDto)
 
 Create a new schema.
 
@@ -830,7 +830,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -848,7 +848,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPublishSchema
 
-> SchemaDetailsDto SchemasPublishSchema(ctx, app, name)
+> SchemaDto SchemasPublishSchema(ctx, app, schema)
 
 Publish a schema.
 
@@ -859,11 +859,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema to publish. | 
+**schema** | **string**| The name of the schema to publish. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -881,7 +881,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutCategory
 
-> SchemaDetailsDto SchemasPutCategory(ctx, app, name, changeCategoryDto)
+> SchemaDto SchemasPutCategory(ctx, app, schema, changeCategoryDto)
 
 Update a schema category.
 
@@ -892,12 +892,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **changeCategoryDto** | [**ChangeCategoryDto**](ChangeCategoryDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -915,7 +915,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutPreviewUrls
 
-> SchemaDetailsDto SchemasPutPreviewUrls(ctx, app, name, requestBody)
+> SchemaDto SchemasPutPreviewUrls(ctx, app, schema, requestBody)
 
 Update the preview urls.
 
@@ -926,12 +926,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **requestBody** | [**map[string]string**](string.md)| The preview urls for the schema. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -949,7 +949,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutRules
 
-> SchemaDetailsDto SchemasPutRules(ctx, app, name, configureFieldRulesDto)
+> SchemaDto SchemasPutRules(ctx, app, schema, configureFieldRulesDto)
 
 Update the rules.
 
@@ -960,12 +960,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **configureFieldRulesDto** | [**ConfigureFieldRulesDto**](ConfigureFieldRulesDto.md)| The schema rules object that needs to updated. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -983,7 +983,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutSchema
 
-> SchemaDetailsDto SchemasPutSchema(ctx, app, name, updateSchemaDto)
+> SchemaDto SchemasPutSchema(ctx, app, schema, updateSchemaDto)
 
 Update a schema.
 
@@ -994,12 +994,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **updateSchemaDto** | [**UpdateSchemaDto**](UpdateSchemaDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -1017,7 +1017,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutSchemaSync
 
-> SchemaDetailsDto SchemasPutSchemaSync(ctx, app, name, synchronizeSchemaDto)
+> SchemaDto SchemasPutSchemaSync(ctx, app, schema, synchronizeSchemaDto)
 
 Synchronize a schema.
 
@@ -1028,12 +1028,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **synchronizeSchemaDto** | [**SynchronizeSchemaDto**](SynchronizeSchemaDto.md)| The schema object that needs to updated. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -1051,7 +1051,7 @@ Name | Type | Description  | Notes
 
 ## SchemasPutScripts
 
-> SchemaDetailsDto SchemasPutScripts(ctx, app, name, schemaScriptsDto)
+> SchemaDto SchemasPutScripts(ctx, app, schema, schemaScriptsDto)
 
 Update the scripts.
 
@@ -1062,12 +1062,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema. | 
+**schema** | **string**| The name of the schema. | 
 **schemaScriptsDto** | [**SchemaScriptsDto**](SchemaScriptsDto.md)| The schema scripts object that needs to updated. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 
@@ -1085,7 +1085,7 @@ Name | Type | Description  | Notes
 
 ## SchemasUnpublishSchema
 
-> SchemaDetailsDto SchemasUnpublishSchema(ctx, app, name)
+> SchemaDto SchemasUnpublishSchema(ctx, app, schema)
 
 Unpublish a schema.
 
@@ -1096,11 +1096,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **app** | **string**| The name of the app. | 
-**name** | **string**| The name of the schema to unpublish. | 
+**schema** | **string**| The name of the schema to unpublish. | 
 
 ### Return type
 
-[**SchemaDetailsDto**](SchemaDetailsDto.md)
+[**SchemaDto**](SchemaDto.md)
 
 ### Authorization
 

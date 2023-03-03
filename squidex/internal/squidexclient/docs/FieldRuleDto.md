@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Action** | [**OneOfFieldRuleAction**](oneOf&lt;FieldRuleAction&gt;.md) | The action to perform when the condition is met. | 
+**Action** | [**FieldRuleAction**](FieldRuleAction.md) |  | 
 **Field** | **string** | The field to update. | 
 **Condition** | Pointer to **string** | The condition. | [optional] 
 

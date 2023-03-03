@@ -1,10 +1,10 @@
 # \SearchApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SearchGetSearchResults**](SearchApi.md#SearchGetSearchResults) | **Get** /apps/{app}/search | Get search results.
+[**SearchGetSearchResults**](SearchApi.md#SearchGetSearchResults) | **Get** /api/apps/{app}/search | Get search results.
 
 
 

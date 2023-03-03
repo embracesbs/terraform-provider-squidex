@@ -1,10 +1,10 @@
 # \TranslationsApi
 
-All URIs are relative to *https://squidex.dev.embracecloud.io/api*
+All URIs are relative to *http://squidex.localhost:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**TranslationsPostTranslation**](TranslationsApi.md#TranslationsPostTranslation) | **Post** /apps/{app}/translations | Translate a text.
+[**TranslationsPostTranslation**](TranslationsApi.md#TranslationsPostTranslation) | **Post** /api/apps/{app}/translations | Translate a text.
 
 
 

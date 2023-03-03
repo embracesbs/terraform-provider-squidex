@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActionType** | **string** |  | 
+**ActionType** | Pointer to **string** |  | 
 **AccessToken** | **string** |  The generated access token. | 
 **AccessSecret** | **string** |  The generated access secret. | 
 **Text** | **string** | The text that is sent as tweet to twitter. | 
