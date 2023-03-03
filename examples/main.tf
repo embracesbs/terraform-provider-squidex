@@ -123,7 +123,7 @@ resource "squidex_schema" "test" {
   app_name                    = squidex_app.test.name
   name                        = "blog1"
   published                   = true
-  singleton                   = false
+  type                        = "Default"
   properties {
     label                = "bloglabel"
     content_sidebar_url  = "someuri_1"
