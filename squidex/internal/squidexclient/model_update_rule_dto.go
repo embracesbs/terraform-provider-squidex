@@ -14,7 +14,7 @@ type UpdateRuleDto struct {
 	// Optional rule name.
 	Name    *string        `json:"name,omitempty"`
 	Trigger RuleTriggerDto `json:"trigger,omitempty"`
-	Action  RuleAction     `json:"action,omitempty"`
-	// Enable or disable the rule.
-	IsEnabled *bool `json:"isEnabled,omitempty"`
+	// The action properties.
+	Action    RuleAction `json:"action,omitempty"`
+	IsEnabled bool       `json:"isEnabled"`
 }

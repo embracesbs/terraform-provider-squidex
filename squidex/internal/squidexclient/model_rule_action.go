@@ -11,5 +11,8 @@ package squidexclient
 
 // RuleAction struct for RuleAction
 type RuleAction struct {
-	ActionType *string `json:"actionType"`
+	ActionType   string `json:"actionType"`
+	Url          string `json:"url"`
+	Method       string `json:"method"`
+	SharedSecret string `json:"sharedsecret"`
 }
