@@ -641,12 +641,11 @@ func resourceSchema() *schema.Resource {
 				Description:  "The name of the schema. Only [a-z0-9] and may contain dashes - but not start with them.",
 				ValidateFunc: validation.StringMatch(regexp.MustCompile(`^[a-z0-9]+(\-[a-z0-9]+)*$`), "Name may only contain a-z 0-9 and - and not start with -."),
 			},
-			"singleton": {
-				Type:        schema.TypeBool,
+			"type": {
+				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     false,
-				Deprecated:  "Deprecated within squidex",
-				Description: "Set to true to allow a single content item only.",
+				Default:     "Default",
+				Description: "Enum: \"Default\" \"Singleton\" \"Component\"",
 			},
 		},
 	}
@@ -658,7 +657,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 
 	data.Set("name", schema.Name)
 	data.Set("published", schema.IsPublished)
-	data.Set("singleton", schema.IsSingleton)
+	data.Set("type", schema.Type)
 	data.Set("category", schema.Category)
 
 	if (squidexclient.SchemaPropertiesDto{}) == schema.Properties {
@@ -873,7 +872,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	squidexschema := squidexclient.CreateSchemaDto{
 		IsPublished: data.Get("published").(bool),
 		Name:        data.Get("name").(string),
-		Type:        data.Get("type").(squidexclient.SchemaType),
+		Type:        squidexclient.SchemaType(data.Get("type").(string)),
 	}
 
 	if category, ok := data.GetOk("category"); ok {
@@ -1456,12 +1455,12 @@ func mapCreateSchemaDtoToSynchronizeSchemaDto(
 		NoFieldRecreation:  !schemaFieldRecreateAllowed,
 		Category:           createSchema.Category,
 		Fields:             createSchema.Fields,
-		FieldsInLists:      *createSchema.FieldsInLists,
-		FieldsInReferences: *createSchema.FieldsInReferences,
+		FieldsInLists:      createSchema.FieldsInLists,
+		FieldsInReferences: createSchema.FieldsInReferences,
 		IsPublished:        createSchema.IsPublished,
 		PreviewUrls:        createSchema.PreviewUrls,
-		Properties:         *createSchema.Properties,
-		Scripts:            *createSchema.Scripts,
+		Properties:         createSchema.Properties,
+		Scripts:            createSchema.Scripts,
 	}
 	return dto
 }
@@ -1529,8 +1528,9 @@ func resourceSchemaCreate(ctx context.Context, data *schema.ResourceData, meta i
 	}
 
 	setCreationDefaults(&createDto)
-	createDtoJson, _ := json.MarshalIndent(createDto, "", "  ")
-	log.Printf("[TRACE] Creating a new schema with dto %s.", string(createDtoJson))
+	createDtoJson, _ := json.MarshalIndent(createDto, "", "")
+	log.Println("[TRACE] Creating a new schema with dto:")
+	log.Println(string(createDtoJson))
 	result, response, err := client.SchemasApi.SchemasPostSchema(ctx, appName, createDto)
 
 	err = common.HandleAPIError(response, err, false)

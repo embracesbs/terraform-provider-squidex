@@ -30,6 +30,8 @@ type SchemaDto struct {
 	Category   *string             `json:"category,omitempty"`
 	Properties SchemaPropertiesDto `json:"properties"`
 	// Indicates if the schema is a singleton.
+	//
+	// Deprecated: Use Type instead.
 	IsSingleton bool `json:"isSingleton,omitempty"`
 	// Indicates if the schema is published.
 	IsPublished bool `json:"isPublished,omitempty"`
