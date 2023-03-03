@@ -22,6 +22,8 @@ type FieldPropertiesDto struct {
 	Placeholder *string `json:"placeholder,omitempty"`
 	// IsRequired Indicates if the field is required.
 	IsRequired bool `json:"isRequired,omitempty"`
+	// IsRequired Indicates if the field is required.
+	IsRequiredOnPublish bool `json:"isRequiredOnPublish,omitempty"`
 	// IsHalfWidth Indicates if the field should be rendered with half width only.
 	IsHalfWidth bool `json:"isHalfWidth,omitempty"`
 	// EditorUrl Optional url to the editor.
@@ -32,6 +34,14 @@ type FieldPropertiesDto struct {
 	FieldType string `json:"fieldType"`
 
 	// Editor
+	// BooleanEditor -> 	Enum: "Checkbox" "Toggle"
+	// DateTimeEditor -> 	Enum: "Date" "DateTime"
+	// GeolocationEditor ->	Value: "Map"
+	// TagsFieldEditor -> 	Enum: "Tags" "Checkboxes" "Dropdown"
+	// NumberEditor -> 		Enum: "Input" "Radio" "Dropdown" "Stars"
+	// ReferencesEditor -> 	Enum: "List" "Dropdown" "Tags" "Checkboxes" "Input"
+	// StringFieldEditor -> Enum: "Input" "Color" "Markdown" "Dropdown" "Html" "Radio" "RichText" "Slug" "StockPhoto" "TextArea"
+	// UIFieldEditor -> 	Value: "Separator"
 	Editor *string `json:"editor,omitempty"`
 	// MinItems The minimum allowed items for the field value.
 	MinItems *int `json:"minItems,omitempty"`
@@ -58,6 +68,11 @@ type FieldPropertiesDto struct {
 		- bool: true
 	*/
 	DefaultValue *interface{} `json:"defaultValue,omitempty"`
+	// UniqueFields.
+	UniqueFields *[]string `json:"uniqueFields,omitempty"`
+
+	// FolderId The initial id to the folder.
+	FolderId *string `json:"folderId,omitempty"`
 	// MinSize The minimum file size in bytes.
 	MinSize *int `json:"minSize,omitempty"`
 	// MaxSize The maximum file size in bytes.
@@ -75,9 +90,17 @@ type FieldPropertiesDto struct {
 	// AspectHeight The image aspect height in pixels.
 	AspectHeight *int `json:"aspectHeight,omitempty"`
 	// MustBeImage Defines if the asset must be an image.
+	//
+	// Deprecated
 	MustBeImage *bool `json:"mustBeImage,omitempty"`
+	// ExpectedType Enum: "Unknown" "Image" "Audio" "Video"
+	ExpectedType *string `json:"expectedType,omitempty"`
 	// ResolveFirst True to resolve first asset in the content list.
 	ResolveFirst *bool `json:"resolveFirst,omitempty"`
+	// ResolveImage True to resolve first image in the content list
+	//
+	// Deprecated
+	ResolveImage *bool `json:"resolveImage,omitempty"`
 	// AllowedExtensions The allowed file extensions.
 	AllowedExtensions *[]string `json:"allowedExtensions,omitempty"`
 	// AllowDuplicates True, if duplicate values are allowed.
@@ -113,6 +136,12 @@ type FieldPropertiesDto struct {
 	MustBePublished *bool `json:"mustBePublished,omitempty"`
 	// schemaIds The id of the referenced schemas.
 	SchemaIds *[]string `json:"schemaIds,omitempty"`
+	// IsEmbeddable Indicates that other content items or references are embedded.
+	IsEmbeddable *bool `json:"isEmbedabble,omitempty"`
+	// CreateEnum Indicates whether GraphQL Enum should be created.
+	CreateEnum *bool `json:"createEnum,omitempty"`
+	// Pattern The pattern to enforce a specific format for the field value.
+	Format *string `json:"format,omitempty"`
 	// Pattern The pattern to enforce a specific format for the field value.
 	Pattern *string `json:"pattern,omitempty"`
 	// PatternMessage The validation message for the pattern.

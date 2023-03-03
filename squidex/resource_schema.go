@@ -41,6 +41,12 @@ func resourceSchema() *schema.Resource {
 			Default:     false,
 			Description: "Indicates if the field is required.",
 		},
+		"required_on_publish": {
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Default:     false,
+			Description: "Indicates if the field is required on publish.",
+		},
 		"half_width": {
 			Type:        schema.TypeBool,
 			Optional:    true,
@@ -140,6 +146,19 @@ func resourceSchema() *schema.Resource {
 				Type: schema.TypeString,
 			},
 		},
+		"unique_fields": {
+			Type:        schema.TypeList,
+			Optional:    true,
+			Description: "The fields that must be unique.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"folder_id": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "The initial id to the folder.",
+		},
 		"min_size": {
 			Type:        schema.TypeInt,
 			Optional:    true,
@@ -185,10 +204,20 @@ func resourceSchema() *schema.Resource {
 			Optional:    true,
 			Description: "Defines if the asset must be an image.",
 		},
+		"expected_type": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "Enum: \"Unknown\" \"Image\" \"Audio\" \"Video\"",
+		},
 		"resolve_first": {
 			Type:        schema.TypeBool,
 			Optional:    true,
 			Description: "True to resolve first asset in the content list.",
+		},
+		"resolve_image": {
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: "True to resolve first image in the content list.",
 		},
 		"allowed_extensions": {
 			Type:        schema.TypeList,
@@ -271,6 +300,21 @@ func resourceSchema() *schema.Resource {
 			Elem: &schema.Schema{
 				Type: schema.TypeString,
 			},
+		},
+		"embeddable": {
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: "Indicates that other content items or references are embedded.",
+		},
+		"create_enum": {
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: "Indicates whether GraphQL Enum should be created.. (Required for fieldtype References)",
+		},
+		"format": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "The pattern to enforce a specific format for the field value.",
 		},
 		"pattern": {
 			Type:        schema.TypeString,
@@ -601,6 +645,7 @@ func resourceSchema() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
+				Deprecated:  "Deprecated within squidex",
 				Description: "Set to true to allow a single content item only.",
 			},
 		},
@@ -662,6 +707,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["preview_mode"] = v.Properties.PreviewMode
 			properties["default_values"] = v.Properties.DefaultValues
 			properties["default_value"] = v.Properties.DefaultValue
+			properties["unique_fields"] = v.Properties.UniqueFields
+			properties["folder_id"] = v.Properties.FolderId
 			properties["min_size"] = v.Properties.MinSize
 			properties["max_size"] = v.Properties.MaxSize
 			properties["min_width"] = v.Properties.MinWidth
@@ -671,7 +718,9 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["aspect_width"] = v.Properties.AspectWidth
 			properties["aspect_height"] = v.Properties.AspectHeight
 			properties["must_be_image"] = v.Properties.MustBeImage
+			properties["expected_type"] = v.Properties.ExpectedType
 			properties["resolve_first"] = v.Properties.ResolveFirst
+			properties["resolve_image"] = v.Properties.ResolveImage
 			properties["allowed_extensions"] = v.Properties.AllowedExtensions
 			properties["allow_duplicates"] = v.Properties.AllowDuplicates
 			properties["inline_editable"] = v.Properties.InlineEditable
@@ -682,6 +731,9 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["resolve_reference"] = v.Properties.ResolveReference
 			properties["must_be_published"] = v.Properties.MustBePublished
 			properties["schema_ids"] = v.Properties.SchemaIds
+			properties["embedabble"] = v.Properties.IsEmbeddable
+			properties["create_enum"] = v.Properties.CreateEnum
+			properties["format"] = v.Properties.Format
 			properties["pattern"] = v.Properties.Pattern
 			properties["pattern_message"] = v.Properties.PatternMessage
 			properties["min_length"] = v.Properties.MinLength
@@ -696,6 +748,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 			properties["field_type"] = v.Properties.FieldType
 			properties["half_width"] = &v.Properties.IsHalfWidth
 			properties["required"] = &v.Properties.IsRequired
+			properties["required_on_publish"] = &v.Properties.IsRequiredOnPublish
 			properties["label"] = v.Properties.Label
 			properties["placeholder"] = v.Properties.Placeholder
 			properties["tags"] = v.Properties.Tags
@@ -721,6 +774,8 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["preview_mode"] = nested.Properties.PreviewMode
 				properties["default_values"] = nested.Properties.DefaultValues
 				properties["default_value"] = nested.Properties.DefaultValue
+				properties["unique_fields"] = nested.Properties.UniqueFields
+				properties["folder_id"] = nested.Properties.FolderId
 				properties["min_size"] = nested.Properties.MinSize
 				properties["max_size"] = nested.Properties.MaxSize
 				properties["min_width"] = nested.Properties.MinWidth
@@ -730,7 +785,9 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["aspect_width"] = nested.Properties.AspectWidth
 				properties["aspect_height"] = nested.Properties.AspectHeight
 				properties["must_be_image"] = nested.Properties.MustBeImage
+				properties["expected_type"] = nested.Properties.ExpectedType
 				properties["resolve_first"] = nested.Properties.ResolveFirst
+				properties["resolve_image"] = nested.Properties.ResolveImage
 				properties["allowed_extensions"] = nested.Properties.AllowedExtensions
 				properties["allow_duplicates"] = nested.Properties.AllowDuplicates
 				properties["inline_editable"] = nested.Properties.InlineEditable
@@ -741,6 +798,9 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["resolve_reference"] = nested.Properties.ResolveReference
 				properties["must_be_published"] = nested.Properties.MustBePublished
 				properties["schema_ids"] = nested.Properties.SchemaIds
+				properties["embeddable"] = nested.Properties.IsEmbeddable
+				properties["create_enum"] = nested.Properties.CreateEnum
+				properties["format"] = nested.Properties.Format
 				properties["pattern"] = nested.Properties.Pattern
 				properties["pattern_message"] = nested.Properties.PatternMessage
 				properties["min_length"] = nested.Properties.MinLength
@@ -755,6 +815,7 @@ func setDataFromSchemaDetailsDto(data *schema.ResourceData, schema squidexclient
 				properties["field_type"] = nested.Properties.FieldType
 				properties["half_width"] = nested.Properties.IsHalfWidth
 				properties["required"] = nested.Properties.IsRequired
+				properties["required_on_publish"] = nested.Properties.IsRequiredOnPublish
 				properties["label"] = nested.Properties.Label
 				properties["placeholder"] = nested.Properties.Placeholder
 				tags := *nested.Properties.Tags
@@ -812,7 +873,7 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 	squidexschema := squidexclient.CreateSchemaDto{
 		IsPublished: data.Get("published").(bool),
 		Name:        data.Get("name").(string),
-		IsSingleton: data.Get("singleton").(bool),
+		Type:        data.Get("type").(squidexclient.SchemaType),
 	}
 
 	if category, ok := data.GetOk("category"); ok {
@@ -935,6 +996,9 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					if properties["required"] != nil {
 						squidexProperties.IsRequired = properties["required"].(bool)
 					}
+					if properties["required_on_publish"] != nil {
+						squidexProperties.IsRequiredOnPublish = properties["required_on_publish"].(bool)
+					}
 					if properties["half_width"] != nil {
 						squidexProperties.IsHalfWidth = properties["half_width"].(bool)
 					}
@@ -961,6 +1025,14 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					if properties["default_value"] != nil {
 						defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
 						squidexProperties.DefaultValue = &defaultvalue
+					}
+					if properties["unique_fields"] != nil {
+						uniquefields := interfaceSliceToStringSlice(properties["unique_fields"].([]interface{}))
+						squidexProperties.UniqueFields = &uniquefields
+					}
+					if properties["folder_id"] != nil {
+						folderId := properties["folder_id"].(string)
+						squidexProperties.FolderId = &folderId
 					}
 					if properties["min_size"] != nil {
 						minsize := properties["min_size"].(int)
@@ -998,9 +1070,17 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 						mustbeimage := properties["must_be_image"].(bool)
 						squidexProperties.MustBeImage = &mustbeimage
 					}
+					if properties["expected_type"] != nil {
+						expectedType := properties["expected_type"].(string)
+						squidexProperties.ExpectedType = &expectedType
+					}
 					if properties["resolve_first"] != nil {
 						resolvefirst := properties["resolve_first"].(bool)
 						squidexProperties.ResolveFirst = &resolvefirst
+					}
+					if properties["resolve_image"] != nil {
+						resolveImage := properties["resolve_image"].(bool)
+						squidexProperties.ResolveImage = &resolveImage
 					}
 					if properties["allowed_extensions"] != nil {
 						allowedextensions := interfaceSliceToStringSlice(properties["allowed_extensions"].([]interface{}))
@@ -1041,6 +1121,18 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 					if properties["schema_ids"] != nil {
 						val := interfaceSliceToStringSlice(properties["schema_ids"].([]interface{}))
 						squidexProperties.SchemaIds = &val
+					}
+					if properties["embeddable"] != nil {
+						val := properties["embeddable"].(bool)
+						squidexProperties.IsEmbeddable = &val
+					}
+					if properties["create_enum"] != nil {
+						val := properties["create_enum"].(bool)
+						squidexProperties.CreateEnum = &val
+					}
+					if properties["format"] != nil {
+						val := properties["format"].(string)
+						squidexProperties.Format = &val
 					}
 					if properties["pattern"] != nil {
 						val := properties["pattern"].(string)
@@ -1136,6 +1228,9 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							if properties["required"] != nil {
 								squidexProperties.IsRequired = properties["required"].(bool)
 							}
+							if properties["required_on_publish"] != nil {
+								squidexProperties.IsRequiredOnPublish = properties["required_on_publish"].(bool)
+							}
 							if properties["half_width"] != nil {
 								squidexProperties.IsHalfWidth = properties["half_width"].(bool)
 							}
@@ -1163,6 +1258,14 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							if properties["default_value"] != nil {
 								defaultvalue := defaultValueToInterface(fieldType, properties["default_value"])
 								squidexProperties.DefaultValue = &defaultvalue
+							}
+							if properties["unique_fields"] != nil {
+								uniquefields := interfaceSliceToStringSlice(properties["unique_fields"].([]interface{}))
+								squidexProperties.UniqueFields = &uniquefields
+							}
+							if properties["folder_id"] != nil {
+								folderId := properties["folder_id"].(string)
+								squidexProperties.FolderId = &folderId
 							}
 							if properties["min_size"] != nil {
 								minsize := properties["min_size"].(int)
@@ -1200,9 +1303,17 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 								mustbeimage := properties["must_be_image"].(bool)
 								squidexProperties.MustBeImage = &mustbeimage
 							}
+							if properties["expected_type"] != nil {
+								expectedType := properties["expected_type"].(string)
+								squidexProperties.ExpectedType = &expectedType
+							}
 							if properties["resolve_first"] != nil {
 								resolvefirst := properties["resolve_first"].(bool)
 								squidexProperties.ResolveFirst = &resolvefirst
+							}
+							if properties["resolve_image"] != nil {
+								resolveImage := properties["resolve_image"].(bool)
+								squidexProperties.ResolveImage = &resolveImage
 							}
 							if properties["unique"] != nil {
 								unique := properties["unique"].(bool)
@@ -1215,6 +1326,14 @@ func getCreateSchemaDtoFromData(data *schema.ResourceData) (squidexclient.Create
 							if properties["tags"] != nil {
 								tags := interfaceSliceToStringSlice(properties["tags"].([]interface{}))
 								squidexProperties.Tags = &tags
+							}
+							if properties["embeddable"] != nil {
+								val := properties["embeddable"].(bool)
+								squidexProperties.IsEmbeddable = &val
+							}
+							if properties["create_enum"] != nil {
+								val := properties["create_enum"].(bool)
+								squidexProperties.CreateEnum = &val
 							}
 							squidexNested[i].Properties = squidexProperties
 						}

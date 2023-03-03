@@ -29,5 +29,7 @@ type CreateSchemaDto struct {
 	Name string     `json:"name"`
 	Type SchemaType `json:"type,omitempty"`
 	// Set to true to allow a single content item only.
+	//
+	// Deprecated
 	IsSingleton bool `json:"isSingleton,omitempty"`
 }
